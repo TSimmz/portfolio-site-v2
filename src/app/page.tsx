@@ -1,9 +1,11 @@
-import Head from "next/head";
-import Link from "next/link";
-import { api } from "~/utils/api";
+'use client';
 
-export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+import Head from 'next/head';
+import Link from 'next/link';
+import { api } from '~/utils/api';
+
+function HomePage() {
+  //const hello = api.example.hello.useQuery({ text: 'from tRPC' });
 
   return (
     <>
@@ -41,11 +43,13 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p>
+          {/* <p className="text-2xl text-white">
+            {hello.data ? hello.data.greeting : 'Loading tRPC query...'}
+          </p> */}
         </div>
       </main>
     </>
   );
 }
+
+export default api.withTRPC(HomePage);
