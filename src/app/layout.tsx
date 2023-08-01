@@ -1,5 +1,6 @@
-import './globals.css';
+import '~/styles/globals.css';
 import { type Metadata } from 'next';
+import { sourceCodePro } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni - Portfolio v2',
@@ -20,8 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html
+      lang="en"
+      className="bg-white text-gray-800 dark:bg-gray-800 dark:text-rose-100"
+    >
+      <body
+        className={`mx-4 mb-40 mt-8 flex max-w-2xl flex-col antialiased lg:mx-auto ${sourceCodePro.className}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
