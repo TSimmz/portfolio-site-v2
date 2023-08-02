@@ -26,7 +26,7 @@ export default function RootLayout({
       className="bg-white text-gray-800 dark:bg-gray-800 dark:text-rose-100"
     >
       <body
-        className={`mx-4 mb-40 mt-8 flex max-w-2xl flex-col antialiased lg:mx-auto ${sourceCodePro.className}`}
+        className={`mx-4 mb-40 mt-8 flex max-w-4xl flex-col antialiased md:mx-auto ${sourceCodePro.className}`}
       >
         {children}
       </body>
