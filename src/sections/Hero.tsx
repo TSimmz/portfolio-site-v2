@@ -2,14 +2,13 @@
 
 import SectionWrapper from '~/components/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
+import Heading from '~/components/typography/Heading';
 
 const Hero = () => {
   return (
     <SectionWrapper id="home">
       <div>
-        <h1 className="mb-3 text-5xl font-bold tracking-tight sm:text-[5rem]">
-          Hello there.
-        </h1>
+        <Heading as="h1">Hello there.</Heading>
         <h2 className="whitespace-nowrap text-4xl font-bold leading-[4rem] tracking-tight sm:text-[4rem]">
           My name is{' '}
           <GradientTextColor as="span">
