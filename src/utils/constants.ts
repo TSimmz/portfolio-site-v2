@@ -4,15 +4,15 @@ export const NAV_LINKS = [
     href: '/',
   },
   {
+    title: 'About',
+    href: '/about',
+  },
+  {
     title: 'Portfolio',
     href: '/portfolio',
   },
   {
     title: 'Blog',
     href: '/blog',
-  },
-  {
-    title: 'About',
-    href: '/about',
   },
 ];
