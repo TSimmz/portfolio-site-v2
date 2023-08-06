@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .hexagon-container {
+    display: flex;
+    --size: 100px; /* size  */
+    --hex-size: 120px;
+    --margin: 4px; /* margin */
+    --f: calc(
+      1.732 * var(--size) + 4 * var(--margin) - 1px
+    );
+  }
+
+  .hexagon-wrapper {
+    font-size: 0; /*disable white space between inline block element */
+  }
+
+  .hexagon-wrapper .hexagon {
+    padding: 1rem;
+    width: var(--hex-size);
+    display: inline-block;
+    font-size: theme('fontSize.sm');
+    aspect-ratio: 1;
+    background: theme('colors.rose.500');
+    margin-top: -16px;
+    clip-path: polygon(
+      50% 0%,
+      95% 25%,
+      95% 75%,
+      50% 100%,
+      5% 75%,
+      5% 25%
+    );
+  }
+
+  /* .hexagon-wrapper .hexagon:nth-child(odd) {
+    background:green;
+  } */
+
+  .hexagon-wrapper::before {
+    content: '';
+    width: calc(var(--hex-size) / 2);
+    float: left;
+    height: 120%;
+    shape-outside: repeating-linear-gradient(
+      #0000 0 calc(var(--f) - 3px),
+      #000 0 var(--f)
+    );
+  }
+}

@@ -17,11 +17,11 @@ const headingClasses = {
 const Heading: FC<HeadingProps> = ({
   as: Tag = 'h1',
   ...otherProps
-}) => (
-  <Tag
-    {...otherProps}
-    className={`${otherProps.className} ${headingClasses[Tag]}`}
-  />
-);
+}) => {
+  const className = !otherProps.className
+    ? headingClasses[Tag]
+    : `${otherProps.className} ${headingClasses[Tag]}`;
+  return <Tag {...otherProps} className={className} />;
+};
 
 export default Heading;

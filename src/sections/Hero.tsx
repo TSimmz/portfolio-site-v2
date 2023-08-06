@@ -1,6 +1,6 @@
 'use-client';
 
-import SectionWrapper from '~/components/SectionWrapper';
+import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 
@@ -11,7 +11,7 @@ const Hero = () => {
         <Heading as="h1">Hello there.</Heading>
         <h2 className="whitespace-nowrap text-4xl font-bold leading-[4rem] tracking-tight sm:text-[4rem]">
           My name is{' '}
-          <GradientTextColor as="span">
+          <GradientTextColor>
             Tyler Simoni
           </GradientTextColor>
           .
