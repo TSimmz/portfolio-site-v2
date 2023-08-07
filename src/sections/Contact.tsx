@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
+import Underline from '~/components/Underline';
 
 const ContactSchema = z.object({
   name: z
@@ -39,13 +40,17 @@ const Contact = () => {
   console.log('Errors: ', errors);
 
   return (
-    <SectionWrapper id="portfolio">
+    <SectionWrapper id="portfolio" className="gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>Contact</GradientTextColor>
+        <Underline className="bg-rose-700 px-4" />
       </Heading>
+      <p className="mt-3 text-center text-lg">
+        Want to work together? Let&apos;s connect 🚀
+      </p>
       <form
         id="contact-form"
-        className="flex w-full flex-col gap-4 md:w-4/5"
+        className="mt-8 flex w-full flex-col gap-4 md:w-4/5"
         onSubmit={handleSubmit(onContactSubmit)}
       >
         <div className="flex flex-col gap-[5px]">

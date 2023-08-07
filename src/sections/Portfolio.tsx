@@ -2,12 +2,15 @@ import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/components/containers/PortfolioCard';
+import Underline from '~/components/Underline';
 
 const Portfolio = () => {
   return (
     <SectionWrapper id="portfolio">
       <Heading as="h1" className="mb-12 text-center">
         <GradientTextColor>Portfolio</GradientTextColor>
+
+        <Underline className="bg-rose-700 px-4" />
       </Heading>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6">
         <PortfolioCard
