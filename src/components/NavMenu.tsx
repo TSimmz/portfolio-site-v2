@@ -24,40 +24,52 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
 
   const handlePathChange = useCallback(
     (newActiveLinkId: string) => {
+      // Get the link button elements
       const prevActiveLink = document.getElementById(activeLinkId);
       const nextActiveLink = document.getElementById(newActiveLinkId);
 
+      // Check for null
       if (nextActiveLink === null || navMenuRef.current === null) return;
 
+      // Generate new scale and position values
       const newScale = `${
         nextActiveLink.offsetWidth / navMenuRef.current.offsetWidth
       }`;
       const newPosition = `${nextActiveLink.offsetLeft}px`;
 
+      // If previous link is null, this is first page load
       if (prevActiveLink === null) {
         navMenuRef.current.style.setProperty('--_width', newScale);
         navMenuRef.current.style.setProperty('--_left', newPosition);
         navMenuRef.current.style.setProperty('--_height', '2px');
         navMenuRef.current.style.setProperty('--_duration', '0ms');
-      } else {
+      }
+      // Else calculate transition scale
+      else {
+        // Set duration
         navMenuRef.current.style.setProperty('--_duration', '200ms');
+
+        // Calculate which direction the next button is relative to previous
+        let transitionScale: number;
         const direction =
           prevActiveLink.compareDocumentPosition(nextActiveLink) === 4
             ? 'right'
             : 'left';
 
-        let transitionScale: number;
         if (direction === 'right') {
+          // Transition scale - left side of left button to right side of right button
           transitionScale =
             nextActiveLink.offsetWidth +
             nextActiveLink.offsetLeft -
             prevActiveLink.offsetLeft;
 
+          // Set the transition scale
           navMenuRef.current.style.setProperty(
             '--_width',
             `${transitionScale / navMenuRef.current.offsetWidth}`,
           );
 
+          // Set timeout to set the final translate and scale on a delay (creates right stretch effect)
           setTimeout(() => {
             if (navMenuRef.current !== null) {
               navMenuRef.current.style.setProperty('--_width', newScale);
@@ -65,16 +77,20 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
             }
           }, 220);
         } else {
+          // Transition scale - right side of right button to left side of left button
           transitionScale =
             prevActiveLink.offsetLeft +
             prevActiveLink.offsetWidth -
             nextActiveLink.offsetLeft;
 
+          // Set translate and scale immediately
           navMenuRef.current.style.setProperty(
             '--_width',
             `${transitionScale / navMenuRef.current.offsetWidth}`,
           );
           navMenuRef.current.style.setProperty('--_left', newPosition);
+
+          // Set timeout to set the final scale on a delay (creates left stretch effect)
           setTimeout(() => {
             if (navMenuRef.current !== null) {
               navMenuRef.current.style.setProperty('--_width', newScale);
@@ -83,41 +99,39 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
         }
       }
 
+      // Update the active link ID
       setActiveLinkId(newActiveLinkId);
     },
     [activeLinkId],
   );
 
   return (
-    <>
-      <header
-        id="page-header"
-        key="page-header"
-        className="fixed top-0 z-10 mt-8 px-4"
+    <header
+      id="page-header"
+      key="page-header"
+      className="fixed top-0 z-10 mt-8 px-4"
+    >
+      <nav
+        id="nav-menu"
+        key="nav-menu"
+        ref={navMenuRef}
+        className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
       >
-        <nav
-          id="nav-menu"
-          key="nav-menu"
-          ref={navMenuRef}
-          className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
-        >
-          {navLinks.map((link: NavLink) => {
-            const elementId = createLinkId(link.title);
+        {navLinks.map((link: NavLink) => {
+          const elementId = createLinkId(link.title);
 
-            return (
-              <NavLink
-                key={elementId}
-                id={elementId}
-                title={link.title}
-                href={link.href}
-                onPathChange={handlePathChange}
-              />
-            );
-          })}
-        </nav>
-      </header>
-      {/* <div className="fixed h-24 w-full bg-slate-500"></div> */}
-    </>
+          return (
+            <NavLink
+              key={elementId}
+              id={elementId}
+              title={link.title}
+              href={link.href}
+              onPathChange={handlePathChange}
+            />
+          );
+        })}
+      </nav>
+    </header>
   );
 };
 
