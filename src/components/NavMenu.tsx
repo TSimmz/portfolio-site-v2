@@ -109,13 +109,13 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
     <header
       id="page-header"
       key="page-header"
-      className="fixed top-0 z-10 mt-8 px-4"
+      className="fixed top-0 z-10 w-full bg-slate-800/50 px-4 pb-3 pt-8 backdrop-blur-md lg:sticky"
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
+        className="nav-menu relative mx-auto flex max-w-4xl scroll-pr-6 flex-row items-center gap-2 px-3"
       >
         {navLinks.map((link: NavLink) => {
           const elementId = createLinkId(link.title);

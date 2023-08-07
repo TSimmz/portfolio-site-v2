@@ -5,7 +5,7 @@ const Footer = () => {
     <footer
       id="page-footer"
       key="page-footer"
-      className="flex w-full flex-col justify-center px-4 py-8"
+      className="mt-12 flex w-full flex-col justify-center px-4 py-8 backdrop-brightness-110"
     >
       <div
         id="socials"
