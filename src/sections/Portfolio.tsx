@@ -11,7 +11,7 @@ const Portfolio = () => {
         <Heading as="h1" className="mb-12 text-center">
           <GradientTextColor>Portfolio</GradientTextColor>
         </Heading>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6">
           <PortfolioCard
             title="First Steps"
             description="Just the basics - Everything you need to know to set up your
