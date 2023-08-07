@@ -1,7 +1,8 @@
 'use client';
 
+import { useElementSize } from '@mantine/hooks';
 import NavLink from './NavLink';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
 type NavLink = {
   title: string;
@@ -13,6 +14,7 @@ type NavMenuProps = {
 };
 
 const NavMenu = ({ navLinks }: NavMenuProps) => {
+  const { ref, width } = useElementSize();
   const navMenuRef = useRef<HTMLElement | null>(null);
 
   const [activeLinkId, setActiveLinkId] = useState<string>('');
@@ -21,6 +23,42 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
     (name: string) => `nav-link-${name.toLowerCase()}`,
     [],
   );
+
+  const setNavMenuVariables = useCallback(
+    ({
+      width = '',
+      position = '',
+      height = '',
+      duration = '',
+    }: {
+      width?: string;
+      position?: string;
+      height?: string;
+      duration?: string;
+    }) => {
+      if (navMenuRef.current !== null) {
+        if (width) navMenuRef.current.style.setProperty('--_width', width);
+        if (position) navMenuRef.current.style.setProperty('--_left', position);
+        if (height) navMenuRef.current.style.setProperty('--_height', height);
+        if (duration)
+          navMenuRef.current.style.setProperty('--_duration', duration);
+      }
+    },
+    [navMenuRef],
+  );
+
+  useEffect(() => {
+    const activeLink = document.getElementById(activeLinkId);
+    if (activeLink !== null && navMenuRef.current !== null) {
+      const newWidth = activeLink.offsetWidth / navMenuRef.current.offsetWidth;
+      const newPosition = activeLink.offsetLeft;
+
+      setNavMenuVariables({
+        width: `${newWidth}`,
+        position: `${newPosition}px`,
+      });
+    }
+  }, [width]);
 
   const handlePathChange = useCallback(
     (newActiveLinkId: string) => {
@@ -32,22 +70,24 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
       if (nextActiveLink === null || navMenuRef.current === null) return;
 
       // Generate new scale and position values
-      const newScale = `${
+      const newWidth = `${
         nextActiveLink.offsetWidth / navMenuRef.current.offsetWidth
       }`;
       const newPosition = `${nextActiveLink.offsetLeft}px`;
 
       // If previous link is null, this is first page load
       if (prevActiveLink === null) {
-        navMenuRef.current.style.setProperty('--_width', newScale);
-        navMenuRef.current.style.setProperty('--_left', newPosition);
-        navMenuRef.current.style.setProperty('--_height', '2px');
-        navMenuRef.current.style.setProperty('--_duration', '0ms');
+        setNavMenuVariables({
+          width: newWidth,
+          position: newPosition,
+          height: '2px',
+          duration: '0ms',
+        });
       }
       // Else calculate transition scale
       else {
         // Set duration
-        navMenuRef.current.style.setProperty('--_duration', '200ms');
+        setNavMenuVariables({ duration: '200ms' });
 
         // Calculate which direction the next button is relative to previous
         let transitionScale: number;
@@ -64,16 +104,17 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
             prevActiveLink.offsetLeft;
 
           // Set the transition scale
-          navMenuRef.current.style.setProperty(
-            '--_width',
-            `${transitionScale / navMenuRef.current.offsetWidth}`,
-          );
+          setNavMenuVariables({
+            width: `${transitionScale / navMenuRef.current.offsetWidth}`,
+          });
 
           // Set timeout to set the final translate and scale on a delay (creates right stretch effect)
           setTimeout(() => {
             if (navMenuRef.current !== null) {
-              navMenuRef.current.style.setProperty('--_width', newScale);
-              navMenuRef.current.style.setProperty('--_left', newPosition);
+              setNavMenuVariables({
+                width: newWidth,
+                position: newPosition,
+              });
             }
           }, 220);
         } else {
@@ -84,16 +125,15 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
             nextActiveLink.offsetLeft;
 
           // Set translate and scale immediately
-          navMenuRef.current.style.setProperty(
-            '--_width',
-            `${transitionScale / navMenuRef.current.offsetWidth}`,
-          );
-          navMenuRef.current.style.setProperty('--_left', newPosition);
+          setNavMenuVariables({
+            width: `${transitionScale / navMenuRef.current.offsetWidth}`,
+            position: newPosition,
+          });
 
           // Set timeout to set the final scale on a delay (creates left stretch effect)
           setTimeout(() => {
             if (navMenuRef.current !== null) {
-              navMenuRef.current.style.setProperty('--_width', newScale);
+              setNavMenuVariables({ width: newWidth });
             }
           }, 220);
         }
@@ -102,20 +142,21 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
       // Update the active link ID
       setActiveLinkId(newActiveLinkId);
     },
-    [activeLinkId],
+    [activeLinkId, setNavMenuVariables],
   );
 
   return (
     <header
       id="page-header"
       key="page-header"
+      ref={ref}
       className="fixed top-0 z-10 w-full bg-slate-800/50 px-4 pb-3 pt-8 backdrop-blur-md lg:sticky"
     >
       <nav
-        id="nav-menu"
-        key="nav-menu"
+        id="landscape-nav-menu"
+        key="landscape-nav-menu"
         ref={navMenuRef}
-        className="nav-menu relative mx-auto flex max-w-4xl scroll-pr-6 flex-row items-center gap-2 px-3"
+        className="nav-menu relative mx-auto hidden max-w-4xl scroll-pr-6 flex-row items-center gap-2 px-3 sm:flex"
       >
         {navLinks.map((link: NavLink) => {
           const elementId = createLinkId(link.title);

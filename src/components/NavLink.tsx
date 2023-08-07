@@ -24,7 +24,7 @@ const NavLink: FC<NavLinkProps> = ({ id, title, href, onPathChange }) => {
     <div
       ref={linkRef}
       id={id}
-      className={`relative flex flex-row space-x-0 rounded px-5 py-1 transition-all duration-500  hover:backdrop-brightness-125 ${
+      className={`relative flex flex-row space-x-0 rounded px-2 py-1 transition-all duration-500 hover:backdrop-brightness-125 sm:px-5 ${
         isActive.current ? 'text-rose-500' : 'hover:text-rose-400'
       }`}
     >
