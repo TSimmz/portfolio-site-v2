@@ -27,6 +27,8 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
       const prevActiveLink = document.getElementById(activeLinkId);
       const nextActiveLink = document.getElementById(newActiveLinkId);
 
+      if (nextActiveLink === null || navMenuRef.current === null) return;
+
       const newScale = `${
         nextActiveLink.offsetWidth / navMenuRef.current.offsetWidth
       }`;
@@ -57,8 +59,10 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
           );
 
           setTimeout(() => {
-            navMenuRef.current.style.setProperty('--_width', newScale);
-            navMenuRef.current.style.setProperty('--_left', newPosition);
+            if (navMenuRef.current !== null) {
+              navMenuRef.current.style.setProperty('--_width', newScale);
+              navMenuRef.current.style.setProperty('--_left', newPosition);
+            }
           }, 220);
         } else {
           transitionScale =
@@ -72,7 +76,9 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
           );
           navMenuRef.current.style.setProperty('--_left', newPosition);
           setTimeout(() => {
-            navMenuRef.current.style.setProperty('--_width', newScale);
+            if (navMenuRef.current !== null) {
+              navMenuRef.current.style.setProperty('--_width', newScale);
+            }
           }, 220);
         }
       }
@@ -83,26 +89,32 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
   );
 
   return (
-    <nav
-      id="nav-menu"
-      key="nav-menu"
-      ref={navMenuRef}
-      className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
+    <header
+      id="page-header"
+      key="page-header"
+      className="fixed top-0 z-10 mt-8"
     >
-      {navLinks.map((link: NavLink) => {
-        const elementId = createLinkId(link.title);
+      <nav
+        id="nav-menu"
+        key="nav-menu"
+        ref={navMenuRef}
+        className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
+      >
+        {navLinks.map((link: NavLink) => {
+          const elementId = createLinkId(link.title);
 
-        return (
-          <NavLink
-            key={elementId}
-            id={elementId}
-            title={link.title}
-            href={link.href}
-            onPathChange={handlePathChange}
-          />
-        );
-      })}
-    </nav>
+          return (
+            <NavLink
+              key={elementId}
+              id={elementId}
+              title={link.title}
+              href={link.href}
+              onPathChange={handlePathChange}
+            />
+          );
+        })}
+      </nav>
+    </header>
   );
 };
 

@@ -38,7 +38,7 @@ export default function RootLayout({
       className="bg-white text-gray-800 dark:bg-gray-800 dark:text-rose-100"
     >
       <body
-        className={`mx-4 mb-40 mt-8 flex max-w-4xl flex-col antialiased md:mx-auto ${sourceCodePro.className}`}
+        className={`relative mx-4 flex max-w-4xl flex-col antialiased md:mx-auto ${sourceCodePro.className}`}
       >
         <NavMenu navLinks={NAV_LINKS} />
         {children}
