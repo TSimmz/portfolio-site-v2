@@ -7,7 +7,7 @@ const About = () => {
   return (
     <SectionWrapper id="about">
       <div>
-        <Heading as="h2" className="mb-[100px] text-center">
+        <Heading as="h1" className="mb-[100px] text-center">
           <GradientTextColor>About</GradientTextColor>
         </Heading>
         {/* <Hexagon className="w-40" /> */}
