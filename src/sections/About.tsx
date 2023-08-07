@@ -1,4 +1,4 @@
-import Hexagon from '~/components/containers/Hexagon/Hexagon';
+//import Hexagon from '~/components/containers/Hexagon/Hexagon';
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
@@ -7,8 +7,8 @@ const About = () => {
   return (
     <SectionWrapper id="about">
       <div>
-        <Heading as="h2" className="mb-12">
-          <GradientTextColor>About</GradientTextColor> Page
+        <Heading as="h2" className="mb-[100px] text-center">
+          <GradientTextColor>About</GradientTextColor>
         </Heading>
         {/* <Hexagon className="w-40" /> */}
         <div className="hexagon-container">

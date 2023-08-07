@@ -6,7 +6,7 @@ import Heading from '~/components/typography/Heading';
 
 const Hero = () => {
   return (
-    <SectionWrapper id="home">
+    <SectionWrapper id="home" className="min-h-screen">
       <div>
         <Heading as="h1">Hello there.</Heading>
         <h2 className="whitespace-nowrap text-4xl font-bold leading-[4rem] tracking-tight sm:text-[4rem]">
