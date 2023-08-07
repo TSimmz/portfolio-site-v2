@@ -89,32 +89,35 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
   );
 
   return (
-    <header
-      id="page-header"
-      key="page-header"
-      className="fixed top-0 z-10 mt-8"
-    >
-      <nav
-        id="nav-menu"
-        key="nav-menu"
-        ref={navMenuRef}
-        className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
+    <>
+      <header
+        id="page-header"
+        key="page-header"
+        className="fixed top-0 z-10 mt-8 px-4"
       >
-        {navLinks.map((link: NavLink) => {
-          const elementId = createLinkId(link.title);
+        <nav
+          id="nav-menu"
+          key="nav-menu"
+          ref={navMenuRef}
+          className="nav-menu fade relative flex scroll-pr-6 flex-row items-start gap-2 px-0 md:overflow-auto lg:sticky"
+        >
+          {navLinks.map((link: NavLink) => {
+            const elementId = createLinkId(link.title);
 
-          return (
-            <NavLink
-              key={elementId}
-              id={elementId}
-              title={link.title}
-              href={link.href}
-              onPathChange={handlePathChange}
-            />
-          );
-        })}
-      </nav>
-    </header>
+            return (
+              <NavLink
+                key={elementId}
+                id={elementId}
+                title={link.title}
+                href={link.href}
+                onPathChange={handlePathChange}
+              />
+            );
+          })}
+        </nav>
+      </header>
+      {/* <div className="fixed h-24 w-full bg-slate-500"></div> */}
+    </>
   );
 };
 

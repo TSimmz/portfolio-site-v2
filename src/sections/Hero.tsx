@@ -8,14 +8,19 @@ const Hero = () => {
   return (
     <SectionWrapper id="home" className="min-h-screen">
       <div>
-        <Heading as="h1">Hello there.</Heading>
-        <h2 className="whitespace-nowrap text-4xl font-bold leading-[4rem] tracking-tight sm:text-[4rem]">
+        <Heading as="h1" className="mb-8">
+          Hello there.
+        </Heading>
+        <Heading
+          as="h2"
+          className="whitespace-nowrap sm:leading-[3.5rem] md:leading-[4rem]"
+        >
           My name is <GradientTextColor>Tyler Simoni</GradientTextColor>
           .
           <br />
           I&apos;m a frontend web <br />
           developer.
-        </h2>
+        </Heading>
       </div>
     </SectionWrapper>
   );
