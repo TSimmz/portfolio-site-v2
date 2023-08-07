@@ -1,6 +1,7 @@
 'use client';
 
 import About from '~/sections/About';
+import Contact from '~/sections/Contact';
 import Hero from '~/sections/Hero';
 import Portfolio from '~/sections/Portfolio';
 //import Theo from '~/sections/Theo';
@@ -12,6 +13,7 @@ function HomePage() {
       <Hero />
       <About />
       <Portfolio />
+      <Contact />
       {/* <Theo /> */}
     </>
   );
