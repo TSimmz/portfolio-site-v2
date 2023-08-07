@@ -1,7 +1,6 @@
 import { type HTMLAttributes, type FC } from 'react';
 
-interface HeadingProps
-  extends HTMLAttributes<HTMLOrSVGElement> {
+interface HeadingProps extends HTMLAttributes<HTMLOrSVGElement> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
@@ -14,10 +13,7 @@ const headingClasses = {
   h6: 'text-lg font-bold tracking-tight sm:text-[2.5rem]',
 };
 
-const Heading: FC<HeadingProps> = ({
-  as: Tag = 'h1',
-  ...otherProps
-}) => {
+const Heading: FC<HeadingProps> = ({ as: Tag = 'h1', ...otherProps }) => {
   const className = !otherProps.className
     ? headingClasses[Tag]
     : `${otherProps.className} ${headingClasses[Tag]}`;

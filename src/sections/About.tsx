@@ -16,10 +16,7 @@ const About = () => {
             {Array(20)
               .fill(0)
               .map((_, index) => (
-                <div
-                  key={`hexagon-${index}`}
-                  className="hexagon"
-                >
+                <div key={`hexagon-${index}`} className="hexagon">
                   <div className="flex h-full items-center justify-center">
                     {index + 1}
                   </div>

@@ -1,11 +1,6 @@
-import {
-  type ElementType,
-  type HTMLAttributes,
-  type FC,
-} from 'react';
+import { type ElementType, type HTMLAttributes, type FC } from 'react';
 
-interface GradientTextColorProps
-  extends HTMLAttributes<HTMLOrSVGElement> {
+interface GradientTextColorProps extends HTMLAttributes<HTMLOrSVGElement> {
   as?: ElementType;
 }
 

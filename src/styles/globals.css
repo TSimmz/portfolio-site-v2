@@ -8,9 +8,7 @@
     --size: 100px; /* size  */
     --hex-size: 120px;
     --margin: 4px; /* margin */
-    --f: calc(
-      1.732 * var(--size) + 4 * var(--margin) - 1px
-    );
+    --f: calc(1.732 * var(--size) + 4 * var(--margin) - 1px);
   }
 
   .hexagon-wrapper {
@@ -25,14 +23,7 @@
     aspect-ratio: 1;
     background: theme('colors.rose.500');
     margin-top: -16px;
-    clip-path: polygon(
-      50% 0%,
-      95% 25%,
-      95% 75%,
-      50% 100%,
-      5% 75%,
-      5% 25%
-    );
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
   }
 
   /* .hexagon-wrapper .hexagon:nth-child(odd) {
