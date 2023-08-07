@@ -20,6 +20,7 @@
 
   .hexagon-container {
     display: flex;
+    padding-left: 8px;
     --size: 100px; /* size  */
     --hex-size: 120px;
     --margin: 4px; /* margin */
