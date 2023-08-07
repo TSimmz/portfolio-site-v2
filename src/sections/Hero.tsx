@@ -12,14 +12,13 @@ const Hero = () => {
           Hello there.
         </Heading>
         <Heading
-          as="h2"
-          className="whitespace-nowrap sm:leading-[3.5rem] md:leading-[4rem]"
+          as="h4"
+          className="whitespace-nowrap sm:leading-[2.5rem] md:leading-[3rem]"
         >
           My name is <GradientTextColor>Tyler Simoni</GradientTextColor>
           .
           <br />
-          I&apos;m a frontend web <br />
-          developer.
+          I&apos;m a frontend web developer.
         </Heading>
       </div>
     </SectionWrapper>
