@@ -3,6 +3,21 @@
 @tailwind utilities;
 
 @layer utilities {
+  .nav-menu::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--_height);
+    background-color: theme('colors.rose.500');
+    scale: var(--_width, 0.125) 1;
+    translate: var(--_left, 0) 0px;
+    transform-origin: left;
+    transition-duration: var(--_duration);
+    transition-timing-function: ease-in-out;
+  }
+
   .hexagon-container {
     display: flex;
     --size: 100px; /* size  */
