@@ -150,7 +150,7 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
       id="page-header"
       key="page-header"
       ref={ref}
-      className="fixed top-0 z-10 w-full bg-slate-800/50 px-4 pb-3 pt-8 backdrop-blur-md lg:sticky"
+      className="fixed top-0 z-10 w-full bg-gradient-to-t from-slate-800/50 to-slate-700/60 px-4 pb-3 pt-8 shadow-xl shadow-slate-800 backdrop-blur-md lg:sticky"
     >
       <nav
         id="landscape-nav-menu"
