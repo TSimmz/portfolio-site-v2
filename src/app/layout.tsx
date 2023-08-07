@@ -4,6 +4,7 @@ import { sourceCodePro } from './fonts';
 
 import NavMenu from '~/components/NavMenu';
 import { NAV_LINKS } from '~/utils/constants';
+import Footer from '~/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni - Portfolio v2',
@@ -35,13 +36,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="bg-white text-gray-800 dark:bg-gray-800 dark:text-rose-100"
+      className="bg-white text-gray-800 dark:bg-slate-800 dark:text-slate-200"
     >
       <body
         className={`relative mx-auto flex max-w-4xl flex-col antialiased ${sourceCodePro.className}`}
       >
         <NavMenu navLinks={NAV_LINKS} />
         {children}
+        <Footer />
       </body>
     </html>
   );
