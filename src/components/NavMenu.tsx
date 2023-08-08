@@ -188,13 +188,14 @@ const NavMenu = () => {
         ref={navMenuRef}
         className={`${
           !isMobileView.current ? 'nav-menu' : ''
-        } relative flex min-h-[40px] max-w-4xl scroll-pr-6 items-center gap-2 px-3`}
+        } relative flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-end gap-2 px-3 sm:justify-start`}
       >
         {isMobileView.current ? (
           <Drawer.Root
             opened={opened}
             onClose={close}
             position="top"
+            className="max-w-screen !border-none"
             transitionProps={{ duration: 200, timingFunction: 'ease-in-out' }}
           >
             <Drawer.Overlay
@@ -210,7 +211,7 @@ const NavMenu = () => {
                   aria-label={'Open/Close Navigation'}
                   color={!opened ? colors.slate['200'] : colors.rose['500']}
                   size={30}
-                  className="hover:backdrop-brightness-125"
+                  className="mr-[9px] hover:backdrop-brightness-125"
                   opened={opened}
                   onClick={toggle}
                 />
@@ -220,17 +221,17 @@ const NavMenu = () => {
         ) : (
           renderNavButtons
         )}
+        <Burger
+          title={'Open/Close Navigation'}
+          aria-label={'Open/Close Navigation'}
+          color={!opened ? colors.slate['200'] : colors.rose['500']}
+          className={`${
+            !isMobileView.current ? 'hidden' : ''
+          } hover:backdrop-brightness-125`}
+          opened={opened}
+          onClick={toggle}
+        />
       </nav>
-      <Burger
-        title={'Open/Close Navigation'}
-        aria-label={'Open/Close Navigation'}
-        color={!opened ? colors.slate['200'] : colors.rose['500']}
-        className={`${
-          !isMobileView.current ? 'hidden' : ''
-        } hover:backdrop-brightness-125`}
-        opened={opened}
-        onClick={toggle}
-      />
     </header>
   );
 };

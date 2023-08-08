@@ -5,7 +5,7 @@ export default function RootTemplate({
 }) {
   return (
     <>
-      <main className="mx-auto flex min-h-screen min-w-0 max-w-4xl flex-auto flex-col items-center justify-center px-2">
+      <main className="flex min-h-screen min-w-0 max-w-4xl flex-auto flex-col items-center justify-center px-2">
         {children}
       </main>
     </>
