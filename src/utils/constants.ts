@@ -1,18 +1,11 @@
-export const NAV_LINKS = [
-  {
-    title: 'Home',
-    href: '/',
-  },
-  {
-    title: 'About',
-    href: '/about',
-  },
-  {
-    title: 'Portfolio',
-    href: '/portfolio',
-  },
-  {
-    title: 'Blog',
-    href: '/blog',
-  },
-];
+export const baseRoutes = {
+  home: '/',
+  about: '/about',
+  portfolio: '/portfolio',
+  blog: '/blog',
+} as const;
+
+export type BaseRouteKeys = keyof typeof baseRoutes;
+export type BaseRoutePaths = (typeof baseRoutes)[BaseRouteKeys];
+
+export const baseRouteKeysList = Object.keys(baseRoutes) as BaseRouteKeys[];

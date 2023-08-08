@@ -3,7 +3,6 @@ import { type Metadata } from 'next';
 import { sourceCodePro } from './fonts';
 
 import NavMenu from '~/components/NavMenu';
-import { NAV_LINKS } from '~/utils/constants';
 import Footer from '~/components/Footer';
 
 export const metadata: Metadata = {
@@ -41,7 +40,7 @@ export default function RootLayout({
       <body
         className={`relative flex flex-col antialiased ${sourceCodePro.className}`}
       >
-        <NavMenu navLinks={NAV_LINKS} />
+        <NavMenu />
         {children}
         <Footer />
       </body>

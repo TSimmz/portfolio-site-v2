@@ -13,7 +13,6 @@ type NavLinkProps = {
 const NavLink: FC<NavLinkProps> = ({ id, title, href, onPathChange }) => {
   const pathname = usePathname();
   const isActive = useRef<boolean>(pathname === href);
-  const linkRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     isActive.current = pathname === href;
@@ -22,14 +21,13 @@ const NavLink: FC<NavLinkProps> = ({ id, title, href, onPathChange }) => {
 
   return (
     <div
-      ref={linkRef}
       id={id}
       className={`relative flex flex-row space-x-0 rounded px-2 py-1 transition-all duration-500 hover:backdrop-brightness-125 sm:px-5 ${
         isActive.current ? 'text-rose-500' : 'hover:text-rose-400'
       }`}
     >
-      <Link href={href} className={`flex align-middle `}>
-        <span className="px-2 py-1">{title}</span>
+      <Link href={href} className={`flex align-middle focus:outline-none`}>
+        <span className="px-2 py-1 capitalize">{title}</span>
       </Link>
     </div>
   );

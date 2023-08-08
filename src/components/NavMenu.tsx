@@ -1,23 +1,33 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useElementSize } from '@mantine/hooks';
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
+import { useDisclosure } from '@mantine/hooks';
+import { Burger, Drawer } from '@mantine/core';
+import colors from 'tailwindcss/colors';
+import theme from 'tailwindcss/defaultTheme';
+
 import NavLink from './NavLink';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import {
+  type BaseRouteKeys,
+  baseRouteKeysList,
+  baseRoutes,
+} from '~/utils/constants';
 
-type NavLink = {
-  title: string;
-  href: string;
-};
-
-type NavMenuProps = {
-  navLinks: NavLink[];
-};
-
-const NavMenu = ({ navLinks }: NavMenuProps) => {
+const NavMenu = () => {
+  const pathname = usePathname();
   const { ref, width } = useElementSize();
+  const [opened, { toggle, close }] = useDisclosure(false);
+
   const navMenuRef = useRef<HTMLElement | null>(null);
 
   const [activeLinkId, setActiveLinkId] = useState<string>('');
+
+  const themeSize = useRef<number>(
+    parseInt(theme.screens.sm.split('px')[0] ?? '0', 10),
+  );
+  const isMobileView = useRef<boolean>(window.screen.width < themeSize.current);
 
   const createLinkId = useCallback(
     (name: string) => `nav-link-${name.toLowerCase()}`,
@@ -48,6 +58,12 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
   );
 
   useEffect(() => {
+    close();
+  }, [pathname]);
+
+  useEffect(() => {
+    isMobileView.current = window.screen.width < themeSize.current;
+
     const activeLink = document.getElementById(activeLinkId);
     if (activeLink !== null && navMenuRef.current !== null) {
       const newWidth = activeLink.offsetWidth / navMenuRef.current.offsetWidth;
@@ -60,7 +76,7 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
     }
   }, [width]);
 
-  const handlePathChange = useCallback(
+  const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
       // Get the link button elements
       const prevActiveLink = document.getElementById(activeLinkId);
@@ -145,33 +161,76 @@ const NavMenu = ({ navLinks }: NavMenuProps) => {
     [activeLinkId, setNavMenuVariables],
   );
 
+  const renderNavButtons = useMemo(
+    () =>
+      baseRouteKeysList.map((routeName: BaseRouteKeys) => (
+        <NavLink
+          key={createLinkId(routeName)}
+          id={createLinkId(routeName)}
+          title={routeName}
+          href={baseRoutes[routeName]}
+          onPathChange={handleDesktopPathChange}
+        />
+      )),
+    [createLinkId, handleDesktopPathChange],
+  );
+
   return (
     <header
       id="page-header"
       key="page-header"
       ref={ref}
-      className="fixed top-0 z-10 w-full bg-gradient-to-t from-slate-800/50 to-slate-700/60 px-4 pb-3 pt-8 shadow-xl shadow-slate-800 backdrop-blur-md lg:sticky"
+      className="fixed top-0 z-10 flex min-h-[84px] w-screen justify-between bg-gradient-to-t from-slate-800/50 to-slate-700/60 px-4 pb-3 pt-8 shadow-xl shadow-slate-800 backdrop-blur-md sm:justify-start"
     >
       <nav
-        id="landscape-nav-menu"
-        key="landscape-nav-menu"
+        id="nav-menu"
+        key="nav-menu"
         ref={navMenuRef}
-        className="nav-menu relative mx-auto hidden max-w-4xl scroll-pr-6 flex-row items-center gap-2 px-3 sm:flex"
+        className={`${
+          !isMobileView.current ? 'nav-menu' : ''
+        } relative flex min-h-[40px] max-w-4xl scroll-pr-6 items-center gap-2 px-3`}
       >
-        {navLinks.map((link: NavLink) => {
-          const elementId = createLinkId(link.title);
-
-          return (
-            <NavLink
-              key={elementId}
-              id={elementId}
-              title={link.title}
-              href={link.href}
-              onPathChange={handlePathChange}
+        {isMobileView.current ? (
+          <Drawer.Root
+            opened={opened}
+            onClose={close}
+            position="top"
+            transitionProps={{ duration: 200, timingFunction: 'ease-in-out' }}
+          >
+            <Drawer.Overlay
+              opacity={0.1}
+              blur={2}
+              color={colors.slate['200']}
             />
-          );
-        })}
+            <Drawer.Content>
+              <Drawer.Body className="flex w-screen gap-2">
+                <div className="grow">{renderNavButtons}</div>
+                <Burger
+                  title={'Open/Close Navigation'}
+                  aria-label={'Open/Close Navigation'}
+                  color={!opened ? colors.slate['200'] : colors.rose['500']}
+                  size={30}
+                  className="hover:backdrop-brightness-125"
+                  opened={opened}
+                  onClick={toggle}
+                />
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer.Root>
+        ) : (
+          renderNavButtons
+        )}
       </nav>
+      <Burger
+        title={'Open/Close Navigation'}
+        aria-label={'Open/Close Navigation'}
+        color={!opened ? colors.slate['200'] : colors.rose['500']}
+        className={`${
+          !isMobileView.current ? 'hidden' : ''
+        } hover:backdrop-brightness-125`}
+        opened={opened}
+        onClick={toggle}
+      />
     </header>
   );
 };
