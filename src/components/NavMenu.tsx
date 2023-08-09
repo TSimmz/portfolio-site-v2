@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useElementSize } from '@mantine/hooks';
+import { useViewportSize } from '@mantine/hooks';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { Burger, Drawer } from '@mantine/core';
@@ -17,7 +17,7 @@ import {
 
 const NavMenu = () => {
   const pathname = usePathname();
-  const { ref, width } = useElementSize();
+  const { width } = useViewportSize();
   const [opened, { toggle, close }] = useDisclosure(false);
 
   const navMenuRef = useRef<HTMLElement | null>(null);
@@ -27,7 +27,9 @@ const NavMenu = () => {
   const themeSize = useRef<number>(
     parseInt(theme.screens.sm.split('px')[0] ?? '0', 10),
   );
-  const isMobileView = useRef<boolean>(window.screen.width < themeSize.current);
+  const [isMobileView, setIsMobileView] = useState<boolean>(
+    width < themeSize.current,
+  );
 
   const createLinkId = useCallback(
     (name: string) => `nav-link-${name.toLowerCase()}`,
@@ -62,7 +64,11 @@ const NavMenu = () => {
   }, [pathname]);
 
   useEffect(() => {
-    isMobileView.current = window.screen.width < themeSize.current;
+    setIsMobileView((prevMobileView) =>
+      prevMobileView !== width < themeSize.current
+        ? width < themeSize.current
+        : prevMobileView,
+    );
 
     const activeLink = document.getElementById(activeLinkId);
     if (activeLink !== null && navMenuRef.current !== null) {
@@ -179,7 +185,6 @@ const NavMenu = () => {
     <header
       id="page-header"
       key="page-header"
-      ref={ref}
       className="fixed top-0 z-10 flex min-h-[84px] w-screen justify-between bg-gradient-to-t from-slate-800/50 to-slate-700/60 px-4 pb-3 pt-8 shadow-xl shadow-slate-800 backdrop-blur-md sm:justify-start"
     >
       <nav
@@ -187,10 +192,10 @@ const NavMenu = () => {
         key="nav-menu"
         ref={navMenuRef}
         className={`${
-          !isMobileView.current ? 'nav-menu' : ''
+          !isMobileView ? 'nav-menu' : ''
         } relative mx-auto flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-end gap-2 sm:justify-start`}
       >
-        {isMobileView.current ? (
+        {isMobileView ? (
           <Drawer.Root
             opened={opened}
             onClose={close}
@@ -225,7 +230,7 @@ const NavMenu = () => {
           aria-label={'Open/Close Navigation'}
           color={!opened ? colors.slate['200'] : colors.rose['500']}
           className={`${
-            !isMobileView.current ? 'hidden' : ''
+            !isMobileView ? 'hidden' : ''
           } hover:backdrop-brightness-125`}
           opened={opened}
           onClick={toggle}
