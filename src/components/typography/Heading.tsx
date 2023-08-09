@@ -5,18 +5,20 @@ interface HeadingProps extends HTMLAttributes<HTMLOrSVGElement> {
 }
 
 const headingClasses = {
-  h1: 'text-5xl font-bold tracking-tight sm:text-[3.5rem] md:text-[4rem]',
-  h2: 'text-4xl font-bold tracking-tight sm:text-[3rem] md:text-[3.5rem]',
-  h3: 'text-3xl font-bold tracking-tight sm:text-[2.5rem] md:text-[3rem]',
-  h4: 'text-2xl font-bold tracking-tight sm:text-[2rem] md:text-[2.5rem]',
-  h5: 'text-xl font-bold tracking-tight sm:text-[1.5rem] md:text-[2rem]',
-  h6: 'text-lg font-bold tracking-tight sm:text-[1rem] md:text-[1.5rem]',
+  h1: 'text-[2.5rem] leading-10 xs:text-5xl',
+  h2: 'text-[2rem] leading-10 xs:text-4xl',
+  h3: 'text-[1.625rem] leading-9 xs:text-[2rem] xs:leading-1',
+  h4: 'text-2xl xs:text-3xl',
+  h5: 'text-xl xs:text-2xl',
+  h6: 'text-lg xs:text-xl',
 };
 
 const Heading: FC<HeadingProps> = ({ as: Tag = 'h1', ...otherProps }) => {
-  const className = !otherProps.className
-    ? headingClasses[Tag]
-    : `${otherProps.className} ${headingClasses[Tag]} transition-all`;
+  const className = `${
+    !otherProps.className
+      ? headingClasses[Tag]
+      : `${otherProps.className} ${headingClasses[Tag]}`
+  } transition-all font-bold tracking-tight`;
   return <Tag {...otherProps} className={className} />;
 };
 

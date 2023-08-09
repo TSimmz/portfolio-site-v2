@@ -38,7 +38,7 @@ export default function RootLayout({
       className="bg-white text-gray-800 dark:bg-slate-800 dark:text-slate-200"
     >
       <body
-        className={`relative !mx-0 flex flex-col antialiased ${sourceCodePro.className}`}
+        className={`relative !mx-0 w-screen overflow-x-hidden antialiased ${sourceCodePro.className}`}
       >
         <NavMenu />
         {children}

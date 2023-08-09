@@ -40,13 +40,14 @@ const Contact = () => {
   console.log('Errors: ', errors);
 
   return (
-    <SectionWrapper id="portfolio" className="gap-0">
+    <SectionWrapper id="portfolio" className="!gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>Contact</GradientTextColor>
         <Underline className="bg-rose-700 px-4" />
       </Heading>
-      <p className="mt-3 text-center text-lg">
-        Want to work together? Let&apos;s connect 🚀
+      <p className="mt-2 text-center text-lg">
+        Want to work together?
+        <br className="xs:hidden" /> Let&apos;s connect 🚀
       </p>
       <form
         id="contact-form"

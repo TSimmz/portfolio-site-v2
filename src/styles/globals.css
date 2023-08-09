@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+svg {
+  min-width: auto;
+}
+
+.mantin-Drawer-overlay {
+  padding: 0px 8px !important;
+}
 .mantine-Drawer-content {
   color: theme('colors.slate.100') !important;
   --tw-gradient-from: theme('colors.slate.800') var(--tw-gradient-from-position);
@@ -13,21 +20,6 @@
   ) !important;
   padding: 1rem 0 !important;
   height: unset !important;
-}
-
-.mantine-Drawer-close {
-  width: 2rem;
-  height: 2rem;
-  color: theme('colors.rose.500');
-}
-
-.mantine-Drawer-close > svg {
-  width: 1.5rem !important;
-  height: 1.5rem !important;
-}
-
-.mantine-Drawer-close:hover {
-  background-color: theme('colors.slate.600');
 }
 
 @layer utilities {

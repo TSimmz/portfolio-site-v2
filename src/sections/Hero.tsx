@@ -6,19 +6,21 @@ import Heading from '~/components/typography/Heading';
 
 const Hero = () => {
   return (
-    <SectionWrapper id="home" className="min-h-screen">
+    <SectionWrapper
+      id="home"
+      className="!mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
+    >
       <div>
         <Heading as="h1" className="mb-8">
           Hello there.
         </Heading>
-        <Heading
-          as="h4"
-          className="whitespace-nowrap sm:leading-[2.5rem] md:leading-[3rem]"
-        >
-          My name is <GradientTextColor>Tyler Simoni</GradientTextColor>
+        <Heading as="h2" className="font-semibold xs:font-bold">
+          My name is <br className="xs:hidden" />
+          <GradientTextColor className="whitespace-nowrap">
+            Tyler Simoni
+          </GradientTextColor>
           .
-          <br />
-          I&apos;m a frontend web developer.
+          <br />I am a frontend web developer.
         </Heading>
       </div>
     </SectionWrapper>

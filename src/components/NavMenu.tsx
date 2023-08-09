@@ -188,14 +188,14 @@ const NavMenu = () => {
         ref={navMenuRef}
         className={`${
           !isMobileView.current ? 'nav-menu' : ''
-        } relative flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-end gap-2 px-3 sm:justify-start`}
+        } relative mx-auto flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-end gap-2 sm:justify-start`}
       >
         {isMobileView.current ? (
           <Drawer.Root
             opened={opened}
             onClose={close}
             position="top"
-            className="max-w-screen !border-none"
+            keepMounted={false}
             transitionProps={{ duration: 200, timingFunction: 'ease-in-out' }}
           >
             <Drawer.Overlay
@@ -204,14 +204,13 @@ const NavMenu = () => {
               color={colors.slate['200']}
             />
             <Drawer.Content>
-              <Drawer.Body className="flex w-screen gap-2">
+              <Drawer.Body className="flex gap-2">
                 <div className="grow">{renderNavButtons}</div>
                 <Burger
                   title={'Open/Close Navigation'}
                   aria-label={'Open/Close Navigation'}
                   color={!opened ? colors.slate['200'] : colors.rose['500']}
-                  size={30}
-                  className="mr-[9px] hover:backdrop-brightness-125"
+                  className="hover:backdrop-brightness-125"
                   opened={opened}
                   onClick={toggle}
                 />

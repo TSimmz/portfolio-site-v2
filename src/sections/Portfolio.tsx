@@ -7,7 +7,7 @@ import Underline from '~/components/Underline';
 const Portfolio = () => {
   return (
     <SectionWrapper id="portfolio">
-      <Heading as="h1" className="mb-12 text-center">
+      <Heading as="h1" className="text-center">
         <GradientTextColor>Portfolio</GradientTextColor>
 
         <Underline className="bg-rose-700 px-4" />

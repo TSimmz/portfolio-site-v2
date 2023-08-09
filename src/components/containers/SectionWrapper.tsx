@@ -13,7 +13,7 @@ const SectionWrapper: FC<SectionWrapperProps> = ({
 }) => {
   const className = `${
     otherProps.className ? `${otherProps.className} ` : ''
-  }container flex flex-col items-center justify-center gap-12 px-4 py-16`;
+  }container flex flex-col items-center justify-center grow max-w-4xl gap-4 xs:gap-12 px-4 py-16`;
 
   return (
     <Tag key={id} id={id} className={className}>
