@@ -37,8 +37,6 @@ const Contact = () => {
     console.log('Contact Data: ', data);
   };
 
-  console.log('Errors: ', errors);
-
   return (
     <SectionWrapper id="portfolio" className="!gap-0">
       <Heading as="h1" className="text-center">

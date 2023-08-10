@@ -1,10 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { useViewportSize } from '@mantine/hooks';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
-import { useDisclosure } from '@mantine/hooks';
-import { Burger, Drawer } from '@mantine/core';
+import { useToggle, useWindowSize } from 'react-use';
 import colors from 'tailwindcss/colors';
 import theme from 'tailwindcss/defaultTheme';
 
@@ -17,8 +15,8 @@ import {
 
 const NavMenu = () => {
   const pathname = usePathname();
-  const { width } = useViewportSize();
-  const [opened, { toggle, close }] = useDisclosure(false);
+  const { width } = useWindowSize();
+  const [opened, toggle] = useToggle(false);
 
   const navMenuRef = useRef<HTMLElement | null>(null);
 
@@ -191,11 +189,52 @@ const NavMenu = () => {
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
+        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-start gap-2`}
+      >
+        {/* Mobile nav buttons */}
+        {opened ? <div className="sm:hidden">{renderNavButtons}</div> : null}
+
+        {/* Desktop nav buttons */}
+        <div className="hidden space-x-4 sm:flex">{renderNavButtons}</div>
+
+        {/* Burger button */}
+        <div className="absolute right-0 top-0 flex aspect-square justify-center sm:hidden">
+          <button onClick={toggle}>
+            <svg
+              className="h-8 w-8"
+              fill="none"
+              stroke={colors.rose['500']}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {opened ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              )}
+            </svg>
+          </button>
+        </div>
+      </nav>
+      {/* <nav
+        id="nav-menu"
+        key="nav-menu"
+        ref={navMenuRef}
         className={`${
           !isMobileView ? 'nav-menu' : ''
         } relative mx-auto flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-end gap-2 sm:justify-start`}
-      >
-        {isMobileView ? (
+      > */}
+      {/* {isMobileView ? (
           <Drawer.Root
             opened={opened}
             onClose={close}
@@ -224,8 +263,26 @@ const NavMenu = () => {
           </Drawer.Root>
         ) : (
           renderNavButtons
-        )}
-        <Burger
+        )} */}
+      {/* <button className="flex-none px-2 ">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 8h16M4 16h16"
+            />
+          </svg>
+          <span className="sr-only">Open Menu</span>
+        </button> */}
+
+      {/* <Burger
           title={'Open/Close Navigation'}
           aria-label={'Open/Close Navigation'}
           color={!opened ? colors.slate['200'] : colors.rose['500']}
@@ -234,8 +291,8 @@ const NavMenu = () => {
           } hover:backdrop-brightness-125`}
           opened={opened}
           onClick={toggle}
-        />
-      </nav>
+        /> */}
+      {/* </nav> */}
     </header>
   );
 };
