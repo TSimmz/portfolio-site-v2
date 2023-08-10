@@ -58,27 +58,38 @@ const NavMenu = () => {
   );
 
   useEffect(() => {
-    close();
+    toggle(false);
   }, [pathname]);
 
   useEffect(() => {
-    setIsMobileView((prevMobileView) =>
-      prevMobileView !== width < themeSize.current
-        ? width < themeSize.current
-        : prevMobileView,
-    );
+    // Update mobile view state
+    if (isMobileView !== width < themeSize.current) {
+      // If moving to desktop view, turn off mobile nav menu
+      if (width >= themeSize.current) toggle(false);
 
-    const activeLink = document.getElementById(activeLinkId);
-    if (activeLink !== null && navMenuRef.current !== null) {
-      const newWidth = activeLink.offsetWidth / navMenuRef.current.offsetWidth;
-      const newPosition = activeLink.offsetLeft;
+      setIsMobileView(width < themeSize.current);
+    }
 
-      setNavMenuVariables({
-        width: `${newWidth}`,
-        position: `${newPosition}px`,
-      });
+    // Update position and width for desktop nav if not in mobile view
+    if (!isMobileView) {
+      const activeLink = document.getElementById(activeLinkId);
+      if (activeLink !== null && navMenuRef.current !== null) {
+        const newWidth =
+          activeLink.offsetWidth / navMenuRef.current.offsetWidth;
+        const newPosition = activeLink.offsetLeft;
+
+        setNavMenuVariables({
+          width: `${newWidth}`,
+          position: `${newPosition}px`,
+        });
+      }
     }
   }, [width]);
+
+  useEffect(() => {
+    if (opened) document.body.classList.add('nav-menu-open');
+    else document.body.classList.remove('nav-menu-open');
+  }, [opened]);
 
   const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
@@ -183,27 +194,37 @@ const NavMenu = () => {
     <header
       id="page-header"
       key="page-header"
-      className="fixed top-0 z-10 flex min-h-[84px] w-screen justify-between bg-gradient-to-t from-slate-800/50 to-slate-700/60 px-4 pb-3 pt-8 shadow-xl shadow-slate-800 backdrop-blur-md sm:justify-start"
+      className={`${
+        opened ? 'from-slate-700/40' : 'from-slate-800/80'
+      } fixed top-0 z-10 flex min-h-[84px] w-screen flex-col bg-gradient-to-t from-slate-800/80 to-slate-700/60 px-4 pb-3 pt-8 shadow-2xl shadow-slate-800 backdrop-blur-md`}
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-start gap-2`}
+        className={`sm:nav-menu relative flex min-h-[40px] max-w-4xl scroll-pr-6 gap-2 px-0 pb-3 sm:px-4 sm:pb-0 lg:px-0`}
       >
         {/* Mobile nav buttons */}
-        {opened ? <div className="sm:hidden">{renderNavButtons}</div> : null}
+        {opened ? (
+          <>
+            <div className="flex w-[80%] flex-col gap-1 sm:hidden">
+              {renderNavButtons}
+            </div>
+          </>
+        ) : null}
 
         {/* Desktop nav buttons */}
-        <div className="hidden space-x-4 sm:flex">{renderNavButtons}</div>
+        <div className="hidden w-full space-x-4 sm:flex">
+          {renderNavButtons}
+        </div>
 
         {/* Burger button */}
-        <div className="absolute right-0 top-0 flex aspect-square justify-center sm:hidden">
+        <div className="absolute right-0 top-0 flex aspect-square h-10 w-10 items-center justify-center rounded-md hover:backdrop-brightness-125 sm:hidden">
           <button onClick={toggle}>
             <svg
               className="h-8 w-8"
               fill="none"
-              stroke={colors.rose['500']}
+              stroke={opened ? colors.rose['500'] : colors.slate['200']}
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -226,73 +247,12 @@ const NavMenu = () => {
           </button>
         </div>
       </nav>
-      {/* <nav
-        id="nav-menu"
-        key="nav-menu"
-        ref={navMenuRef}
-        className={`${
-          !isMobileView ? 'nav-menu' : ''
-        } relative mx-auto flex min-h-[40px] max-w-4xl grow scroll-pr-6 items-center justify-end gap-2 sm:justify-start`}
-      > */}
-      {/* {isMobileView ? (
-          <Drawer.Root
-            opened={opened}
-            onClose={close}
-            position="top"
-            keepMounted={false}
-            transitionProps={{ duration: 200, timingFunction: 'ease-in-out' }}
-          >
-            <Drawer.Overlay
-              opacity={0.1}
-              blur={2}
-              color={colors.slate['200']}
-            />
-            <Drawer.Content>
-              <Drawer.Body className="flex gap-2">
-                <div className="grow">{renderNavButtons}</div>
-                <Burger
-                  title={'Open/Close Navigation'}
-                  aria-label={'Open/Close Navigation'}
-                  color={!opened ? colors.slate['200'] : colors.rose['500']}
-                  className="hover:backdrop-brightness-125"
-                  opened={opened}
-                  onClick={toggle}
-                />
-              </Drawer.Body>
-            </Drawer.Content>
-          </Drawer.Root>
-        ) : (
-          renderNavButtons
-        )} */}
-      {/* <button className="flex-none px-2 ">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 8h16M4 16h16"
-            />
-          </svg>
-          <span className="sr-only">Open Menu</span>
-        </button> */}
-
-      {/* <Burger
-          title={'Open/Close Navigation'}
-          aria-label={'Open/Close Navigation'}
-          color={!opened ? colors.slate['200'] : colors.rose['500']}
-          className={`${
-            !isMobileView ? 'hidden' : ''
-          } hover:backdrop-brightness-125`}
-          opened={opened}
-          onClick={toggle}
-        /> */}
-      {/* </nav> */}
+      {/* <div
+        className={`h-20 w-full flex-auto grow bg-slate-500/20 backdrop-blur-md sm:hidden ${
+          !opened && 'hidden'
+        }`}
+        onClick={() => toggle()}
+      ></div> */}
     </header>
   );
 };

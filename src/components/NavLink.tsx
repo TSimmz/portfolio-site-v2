@@ -20,16 +20,17 @@ const NavLink: FC<NavLinkProps> = ({ id, title, href, onPathChange }) => {
   }, [pathname]);
 
   return (
-    <div
+    <Link
       id={id}
-      className={`relative flex flex-row space-x-0 rounded px-2 py-1 transition-all duration-500 hover:backdrop-brightness-125 sm:px-5 ${
+      href={href}
+      className={`relative flex flex-row space-x-0 rounded px-2 py-[2px] text-lg transition-all duration-500 hover:backdrop-brightness-125 sm:px-5 sm:text-base ${
         isActive.current ? 'text-rose-500' : 'hover:text-rose-400'
       }`}
     >
-      <Link href={href} className={`flex align-middle focus:outline-none`}>
+      <div className={`flex align-middle focus:outline-none`}>
         <span className="px-2 py-1 capitalize">{title}</span>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

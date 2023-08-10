@@ -6,20 +6,25 @@ svg {
   min-width: auto;
 }
 
-.mantin-Drawer-overlay {
-  padding: 0px 8px !important;
+.nav-menu-open {
+  overflow-y: hidden;
+  position: relative;
 }
-.mantine-Drawer-content {
-  color: theme('colors.slate.100') !important;
-  --tw-gradient-from: theme('colors.slate.800') var(--tw-gradient-from-position);
-  --tw-gradient-to: theme('colors.slate.700') var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-  background-image: linear-gradient(
-    to top,
-    var(--tw-gradient-stops)
-  ) !important;
-  padding: 1rem 0 !important;
-  height: unset !important;
+
+.nav-menu-open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 25%;
+  background-color: theme('colors.slate.500');
+  --tw-backdrop-blur: blur(20px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
+    var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
+    var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
+    var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
+    var(--tw-backdrop-sepia);
 }
 
 @layer utilities {
