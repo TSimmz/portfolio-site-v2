@@ -3,8 +3,47 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/components/containers/PortfolioCard';
 import Underline from '~/components/Underline';
+import { pinnedRepoNames } from '~/utils/constants';
+import { type GitHubRepositoryResponse } from '~/utils/types';
 
-const Portfolio = () => {
+const getGithubProfile = async (): Promise<unknown> => {
+  //if (process.env.GITHUB_ACCESS_TOKEN) {
+  const data: Response = await fetch(`https://api.github.com/users/tsimmz`, {
+    method: 'GET',
+  });
+  const githubProfile: unknown = await data.json();
+
+  return githubProfile;
+  //}
+};
+
+const getGithubRepos = async (): Promise<unknown> => {
+  const data: Response = await fetch(
+    'https://api.github.com/users/TSimmz/repos',
+    {
+      method: 'GET',
+    },
+  );
+
+  const githubRepoData: unknown = await data.json();
+  return githubRepoData as GitHubRepositoryResponse[];
+};
+
+const Portfolio = async () => {
+  const githubProfile = await getGithubProfile();
+  const githubRepos: GitHubRepositoryResponse[] =
+    (await getGithubRepos()) as GitHubRepositoryResponse[];
+
+  // const pinnedRepos = githubRepos?.filter(
+  //   (repo: GitHubRepositoryResponse) =>
+  //     repo.private && pinnedRepoNames.has(repo.name ? repo.name : ''),
+  // );
+
+  // console.log('Pinned: ', pinnedRepos);
+
+  console.log('Github Profile: ', githubProfile);
+  console.log('Github Repos: ', githubRepos);
+
   return (
     <SectionWrapper id="portfolio">
       <Heading as="h1" className="text-center">
