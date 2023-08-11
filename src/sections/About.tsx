@@ -11,8 +11,10 @@ const About = () => {
         <GradientTextColor>About</GradientTextColor>
         <Underline className="bg-rose-700 px-4" />
       </Heading>
+
+      <p className="mt-2 text-center text-lg">-- Insert about page here --</p>
       {/* <Hexagon className="w-40" /> */}
-      <div className="hexagon-container">
+      {/* <div className="hexagon-container">
         <div className="hexagon-wrapper">
           {Array(8)
             .fill(0)
@@ -24,7 +26,7 @@ const About = () => {
               </div>
             ))}
         </div>
-      </div>
+      </div> */}
     </SectionWrapper>
   );
 };
