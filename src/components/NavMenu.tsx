@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize } from 'react-use';
-import colors from 'tailwindcss/colors';
+
 import theme from 'tailwindcss/defaultTheme';
 
 import NavLink from './NavLink';
@@ -12,6 +12,7 @@ import {
   baseRouteKeysList,
   baseRoutes,
 } from '~/utils/constants';
+import Burger from './Burger';
 
 const NavMenu = () => {
   const pathname = usePathname();
@@ -219,40 +220,8 @@ const NavMenu = () => {
         </div>
 
         {/* Burger button */}
-        <div className="absolute right-0 top-0 flex aspect-square h-10 w-10 items-center justify-center rounded-md hover:backdrop-brightness-125 sm:hidden">
-          <button onClick={toggle}>
-            <svg
-              className="h-8 w-8"
-              fill="none"
-              stroke={opened ? colors.rose['500'] : colors.slate['200']}
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {opened ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              )}
-            </svg>
-          </button>
-        </div>
+        <Burger opened={opened} onClick={toggle} />
       </nav>
-      {/* <div
-        className={`h-20 w-full flex-auto grow bg-slate-500/20 backdrop-blur-md sm:hidden ${
-          !opened && 'hidden'
-        }`}
-        onClick={() => toggle()}
-      ></div> */}
     </header>
   );
 };
