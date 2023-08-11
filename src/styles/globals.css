@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-svg {
-  min-width: auto;
-}
-
-.nav-menu-open {
+/* .nav-menu-open {
   overflow-y: hidden;
   position: relative;
 }
@@ -18,14 +14,14 @@ svg {
   height: 100%;
   width: 100%;
   opacity: 25%;
-  background-color: theme('colors.slate.500');
+  background-color: theme('colors.slate.600');
   --tw-backdrop-blur: blur(20px);
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
     var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
     var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
     var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
     var(--tw-backdrop-sepia);
-}
+} */
 
 @layer utilities {
   .nav-menu::after {
