@@ -1,7 +1,7 @@
 'use client';
 
-import { type FC, useEffect } from 'react';
-import { motion, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { type FC } from 'react';
+import { motion } from 'framer-motion';
 
 import colors from 'tailwindcss/colors';
 
@@ -20,15 +20,18 @@ const burgerVariant = {
 type BurgerProps = {
   title?: string;
   opened: boolean;
+  className?: string;
   onClick: (nextValue: unknown) => void;
 };
 
-const Burger: FC<BurgerProps> = ({ title, opened, onClick }) => {
+const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
   return (
     <button
       title={title}
       onClick={onClick}
-      className="absolute right-0 top-0 flex !h-10 !w-10 items-center justify-center rounded-md hover:backdrop-brightness-125 sm:hidden"
+      className={`flex !h-10 !w-10 items-center justify-center rounded-md hover:backdrop-brightness-125 ${
+        className ? className : ''
+      }`}
     >
       <motion.svg
         className="h-8 w-8"

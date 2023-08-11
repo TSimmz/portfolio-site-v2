@@ -220,7 +220,11 @@ const NavMenu = () => {
         </div>
 
         {/* Burger button */}
-        <Burger opened={opened} onClick={toggle} />
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          className="absolute right-0 top-0 sm:hidden"
+        />
       </nav>
     </header>
   );
