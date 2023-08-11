@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+svg {
+  min-width: auto;
+}
+
+.nav-menu-open {
+  overflow-y: hidden;
+  position: relative;
+}
+
+.nav-menu-open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 25%;
+  background-color: theme('colors.slate.500');
+  --tw-backdrop-blur: blur(20px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
+    var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
+    var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
+    var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
+    var(--tw-backdrop-sepia);
+}
+
+@layer utilities {
+  .nav-menu::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--_height);
+    background-color: theme('colors.rose.500');
+    scale: var(--_width, 0.125) 1;
+    translate: var(--_left, 0) 0px;
+    transform-origin: left;
+    transition-duration: var(--_duration);
+    transition-timing-function: ease-in-out;
+  }
+
+  .hexagon-container {
+    display: flex;
+    padding-left: 8px;
+    --size: 100px; /* size  */
+    --hex-size: 120px;
+    --margin: 4px; /* margin */
+    --f: calc(1.732 * var(--size) + 4 * var(--margin) - 1px);
+  }
+
+  .hexagon-wrapper {
+    font-size: 0; /*disable white space between inline block element */
+  }
+
+  .hexagon-wrapper .hexagon {
+    padding: 1rem;
+    width: var(--hex-size);
+    display: inline-block;
+    font-size: theme('fontSize.sm');
+    aspect-ratio: 1;
+    background: theme('colors.rose.500');
+    margin-top: -16px;
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  }
+
+  /* .hexagon-wrapper .hexagon:nth-child(odd) {
+    background:green;
+  } */
+
+  .hexagon-wrapper::before {
+    content: '';
+    width: calc(var(--hex-size) / 2);
+    float: left;
+    height: 120%;
+    shape-outside: repeating-linear-gradient(
+      #0000 0 calc(var(--f) - 3px),
+      #000 0 var(--f)
+    );
+  }
+}

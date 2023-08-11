@@ -10,6 +10,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.16",
+    "@heroicons/react": "^2.0.18",
+    "@hookform/resolvers": "^3.2.0",
     "@prisma/client": "^5.0.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.14.4",
@@ -19,10 +22,13 @@
     "@trpc/next": "^10.26.0",
     "@trpc/react-query": "^10.26.0",
     "@trpc/server": "^10.26.0",
+    "framer-motion": "^10.15.1",
     "next": "^13.4.2",
     "next-sanity": "^5.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-use": "^17.4.0",
     "sanity": "^3.14.4",
     "styled-components": "5.2",
     "superjson": "1.12.2",
