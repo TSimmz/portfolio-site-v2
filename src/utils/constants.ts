@@ -11,5 +11,10 @@ export type BaseRoutePaths = (typeof baseRoutes)[BaseRouteKeys];
 export const baseRouteKeysList = Object.keys(baseRoutes) as BaseRouteKeys[];
 
 export const pinnedRepoNames = new Set([
-  'portfolio-site-v2, portfolio-site, vidyo-ai-redesign, trivia-game, jammming',
+  'portfolio-site-v2',
+  'portfolio-site',
+  'vidyo-ai-redesign',
+  'trivia-game',
+  'jammming',
+  'recipe-book-app',
 ]);

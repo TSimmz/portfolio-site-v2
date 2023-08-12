@@ -30,19 +30,11 @@ const getGithubRepos = async (): Promise<unknown> => {
 };
 
 const Portfolio = async () => {
-  const githubProfile = await getGithubProfile();
+  //const githubProfile = await getGithubProfile();
   const githubRepos: GitHubRepositoryResponse[] =
     (await getGithubRepos()) as GitHubRepositoryResponse[];
 
-  // const pinnedRepos = githubRepos?.filter(
-  //   (repo: GitHubRepositoryResponse) =>
-  //     repo.private && pinnedRepoNames.has(repo.name ? repo.name : ''),
-  // );
-
-  // console.log('Pinned: ', pinnedRepos);
-
-  console.log('Github Profile: ', githubProfile);
-  console.log('Github Repos: ', githubRepos);
+  console.log('Repos: ', githubRepos);
 
   return (
     <SectionWrapper id="portfolio">
@@ -52,7 +44,20 @@ const Portfolio = async () => {
         <Underline className="bg-rose-700 px-4" />
       </Heading>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6">
-        <PortfolioCard
+        {githubRepos
+          .filter(
+            (repo) =>
+              !repo.private && pinnedRepoNames.has(repo.name ? repo.name : ''),
+          )
+          .map((repo) => (
+            <PortfolioCard
+              key={repo.name}
+              title={repo.name ?? 'Repo Name'}
+              description={repo.description ?? 'Repo Description'}
+              href={repo.svn_url ?? '/'}
+            />
+          ))}
+        {/* <PortfolioCard
           title="First Steps"
           description="Just the basics - Everything you need to know to set up your database and authentication."
           href="https://create.t3.gg/en/usage/first-steps"
@@ -71,7 +76,7 @@ const Portfolio = async () => {
           title="Documentation"
           description="Learn more about Create T3 App, the libraries it uses, and how to deploy it."
           href="https://create.t3.gg/en/introduction"
-        />
+        /> */}
       </div>
     </SectionWrapper>
   );
