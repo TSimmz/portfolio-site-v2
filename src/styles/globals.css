@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+#hexagon-icon > svg {
+  --_icon-size: 36px;
+  width: var(--_icon-size);
+  height: var(--_icon-size);
+}
+
 /* .nav-menu-open {
   overflow-y: hidden;
   position: relative;
@@ -55,9 +61,9 @@
   .hexagon-wrapper .hexagon {
     padding: 1rem;
     width: var(--hex-size);
+    height: var(--hex-size);
     display: inline-block;
     font-size: theme('fontSize.sm');
-    aspect-ratio: 1;
     background: theme('colors.rose.500');
     margin-top: -16px;
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);

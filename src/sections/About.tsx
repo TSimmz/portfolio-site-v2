@@ -1,4 +1,8 @@
 //import Hexagon from '~/components/containers/Hexagon/Hexagon';
+'use client';
+
+import * as Icons from '~/components/svgs';
+
 import Underline from '~/components/Underline';
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
@@ -6,27 +10,32 @@ import Heading from '~/components/typography/Heading';
 
 const About = () => {
   return (
-    <SectionWrapper id="about">
-      <Heading as="h1" className="mb-4 text-center xs:mb-8">
+    <SectionWrapper id="about" className="!gap-0">
+      <Heading as="h1" className="text-center">
         <GradientTextColor>About</GradientTextColor>
         <Underline className="bg-rose-700 px-4" />
       </Heading>
 
-      <p className="mt-2 text-center text-lg">-- Insert about page here --</p>
+      <p className="mb-10 text-center text-lg">-- Skills to pay the bills --</p>
       {/* <Hexagon className="w-40" /> */}
-      {/* <div className="hexagon-container">
+      <div className="hexagon-container">
         <div className="hexagon-wrapper">
-          {Array(8)
-            .fill(0)
-            .map((_, index) => (
-              <div key={`hexagon-${index}`} className="hexagon">
-                <div className="flex h-full items-center justify-center">
-                  {index + 1}
-                </div>
+          {Object.entries(Icons).map(([IconKey, Icon]) => (
+            <div
+              id={`hexagon-${IconKey}`}
+              key={`hexagon-${IconKey}`}
+              className="hexagon"
+            >
+              <div
+                id={'hexagon-icon'}
+                className="flex h-full items-center justify-center"
+              >
+                <Icon />
               </div>
-            ))}
+            </div>
+          ))}
         </div>
-      </div> */}
+      </div>
     </SectionWrapper>
   );
 };
