@@ -1,4 +1,6 @@
+'use client';
 import { motion } from 'framer-motion';
+
 function IconHtml5() {
   return (
     <motion.svg
