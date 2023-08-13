@@ -1,7 +1,7 @@
 //import Hexagon from '~/components/containers/Hexagon/Hexagon';
 'use client';
 
-import * as Icons from '~/components/svgs';
+import * as TechIcons from '~/components/svgs/tech';
 
 import Underline from '~/components/Underline';
 import SectionWrapper from '~/components/containers/SectionWrapper';
@@ -10,7 +10,7 @@ import Heading from '~/components/typography/Heading';
 
 const About = () => {
   return (
-    <SectionWrapper id="about" className="!gap-0">
+    <SectionWrapper id="about" className="mb-8 !gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>About</GradientTextColor>
         <Underline className="bg-rose-700 px-4" />
@@ -20,7 +20,7 @@ const About = () => {
       {/* <Hexagon className="w-40" /> */}
       <div className="hexagon-container">
         <div className="hexagon-wrapper">
-          {Object.entries(Icons).map(([IconKey, Icon]) => (
+          {Object.entries(TechIcons).map(([IconKey, Icon]) => (
             <div
               id={`hexagon-${IconKey}`}
               key={`hexagon-${IconKey}`}
