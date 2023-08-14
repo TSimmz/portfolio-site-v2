@@ -6,20 +6,9 @@ import Underline from '~/components/Underline';
 import { pinnedRepoNames } from '~/utils/constants';
 import { type GitHubRepositoryResponse } from '~/utils/types';
 
-const getGithubProfile = async (): Promise<unknown> => {
-  //if (process.env.GITHUB_ACCESS_TOKEN) {
-  const data: Response = await fetch(`https://api.github.com/users/tsimmz`, {
-    method: 'GET',
-  });
-  const githubProfile: unknown = await data.json();
-
-  return githubProfile;
-  //}
-};
-
 const getGithubRepos = async (): Promise<unknown> => {
   const data: Response = await fetch(
-    'https://api.github.com/users/TSimmz/repos',
+    'https://api.github.com/users/tsimmz/repos',
     {
       method: 'GET',
     },
@@ -30,11 +19,8 @@ const getGithubRepos = async (): Promise<unknown> => {
 };
 
 const Portfolio = async () => {
-  //const githubProfile = await getGithubProfile();
   const githubRepos: GitHubRepositoryResponse[] =
     (await getGithubRepos()) as GitHubRepositoryResponse[];
-
-  console.log('Repos: ', githubRepos);
 
   return (
     <SectionWrapper id="portfolio">

@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-#hexagon-icon > svg {
+/* #hexagon-icon > svg {
   --_icon-size: 36px;
   width: var(--_icon-size);
   height: var(--_icon-size);
-}
+} */
 
 /* .nav-menu-open {
   overflow-y: hidden;
@@ -45,20 +45,20 @@
     transition-timing-function: ease-in-out;
   }
 
-  .hexagon-container {
+  /* .hexagon-container {
     display: flex;
     padding-left: 8px;
-    --size: 100px; /* size  */
+    --size: 100px; /* size  
     --hex-size: 120px;
-    --margin: 4px; /* margin */
+    --margin: 4px; /* margin 
     --f: calc(1.732 * var(--size) + 4 * var(--margin) - 1px);
   }
 
   .hexagon-wrapper {
-    font-size: 0; /*disable white space between inline block element */
-  }
+    font-size: 0; /*disable white space between inline block element 
+  } */
 
-  .hexagon-wrapper .hexagon {
+  /* .hexagon-wrapper .hexagon {
     padding: 1rem;
     width: var(--hex-size);
     height: var(--hex-size);
@@ -67,13 +67,19 @@
     background: theme('colors.rose.500');
     margin-top: -16px;
     clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  }
+  } */
+  /* 
+  .hexagon-img {
+    position: relative;
+    padding: 1rem;
+    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  } */
 
   /* .hexagon-wrapper .hexagon:nth-child(odd) {
     background:green;
   } */
 
-  .hexagon-wrapper::before {
+  /* .hexagon-wrapper::before {
     content: '';
     width: calc(var(--hex-size) / 2);
     float: left;
@@ -82,5 +88,5 @@
       #0000 0 calc(var(--f) - 3px),
       #000 0 var(--f)
     );
-  }
+  } */
 }
