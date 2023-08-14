@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize } from 'react-use';
+import { motion } from 'framer-motion';
 
 import theme from 'tailwindcss/defaultTheme';
 
@@ -13,6 +14,7 @@ import {
   baseRoutes,
 } from '~/utils/constants';
 import Burger from './Burger';
+import { AnimatePresence } from 'framer-motion';
 
 const NavMenu = () => {
   const pathname = usePathname();
@@ -87,10 +89,10 @@ const NavMenu = () => {
     }
   }, [width]);
 
-  useEffect(() => {
-    if (opened) document.body.classList.add('nav-menu-open');
-    else document.body.classList.remove('nav-menu-open');
-  }, [opened]);
+  // useEffect(() => {
+  //   if (opened) document.body.classList.add('nav-menu-open');
+  //   else document.body.classList.remove('nav-menu-open');
+  // }, [opened]);
 
   const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
@@ -196,23 +198,54 @@ const NavMenu = () => {
       id="page-header"
       key="page-header"
       className={`${
-        opened ? 'from-slate-700/40' : 'from-slate-800/80'
-      } fixed top-0 z-10 flex min-h-[84px] w-screen flex-col bg-gradient-to-t from-slate-800/80 to-slate-700/60 px-4 pb-3 pt-8 shadow-2xl shadow-slate-800 backdrop-blur-md`}
+        opened ? 'from-slate-900/50' : 'from-slate-800/80'
+      } fixed top-0 z-10 min-h-[84px] w-full bg-gradient-to-t from-slate-800/80 to-slate-700/60 px-4 pb-3 pt-8 shadow-2xl shadow-slate-800 backdrop-blur-md`}
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className={`sm:nav-menu relative flex min-h-[40px] max-w-4xl scroll-pr-6 gap-2 px-0 pb-3 sm:px-4 sm:pb-0 lg:px-0`}
+        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-4xl scroll-pr-6 gap-2 px-0 pb-3 sm:px-4 sm:pb-0 lg:px-0`}
       >
         {/* Mobile nav buttons */}
-        {opened ? (
-          <>
-            <div className="flex w-[80%] flex-col gap-1 sm:hidden">
+        <AnimatePresence>
+          {opened ? (
+            <motion.div
+              initial={{
+                height: 0,
+                opacity: 0,
+              }}
+              animate={{
+                height: 'auto',
+                opacity: 1,
+                transition: {
+                  height: {
+                    duration: 0.4,
+                  },
+                  opacity: {
+                    duration: 0.25,
+                    delay: 0.15,
+                  },
+                },
+              }}
+              exit={{
+                height: 0,
+                opacity: 0,
+                transition: {
+                  height: {
+                    duration: 0.4,
+                  },
+                  opacity: {
+                    duration: 0.25,
+                  },
+                },
+              }}
+              className="flex w-[80%] flex-col gap-1"
+            >
               {renderNavButtons}
-            </div>
-          </>
-        ) : null}
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
 
         {/* Desktop nav buttons */}
         <div className="hidden w-full space-x-4 sm:flex">

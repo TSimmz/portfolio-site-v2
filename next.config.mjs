@@ -18,6 +18,18 @@ const config = {
     locales: ['en'],
     defaultLocale: 'en',
   },
+
+  images: {
+    remotePatterns: [
+      // GitHub Profile Img - https://avatars.githubusercontent.com/u/17163973?v=4
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/u/17163973**',
+      },
+    ],
+  },
 };
 
 export default config;
