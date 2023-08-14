@@ -1,8 +1,24 @@
 'use client';
+import { type FC } from 'react';
 import { motion } from 'framer-motion';
-function IconFigmaLogo() {
+import { type SVGIconProps } from '..';
+
+const IconFigmaLogo: FC<SVGIconProps> = ({
+  fill = 'none',
+  stroke = 'none',
+  strokeWidth = 0,
+  height = '1em',
+  width = '1em',
+}) => {
   return (
-    <motion.svg fill="none" viewBox="0 0 15 15" height="1em" width="1em">
+    <motion.svg
+      fill={fill}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      viewBox="0 0 15 15"
+      height={height}
+      width={width}
+    >
       <motion.path
         fill="currentColor"
         fillRule="evenodd"
@@ -11,6 +27,6 @@ function IconFigmaLogo() {
       />
     </motion.svg>
   );
-}
+};
 
 export default IconFigmaLogo;
