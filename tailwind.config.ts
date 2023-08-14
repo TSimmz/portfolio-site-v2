@@ -1,10 +1,23 @@
 import { type Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 
+const brand = colors.rose;
+const neutrals = colors.slate;
+const success = colors.emerald;
+const warning = colors.amber;
+const error = colors.red;
+const accent = brand[500];
+const lightBg = neutrals[100];
+const darkBg = neutrals[800];
+const lightBaseText = neutrals[800];
+const lightSubText = neutrals[400];
+const darkBaseText = neutrals[100];
+const darkSubText = neutrals[500];
+
 const colorThemes = Object.freeze({
-  light: colors.slate[100],
-  dark: colors.slate[800],
-  accent: colors.rose[500],
+  light: lightBg,
+  dark: darkBg,
+  accent: accent,
 });
 
 export default {
@@ -17,25 +30,25 @@ export default {
       },
       textColor: {
         light: {
-          base: colors.slate[800],
-          sub: colors.slate[400],
+          base: lightBaseText,
+          sub: lightSubText,
         },
         dark: {
-          base: colors.slate[100],
-          sub: colors.slate[500],
+          base: darkBaseText,
+          sub: darkSubText,
         },
-        accent: colors.rose[500],
+        accent: accent,
       },
       backgroundColor: colorThemes,
       fill: colorThemes,
       stroke: colorThemes,
       colors: {
-        brand: colors.rose,
-        neutrals: colors.slate,
-        success: colors.emerald,
-        warning: colors.amber,
-        error: colors.red,
-        accent: colors.rose[500],
+        brand: brand,
+        neutrals: neutrals,
+        success: success,
+        warning: warning,
+        error: error,
+        accent: accent,
       },
     },
   },

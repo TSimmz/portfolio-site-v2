@@ -36,7 +36,7 @@ const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
       <motion.svg
         className="h-8 w-8"
         fill="none"
-        animate={{ stroke: opened ? colors.rose['500'] : colors.slate['500'] }}
+        animate={{ stroke: opened ? colors.rose['500'] : colors.slate['400'] }}
         transition={{ delay: 0.1 }}
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
