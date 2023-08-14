@@ -29,6 +29,7 @@ const About = async () => {
     <SectionWrapper id="about" className="mb-8 !gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>About</GradientTextColor>
+        <Underline className="bg-rose-700 px-4" />
       </Heading>
 
       <p className="mb-10 text-center text-lg">{githubProfile.bio}</p>
