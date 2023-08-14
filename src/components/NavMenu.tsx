@@ -198,8 +198,10 @@ const NavMenu = () => {
       id="page-header"
       key="page-header"
       className={`${
-        opened ? 'from-slate-900/50' : 'from-slate-800/80'
-      } fixed top-0 z-10 min-h-[84px] w-full bg-gradient-to-t from-slate-800/80 to-slate-700/60 px-4 pb-3 pt-8 shadow-2xl shadow-slate-800 backdrop-blur-md`}
+        opened
+          ? 'from-neutrals-300 dark:from-neutrals-900/50'
+          : 'from-neutrals-200 dark:from-neutrals-800/80'
+      } fixed top-0 z-10 min-h-[84px] w-full bg-gradient-to-t to-neutrals-100/60 px-4 pb-3 pt-8 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:to-neutrals-700/60 dark:shadow-neutrals-800`}
     >
       <nav
         id="nav-menu"

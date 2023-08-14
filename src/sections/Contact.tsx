@@ -41,7 +41,7 @@ const Contact = () => {
     <SectionWrapper id="portfolio" className="!gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>Contact</GradientTextColor>
-        <Underline className="bg-rose-700 px-4" />
+        <Underline className="bg-brand-700 px-4" />
       </Heading>
       <p className="mt-2 text-center text-lg">
         Want to work together?
@@ -58,11 +58,11 @@ const Contact = () => {
             type="text"
             form="contact-form"
             aria-invalid={errors.name ? 'true' : 'false'}
-            className="h-10 rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="h-10 rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500"
             {...register('name', { required: true })}
           />
           {errors.name ? (
-            <p role="alert" className="text-base text-rose-500">
+            <p role="alert" className="text-base text-error-500">
               {errors.name?.message}
             </p>
           ) : null}
@@ -74,11 +74,11 @@ const Contact = () => {
             type="email"
             form="contact-form"
             aria-invalid={errors.email ? 'true' : 'false'}
-            className="h-10 rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="h-10 rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500"
             {...register('email', { required: true })}
           />
           {errors.email ? (
-            <p role="alert" className="text-base text-rose-500">
+            <p role="alert" className="text-base text-error-500">
               {errors.email?.message}
             </p>
           ) : null}
@@ -90,11 +90,11 @@ const Contact = () => {
             form="contact-form"
             aria-invalid={errors.message ? 'true' : 'false'}
             rows={10}
-            className="min-h-[2.5rem] resize-y rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="min-h-[2.5rem] resize-y rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500"
             {...register('message', { required: true })}
           />
           {errors.message ? (
-            <p role="alert" className="text-base text-rose-500">
+            <p role="alert" className="text-base text-error-500">
               {errors.message?.message}
             </p>
           ) : null}
@@ -102,7 +102,7 @@ const Contact = () => {
 
         <input
           type="submit"
-          className="mt-2 h-12 cursor-pointer rounded-lg bg-rose-500 font-bold"
+          className="mt-2 h-12 w-1/2 cursor-pointer self-end rounded-lg border-2 border-neutrals-800 font-bold transition-colors duration-200 ease-in-out hover:border-accent hover:bg-accent hover:text-white dark:border-neutrals-200 dark:hover:border-accent dark:hover:bg-accent"
         />
       </form>
     </SectionWrapper>

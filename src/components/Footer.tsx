@@ -6,7 +6,7 @@ const Footer = () => {
     <footer
       id="page-footer"
       key="page-footer"
-      className="mt-4 flex w-full flex-col justify-center bg-gradient-to-b from-slate-800 to-slate-700 px-4 pb-8 pt-12"
+      className="mt-4 flex w-full flex-col justify-center bg-gradient-to-b from-neutrals-800 to-neutral-700 px-4 pb-8 pt-12"
     >
       <div
         id="socials"
@@ -20,7 +20,7 @@ const Footer = () => {
           <SocialIcons.IconGitHubAlt
             height={36}
             width={36}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-neutrals-200 stroke-neutrals-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
           />
         </Link>
         <Link
@@ -31,7 +31,7 @@ const Footer = () => {
           <SocialIcons.IconLinkedIn
             height={36}
             width={36}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-neutrals-200 stroke-neutrals-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
           />
         </Link>
         <Link
@@ -42,7 +42,7 @@ const Footer = () => {
           <SocialIcons.IconInstagram
             height={36}
             width={36}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-neutrals-200 stroke-neutrals-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
           />
         </Link>
         <Link
@@ -53,11 +53,11 @@ const Footer = () => {
           <SocialIcons.IconTwitter
             height={30}
             width={30}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-neutrals-200 stroke-neutrals-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
           />
         </Link>
       </div>
-      <p className="text-center text-sm text-slate-100">
+      <p className="text-center text-sm text-neutrals-100">
         Tyler Simoni{' '}
         <span className="text-rose-300">&copy;{new Date().getFullYear()}</span>
       </p>

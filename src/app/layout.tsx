@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   themeColor: [
     {
       media: '(prefers-color-scheme: dark)',
-      color: '#000000',
+      color: '#1e293b',
     },
     {
       media: '(prefers-color-scheme: light)',
-      color: '#ffffff',
+      color: '#f1f5f9',
     },
   ],
   colorScheme: 'dark',
@@ -33,12 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className="bg-white text-gray-800 dark:bg-slate-800 dark:text-slate-200"
-    >
+    <html lang="en" className="dark">
       <body
-        className={`relative !mx-0 w-screen overflow-x-hidden antialiased ${sourceCodePro.className}`}
+        className={`relative !mx-0 w-screen overflow-x-hidden bg-light text-light-base antialiased dark:bg-dark dark:text-dark-base ${sourceCodePro.className}`}
       >
         <NavMenu />
         {children}

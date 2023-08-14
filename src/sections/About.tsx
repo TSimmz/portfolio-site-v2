@@ -29,7 +29,7 @@ const About = async () => {
     <SectionWrapper id="about" className="mb-8 !gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>About</GradientTextColor>
-        <Underline className="bg-rose-700 px-4" />
+        <Underline className="bg-brand-500 px-4" />
       </Heading>
 
       <p className="mb-10 text-center text-lg">{githubProfile.bio}</p>
@@ -49,9 +49,13 @@ const About = async () => {
             <div
               id={`hexagon-${IconKey}`}
               key={`hexagon-${IconKey}`}
-              className="flex aspect-square items-center justify-center rounded-2xl bg-rose-500 p-4"
+              className="flex aspect-square items-center justify-center rounded-2xl bg-accent p-4"
             >
-              <Icon height={'32px'} width={'32px'} />
+              <Icon
+                height={'32px'}
+                width={'32px'}
+                className="fill-light stroke-light"
+              />
             </div>
           ))}
         </div>
