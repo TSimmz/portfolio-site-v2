@@ -9,6 +9,7 @@ const IconFramer: FC<SVGIconProps> = ({
   strokeWidth = 0,
   height = '1em',
   width = '1em',
+  className,
 }) => {
   return (
     <motion.svg
@@ -18,6 +19,7 @@ const IconFramer: FC<SVGIconProps> = ({
       strokeWidth={strokeWidth}
       height={height}
       width={width}
+      className={className}
     >
       <motion.path
         fill={fill}

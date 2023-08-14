@@ -9,9 +9,16 @@ const IconReact: FC<SVGIconProps> = ({
   strokeWidth = 1,
   height = '1em',
   width = '1em',
+  className,
 }) => {
   return (
-    <motion.svg fill={fill} viewBox="0 0 15 15" height={height} width={width}>
+    <motion.svg
+      fill={fill}
+      viewBox="0 0 15 15"
+      height={height}
+      width={width}
+      className={className}
+    >
       <motion.path
         stroke={stroke}
         strokeWidth={strokeWidth}

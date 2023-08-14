@@ -15,30 +15,46 @@ const Footer = () => {
         <Link
           href={'https://github.com/tsimmz'}
           target="_blank"
-          className="group flex h-12 !w-12 min-w-fit place-items-center rounded-xl p-2 transition-transform duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
+          className="group flex aspect-square w-12 items-center justify-center rounded-xl p-1 transition-all duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
         >
-          <SocialIcons.IconGitHubAlt />
+          <SocialIcons.IconGitHubAlt
+            height={36}
+            width={36}
+            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+          />
         </Link>
         <Link
           href={'https://linkedin.com/in/tylersimoni'}
           target="_blank"
-          className="group flex aspect-square w-12 place-items-center  rounded-xl p-2 transition-all duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
+          className="group flex aspect-square w-12 items-center justify-center  rounded-xl p-1 transition-all duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
         >
-          <SocialIcons.IconLinkedIn />
+          <SocialIcons.IconLinkedIn
+            height={36}
+            width={36}
+            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+          />
         </Link>
         <Link
           href={'http://instagram.com/t_simmz'}
           target="_blank"
-          className="group flex aspect-square w-12 place-items-center rounded-xl p-2 transition-transform duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
+          className="group flex aspect-square w-12 items-center justify-center rounded-xl p-1 transition-transform duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
         >
-          <SocialIcons.IconInstagram />
+          <SocialIcons.IconInstagram
+            height={36}
+            width={36}
+            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+          />
         </Link>
         <Link
           href={'https://twitter.com/tylersimoni'}
           target="_blank"
-          className="group flex aspect-square w-12 place-items-center rounded-xl p-2  transition-transform duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
+          className="group flex aspect-square w-12 items-center justify-center rounded-xl p-1  transition-transform duration-200 ease-in-out hover:translate-y-[-8px] hover:scale-110 hover:backdrop-brightness-125"
         >
-          <SocialIcons.IconTwitter />
+          <SocialIcons.IconTwitter
+            height={30}
+            width={30}
+            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+          />
         </Link>
       </div>
       <p className="text-center text-sm text-slate-100">

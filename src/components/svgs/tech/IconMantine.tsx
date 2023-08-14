@@ -9,6 +9,7 @@ const IconBrandMantine: FC<SVGIconProps> = ({
   strokeWidth = 2,
   height = '1em',
   width = '1em',
+  className,
 }) => {
   return (
     <motion.svg
@@ -20,6 +21,7 @@ const IconBrandMantine: FC<SVGIconProps> = ({
       strokeWidth={strokeWidth}
       height={height}
       width={width}
+      className={className}
     >
       <motion.path stroke={fill} d="M0 0h24v24H0z" />
       <motion.path d="M21 12 A9 9 0 0 1 12 21 A9 9 0 0 1 3 12 A9 9 0 0 1 21 12 z" />
