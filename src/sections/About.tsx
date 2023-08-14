@@ -42,13 +42,13 @@ const About = async () => {
         </div>
         <div
           id="skills-container"
-          className="flex flex-wrap justify-center gap-2"
+          className="flex flex-wrap items-center justify-center gap-4"
         >
           {Object.entries(TechIcons).map(([IconKey, Icon]) => (
             <div
               id={`hexagon-${IconKey}`}
               key={`hexagon-${IconKey}`}
-              className="item-center flex justify-center rounded-2xl bg-rose-500 p-4"
+              className="flex aspect-square items-center justify-center rounded-2xl bg-rose-500 p-4"
             >
               <Icon height={'32px'} width={'32px'} />
             </div>
