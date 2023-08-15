@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize } from 'react-use';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import theme from 'tailwindcss/defaultTheme';
 
@@ -14,11 +14,13 @@ import {
   baseRoutes,
 } from '~/utils/constants';
 import Burger from './Burger';
-import { AnimatePresence } from 'framer-motion';
+import BrandLogo from './svgs/BrandLogo';
+import Link from 'next/link';
 
 const NavMenu = () => {
   const pathname = usePathname();
   const { width } = useWindowSize();
+
   const [opened, toggle] = useToggle(false);
 
   const navMenuRef = useRef<HTMLElement | null>(null);
@@ -88,11 +90,6 @@ const NavMenu = () => {
       }
     }
   }, [width]);
-
-  // useEffect(() => {
-  //   if (opened) document.body.classList.add('nav-menu-open');
-  //   else document.body.classList.remove('nav-menu-open');
-  // }, [opened]);
 
   const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
@@ -197,18 +194,48 @@ const NavMenu = () => {
     <header
       id="page-header"
       key="page-header"
-      className={`${
-        opened
-          ? 'from-neutrals-300 dark:from-neutrals-900/50'
-          : 'from-neutrals-200 dark:from-neutrals-800/80'
-      } fixed top-0 z-10 min-h-[84px] w-full bg-gradient-to-t to-neutrals-100/60 px-4 pb-3 pt-8 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:to-neutrals-700/60 dark:shadow-neutrals-800`}
+      className={`fixed top-0 z-10 w-full bg-dark/90 px-4 py-3 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-white/90 dark:shadow-neutrals-800`}
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-4xl scroll-pr-6 gap-2 px-0 pb-3 sm:px-4 sm:pb-0 lg:px-0`}
+        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-5xl scroll-pr-6 px-0 sm:justify-between sm:px-4 lg:px-0`}
       >
+        <AnimatePresence>
+          {!opened ? (
+            <motion.div
+              className="overflow-hidden rounded-md hover:backdrop-brightness-110 sm:py-1 sm:pl-1 sm:pr-4"
+              initial={{
+                translateX: -100,
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+                translateX: 0,
+                transition: {
+                  opacity: {
+                    duration: 0.2,
+                    delay: 0.3,
+                  },
+                  translateX: {
+                    duration: 0.2,
+                    delay: 0.3,
+                  },
+                },
+              }}
+              exit={{
+                opacity: 0,
+                translateX: -100,
+              }}
+            >
+              <Link id="brand-logo" href="/">
+                <BrandLogo height={'36px'} className="fill-brand-500" />
+              </Link>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+
         {/* Mobile nav buttons */}
         <AnimatePresence>
           {opened ? (
@@ -216,29 +243,39 @@ const NavMenu = () => {
               initial={{
                 height: 0,
                 opacity: 0,
+                translateY: -100,
               }}
               animate={{
                 height: 'auto',
                 opacity: 1,
+                translateY: 0,
                 transition: {
                   height: {
-                    duration: 0.4,
+                    delay: 0.2,
                   },
                   opacity: {
-                    duration: 0.25,
-                    delay: 0.15,
+                    duration: 0.2,
+                    delay: 0.5,
+                  },
+                  translateY: {
+                    duration: 0.2,
+                    delay: 0.5,
                   },
                 },
               }}
               exit={{
                 height: 0,
                 opacity: 0,
+                translateY: -100,
                 transition: {
-                  height: {
-                    duration: 0.4,
+                  translateY: {
+                    duration: 0.01,
                   },
                   opacity: {
-                    duration: 0.25,
+                    duration: 0,
+                  },
+                  height: {
+                    duration: 0.1,
                   },
                 },
               }}
@@ -250,9 +287,7 @@ const NavMenu = () => {
         </AnimatePresence>
 
         {/* Desktop nav buttons */}
-        <div className="hidden w-full space-x-4 sm:flex">
-          {renderNavButtons}
-        </div>
+        <div className="hidden space-x-1 sm:flex">{renderNavButtons}</div>
 
         {/* Burger button */}
         <Burger

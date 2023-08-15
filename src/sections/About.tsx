@@ -20,10 +20,10 @@ const getGithubProfile = async (): Promise<unknown> => {
 const About = async () => {
   const githubProfile: GitHubProfileResponse =
     (await getGithubProfile()) as GitHubProfileResponse;
-  console.log('Profile: ', githubProfile);
+  //console.log('Profile: ', githubProfile);
 
   const profileImgUrl = githubProfile.avatar_url;
-  console.log('Profile Img: ', profileImgUrl);
+  //console.log('Profile Img: ', profileImgUrl);
 
   return (
     <SectionWrapper id="about" className="mb-8 !gap-0">
