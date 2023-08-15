@@ -13,9 +13,10 @@ import {
   baseRouteKeysList,
   baseRoutes,
 } from '~/utils/constants';
-import Burger from './Burger';
+import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
+import ThemeSwitcher from './buttons/ThemeSwitcher';
 
 const NavMenu = () => {
   const pathname = usePathname();
@@ -300,6 +301,8 @@ const NavMenu = () => {
           onClick={toggle}
           className="absolute right-0 top-0 sm:hidden"
         />
+
+        <ThemeSwitcher />
       </nav>
     </header>
   );
