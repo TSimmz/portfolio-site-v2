@@ -216,11 +216,13 @@ const NavMenu = () => {
                 transition: {
                   opacity: {
                     duration: 0.2,
-                    delay: 0.3,
+                    delay: 0.2,
                   },
                   translateX: {
                     duration: 0.2,
-                    delay: 0.3,
+                    delay: 0.25,
+                    type: 'spring',
+                    bounce: 0.35,
                   },
                 },
               }}
@@ -252,6 +254,8 @@ const NavMenu = () => {
                 transition: {
                   height: {
                     delay: 0.2,
+                    type: 'spring',
+                    bounce: 0.5,
                   },
                   opacity: {
                     duration: 0.2,
@@ -269,13 +273,14 @@ const NavMenu = () => {
                 translateY: -100,
                 transition: {
                   translateY: {
-                    duration: 0.01,
+                    duration: 0,
                   },
                   opacity: {
                     duration: 0,
                   },
                   height: {
-                    duration: 0.1,
+                    duration: 0.15,
+                    delay: 0.1,
                   },
                 },
               }}
