@@ -26,7 +26,21 @@ type BurgerProps = {
 
 const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
   return (
-    <button
+    <motion.button
+      initial={{
+        translateX: 100,
+      }}
+      animate={{
+        translateX: 0,
+        transition: {
+          translateX: {
+            duration: 0.2,
+            delay: 0.25,
+            type: 'spring',
+            bounce: 0.35,
+          },
+        },
+      }}
       title={title}
       onClick={onClick}
       className={`flex !h-10 !w-10 items-center justify-center rounded-md hover:backdrop-brightness-125 ${
@@ -87,7 +101,7 @@ const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
           animate={opened ? 'closed' : 'opened'}
         />
       </motion.svg>
-    </button>
+    </motion.button>
   );
 };
 
