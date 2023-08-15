@@ -6,14 +6,23 @@ import NavMenu from '~/components/NavMenu';
 import Footer from '~/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Tyler Simoni - Portfolio v2',
-  description: 'A portfolio website for Tyler Simoni',
-  applicationName: 'My Portfolio v2',
+  title: 'Tyler Simoni | Portfolio',
+  description: 'A portfolio website for Tyler Simoni to showcase work',
+  applicationName: 'Tyler Simoni Portfolio',
   authors: {
     name: 'Tyler Simoni',
     url: 'https://tylersimoni.com',
   },
-  keywords: ['react', 'next13', 'tailwindcss', 'trpc', 'sanityio', 'portfolio'],
+  keywords: [
+    'react',
+    'next13',
+    'tailwindcss',
+    'trpc',
+    'sanityio',
+    'portfolio',
+    'tyler simoni',
+    'framer-motion',
+  ],
   themeColor: [
     {
       media: '(prefers-color-scheme: dark)',
