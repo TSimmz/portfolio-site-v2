@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { themeLocalStorageId } from '~/utils/constants';
 
 const themeTypes = {
@@ -15,7 +15,7 @@ function useDarkTheme() {
 
   const handleSystemChange = (mediaQuery: MediaQueryList) => {
     if (localStorage[themeLocalStorageId] === themeTypes.system) {
-      const theme = mediaQuery.matches ? themeTypes.dark : themeTypes.light;
+      const theme = mediaQuery.matches ? 'dark' : 'light';
       if (theme === themeTypes.dark) {
         document.documentElement.classList.add('dark');
         setIsDarkMode(true);
@@ -28,12 +28,12 @@ function useDarkTheme() {
 
   const handleSystemChangeEvent = useCallback((event: MediaQueryListEvent) => {
     if (localStorage[themeLocalStorageId] === themeTypes.system) {
-      const theme = event.matches ? themeTypes.dark : themeTypes.light;
+      const theme = event.matches ? 'dark' : 'light';
       if (theme === themeTypes.dark) {
         document.documentElement.classList.add('dark');
         setIsDarkMode(true);
       } else {
-        document.documentElement.classList.remove('light');
+        document.documentElement.classList.remove('dark');
         setIsDarkMode(false);
       }
     }

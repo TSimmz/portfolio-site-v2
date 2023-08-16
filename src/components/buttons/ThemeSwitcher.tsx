@@ -1,6 +1,12 @@
 'use client';
 
-import { type FC, useRef, useState, useEffect } from 'react';
+import {
+  type FC,
+  useRef,
+  useState,
+  useEffect,
+  type MouseEvent as ReactMouseEvent,
+} from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import useDarkTheme, { type ThemeType } from '~/hooks/useDarkTheme';
@@ -31,14 +37,25 @@ const themeSwitcherVariant = {
   },
 };
 
+const sunMoonVariant = {
+  rest: {
+    //fill: colors.slate[500],
+    stroke: colors.slate[500],
+  },
+  hover: (isDarkMode: boolean) => ({
+    //fill: isDarkMode ? colors.yellow[200] : colors.yellow[400],
+    stroke: isDarkMode ? colors.yellow[200] : colors.yellow[400],
+  }),
+};
+
 const moonVariant = {
   rest: {
     fill: colors.slate[500],
     stroke: colors.slate[500],
   },
-  hover: (isDisabled: boolean) => ({
-    fill: !isDisabled ? colors.yellow[400] : colors.zinc[500],
-    stroke: !isDisabled ? colors.yellow[400] : colors.zinc[500],
+  hover: {
+    fill: colors.yellow[400],
+    stroke: colors.yellow[400],
     rotate: [-5, 10, -5, 10, -5],
     transition: {
       rotate: {
@@ -48,15 +65,15 @@ const moonVariant = {
         repeat: Infinity,
       },
     },
-  }),
+  },
 };
 
 const sunVariant = {
   rest: {
     fill: colors.slate[500],
   },
-  hover: (isDisabled: boolean) => ({
-    fill: !isDisabled ? colors.yellow[200] : colors.blue[200],
+  hover: {
+    fill: colors.yellow[200],
     rotate: [-5, 10, -5, 10, -5],
     transition: {
       rotate: {
@@ -66,7 +83,7 @@ const sunVariant = {
         repeat: Infinity,
       },
     },
-  }),
+  },
 };
 
 const moonFillVariant = {
@@ -138,17 +155,21 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
 
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
-  const handleDetailsClick = () => {
-    setIsDetailsOpen((prevState) => !prevState);
+  const handleDetailsClick = (
+    e: ReactMouseEvent<HTMLDetailsElement, MouseEvent>,
+  ) => {
+    const isOpen = e.currentTarget.hasAttribute('open');
+    console.log('PREV STATE: ', isOpen, isDetailsOpen);
+    setIsDetailsOpen((previousState) =>
+      previousState === isOpen ? !previousState : !isOpen,
+    );
   };
 
   const handleThemeClick = (theme: ThemeType) => {
     onThemeClick(theme);
-    if (
-      detailsRef.current !== null &&
-      detailsRef.current.hasAttribute('open')
-    ) {
+    if (detailsRef.current !== null) {
       detailsRef.current.removeAttribute('open');
+      setIsDetailsOpen(false);
     }
   };
 
@@ -171,12 +192,12 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
     }
   }, []);
 
-  const handleDetailsOutsideClick = (e: MouseEvent | TouchEvent) => {
+  const handleDetailsOutsideClick = (e: MouseEvent) => {
     if (
       detailsRef.current !== null &&
       detailsRef.current.hasAttribute('open')
     ) {
-      const { clientX, clientY } = e as PointerEvent;
+      const { clientX, clientY } = e;
       const detailsBounds = detailsRef.current.getBoundingClientRect();
 
       // If click is outside details box, close it
@@ -195,9 +216,18 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
   };
 
   useEffect(() => {
-    window.addEventListener('click', handleDetailsOutsideClick);
+    window.addEventListener(
+      'click',
+      handleDetailsOutsideClick.bind(null),
+      true,
+    );
 
-    return () => window.removeEventListener('click', handleDetailsOutsideClick);
+    return () =>
+      window.removeEventListener(
+        'click',
+        handleDetailsOutsideClick.bind(null),
+        true,
+      );
   }, []);
 
   return (
@@ -205,7 +235,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       id={id}
       title={title}
       ref={detailsRef}
-      onClick={() => handleDetailsClick()}
+      onClick={handleDetailsClick}
       variants={themeSwitcherVariant}
       initial={['rest', 'out']}
       whileHover="hover"
@@ -215,26 +245,45 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       className="group relative flex !h-10 items-center justify-center rounded-md"
     >
       <motion.summary
+        id={`${id}-summary`}
         className={`pointer-events-auto relative flex list-none items-center justify-center gap-2 bg-transparent px-3 py-2`}
       >
         <button
+          id="theme-mode-button"
           className="mr-2 overflow-visible"
-          disabled={themeMode === 'system'}
           onClick={(e) => {
             if (themeMode === 'system') return;
-
             e.stopPropagation();
+
             closeDetailsDropDown();
             onThemeClick(isDarkMode ? 'light' : 'dark');
           }}
         >
           <AnimatePresence>
-            {!isDarkMode ? (
+            {themeMode === 'system' ? (
+              <motion.svg
+                id="sun-moon-icon"
+                viewBox="0 0 24 24"
+                variants={sunMoonVariant}
+                custom={isDarkMode}
+                className="h-6 w-6"
+              >
+                <motion.path
+                  fill="none"
+                  strokeWidth={2}
+                  d="M16 12 A4 4 0 0 1 12 16 A4 4 0 0 1 8 12 A4 4 0 0 1 16 12 z"
+                />
+                <motion.path
+                  fill="none"
+                  strokeWidth={2}
+                  d="M12 8a2 2 0 104 4M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+                />
+              </motion.svg>
+            ) : !isDarkMode ? (
               <motion.svg
                 id="moon-icon"
                 viewBox="0 0 16 16"
                 variants={moonVariant}
-                custom={themeMode === 'system'}
                 className="h-6 w-6 stroke-[0.3]"
               >
                 <motion.path d="M6 .278a.768.768 0 01.08.858 7.208 7.208 0 00-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 01.81.316.733.733 0 01-.031.893A8.349 8.349 0 018.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 016 .278zM4.858 1.311A7.269 7.269 0 001.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 005.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z" />
@@ -245,7 +294,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
                 id="sun-icon"
                 viewBox="0 0 512 512"
                 variants={sunVariant}
-                custom={themeMode === 'system'}
                 className="h-6 w-6"
               >
                 <motion.path d="M505.2 324.8l-47.73-68.78 47.75-68.81c7.359-10.62 8.797-24.12 3.844-36.06-4.969-11.94-15.52-20.44-28.22-22.72l-82.39-14.88-14.89-82.41c-2.281-12.72-10.76-23.25-22.69-28.22-11.97-4.936-25.42-3.498-36.12 3.844L256 54.49 187.2 6.709c-10.7-7.31-24.1-8.748-36.1-3.813-11.92 4.971-20.4 15.5-22.7 28.19l-14.89 82.44L31.15 128.4c-12.73 2.3-23.296 10.8-28.25 22.8-4.951 11.9-3.5 25.4 3.875 36l47.73 68.78-47.75 68.81c-7.359 10.62-8.795 24.12-3.844 36.06 4.969 11.94 15.52 20.44 28.22 22.72l82.39 14.88 14.89 82.41c2.297 12.72 10.78 23.25 22.7 28.22 11.95 4.906 25.44 3.531 36.09-3.844L256 457.5l68.83 47.78c6.47 4.42 13.97 6.72 21.47 6.72 4.906 0 9.859-.969 14.56-2.906 11.92-4.969 20.4-15.5 22.7-28.19l14.89-82.44 82.37-14.88c12.73-2.281 23.3-10.78 28.25-22.75 5.03-11.934 3.53-25.434-3.87-36.034zm-48.4 14.4l-99.61 18-18 99.63L256 399.1l-83.2 57.7-18-99.63-99.61-18 57.71-84.07-57.67-82.3 99.61-18 18-99.63L256 112.9l83.15-57.75 18.02 99.66 99.61 18-57.68 82.29 57.7 84.1zM256 143.1c-61.85 0-111.1 50.14-111.1 111.1 0 61.85 50.15 111.1 111.1 111.1s111.1-50.14 111.1-111.1c0-60.1-49.3-111.1-111.1-111.1zm0 176c-35.28 0-63.99-28.71-63.99-63.99S220.7 192 256 192s63.99 28.71 63.99 63.1-28.69 64-63.99 64z" />
@@ -254,11 +302,13 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
           </AnimatePresence>
         </button>
         <motion.svg
+          id={`${id}-caret`}
           viewBox="0 0 6 4"
           height={8}
           width={12}
           initial={{ rotate: 90 }}
           animate={{ rotate: isDetailsOpen ? 180 : 90 }}
+          custom={isDetailsOpen}
           className="mt-1 cursor-pointer"
         >
           <motion.path
@@ -277,7 +327,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       >
         <motion.ul
           variants={dropdownVariant}
-          layout
           className={`${'relative rounded-md bg-neutrals-300 px-4 py-2 text-sm dark:bg-neutrals-600'} 
           ${"before:absolute before:right-[6px] before:top-[-0.65rem] before:h-0 before:w-0 before:content-['']"} 
           ${'before:border-l-[0.7rem] before:border-l-transparent'} 
@@ -286,7 +335,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
         >
           <motion.li
             variants={itemVariant}
-            layout
             className={`w-full cursor-pointer p-1 ${
               themeMode === 'light' ? 'text-brand-500 dark:text-brand-400' : ''
             }`}
@@ -296,7 +344,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
           </motion.li>
           <motion.li
             variants={itemVariant}
-            layout
             className={`w-full cursor-pointer p-1 ${
               themeMode === 'dark' ? 'dark:text-brand-400: text-brand-500' : ''
             }`}
@@ -306,7 +353,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
           </motion.li>
           <motion.li
             variants={itemVariant}
-            layout
             className={`w-full cursor-pointer p-1 ${
               themeMode === 'system' ? 'text-brand-500 dark:text-brand-400' : ''
             }`}
