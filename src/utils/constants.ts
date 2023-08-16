@@ -18,3 +18,5 @@ export const pinnedRepoNames = new Set([
   'jammming',
   'recipe-book-app',
 ]);
+
+export const themeLocalStorageId = 'tylerSimoni:ui:colorScheme';

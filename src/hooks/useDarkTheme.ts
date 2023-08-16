@@ -1,14 +1,27 @@
 import { useState, useEffect } from 'react';
+import { themeLocalStorageId } from '~/utils/constants';
 
-export type ThemeType = 'light' | 'dark' | 'system';
+const themeTypes = {
+  light: 'light',
+  dark: 'dark',
+  system: 'system',
+} as const;
+
+export type ThemeType = keyof typeof themeTypes;
 
 function useDarkTheme() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
   const [themeMode, setThemeMode] = useState<ThemeType>('system');
 
   const handleSystemChange = (event: MediaQueryListEvent) => {
-    event.matches ? 'dark' : 'light';
+    const themeMode = event.matches ? 'dark' : 'light';
+    if (themeMode === themeTypes.dark) {
+      document.documentElement.classList.add('dark');
+      setIsDarkMode(true);
+    } else {
+      document.documentElement.classList.remove('dark');
+      setIsDarkMode(false);
+    }
   };
 
   useEffect(() => {
@@ -28,39 +41,44 @@ function useDarkTheme() {
   }, [themeMode]);
 
   useEffect(() => {
+    // If key not in local storage or value is not valid type, set to system
+    if (
+      !(themeLocalStorageId in localStorage) ||
+      !(localStorage[themeLocalStorageId] in themeTypes)
+    ) {
+      onThemeClick('system');
+    }
+    // Else set theme value
+    else {
+      onThemeClick(localStorage[themeLocalStorageId] as ThemeType);
+    }
+
     const darkMode = document.documentElement.classList.contains('dark');
     setIsDarkMode(darkMode);
-
-    if (!('theme' in localStorage)) {
-      onThemeClick('system');
-    } else {
-      if (localStorage.theme === 'dark') onThemeClick('dark');
-      else onThemeClick('light');
-    }
   }, []);
 
   const setSystemTheme = () => {
-    localStorage.removeItem('theme');
+    localStorage[themeLocalStorageId] = 'system';
     setThemeMode('system');
   };
 
   const setDarkTheme = () => {
     document.documentElement.classList.add('dark');
-    localStorage.theme = 'dark';
+    localStorage[themeLocalStorageId] = 'dark';
     setIsDarkMode(true);
     setThemeMode('dark');
   };
 
   const setLightTheme = () => {
     document.documentElement.classList.remove('dark');
-    localStorage.theme = 'light';
+    localStorage[themeLocalStorageId] = 'light';
     setIsDarkMode(false);
     setThemeMode('light');
   };
 
   const onThemeClick = (theme: ThemeType) => {
     if (theme === 'system') {
-      localStorage.removeItem('theme');
+      localStorage.removeItem(themeLocalStorageId);
       setSystemTheme();
     } else if (theme === 'dark') {
       setDarkTheme();
