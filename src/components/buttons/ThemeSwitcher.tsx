@@ -33,8 +33,8 @@ const themeSwitcherVariant = {
 
 const moonVariant = {
   rest: {
-    fill: colors.slate[800],
-    stroke: colors.slate[800],
+    fill: colors.slate[500],
+    stroke: colors.slate[500],
   },
   hover: {
     fill: colors.yellow[400],
@@ -53,7 +53,7 @@ const moonVariant = {
 
 const sunVariant = {
   rest: {
-    fill: colors.slate[200],
+    fill: colors.slate[500],
   },
   hover: {
     fill: colors.yellow[200],
@@ -71,7 +71,7 @@ const sunVariant = {
 
 const moonFillVariant = {
   rest: {
-    fill: colors.slate[800],
+    fill: colors.slate[500],
   },
   hover: {
     fill: colors.yellow[400],
@@ -80,7 +80,7 @@ const moonFillVariant = {
 
 const sunFillVariant = {
   rest: {
-    fill: colors.slate[200],
+    fill: colors.slate[500],
   },
   hover: {
     fill: colors.yellow[200],

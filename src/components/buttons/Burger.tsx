@@ -25,15 +25,6 @@ type BurgerProps = {
 };
 
 const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(
-    document.documentElement.classList.contains('dark'),
-  );
-
-  useEffect(() => {
-    if (document.documentElement.classList.contains('dark') !== isDarkMode)
-      setIsDarkMode((prev) => !prev);
-  });
-
   return (
     <motion.button
       initial={{
@@ -60,11 +51,7 @@ const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
         className="h-8 w-8"
         fill="none"
         animate={{
-          stroke: opened
-            ? colors.rose['500']
-            : isDarkMode
-            ? colors.slate[300]
-            : colors.slate[700],
+          stroke: opened ? colors.rose['500'] : colors.slate[500],
         }}
         transition={{ delay: 0.1 }}
         viewBox="0 0 24 24"

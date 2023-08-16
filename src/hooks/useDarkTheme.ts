@@ -3,9 +3,7 @@ import { useState, useEffect } from 'react';
 export type ThemeType = 'light' | 'dark' | 'system';
 
 function useDarkTheme() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(
-    document.documentElement.classList.contains('dark'),
-  );
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const [themeMode, setThemeMode] = useState<ThemeType>('system');
 
