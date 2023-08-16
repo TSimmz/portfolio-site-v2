@@ -302,7 +302,7 @@ const NavMenu = () => {
 
         {/* Burger button */}
         <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
-          <ThemeSwitcher id="theme-switcher-mobile" />
+          <ThemeSwitcher id="theme-switcher-mobile" isMobile={true} />
           <Burger opened={opened} onClick={toggle} />
         </div>
       </nav>
