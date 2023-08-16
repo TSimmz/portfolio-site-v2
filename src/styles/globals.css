@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+summary::marker,
+summary::-webkit-details-marker {
+  display: none;
+}
+
 /* #hexagon-icon > svg {
   --_icon-size: 36px;
   width: var(--_icon-size);

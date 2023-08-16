@@ -15,7 +15,7 @@ const themeSwitcherVariant = {
     opacity: 0,
   },
   hover: (isDarkMode: boolean) => ({
-    background: isDarkMode ? colors.blue[400] : colors.zinc[800],
+    background: isDarkMode ? colors.blue[400] : colors.zinc[700],
   }),
   in: {
     x: 0,
