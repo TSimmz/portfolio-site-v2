@@ -297,12 +297,12 @@ const NavMenu = () => {
         {/* Desktop nav buttons */}
         <div className="hidden gap-2 space-x-1 sm:flex">
           <div className="flex gap-1">{renderNavButtons}</div>
-          <ThemeSwitcher />
+          <ThemeSwitcher id="theme-switcher-desktop" />
         </div>
 
         {/* Burger button */}
         <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
-          <ThemeSwitcher />
+          <ThemeSwitcher id="theme-switcher-mobile" />
           <Burger opened={opened} onClick={toggle} />
         </div>
       </nav>

@@ -123,10 +123,11 @@ const itemVariant = {
 };
 
 type ThemeSwitcherProps = {
+  id: string;
   title?: string;
 };
 
-const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
+const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ id, title }) => {
   const { isDarkMode, themeMode, onThemeClick } = useDarkTheme();
   const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(false);
 
@@ -160,8 +161,38 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
     }
   }, []);
 
+  const handleDetailsOutsideClick = (e: MouseEvent | TouchEvent) => {
+    if (
+      detailsRef.current !== null &&
+      detailsRef.current.hasAttribute('open')
+    ) {
+      const { clientX, clientY } = e as PointerEvent;
+      const detailsBounds = detailsRef.current.getBoundingClientRect();
+
+      // If click is outside details box, close it
+      if (
+        !(
+          clientX >= detailsBounds.left &&
+          clientX <= detailsBounds.right &&
+          clientY >= detailsBounds.top &&
+          clientY <= detailsBounds.bottom
+        )
+      ) {
+        detailsRef.current.removeAttribute('open');
+        setIsDetailsOpen(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleDetailsOutsideClick);
+
+    return () => window.removeEventListener('click', handleDetailsOutsideClick);
+  }, []);
+
   return (
     <motion.details
+      id={id}
       title={title}
       ref={detailsRef}
       onClick={() => handleDetailsClick()}
