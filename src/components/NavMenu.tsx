@@ -195,7 +195,7 @@ const NavMenu = () => {
     <header
       id="page-header"
       key="page-header"
-      className={`fixed top-0 z-10 w-full bg-dark/90 px-4 py-3 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-white/90 dark:shadow-neutrals-800`}
+      className={`fixed top-0 z-10 w-full bg-neutrals-400 px-4 py-3 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800`}
     >
       <nav
         id="nav-menu"
