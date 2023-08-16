@@ -23,16 +23,14 @@ const NavLink: FC<NavLinkProps> = ({ id, title, href, onPathChange }) => {
     <Link
       id={id}
       href={href}
-      className={`relative ml-0 flex flex-row items-end space-x-0 rounded-md px-2 py-[2px] pb-2 text-base transition-all duration-500 dark:hover:backdrop-brightness-125 sm:px-5 sm:text-sm ${
+      className={`relative ml-0 flex flex-row items-center space-x-0 rounded-md px-3 py-1 text-base text-light-base transition-all duration-500 hover:backdrop-contrast-125 dark:text-dark-base dark:hover:backdrop-brightness-125 sm:text-sm min-[690px]:px-5 ${
         isActive.current
-          ? 'text-brand-500 dark:text-brand-600'
-          : 'hover:text-brand-400 dark:hover:text-brand-500 '
+          ? '!text-brand-600 dark:!text-brand-500'
+          : 'hover:text-brand-500 dark:hover:text-brand-300 '
       }`}
     >
       <div className={`flex align-middle focus:outline-none`}>
-        <span className="px-2 py-1 capitalize text-light-base dark:text-dark-base sm:py-0">
-          {title}
-        </span>
+        <span className="px-2 capitalize text-inherit sm:py-0">{title}</span>
       </div>
     </Link>
   );

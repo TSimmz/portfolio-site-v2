@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import colors from 'tailwindcss/colors';
@@ -25,15 +25,24 @@ type BurgerProps = {
 };
 
 const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    document.documentElement.classList.contains('dark'),
+  );
+
+  useEffect(() => {
+    if (document.documentElement.classList.contains('dark') !== isDarkMode)
+      setIsDarkMode((prev) => !prev);
+  });
+
   return (
     <motion.button
       initial={{
-        translateX: 100,
+        x: 100,
       }}
       animate={{
-        translateX: 0,
+        x: 0,
         transition: {
-          translateX: {
+          x: {
             duration: 0.2,
             delay: 0.25,
             type: 'spring',
@@ -50,7 +59,13 @@ const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
       <motion.svg
         className="h-8 w-8"
         fill="none"
-        animate={{ stroke: opened ? colors.rose['500'] : colors.slate['400'] }}
+        animate={{
+          stroke: opened
+            ? colors.rose['500']
+            : isDarkMode
+            ? colors.slate[300]
+            : colors.slate[700],
+        }}
         transition={{ delay: 0.1 }}
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"

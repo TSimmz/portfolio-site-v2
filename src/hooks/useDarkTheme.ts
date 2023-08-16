@@ -31,7 +31,6 @@ function useDarkTheme() {
 
   useEffect(() => {
     const darkMode = document.documentElement.classList.contains('dark');
-    console.log('dark mode: ', darkMode);
     setIsDarkMode(darkMode);
 
     if (!('theme' in localStorage)) {

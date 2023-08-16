@@ -195,31 +195,33 @@ const NavMenu = () => {
     <header
       id="page-header"
       key="page-header"
-      className={`fixed top-0 z-10 w-full bg-neutrals-400 px-4 py-3 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800`}
+      className={`fixed top-0 z-10 w-full bg-neutrals-400 py-3 pl-4 pr-4 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-5xl scroll-pr-6 px-0 sm:justify-between sm:px-4 lg:px-0`}
+        className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 ${
+          opened ? 'min-h-[40px]' : 'h-10'
+        }`}
       >
         <AnimatePresence>
           {!opened ? (
             <motion.div
-              className="overflow-hidden rounded-md hover:backdrop-brightness-110 sm:py-1 sm:pl-1 sm:pr-4"
+              className="overflow-hidden rounded-md hover:backdrop-brightness-110"
               initial={{
-                translateX: -100,
+                x: -100,
                 opacity: 0,
               }}
               animate={{
                 opacity: 1,
-                translateX: 0,
+                x: 0,
                 transition: {
                   opacity: {
                     duration: 0.2,
                     delay: 0.2,
                   },
-                  translateX: {
+                  x: {
                     duration: 0.2,
                     delay: 0.25,
                     type: 'spring',
@@ -229,11 +231,11 @@ const NavMenu = () => {
               }}
               exit={{
                 opacity: 0,
-                translateX: -100,
+                x: -100,
               }}
             >
               <Link id="brand-logo" href="/">
-                <BrandLogo height={'36px'} className="fill-brand-500" />
+                <BrandLogo height={'36px'} className="fill-brand-500 " />
               </Link>
             </motion.div>
           ) : null}
@@ -285,7 +287,7 @@ const NavMenu = () => {
                   },
                 },
               }}
-              className="flex w-[80%] flex-col gap-1"
+              className="mb-1 flex w-[60%] flex-col gap-1"
             >
               {renderNavButtons}
             </motion.div>
@@ -293,16 +295,16 @@ const NavMenu = () => {
         </AnimatePresence>
 
         {/* Desktop nav buttons */}
-        <div className="hidden space-x-1 sm:flex">{renderNavButtons}</div>
+        <div className="hidden gap-2 space-x-1 sm:flex">
+          <div className="flex gap-1">{renderNavButtons}</div>
+          <ThemeSwitcher />
+        </div>
 
         {/* Burger button */}
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          className="absolute right-0 top-0 sm:hidden"
-        />
-
-        <ThemeSwitcher />
+        <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
+          <ThemeSwitcher />
+          <Burger opened={opened} onClick={toggle} />
+        </div>
       </nav>
     </header>
   );

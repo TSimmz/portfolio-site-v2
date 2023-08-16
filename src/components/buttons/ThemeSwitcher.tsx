@@ -10,9 +10,25 @@ const themeSwitcherVariant = {
   rest: (isDarkMode: boolean) => ({
     background: isDarkMode ? colors.slate[700] : colors.slate[400],
   }),
+  out: {
+    x: 250,
+    opacity: 0,
+  },
   hover: (isDarkMode: boolean) => ({
     background: isDarkMode ? colors.blue[400] : colors.zinc[800],
   }),
+  in: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      x: {
+        duration: 0.2,
+        delay: 0.25,
+        type: 'spring',
+        bounce: 0.35,
+      },
+    },
+  },
 };
 
 const moonVariant = {
@@ -71,6 +87,41 @@ const sunFillVariant = {
   },
 };
 
+const dropdownContainerVariant = {
+  open: {
+    opacity: 1,
+  },
+  close: {
+    opacity: 0,
+  },
+};
+
+const dropdownVariant = {
+  open: {
+    transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const itemVariant = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { delay: 0.2, stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { delay: 0.2, stiffness: 1000 },
+    },
+  },
+};
+
 type ThemeSwitcherProps = {
   title?: string;
 };
@@ -115,9 +166,9 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
       ref={detailsRef}
       onClick={() => handleDetailsClick()}
       variants={themeSwitcherVariant}
-      initial="rest"
+      initial={['rest', 'out']}
       whileHover="hover"
-      animate="rest"
+      animate={['rest', 'in']}
       custom={isDarkMode}
       className="group relative flex !h-10 items-center justify-center rounded-md"
     >
@@ -128,6 +179,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
           className="mr-2 overflow-visible"
           onClick={(e) => {
             e.stopPropagation();
+            if (isDetailsOpen) setIsDetailsOpen(false);
             onThemeClick(isDarkMode ? 'light' : 'dark');
           }}
         >
@@ -170,8 +222,15 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
           ></motion.path>
         </motion.svg>
       </motion.summary>
-      <div className="absolute right-0 mt-[0.7rem] !w-24 rounded-md">
+      <motion.div
+        variants={dropdownContainerVariant}
+        initial={false}
+        animate={isDetailsOpen ? 'open' : 'close'}
+        className="absolute right-0 mt-[0.7rem] !w-24 rounded-md"
+      >
         <motion.ul
+          variants={dropdownVariant}
+          layout
           className={`${'relative rounded-md bg-neutrals-300 px-4 py-2 text-sm dark:bg-neutrals-600'} 
           ${"before:absolute before:right-[6px] before:top-[-0.65rem] before:h-0 before:w-0 before:content-['']"} 
           ${'before:border-l-[0.7rem] before:border-l-transparent'} 
@@ -179,6 +238,8 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
           ${'before:border-b-[0.7rem] before:border-b-neutrals-300 dark:before:border-b-neutrals-600'}`}
         >
           <motion.li
+            variants={itemVariant}
+            layout
             className={`w-full cursor-pointer p-1 ${
               themeMode === 'light' ? 'text-brand-500' : ''
             }`}
@@ -187,6 +248,8 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
             Light
           </motion.li>
           <motion.li
+            variants={itemVariant}
+            layout
             className={`w-full cursor-pointer p-1 ${
               themeMode === 'dark' ? 'text-brand-500' : ''
             }`}
@@ -195,6 +258,8 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
             Dark
           </motion.li>
           <motion.li
+            variants={itemVariant}
+            layout
             className={`w-full cursor-pointer p-1 ${
               themeMode === 'system' ? 'text-brand-500' : ''
             }`}
@@ -203,7 +268,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ title }) => {
             System
           </motion.li>
         </motion.ul>
-      </div>
+      </motion.div>
     </motion.details>
   );
 };
