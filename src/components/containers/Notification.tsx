@@ -1,11 +1,12 @@
 'use client';
 
-import React, { type FC, useEffect, useRef } from 'react';
+import React, { type FC } from 'react';
 import { motion } from 'framer-motion';
 import { type Notification } from '~/utils/types';
 import { useTimeoutFn } from 'react-use';
 
 type NotificationInfo = {
+  emoji: string;
   name: string;
   styles: {
     headerBg: string;
@@ -18,6 +19,7 @@ const notification: {
   error: NotificationInfo;
 } = {
   success: {
+    emoji: '🚀',
     name: 'Success',
     styles: {
       headerBg: 'bg-success-500 ',
@@ -25,6 +27,7 @@ const notification: {
     },
   },
   warning: {
+    emoji: '😬',
     name: 'Warning',
     styles: {
       headerBg: 'bg-warning-500 ',
@@ -32,6 +35,7 @@ const notification: {
     },
   },
   error: {
+    emoji: '🤬',
     name: 'Error',
     styles: {
       headerBg: 'bg-error-500 ',
@@ -51,15 +55,15 @@ const Notification: FC<NotificationProps> = ({
   timeToRemove = 2500,
   removeFromList,
 }) => {
-  const aliveState = useRef<boolean | null>(null);
-  const [isReady, cancel] = useTimeoutFn(
-    () => removeFromList(id),
-    timeToRemove,
-  );
+  const isTimeoutDisabled = timeToRemove !== 0;
+  const timeoutFn = isTimeoutDisabled ? () => removeFromList(id) : () => null;
+  const timeoutValue = isTimeoutDisabled ? timeToRemove : 1000;
 
-  // useEffect(() => {
-  //   aliveState.current = isReady();
-  // }, []);
+  const [cancel] = useTimeoutFn(timeoutFn, timeoutValue);
+
+  if (isTimeoutDisabled) {
+    cancel();
+  }
 
   const handleCloseNotification = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -73,7 +77,7 @@ const Notification: FC<NotificationProps> = ({
     <motion.li
       key={`notification-${type}-${id}`}
       id={`notification-${type}-${id}`}
-      className={`max-w-screen mt-2 flex min-w-[50px] flex-col overflow-hidden rounded-lg bg-slate-300 sm:max-w-md`}
+      className={`max-w-screen mt-2 flex min-w-[100px] flex-col overflow-hidden rounded-lg bg-slate-300 sm:max-w-md`}
       initial={{ opacity: 0, y: 50, scale: 0.3 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
@@ -83,6 +87,7 @@ const Notification: FC<NotificationProps> = ({
         className={`text-light flex w-full items-center justify-between px-3 py-2 text-sm font-semibold sm:text-base ${notification[type].styles.headerBg}`}
       >
         <h1 className="">
+          <span>{notification[type].emoji}</span>{' '}
           <span>{notification[type].name}</span>{' '}
           {title ? (
             <>

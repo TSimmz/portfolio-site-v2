@@ -66,11 +66,22 @@ const Contact = () => {
         )
         .then(
           (result: EmailJSResponseStatus) => {
-            notify.success('Test', 'This is a test');
-            console.log('Email Resp: ', result);
+            if (result.text === 'OK') {
+              console.log('Email Resp: ', result);
+              notify.success(
+                "Thanks for the message! The electrons are on their way and I'll get back to you as soon as I can.",
+                undefined,
+                5000,
+              );
+            }
           },
           (error: EmailJSResponseStatus) => {
             console.log('Email Error: ', error);
+            notify.error(
+              'Oops! There was some sort of error. Try again in a few or email directly at tyler.simoni.8@gmail.com',
+              error.status.toString(),
+              0,
+            );
           },
         );
     }
@@ -194,12 +205,14 @@ const Contact = () => {
           className="mt-2 h-12 w-1/2 cursor-pointer self-end rounded-lg border-2 border-neutrals-800 font-bold transition-colors duration-200 ease-in-out hover:border-accent hover:bg-accent hover:text-white dark:border-neutrals-200 dark:hover:border-accent dark:hover:bg-accent"
         />
       </form>
-      <div className="mt-8 flex gap-4">
+      {/* <div className="mt-8 flex gap-4">
         <button
           className="rounded-md bg-success-500 p-4 text-lg text-white"
           onClick={() =>
             notify.success(
-              'This is a test of the success notification! This is a test of the success notification!',
+              "Thanks for the message! The electrons are on their way and I'll get back to you as soon as I can.",
+              '🚀',
+              5000,
             )
           }
         >
@@ -210,6 +223,8 @@ const Contact = () => {
           onClick={() =>
             notify.warning(
               'This is a test of the warning notification! This is a test of the warning notification!',
+              'Title test!',
+              0,
             )
           }
         >
@@ -220,12 +235,13 @@ const Contact = () => {
           onClick={() =>
             notify.error(
               'This is a test of the error notification! This is a test of the error notification!',
+              'Title test!',
             )
           }
         >
           CLICK ME
         </button>
-      </div>
+      </div> */}
     </SectionWrapper>
   );
 };
