@@ -4,6 +4,7 @@ import { sourceCodePro } from './fonts';
 
 import NavMenu from '~/components/NavMenu';
 import Footer from '~/components/Footer';
+import NotificationProvider from '~/components/containers/NotificationProvider';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni | Portfolio',
@@ -46,9 +47,11 @@ export default function RootLayout({
       <body
         className={`relative !mx-0 w-screen overflow-x-hidden bg-light text-light-base antialiased dark:bg-dark dark:text-dark-base ${sourceCodePro.className}`}
       >
-        <NavMenu />
-        {children}
-        <Footer />
+        <NotificationProvider>
+          <NavMenu />
+          {children}
+          <Footer />
+        </NotificationProvider>
       </body>
     </html>
   );

@@ -9,6 +9,7 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import Underline from '~/components/Underline';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
+import { useNotificationContext } from '~/components/containers/NotificationProvider';
 
 const ContactSchema = z.object({
   name: z
@@ -30,6 +31,7 @@ const ContactSchema = z.object({
 type ContactType = z.infer<typeof ContactSchema>;
 
 const Contact = () => {
+  const { notify } = useNotificationContext();
   const {
     register,
     handleSubmit,
@@ -45,8 +47,6 @@ const Contact = () => {
   }, []);
 
   const onContactSubmit: SubmitHandler<ContactType> = (data) => {
-    //console.log('Contact Data: ', data);
-
     const emailData = {
       to_name: 'Tyler Simoni',
       subject: data.subject,
@@ -66,6 +66,7 @@ const Contact = () => {
         )
         .then(
           (result: EmailJSResponseStatus) => {
+            notify.success('Test', 'This is a test');
             console.log('Email Resp: ', result);
           },
           (error: EmailJSResponseStatus) => {
@@ -193,6 +194,26 @@ const Contact = () => {
           className="mt-2 h-12 w-1/2 cursor-pointer self-end rounded-lg border-2 border-neutrals-800 font-bold transition-colors duration-200 ease-in-out hover:border-accent hover:bg-accent hover:text-white dark:border-neutrals-200 dark:hover:border-accent dark:hover:bg-accent"
         />
       </form>
+      <div className="mt-8 flex gap-4">
+        <button
+          className="rounded-md bg-success-500 p-4 text-lg text-white"
+          onClick={() => notify.success('Success', 'THIS IS A TEST')}
+        >
+          CLICK ME
+        </button>
+        <button
+          className="rounded-md bg-warning-500 p-4 text-lg text-white"
+          onClick={() => notify.warning('Warning', 'THIS IS A TEST')}
+        >
+          CLICK ME
+        </button>
+        <button
+          className="rounded-md bg-error-500 p-4 text-lg text-white"
+          onClick={() => notify.error('Error', 'THIS IS A TEST')}
+        >
+          CLICK ME
+        </button>
+      </div>
     </SectionWrapper>
   );
 };
