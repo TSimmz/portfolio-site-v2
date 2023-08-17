@@ -100,7 +100,7 @@ export type GitHubRepositoryResponse = {
   default_branch: StringOrNull;
 };
 
-export type GitHubProfileResponse = {
+export type GitHubProfileData = {
   login: string;
   id: number;
   node_id: string;
