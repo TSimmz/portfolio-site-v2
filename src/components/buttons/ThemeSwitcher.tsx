@@ -159,7 +159,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
     e: ReactMouseEvent<HTMLDetailsElement, MouseEvent>,
   ) => {
     const isOpen = e.currentTarget.hasAttribute('open');
-    console.log('PREV STATE: ', isOpen, isDetailsOpen);
     setIsDetailsOpen((previousState) =>
       previousState === isOpen ? !previousState : !isOpen,
     );

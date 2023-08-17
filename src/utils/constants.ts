@@ -19,4 +19,5 @@ export const pinnedRepoNames = new Set([
   'recipe-book-app',
 ]);
 
-export const themeLocalStorageId = 'tylerSimoni:ui:colorScheme';
+export const localStorageThemeId = 'tylerSimoni:ui:colorScheme';
+export const localStorageHasScrolledId = 'tylerSimoni:ui:hasScrolled';

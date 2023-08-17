@@ -3,7 +3,12 @@
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize } from 'react-use';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  //useScroll,
+  //useTransform,
+  AnimatePresence,
+} from 'framer-motion';
 
 import theme from 'tailwindcss/defaultTheme';
 
@@ -12,6 +17,7 @@ import {
   type BaseRouteKeys,
   baseRouteKeysList,
   baseRoutes,
+  //localStorageHasScrolledId,
 } from '~/utils/constants';
 import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
@@ -20,9 +26,12 @@ import ThemeSwitcher from './buttons/ThemeSwitcher';
 
 const NavMenu = () => {
   const pathname = usePathname();
+  // const { scrollY } = useScroll();
+  // const opacity = useTransform(scrollY, [100, 500], [0, 1]);
   const { width } = useWindowSize();
-
   const [opened, toggle] = useToggle(false);
+
+  // const [hasScrolled, setHasScrolled] = useState<boolean>(false);
 
   const navMenuRef = useRef<HTMLElement | null>(null);
 
@@ -62,6 +71,18 @@ const NavMenu = () => {
     },
     [navMenuRef],
   );
+
+  // const opacityValue = opacity.isAnimating();
+  // useEffect(() => {
+  //   console.log('Scrolling...', hasScrolled);
+  //   if (
+  //     localStorage[localStorageHasScrolledId] === 'false' &&
+  //     opacity.get() === 1
+  //   ) {
+  //     localStorage[localStorageHasScrolledId] = 'true';
+  //     setHasScrolled(true);
+  //   }
+  // }, [opacityValue]);
 
   useEffect(() => {
     toggle(false);
@@ -192,7 +213,8 @@ const NavMenu = () => {
   );
 
   return (
-    <header
+    <motion.header
+      //style={{ opacity: pathname === '/' && !hasScrolled ? opacity : 1 }}
       id="page-header"
       key="page-header"
       className={`fixed top-0 z-10 w-full bg-neutrals-400 py-3 pl-4 pr-4 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
@@ -306,7 +328,7 @@ const NavMenu = () => {
           <Burger opened={opened} onClick={toggle} />
         </div>
       </nav>
-    </header>
+    </motion.header>
   );
 };
 
