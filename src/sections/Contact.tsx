@@ -1,12 +1,14 @@
 'use client';
 
 import * as z from 'zod';
+import { useEffect, useRef } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import Underline from '~/components/Underline';
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 
 const ContactSchema = z.object({
   name: z
@@ -16,9 +18,12 @@ const ContactSchema = z.object({
     .string({ required_error: 'Email is required' })
     .nonempty({ message: 'Email is required' })
     .email({ message: 'Must be a valid email address' }),
+  subject: z
+    .string({ required_error: 'Subject is required' })
+    .nonempty({ message: 'Subject is required' }),
   message: z
-    .string({ required_error: 'A message is required' })
-    .nonempty({ message: 'A message is required' })
+    .string({ required_error: 'Message is required' })
+    .nonempty({ message: 'Message is required' })
     .min(20, 'Message must be at least 20 characters'),
 });
 
@@ -33,8 +38,41 @@ const Contact = () => {
     resolver: zodResolver(ContactSchema),
   });
 
+  const contactFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_ID!);
+  }, []);
+
   const onContactSubmit: SubmitHandler<ContactType> = (data) => {
-    console.log('Contact Data: ', data);
+    //console.log('Contact Data: ', data);
+
+    const emailData = {
+      to_name: 'Tyler Simoni',
+      subject: data.subject,
+      from_name: data.name,
+      from_email: data.email,
+      message: data.message,
+    };
+
+    console.log('Template Params: ', emailData);
+    if (contactFormRef.current !== null) {
+      emailjs
+        .send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+          emailData,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_ID,
+        )
+        .then(
+          (result: EmailJSResponseStatus) => {
+            console.log('Email Resp: ', result);
+          },
+          (error: EmailJSResponseStatus) => {
+            console.log('Email Error: ', error);
+          },
+        );
+    }
   };
 
   return (
@@ -49,52 +87,102 @@ const Contact = () => {
       </p>
       <form
         id="contact-form"
-        className="mt-8 flex w-full flex-col gap-4 md:w-4/5"
+        ref={contactFormRef}
+        className="mt-8 flex w-full flex-col gap-5 md:w-4/5"
         onSubmit={handleSubmit(onContactSubmit)}
+        noValidate
       >
-        <div className="flex flex-col gap-[5px]">
-          <label htmlFor="name">Name:</label>
+        <div className="relative flex flex-col gap-[5px]">
+          <label htmlFor="name" className="hidden h-0 w-0">
+            Name:
+          </label>
           <input
             type="text"
             form="contact-form"
+            placeholder="> enter your name "
             aria-invalid={errors.name ? 'true' : 'false'}
-            className="h-10 rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500"
+            className={`${
+              errors.name ? ' ring-2 !ring-error-500' : ''
+            } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
             {...register('name', { required: true })}
           />
           {errors.name ? (
-            <p role="alert" className="text-base text-error-500">
+            <p
+              role="alert"
+              className="absolute right-[10px] top-[-10px] z-10 rounded-md bg-error-500 px-2 py-1 text-sm text-dark-base"
+            >
               {errors.name?.message}
             </p>
           ) : null}
         </div>
 
-        <div className="flex flex-col gap-[5px]">
-          <label htmlFor="email">Email: </label>
+        <div className="relative flex flex-col gap-[5px]">
+          <label htmlFor="email" className=" hidden h-0 w-0">
+            Email:{' '}
+          </label>
           <input
             type="email"
             form="contact-form"
+            placeholder="> enter your email"
             aria-invalid={errors.email ? 'true' : 'false'}
-            className="h-10 rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500"
+            className={`${
+              errors.email ? 'ring-2 !ring-error-500' : ''
+            } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
             {...register('email', { required: true })}
           />
           {errors.email ? (
-            <p role="alert" className="text-base text-error-500">
+            <p
+              role="alert"
+              className="absolute right-[10px] top-[-10px] z-10 rounded-md bg-error-500 px-2 py-1 text-sm text-dark-base"
+            >
               {errors.email?.message}
             </p>
           ) : null}
         </div>
 
-        <div className="flex flex-col gap-[5px]">
-          <label htmlFor="message">Message: </label>
+        <div className="relative flex flex-col gap-[5px]">
+          <label htmlFor="subject" className="hidden h-0 w-0">
+            Subject:
+          </label>
+          <input
+            type="text"
+            form="contact-form"
+            placeholder="> enter a subject"
+            aria-invalid={errors.subject ? 'true' : 'false'}
+            className={`${
+              errors.subject ? 'ring-2 !ring-error-500' : ''
+            } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
+            {...register('subject', { required: true })}
+          />
+          {errors.subject ? (
+            <p
+              role="alert"
+              className="absolute right-[10px] top-[-10px] z-10 rounded-md bg-error-500 px-2 py-1 text-sm text-dark-base"
+            >
+              {errors.subject?.message}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="relative flex flex-col gap-[5px]">
+          <label htmlFor="message" className="hidden h-0 w-0">
+            Message:{' '}
+          </label>
           <textarea
             form="contact-form"
             aria-invalid={errors.message ? 'true' : 'false'}
             rows={10}
-            className="min-h-[2.5rem] resize-y rounded-lg bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500"
+            placeholder="> please leave a message after the beep... BEEP!"
+            className={`${
+              errors.message ? 'ring-2 !ring-error-500' : ''
+            } min-h-[2.5rem] resize-y rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
             {...register('message', { required: true })}
           />
           {errors.message ? (
-            <p role="alert" className="text-base text-error-500">
+            <p
+              role="alert"
+              className="absolute right-[10px] top-[-10px] z-10 rounded-md bg-error-500 px-2 py-1 text-sm text-dark-base"
+            >
               {errors.message?.message}
             </p>
           ) : null}
