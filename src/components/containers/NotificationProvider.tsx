@@ -3,15 +3,22 @@
 import React, {
   createContext,
   useContext,
+  useState,
   type ReactNode,
   type FC,
   useCallback,
 } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import useNotifications from '~/hooks/useNotifications';
+import { AnimatePresence } from 'framer-motion';
+import { type Notification as NotificationType } from '~/utils/types';
 import { v4 as uuid } from 'uuid';
+import Notification from './Notification';
 
-type NotifyHelperFunction = (title: string, message: string) => void;
+type NotifyHelperFunction = (
+  message: string,
+  title?: string,
+  timeToRemove?: number,
+) => void;
+
 type NotifyTool = {
   notify: {
     success: NotifyHelperFunction;
@@ -22,9 +29,9 @@ type NotifyTool = {
 
 const NotificationContext = createContext<NotifyTool>({
   notify: {
-    success: (title: string, message: string) => null,
-    warning: (title: string, message: string) => null,
-    error: (title: string, message: string) => null,
+    success: () => null,
+    warning: () => null,
+    error: () => null,
   },
 });
 
@@ -33,83 +40,85 @@ type NotificationProviderProps = {
 };
 
 const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
-  const { notifications, addNotification, removeNotification } =
-    useNotifications();
+  const [notifications, setNotifications] = useState<NotificationType[]>([]);
 
-  const success = useCallback((title: string, message: string) => {
-    console.log('SUCCESS NOTIFICATION');
-    addNotification({
-      id: uuid(),
-      title: title,
-      message: message,
-      type: 'success',
-    });
-  }, []);
+  const addNotification = (notification: NotificationType) => {
+    setNotifications((previousNotifications) => [
+      ...previousNotifications,
+      notification,
+    ]);
+  };
 
-  const warning = useCallback((title: string, message: string) => {
-    console.log('WARNING NOTIFICATION');
-    addNotification({
-      id: uuid(),
-      title: title,
-      message: message,
-      type: 'warning',
+  const removeNotification = (notificationId: string) => {
+    setNotifications((previousNotifications) => {
+      const tempNotifications = [...previousNotifications];
+      tempNotifications.splice(
+        tempNotifications.findIndex(
+          (notification) => notification.id === notificationId,
+        ),
+        1,
+      );
+      return tempNotifications;
     });
-  }, []);
+  };
 
-  const error = useCallback((title: string, message: string) => {
-    console.log('ERROR NOTIFICATION');
-    addNotification({
-      id: uuid(),
-      title: title,
-      message: message,
-      type: 'error',
-    });
-  }, []);
+  const success = useCallback(
+    (message: string, title?: string, timeToRemove?: number) => {
+      addNotification({
+        id: uuid(),
+        title: title,
+        message: message,
+        type: 'success',
+        timeToRemove: timeToRemove,
+      });
+    },
+    [],
+  );
+
+  const warning = useCallback(
+    (message: string, title?: string, timeToRemove?: number) => {
+      addNotification({
+        id: uuid(),
+        title: title,
+        message: message,
+        type: 'warning',
+        timeToRemove: timeToRemove,
+      });
+    },
+    [],
+  );
+
+  const error = useCallback(
+    (message: string, title?: string, timeToRemove?: number) => {
+      addNotification({
+        id: uuid(),
+        title: title,
+        message: message,
+        type: 'error',
+        timeToRemove: timeToRemove,
+      });
+    },
+    [],
+  );
 
   const notify = { success, warning, error };
 
   return (
     <NotificationContext.Provider value={{ notify }}>
       {children}
-      <div className="fixed bottom-[2rem] right-[2rem]">
+      <div className="fixed bottom-[0.5rem] right-[0.5rem] pl-[0.5rem] sm:bottom-[2rem] sm:right-[2rem]">
         <ul>
           <AnimatePresence initial={false}>
             {notifications.map((notification) => (
-              <motion.li
+              <Notification
+                id={notification.id}
                 key={notification.id}
-                className={`${
-                  notification.type === 'success'
-                    ? 'bg-success-500'
-                    : notification.type === 'warning'
-                    ? 'bg-warning-500'
-                    : 'bg-error-500'
-                } mt-1 px-4 py-3`}
-                initial={{ opacity: 0, y: 50, scale: 0.3 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-              >
-                <button
-                  onClick={() => removeNotification(notification.id)}
-                  className="close"
-                >
-                  <svg width="23" height="23" viewBox="0 0 23 23">
-                    <motion.path
-                      fill="transparent"
-                      strokeWidth="3"
-                      stroke="hsl(0, 0%, 18%)"
-                      strokeLinecap="round"
-                      d="M 3 16.5 L 17 2.5"
-                    />
-                    <motion.path
-                      fill="transparent"
-                      strokeWidth="3"
-                      stroke="hsl(0, 0%, 18%)"
-                      strokeLinecap="round"
-                      d="M 3 2.5 L 17 16.346"
-                    />
-                  </svg>
-                </button>
-              </motion.li>
+                type={notification.type}
+                title={notification.title}
+                message={notification.message}
+                timeToRemove={notification.timeToRemove}
+                removeFromList={removeNotification}
+              />
             ))}
           </AnimatePresence>
         </ul>

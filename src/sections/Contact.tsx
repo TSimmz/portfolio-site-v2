@@ -197,19 +197,31 @@ const Contact = () => {
       <div className="mt-8 flex gap-4">
         <button
           className="rounded-md bg-success-500 p-4 text-lg text-white"
-          onClick={() => notify.success('Success', 'THIS IS A TEST')}
+          onClick={() =>
+            notify.success(
+              'This is a test of the success notification! This is a test of the success notification!',
+            )
+          }
         >
           CLICK ME
         </button>
         <button
           className="rounded-md bg-warning-500 p-4 text-lg text-white"
-          onClick={() => notify.warning('Warning', 'THIS IS A TEST')}
+          onClick={() =>
+            notify.warning(
+              'This is a test of the warning notification! This is a test of the warning notification!',
+            )
+          }
         >
           CLICK ME
         </button>
         <button
           className="rounded-md bg-error-500 p-4 text-lg text-white"
-          onClick={() => notify.error('Error', 'THIS IS A TEST')}
+          onClick={() =>
+            notify.error(
+              'This is a test of the error notification! This is a test of the error notification!',
+            )
+          }
         >
           CLICK ME
         </button>

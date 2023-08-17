@@ -55,7 +55,6 @@ const Burger: FC<BurgerProps> = ({ title, opened, onClick, className }) => {
         }}
         transition={{ delay: 0.1 }}
         viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <motion.path
           name={'close-A'}

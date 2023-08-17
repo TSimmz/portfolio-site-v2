@@ -134,3 +134,11 @@ export type GitHubProfileResponse = {
   created_at: string;
   updated_at: string;
 };
+
+export type Notification = {
+  id: string;
+  title?: string;
+  message: string;
+  type: 'success' | 'warning' | 'error';
+  timeToRemove?: number;
+};
