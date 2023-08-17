@@ -22,6 +22,7 @@ type NotifyHelperFunction = (
 type NotifyTool = {
   notify: {
     success: NotifyHelperFunction;
+    info: NotifyHelperFunction;
     warning: NotifyHelperFunction;
     error: NotifyHelperFunction;
   };
@@ -30,6 +31,7 @@ type NotifyTool = {
 const NotificationContext = createContext<NotifyTool>({
   notify: {
     success: () => null,
+    info: () => null,
     warning: () => null,
     error: () => null,
   },
@@ -74,6 +76,18 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
     },
     [],
   );
+  const info = useCallback(
+    (message: string, title?: string, timeToRemove?: number) => {
+      addNotification({
+        id: uuid(),
+        title: title,
+        message: message,
+        type: 'info',
+        timeToRemove: timeToRemove,
+      });
+    },
+    [],
+  );
 
   const warning = useCallback(
     (message: string, title?: string, timeToRemove?: number) => {
@@ -101,7 +115,7 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
     [],
   );
 
-  const notify = { success, warning, error };
+  const notify = { success, info, warning, error };
 
   return (
     <NotificationContext.Provider value={{ notify }}>

@@ -205,43 +205,6 @@ const Contact = () => {
           className="mt-2 h-12 w-1/2 cursor-pointer self-end rounded-lg border-2 border-neutrals-800 font-bold transition-colors duration-200 ease-in-out hover:border-accent hover:bg-accent hover:text-white dark:border-neutrals-200 dark:hover:border-accent dark:hover:bg-accent"
         />
       </form>
-      {/* <div className="mt-8 flex gap-4">
-        <button
-          className="rounded-md bg-success-500 p-4 text-lg text-white"
-          onClick={() =>
-            notify.success(
-              "Thanks for the message! The electrons are on their way and I'll get back to you as soon as I can.",
-              '🚀',
-              5000,
-            )
-          }
-        >
-          CLICK ME
-        </button>
-        <button
-          className="rounded-md bg-warning-500 p-4 text-lg text-white"
-          onClick={() =>
-            notify.warning(
-              'This is a test of the warning notification! This is a test of the warning notification!',
-              'Title test!',
-              0,
-            )
-          }
-        >
-          CLICK ME
-        </button>
-        <button
-          className="rounded-md bg-error-500 p-4 text-lg text-white"
-          onClick={() =>
-            notify.error(
-              'This is a test of the error notification! This is a test of the error notification!',
-              'Title test!',
-            )
-          }
-        >
-          CLICK ME
-        </button>
-      </div> */}
     </SectionWrapper>
   );
 };

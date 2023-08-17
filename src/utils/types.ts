@@ -139,6 +139,6 @@ export type Notification = {
   id: string;
   title?: string;
   message: string;
-  type: 'success' | 'warning' | 'error';
+  type: 'success' | 'info' | 'warning' | 'error';
   timeToRemove?: number;
 };

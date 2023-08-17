@@ -15,6 +15,7 @@ type NotificationInfo = {
 };
 const notification: {
   success: NotificationInfo;
+  info: NotificationInfo;
   warning: NotificationInfo;
   error: NotificationInfo;
 } = {
@@ -24,6 +25,14 @@ const notification: {
     styles: {
       headerBg: 'bg-success-500 ',
       bodyBg: 'bg-success-200',
+    },
+  },
+  info: {
+    emoji: '💁‍♂️',
+    name: 'Info',
+    styles: {
+      headerBg: 'bg-info-500 ',
+      bodyBg: 'bg-info-200',
     },
   },
   warning: {
@@ -77,7 +86,7 @@ const Notification: FC<NotificationProps> = ({
     <motion.li
       key={`notification-${type}-${id}`}
       id={`notification-${type}-${id}`}
-      className={`max-w-screen mt-2 flex min-w-[100px] flex-col overflow-hidden rounded-lg bg-slate-300 sm:max-w-md`}
+      className={`max-w-screen mt-2 flex min-w-[100px] flex-col overflow-hidden rounded-lg bg-slate-300 sm:max-w-lg`}
       initial={{ opacity: 0, y: 50, scale: 0.3 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}

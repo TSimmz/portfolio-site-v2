@@ -4,6 +4,7 @@ import colors from 'tailwindcss/colors';
 const brand = colors.rose;
 const neutrals = colors.slate;
 const success = colors.emerald;
+const info = colors.sky;
 const warning = colors.amber;
 const error = colors.red;
 const accent = brand[500];
@@ -46,6 +47,7 @@ export default {
         brand: brand,
         neutrals: neutrals,
         success: success,
+        info: info,
         warning: warning,
         error: error,
         accent: accent,
