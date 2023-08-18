@@ -33,7 +33,7 @@ const Skills = () => {
           whileHover="hover"
           animate="rest"
           transition={transition}
-          className="flex aspect-square items-center justify-center rounded-2xl bg-brandLight-500 p-4 dark:bg-brandDark-500"
+          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brandLight-500 p-4 dark:bg-brandDark-500"
         >
           <motion.div
             className="h-full w-full"
