@@ -48,14 +48,14 @@ const Contact = () => {
 
   const onContactSubmit: SubmitHandler<ContactType> = (data) => {
     const emailData = {
-      to_name: 'Tyler Simoni',
+      to_name: 'Tyler',
       subject: data.subject,
       from_name: data.name,
       from_email: data.email,
       message: data.message,
     };
 
-    console.log('Template Params: ', emailData);
+    //console.log('Template Params: ', emailData);
     if (contactFormRef.current !== null) {
       emailjs
         .send(
@@ -67,7 +67,7 @@ const Contact = () => {
         .then(
           (result: EmailJSResponseStatus) => {
             if (result.text === 'OK') {
-              console.log('Email Resp: ', result);
+              //console.log('Email Resp: ', result);
               notify.success(
                 "Thanks for the message! The electrons are on their way and I'll get back to you as soon as I can.",
                 undefined,
@@ -76,7 +76,7 @@ const Contact = () => {
             }
           },
           (error: EmailJSResponseStatus) => {
-            console.log('Email Error: ', error);
+            //console.log('Email Error: ', error);
             notify.error(
               'Oops! There was some sort of error. Try again in a few or email directly at tyler.simoni.8@gmail.com',
               error.status.toString(),

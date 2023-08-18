@@ -16,6 +16,27 @@ const helloThereVariant = {
   },
 };
 
+const cursorVariant = {
+  highGround: {
+    opacity: 0,
+    rotate: 0,
+  },
+  dropFromAbove: {
+    opacity: 1,
+    rotate: 10,
+    transition: {
+      opacity: {
+        delay: 1.2,
+        duration: 0.3,
+      },
+      rotate: {
+        delay: 3,
+        duration: 0.2,
+      },
+    },
+  },
+};
+
 const nameVariant = {
   highGround: {
     opacity: 0,
@@ -25,7 +46,41 @@ const nameVariant = {
     transition: {
       opacity: {
         delay: 1.5,
-        duration: 0.3,
+        duration: 0.2,
+      },
+    },
+  },
+};
+
+const hiltVariant = {
+  highGround: {
+    opacity: 0,
+  },
+  dropFromAbove: {
+    opacity: 1,
+    transition: {
+      opacity: {
+        delay: 1.5,
+        duration: 0.2,
+      },
+    },
+  },
+};
+
+const saberVariant = {
+  highGround: {
+    pathLength: 0,
+    opacity: 0,
+  },
+  dropFromAbove: {
+    opacity: 1,
+    pathLength: 1,
+    transition: {
+      opacity: {
+        delay: 2.2,
+      },
+      pathLength: {
+        delay: 2.2,
       },
     },
   },
@@ -35,7 +90,7 @@ const Hero = () => {
   return (
     <SectionWrapper
       id="home"
-      className="!mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
+      className="relative !mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
     >
       <div>
         <motion.div
@@ -51,16 +106,35 @@ const Hero = () => {
             stiffness: 50,
           }}
         >
-          <Heading as="h1" className="mb-8">
+          <Heading as="h1" className="">
             Hello there.
           </Heading>
+          <motion.svg
+            viewBox="0 0 32 2"
+            className="mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
+          >
+            <motion.path
+              className={'stroke-success-500 dark:stroke-brand-500 '}
+              variants={saberVariant}
+              strokeWidth={1.8}
+              strokeLinecap={'round'}
+              d="M7 1H28"
+            />
+            <motion.path
+              className={'stroke-neutrals-600 dark:stroke-neutrals-500'}
+              variants={hiltVariant}
+              strokeWidth={2}
+              strokeLinecap={'square'}
+              d="M1 1H8"
+            />
+          </motion.svg>
         </motion.div>
         <motion.div
           variants={nameVariant}
           initial="highGround"
           animate="dropFromAbove"
         >
-          <Heading as="h2" className="font-semibold xs:font-bold">
+          <Heading as="h2" className="font-semibold leading-none xs:font-bold">
             My name is <br className="xs:hidden" />
             <GradientTextColor className="whitespace-nowrap">
               Tyler Simoni

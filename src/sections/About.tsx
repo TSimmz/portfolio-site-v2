@@ -24,7 +24,7 @@ const About = async () => {
   const githubProfileData = await getGithubProfile().then(
     (response: unknown) => {
       const res = response as OctokitResponse<GitHubProfileData>;
-      console.log('Response: ', res);
+      //console.log('Response: ', res);
       if (res.status === 200) return res.data;
     },
   );
