@@ -16,27 +16,6 @@ const helloThereVariant = {
   },
 };
 
-const cursorVariant = {
-  highGround: {
-    opacity: 0,
-    rotate: 0,
-  },
-  dropFromAbove: {
-    opacity: 1,
-    rotate: 10,
-    transition: {
-      opacity: {
-        delay: 1.2,
-        duration: 0.3,
-      },
-      rotate: {
-        delay: 3,
-        duration: 0.2,
-      },
-    },
-  },
-};
-
 const nameVariant = {
   highGround: {
     opacity: 0,
@@ -45,8 +24,8 @@ const nameVariant = {
     opacity: 1,
     transition: {
       opacity: {
-        delay: 1.5,
-        duration: 0.2,
+        delay: 2.3,
+        duration: 0.3,
       },
     },
   },
@@ -77,10 +56,11 @@ const saberVariant = {
     pathLength: 1,
     transition: {
       opacity: {
-        delay: 2.2,
+        delay: 2,
       },
       pathLength: {
-        delay: 2.2,
+        delay: 2,
+        duration: 0.5,
       },
     },
   },
