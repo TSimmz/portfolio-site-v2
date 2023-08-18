@@ -2,6 +2,8 @@ import { type Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 
 const brand = colors.rose;
+const brandLight = colors.emerald;
+const brandDark = colors.rose;
 const neutrals = colors.slate;
 const success = colors.emerald;
 const info = colors.sky;
@@ -16,6 +18,14 @@ const darkBaseText = neutrals[100];
 const darkSubText = neutrals[500];
 
 const colorThemes = Object.freeze({
+  brand: brand,
+  brandLight: brandLight,
+  brandDark: brandDark,
+  neutrals: neutrals,
+  success: success,
+  info: info,
+  warning: warning,
+  error: error,
   light: lightBg,
   dark: darkBg,
   accent: accent,
@@ -45,6 +55,8 @@ export default {
       stroke: colorThemes,
       colors: {
         brand: brand,
+        brandLight: brandLight,
+        brandDark: brandDark,
         neutrals: neutrals,
         success: success,
         info: info,

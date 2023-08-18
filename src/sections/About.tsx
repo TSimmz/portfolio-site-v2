@@ -33,7 +33,7 @@ const About = async () => {
     <SectionWrapper id="about" className="mb-8 !gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>About</GradientTextColor>
-        <Underline className="bg-brand-500 px-4" />
+        <Underline className="bg-brandLight-500 px-4 dark:bg-brandDark-500" />
       </Heading>
 
       <p className="mb-10 text-center text-lg">

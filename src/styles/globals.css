@@ -42,7 +42,6 @@ summary::-webkit-details-marker {
     right: 0;
     bottom: 0;
     height: var(--_height);
-    background-color: theme('colors.brand.500');
     scale: var(--_width, 0.125) 1;
     translate: var(--_left, 0) 0px;
     transform-origin: left;

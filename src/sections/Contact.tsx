@@ -91,7 +91,7 @@ const Contact = () => {
     <SectionWrapper id="portfolio" className="!gap-0">
       <Heading as="h1" className="text-center">
         <GradientTextColor>Contact</GradientTextColor>
-        <Underline className="bg-brand-700 px-4" />
+        <Underline className="bg-brandLight-500 px-4 dark:bg-brandDark-500" />
       </Heading>
       <p className="mt-2 text-center text-lg">
         Want to work together?
@@ -138,7 +138,7 @@ const Contact = () => {
             placeholder="> enter your email"
             aria-invalid={errors.email ? 'true' : 'false'}
             className={`${
-              errors.email ? 'ring-2 !ring-error-500' : ''
+              errors.email ? 'ring-2 !ring-error-500 ' : ''
             } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
             {...register('email', { required: true })}
           />
@@ -202,7 +202,7 @@ const Contact = () => {
 
         <input
           type="submit"
-          className="mt-2 h-12 w-1/2 cursor-pointer self-end rounded-lg border-2 border-neutrals-800 font-bold transition-colors duration-200 ease-in-out hover:border-accent hover:bg-accent hover:text-white dark:border-neutrals-200 dark:hover:border-accent dark:hover:bg-accent"
+          className="mt-2 h-12 w-1/2 cursor-pointer self-end rounded-lg border-2 border-neutrals-800 font-bold transition-colors duration-200 ease-in-out hover:border-brandLight-500 hover:bg-brandLight-500 hover:text-white dark:border-neutrals-200 dark:hover:border-brandDark-500 dark:hover:bg-brandDark-500"
         />
       </form>
     </SectionWrapper>

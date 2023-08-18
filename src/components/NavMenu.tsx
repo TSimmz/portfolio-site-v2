@@ -217,13 +217,13 @@ const NavMenu = () => {
       //style={{ opacity: pathname === '/' && !hasScrolled ? opacity : 1 }}
       id="page-header"
       key="page-header"
-      className={`fixed top-0 z-10 w-full bg-neutrals-400 py-3 pl-4 pr-4 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
+      className={`fixed top-0 z-20 w-full bg-neutrals-600 py-3 pl-4 pr-4 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 ${
+        className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
           opened ? 'min-h-[40px]' : 'h-10'
         }`}
       >
@@ -257,7 +257,10 @@ const NavMenu = () => {
               }}
             >
               <Link id="brand-logo" href="/">
-                <BrandLogo height={'36px'} className="fill-brand-500 " />
+                <BrandLogo
+                  height={'36px'}
+                  className="fill-brandLight-500 dark:fill-brandDark-500 "
+                />
               </Link>
             </motion.div>
           ) : null}

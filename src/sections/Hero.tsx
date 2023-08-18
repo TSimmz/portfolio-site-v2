@@ -114,7 +114,7 @@ const Hero = () => {
             className="mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
           >
             <motion.path
-              className={'stroke-success-500 dark:stroke-brand-500 '}
+              className={'stroke-brandLight-400 dark:stroke-brandDark-400 '}
               variants={saberVariant}
               strokeWidth={1.8}
               strokeLinecap={'round'}
@@ -136,7 +136,7 @@ const Hero = () => {
         >
           <Heading as="h2" className="font-semibold leading-none xs:font-bold">
             My name is <br className="xs:hidden" />
-            <GradientTextColor className="whitespace-nowrap">
+            <GradientTextColor className="whitespace-nowrap !bg-gradient-to-br !to-brandLight-800 dark:!to-brandDark-200">
               Tyler Simoni
             </GradientTextColor>
             .

@@ -14,7 +14,7 @@ import colors from 'tailwindcss/colors';
 
 const themeSwitcherVariant = {
   rest: (isDarkMode: boolean) => ({
-    background: isDarkMode ? colors.slate[700] : colors.slate[400],
+    background: isDarkMode ? colors.slate[700] : colors.slate[600],
   }),
   out: {
     x: 250,
@@ -50,8 +50,8 @@ const sunMoonVariant = {
 
 const moonVariant = {
   rest: {
-    fill: colors.slate[500],
-    stroke: colors.slate[500],
+    fill: colors.slate[400],
+    stroke: colors.slate[400],
   },
   hover: {
     fill: colors.yellow[400],
@@ -88,7 +88,7 @@ const sunVariant = {
 
 const moonFillVariant = {
   rest: {
-    fill: colors.slate[500],
+    fill: colors.slate[400],
   },
   hover: {
     fill: colors.yellow[400],
@@ -326,16 +326,18 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       >
         <motion.ul
           variants={dropdownVariant}
-          className={`${'relative rounded-md bg-neutrals-300 px-4 py-2 text-sm dark:bg-neutrals-600'} 
+          className={`${'relative rounded-md bg-neutrals-500 px-4 py-2 text-sm text-dark-base'} 
           ${"before:absolute before:right-[6px] before:top-[-0.65rem] before:h-0 before:w-0 before:content-['']"} 
           ${'before:border-l-[0.7rem] before:border-l-transparent'} 
           ${'before:border-r-[0.7rem] before:border-r-transparent '} 
-          ${'before:border-b-[0.7rem] before:border-b-neutrals-300 dark:before:border-b-neutrals-600'}`}
+          ${'before:border-b-[0.7rem] before:border-b-neutrals-500'}`}
         >
           <motion.li
             variants={itemVariant}
             className={`w-full cursor-pointer p-1 ${
-              themeMode === 'light' ? 'text-brand-500 dark:text-brand-400' : ''
+              themeMode === 'light'
+                ? 'text-brandLight-300 dark:text-brandDark-400'
+                : ''
             }`}
             onClick={() => handleThemeClick('light')}
           >
@@ -344,7 +346,9 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
           <motion.li
             variants={itemVariant}
             className={`w-full cursor-pointer p-1 ${
-              themeMode === 'dark' ? 'dark:text-brand-400: text-brand-500' : ''
+              themeMode === 'dark'
+                ? 'text-brandLight-300 dark:text-brandDark-400'
+                : ''
             }`}
             onClick={() => handleThemeClick('dark')}
           >
@@ -353,7 +357,9 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
           <motion.li
             variants={itemVariant}
             className={`w-full cursor-pointer p-1 ${
-              themeMode === 'system' ? 'text-brand-500 dark:text-brand-400' : ''
+              themeMode === 'system'
+                ? 'text-brandLight-300 dark:text-brandDark-400'
+                : ''
             }`}
             onClick={() => handleThemeClick('system')}
           >

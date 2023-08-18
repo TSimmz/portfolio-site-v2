@@ -27,7 +27,7 @@ const Portfolio = async () => {
       <Heading as="h1" className="text-center">
         <GradientTextColor>Portfolio</GradientTextColor>
 
-        <Underline className="bg-brand-700 px-4" />
+        <Underline className="bg-brandLight-500 px-4 dark:bg-brandDark-500" />
       </Heading>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6">
         {githubRepos

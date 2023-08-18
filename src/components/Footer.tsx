@@ -20,7 +20,7 @@ const Footer = () => {
           <SocialIcons.IconGitHubAlt
             height={36}
             width={36}
-            className="fill-dark stroke-dark group-hover:fill-brand-500 group-hover:stroke-brand-500 dark:fill-light dark:stroke-light "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
         <Link
@@ -31,7 +31,7 @@ const Footer = () => {
           <SocialIcons.IconLinkedIn
             height={36}
             width={36}
-            className="fill-dark stroke-dark group-hover:fill-brand-500 group-hover:stroke-brand-500 dark:fill-light dark:stroke-light "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
         <Link
@@ -42,7 +42,7 @@ const Footer = () => {
           <SocialIcons.IconInstagram
             height={36}
             width={36}
-            className="fill-dark stroke-dark group-hover:fill-brand-500 group-hover:stroke-brand-500 dark:fill-light dark:stroke-light "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
         <Link
@@ -53,13 +53,13 @@ const Footer = () => {
           <SocialIcons.IconTwitter
             height={30}
             width={30}
-            className="fill-dark stroke-dark group-hover:fill-brand-500 group-hover:stroke-brand-500 dark:fill-light dark:stroke-light "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
       </div>
       <p className="text-center text-sm text-light-base dark:text-dark-base">
         Tyler Simoni{' '}
-        <span className="text-brand-700 dark:text-brand-300">
+        <span className="text-brandLight-600 dark:text-brandDark-300">
           &copy;{new Date().getFullYear()}
         </span>
       </p>

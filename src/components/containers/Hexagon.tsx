@@ -13,7 +13,7 @@ const Hexagon: FC<HexagonProps> = ({
   return (
     <Tag
       {...otherProps}
-      className={`${className} hexagon flex aspect-square flex-col items-center justify-center overflow-clip bg-brand-500`}
+      className={`${className} hexagon flex aspect-square flex-col items-center justify-center overflow-clip bg-brandLight-500 dark:bg-brandDark-500`}
     >
       <div>Hello World</div>
       <div>Test Test</div>
