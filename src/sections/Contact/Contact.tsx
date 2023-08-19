@@ -55,51 +55,56 @@ const Contact = () => {
   }, []);
 
   useEffect(() => {
-    animateHeader(
-      '.section-header',
-      { opacity: !isHeaderInView ? 0 : 1 },
-      { duration: 0.2, delay: 0.1 },
-    );
+    const animate = async () => {
+      await animateHeader(
+        '.section-header',
+        { opacity: !isHeaderInView ? 0 : 1 },
+        { duration: 0.2, delay: 0.1 },
+      );
 
-    animateHeader(
-      '.header-text',
-      {
-        y: !isHeaderInView ? -50 : 0,
-        opacity: !isHeaderInView ? 0 : 1,
-        scale: !isHeaderInView ? 0.7 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: !isHeaderInView ? 0 : staggerHeader,
-      },
-    );
+      await animateHeader(
+        '.header-text',
+        {
+          y: !isHeaderInView ? -50 : 0,
+          opacity: !isHeaderInView ? 0 : 1,
+          scale: !isHeaderInView ? 0.7 : 1,
+        },
+        {
+          duration: 0.2,
+          delay: !isHeaderInView ? 0 : staggerHeader,
+        },
+      );
 
-    animateHeader(
-      '.flavor-text',
-      {
-        y: !isHeaderInView ? -50 : 0,
-        opacity: !isHeaderInView ? 0 : 1,
-        scale: !isHeaderInView ? 0.7 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: 0.8,
-      },
-    );
+      await animateHeader(
+        '.flavor-text',
+        {
+          y: !isHeaderInView ? -50 : 0,
+          opacity: !isHeaderInView ? 0 : 1,
+          scale: !isHeaderInView ? 0.7 : 1,
+        },
+        {
+          duration: 0.2,
+        },
+      );
+    };
+    animate();
   }, [isHeaderInView]);
 
   useEffect(() => {
-    animateForm(
-      '.form-input',
-      {
-        opacity: !isFormInView ? 0 : 1,
-        scale: !isFormInView ? 0.1 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: !isFormInView ? 0 : staggerFormInputs,
-      },
-    );
+    const animate = async () => {
+      await animateForm(
+        '.form-input',
+        {
+          opacity: !isFormInView ? 0 : 1,
+          x: !isFormInView ? -100 : 0,
+        },
+        {
+          duration: 0.2,
+          delay: !isFormInView ? 0 : staggerFormInputs,
+        },
+      );
+    };
+    animate();
   }, [isFormInView]);
 
   const onContactSubmit: SubmitHandler<ContactType> = (data) => {

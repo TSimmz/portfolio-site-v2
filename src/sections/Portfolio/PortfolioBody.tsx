@@ -24,51 +24,56 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const areCardsInView = useInView(cardsRef, { once: true });
 
   useEffect(() => {
-    animateHeader(
-      '.section-header',
-      { opacity: !isHeaderInView ? 0 : 1 },
-      { duration: 0.2, delay: 0.1 },
-    );
+    const animate = async () => {
+      await animateHeader(
+        '.section-header',
+        { opacity: !isHeaderInView ? 0 : 1 },
+        { duration: 0.2, delay: 0.1 },
+      );
 
-    animateHeader(
-      '.header-text',
-      {
-        y: !isHeaderInView ? -50 : 0,
-        opacity: !isHeaderInView ? 0 : 1,
-        scale: !isHeaderInView ? 0.7 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: !isHeaderInView ? 0 : staggerPortfolioHeader,
-      },
-    );
+      await animateHeader(
+        '.header-text',
+        {
+          y: !isHeaderInView ? -50 : 0,
+          opacity: !isHeaderInView ? 0 : 1,
+          scale: !isHeaderInView ? 0.7 : 1,
+        },
+        {
+          duration: 0.2,
+          delay: !isHeaderInView ? 0 : staggerPortfolioHeader,
+        },
+      );
 
-    animateHeader(
-      '.flavor-text',
-      {
-        y: !isHeaderInView ? -50 : 0,
-        opacity: !isHeaderInView ? 0 : 1,
-        scale: !isHeaderInView ? 0.7 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: 0.8,
-      },
-    );
+      await animateHeader(
+        '.flavor-text',
+        {
+          y: !isHeaderInView ? -50 : 0,
+          opacity: !isHeaderInView ? 0 : 1,
+          scale: !isHeaderInView ? 0.7 : 1,
+        },
+        {
+          duration: 0.2,
+        },
+      );
+    };
+    animate();
   }, [isHeaderInView]);
 
   useEffect(() => {
-    animateCards(
-      '.portfolio-card',
-      {
-        opacity: !areCardsInView ? 0 : 1,
-        scale: !areCardsInView ? 0.1 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: !areCardsInView ? 0 : staggerCards,
-      },
-    );
+    const animate = async () => {
+      await animateCards(
+        '.portfolio-card',
+        {
+          opacity: !areCardsInView ? 0 : 1,
+          scale: !areCardsInView ? 0.1 : 1,
+        },
+        {
+          duration: 0.2,
+          delay: !areCardsInView ? 0 : staggerCards,
+        },
+      );
+    };
+    animate();
   }, [areCardsInView]);
 
   return (

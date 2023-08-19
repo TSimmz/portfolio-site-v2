@@ -25,17 +25,20 @@ const Skills = () => {
   const areSkillsInView = useInView(skillsRef, { once: true });
 
   useEffect(() => {
-    animateSkills(
-      '.skill-square',
-      {
-        opacity: !areSkillsInView ? 0 : 1,
-        scale: !areSkillsInView ? 0.1 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: !areSkillsInView ? 0 : staggerSkills,
-      },
-    );
+    const animate = async () => {
+      await animateSkills(
+        '.skill-square',
+        {
+          opacity: !areSkillsInView ? 0 : 1,
+          scale: !areSkillsInView ? 0.1 : 1,
+        },
+        {
+          duration: 0.2,
+          delay: !areSkillsInView ? 0 : staggerSkills,
+        },
+      );
+    };
+    animate();
   }, [areSkillsInView]);
 
   return (

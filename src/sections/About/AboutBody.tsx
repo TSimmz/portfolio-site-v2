@@ -25,51 +25,56 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   const isImageInView = useInView(imageRef, { once: true });
 
   useEffect(() => {
-    animateHeader(
-      '.section-header',
-      { opacity: !isHeaderInView ? 0 : 1 },
-      { duration: 0.2, delay: 0.1 },
-    );
+    const animate = async () => {
+      await animateHeader(
+        '.section-header',
+        { opacity: !isHeaderInView ? 0 : 1 },
+        { duration: 0.2, delay: 0.1 },
+      );
 
-    animateHeader(
-      '.header-text',
-      {
-        y: !isHeaderInView ? -50 : 0,
-        opacity: !isHeaderInView ? 0 : 1,
-        scale: !isHeaderInView ? 0.7 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: !isHeaderInView ? 0 : staggerAboutHeader,
-      },
-    );
+      await animateHeader(
+        '.header-text',
+        {
+          y: !isHeaderInView ? -50 : 0,
+          opacity: !isHeaderInView ? 0 : 1,
+          scale: !isHeaderInView ? 0.7 : 1,
+        },
+        {
+          duration: 0.2,
+          delay: !isHeaderInView ? 0 : staggerAboutHeader,
+        },
+      );
 
-    animateHeader(
-      '.flavor-text',
-      {
-        y: !isHeaderInView ? -50 : 0,
-        opacity: !isHeaderInView ? 0 : 1,
-        scale: !isHeaderInView ? 0.7 : 1,
-      },
-      {
-        duration: 0.2,
-        delay: 0.8,
-      },
-    );
+      await animateHeader(
+        '.flavor-text',
+        {
+          y: !isHeaderInView ? -50 : 0,
+          opacity: !isHeaderInView ? 0 : 1,
+          scale: !isHeaderInView ? 0.7 : 1,
+        },
+        {
+          duration: 0.2,
+        },
+      );
+    };
+    animate();
   }, [isHeaderInView]);
 
   useEffect(() => {
-    animateImage(
-      '.image-wrapper',
-      {
-        opacity: !isImageInView ? 0 : 1,
-        scale: !isImageInView ? 0.1 : 1,
-      },
-      {
-        duration: 0.5,
-        delay: !isImageInView ? 0 : 0.4,
-      },
-    );
+    const animate = async () => {
+      await animateImage(
+        '.image-wrapper',
+        {
+          opacity: !isImageInView ? 0 : 1,
+          scale: !isImageInView ? 0.1 : 1,
+        },
+        {
+          duration: 0.5,
+          delay: !isImageInView ? 0 : 0.4,
+        },
+      );
+    };
+    animate();
   }, [isImageInView]);
 
   return (
