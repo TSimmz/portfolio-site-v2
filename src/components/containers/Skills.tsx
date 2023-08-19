@@ -1,5 +1,5 @@
 'use client';
-import { type FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion, stagger, useAnimate, useInView } from 'framer-motion';
 import * as TechIcons from '~/components/svgs/tech';
 
@@ -59,9 +59,6 @@ const Skills = () => {
             className="h-full w-full"
             id={`skill-icon-${IconKey.toLowerCase()}`}
             variants={skillIcon}
-            // initial="rest"
-            // whileHover="hover"
-            // animate="rest"
           >
             <Icon
               height={'32px'}

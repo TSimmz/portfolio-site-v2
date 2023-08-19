@@ -11,7 +11,7 @@ import { useAnimate, stagger, useInView } from 'framer-motion';
 
 import { type GitHubProfileData } from '~/utils/types';
 
-const staggerAboutItem = stagger(0.2, { startDelay: 0.5, from: 'last' });
+const staggerAboutHeader = stagger(0.2, { startDelay: 0.4, from: 'last' });
 
 type AboutBodyProps = {
   githubProfileData?: GitHubProfileData;
@@ -40,7 +40,20 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
       },
       {
         duration: 0.2,
-        delay: !isHeaderInView ? 0 : staggerAboutItem,
+        delay: !isHeaderInView ? 0 : staggerAboutHeader,
+      },
+    );
+
+    animateHeader(
+      '.flavor-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: 0.8,
       },
     );
   }, [isHeaderInView]);
@@ -69,7 +82,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         <Underline className="header-text min-w-[250px] max-w-xl bg-brandLight-500 px-4 dark:bg-brandDark-500" />
       </Heading>
 
-      <p className="header-text mb-10 text-center text-lg">
+      <p className="flavor-text mb-10 text-center text-lg">
         {githubProfileData?.bio ?? '<-- Skills to pay the bills -->'}
       </p>
       <div

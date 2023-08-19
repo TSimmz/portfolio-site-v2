@@ -3,7 +3,7 @@ import SectionWrapper from '~/components/containers/SectionWrapper';
 import { Octokit } from '@octokit/core';
 import { type OctokitResponse } from '@octokit/types';
 import { type GitHubProfileData } from '~/utils/types';
-import AboutBody from './About/AboutBody';
+import AboutBody from './AboutBody';
 
 const getGithubProfile = async (): Promise<unknown> => {
   const octokit = new Octokit({ auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN });
