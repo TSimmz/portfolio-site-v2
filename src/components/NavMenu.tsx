@@ -23,6 +23,7 @@ import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
+import ResumeButton from './buttons/ResumeButton';
 
 const NavMenu = () => {
   const pathname = usePathname();
@@ -230,7 +231,7 @@ const NavMenu = () => {
         <AnimatePresence>
           {!opened ? (
             <motion.div
-              className="overflow-hidden rounded-md hover:backdrop-brightness-110"
+              className="flex items-center gap-3 overflow-visible rounded-md "
               initial={{
                 x: -100,
                 opacity: 0,
@@ -259,9 +260,10 @@ const NavMenu = () => {
               <Link id="brand-logo" href="/">
                 <BrandLogo
                   height={'36px'}
-                  className="fill-brandLight-500 dark:fill-brandDark-500 "
+                  className="fill-brandLight-500 transition-transform duration-300 ease-in-out hover:scale-110 dark:fill-brandDark-500"
                 />
               </Link>
+              <ResumeButton />
             </motion.div>
           ) : null}
         </AnimatePresence>

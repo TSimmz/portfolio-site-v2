@@ -95,7 +95,7 @@ const Notification: FC<NotificationProps> = ({
         id={`notification-header-${id}`}
         className={`text-light flex w-full items-center justify-between px-3 py-2 text-sm font-semibold sm:text-base ${notification[type].styles.headerBg}`}
       >
-        <h1 className="">
+        <h1 className="text-dark-base">
           <span>{notification[type].emoji}</span>{' '}
           <span>{notification[type].name}</span>{' '}
           {title ? (

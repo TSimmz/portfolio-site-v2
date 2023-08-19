@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRef, useEffect, type FC } from 'react';
+import { baseRoutes } from '~/utils/constants';
 
 type NavLinkProps = {
   id: string;
@@ -23,7 +24,9 @@ const NavLink: FC<NavLinkProps> = ({ id, title, href, onPathChange }) => {
     <Link
       id={id}
       href={href}
-      className={`relative ml-0 flex flex-row items-center space-x-0 rounded-md px-3 py-1 text-base text-dark-base transition-all duration-500 hover:backdrop-contrast-125 dark:hover:backdrop-brightness-125 sm:text-sm min-[690px]:px-5 ${
+      className={`${
+        href === baseRoutes.home ? 'max-[775px]:hidden' : ''
+      } relative ml-0 flex flex-row items-center space-x-0 rounded-md px-3 py-1 text-base text-dark-base transition-all duration-500 hover:backdrop-contrast-125 dark:hover:backdrop-brightness-125 sm:text-sm min-[690px]:px-4 min-[800px]:px-5 ${
         isActive.current
           ? 'font-semibold !text-brandLight-500 dark:!text-brandDark-500'
           : 'hover:text-brandLight-300 dark:hover:text-brandDark-300 '
