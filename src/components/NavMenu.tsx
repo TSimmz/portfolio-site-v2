@@ -201,12 +201,14 @@ const NavMenu = () => {
 
   const renderNavButtons = useMemo(
     () =>
-      baseRouteKeysList.map((routeName: BaseRouteKeys) => (
+      baseRouteKeysList.map((routeName: BaseRouteKeys, index: number) => (
         <NavLink
           key={createLinkId(routeName)}
           id={createLinkId(routeName)}
           title={routeName}
           href={baseRoutes[routeName]}
+          index={index + 1}
+          length={baseRouteKeysList.length}
           onPathChange={handleDesktopPathChange}
         />
       )),

@@ -1,6 +1,6 @@
 'use client';
 
-import { type FC, useEffect, useState } from 'react';
+import { type FC } from 'react';
 import { motion } from 'framer-motion';
 
 import colors from 'tailwindcss/colors';

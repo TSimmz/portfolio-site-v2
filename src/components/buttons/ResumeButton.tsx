@@ -15,7 +15,7 @@ const buttonVariant = {
     opacity: 1,
     scale: 1,
     transition: {
-      delay: 2.2,
+      delay: 0.65,
     },
   },
   hover: { width: 125 },
@@ -79,7 +79,7 @@ const ResumeButton = () => {
       animate="animateIn"
       whileHover="hover"
       whileTap="tap"
-      className={`"group flex origin-left items-center justify-between overflow-hidden rounded-full bg-brandLight-500 p-1 dark:bg-brandDark-500`}
+      className={`"touch-auto flex origin-left items-center justify-between overflow-hidden rounded-full bg-brandLight-500 p-1 dark:bg-brandDark-500`}
     >
       <svg viewBox="0 0 32 32" className="z-10 h-7 w-7 scale-125 fill-light">
         <motion.path
