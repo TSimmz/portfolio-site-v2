@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import { type FC, useEffect } from 'react';
+import { motion, stagger, useAnimate, useInView } from 'framer-motion';
 import * as TechIcons from '~/components/svgs/tech';
 
 const transition = {
@@ -18,10 +18,30 @@ const skillIcon = {
   hover: { rotate: -135 },
 };
 
+const staggerSkills = stagger(0.12, { startDelay: 0.25, from: 'center' });
+
 const Skills = () => {
+  const [skillsRef, animateSkills] = useAnimate();
+  const areSkillsInView = useInView(skillsRef, { once: true });
+
+  useEffect(() => {
+    animateSkills(
+      '.skill-square',
+      {
+        opacity: !areSkillsInView ? 0 : 1,
+        scale: !areSkillsInView ? 0.1 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: !areSkillsInView ? 0 : staggerSkills,
+      },
+    );
+  }, [areSkillsInView]);
+
   return (
     <div
       id="skills-container"
+      ref={skillsRef}
       className="flex flex-wrap items-center justify-center gap-4"
     >
       {Object.entries(TechIcons).map(([IconKey, Icon]) => (
@@ -33,7 +53,7 @@ const Skills = () => {
           whileHover="hover"
           animate="rest"
           transition={transition}
-          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brandLight-500 p-4 dark:bg-brandDark-500"
+          className="skill-square flex h-16 w-16 items-center justify-center rounded-2xl bg-brandLight-500 p-4 dark:bg-brandDark-500"
         >
           <motion.div
             className="h-full w-full"
