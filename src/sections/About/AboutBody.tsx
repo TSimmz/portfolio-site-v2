@@ -30,7 +30,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         '.section-header',
         { opacity: !isHeaderInView ? 0 : 1 },
         { duration: 0.2, delay: 0.1 },
-      );
+      ).then(() => {});
 
       await animateHeader(
         '.header-text',
@@ -43,7 +43,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
           duration: 0.2,
           delay: !isHeaderInView ? 0 : staggerAboutHeader,
         },
-      );
+      ).then(() => {});
 
       await animateHeader(
         '.flavor-text',
@@ -55,7 +55,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         {
           duration: 0.2,
         },
-      );
+      ).then(() => {});
     };
     animate();
   }, [isHeaderInView]);
@@ -72,7 +72,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
           duration: 0.5,
           delay: !isImageInView ? 0 : 0.4,
         },
-      );
+      ).then(() => {});
     };
     animate();
   }, [isImageInView]);
