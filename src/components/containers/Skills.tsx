@@ -36,7 +36,9 @@ const Skills = () => {
           duration: 0.2,
           delay: !areSkillsInView ? 0 : staggerSkills,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
     };
     animate();
   }, [areSkillsInView]);

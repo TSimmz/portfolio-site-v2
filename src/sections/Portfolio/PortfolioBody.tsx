@@ -29,7 +29,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         '.section-header',
         { opacity: !isHeaderInView ? 0 : 1 },
         { duration: 0.2, delay: 0.1 },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
 
       await animateHeader(
         '.header-text',
@@ -42,7 +44,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
           duration: 0.2,
           delay: !isHeaderInView ? 0 : staggerPortfolioHeader,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
 
       await animateHeader(
         '.flavor-text',
@@ -54,7 +58,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         {
           duration: 0.2,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
     };
     animate();
   }, [isHeaderInView]);
@@ -71,7 +77,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
           duration: 0.2,
           delay: !areCardsInView ? 0 : staggerCards,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
     };
     animate();
   }, [areCardsInView]);

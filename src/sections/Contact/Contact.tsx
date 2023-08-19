@@ -60,7 +60,9 @@ const Contact = () => {
         '.section-header',
         { opacity: !isHeaderInView ? 0 : 1 },
         { duration: 0.2, delay: 0.1 },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
 
       await animateHeader(
         '.header-text',
@@ -73,7 +75,9 @@ const Contact = () => {
           duration: 0.2,
           delay: !isHeaderInView ? 0 : staggerHeader,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
 
       await animateHeader(
         '.flavor-text',
@@ -85,7 +89,9 @@ const Contact = () => {
         {
           duration: 0.2,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
     };
     animate();
   }, [isHeaderInView]);
@@ -102,7 +108,9 @@ const Contact = () => {
           duration: 0.2,
           delay: !isFormInView ? 0 : staggerFormInputs,
         },
-      ).then(() => {});
+      ).then(() => {
+        let then = 0;
+      });
     };
     animate();
   }, [isFormInView]);
