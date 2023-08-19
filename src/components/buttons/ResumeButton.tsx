@@ -18,6 +18,20 @@ const buttonVariant = {
       delay: 0.65,
     },
   },
+  autoOpenClose: {
+    width: [38, 125],
+    transition: {
+      delay: 2,
+      width: {
+        duration: 1,
+        ease: 'easeOut',
+        times: [0, 0.5],
+        repeat: Infinity,
+        repeatType: 'reverse',
+        repeatDelay: 5,
+      },
+    },
+  },
   hover: { width: 125 },
   tap: { scale: 0.9 },
 };
@@ -52,13 +66,45 @@ const textVariant = {
     width: 'auto',
     x: -15,
   },
+  autoOpenClose: {
+    opacity: [0, 1],
+    width: [0, 70],
+    x: [-500, -4],
+    transition: {
+      delay: 2,
+      opacity: {
+        repeatType: 'reverse',
+        duration: 1,
+        ease: 'easeInOut',
+        times: [0, 0.5],
+        repeat: Infinity,
+        repeatDelay: 5,
+      },
+      width: {
+        repeatType: 'reverse',
+        duration: 1,
+        ease: 'easeInOut',
+        times: [0, 0.5],
+        repeat: Infinity,
+        repeatDelay: 5,
+      },
+      x: {
+        repeatType: 'reverse',
+        duration: 1,
+        ease: 'easeInOut',
+        times: [0, 0.5],
+        repeat: Infinity,
+        repeatDelay: 5,
+      },
+    },
+  },
   exit: {
     opacity: 0,
     x: -500,
     width: 0,
     transition: {
       x: {
-        delay: 0.2,
+        delay: 0.1,
       },
     },
   },
@@ -76,10 +122,10 @@ const ResumeButton = () => {
       rel="noopener noreferrer"
       variants={buttonVariant}
       initial="initial"
-      animate="animateIn"
+      animate={['animateIn', 'autoOpenClose']}
       whileHover="hover"
       whileTap="tap"
-      className={`"touch-auto flex origin-left items-center justify-between overflow-hidden rounded-full bg-brandLight-500 p-1 dark:bg-brandDark-500`}
+      className={`"touch-auto flex origin-left scale-75 items-center justify-between overflow-hidden rounded-lg bg-brandLight-500 p-1 dark:bg-brandDark-500`}
     >
       <svg viewBox="0 0 32 32" className="z-10 h-7 w-7 scale-125 fill-light">
         <motion.path
@@ -90,17 +136,15 @@ const ResumeButton = () => {
         <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
       </svg>
       <AnimatePresence>
-        {isHovering ? (
-          <motion.span
-            variants={textVariant}
-            initial="enter"
-            animate="open"
-            exit="exit"
-            className="origin-left font-semibold text-dark-base"
-          >
-            Resume
-          </motion.span>
-        ) : null}
+        <motion.span
+          variants={textVariant}
+          initial="enter"
+          animate={isHovering ? 'open' : 'autoOpenClose'}
+          exit="exit"
+          className="origin-left font-semibold text-dark-base"
+        >
+          Resume
+        </motion.span>
       </AnimatePresence>
     </motion.a>
   );

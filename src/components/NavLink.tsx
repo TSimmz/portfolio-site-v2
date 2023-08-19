@@ -31,7 +31,6 @@ const NavLink: FC<NavLinkProps> = ({
   }, [pathname]);
 
   // Calculates delay so the drop in order is from right to left
-  // 1.2 -> 0.8 -> 0.7 ->
   const delay = 0.5 + 0.15 * (length - index + 1);
 
   return (
