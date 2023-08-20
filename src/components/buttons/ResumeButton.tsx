@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { useHoverDirty } from 'react-use';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
 
 const buttonVariant = {
   initial: {
@@ -61,15 +62,15 @@ const textVariant = {
       },
     },
   },
-  open: {
-    opacity: 1,
-    width: 'auto',
-    x: -15,
-  },
-  autoOpenClose: {
-    opacity: [0, 1],
-    width: [0, 70],
-    x: [-500, -4],
+  open: (isHovering: boolean) => ({
+    opacity: isHovering ? 1 : 0,
+    width: isHovering ? 'auto' : 0,
+    x: isHovering ? -15 : -500,
+  }),
+  autoOpenClose: (isHovering: boolean) => ({
+    opacity: !isHovering ? [0, 1] : [1, 1],
+    width: !isHovering ? [0, 70] : [70, 70],
+    x: !isHovering ? [-500, -4] : [-4, -4],
     transition: {
       delay: 2,
       opacity: {
@@ -97,7 +98,7 @@ const textVariant = {
         repeatDelay: 5,
       },
     },
-  },
+  }),
   exit: {
     opacity: 0,
     x: -500,
@@ -111,42 +112,47 @@ const textVariant = {
 };
 
 const ResumeButton = () => {
-  const linkRef = useRef<HTMLAnchorElement>(null);
+  const linkRef = useRef<HTMLButtonElement>(null);
   const isHovering = useHoverDirty(linkRef);
 
+  const resumeUrlPath = process.env.NEXT_PUBLIC_RESUME_PATH! ?? '/';
   return (
-    <motion.a
+    <motion.button
       ref={linkRef}
-      target="_blank"
-      href={process.env.NEXT_PUBLIC_RESUME_PATH}
-      rel="noopener noreferrer"
       variants={buttonVariant}
       initial="initial"
       animate={['animateIn', 'autoOpenClose']}
       whileHover="hover"
       whileTap="tap"
-      className={`"touch-auto flex origin-left scale-75 items-center justify-between overflow-hidden rounded-lg bg-brandLight-500 p-1 dark:bg-brandDark-500`}
+      className="pointer-events-auto origin-left scale-75 cursor-pointer rounded-lg bg-brandLight-500 p-1 dark:bg-brandDark-500"
     >
-      <svg viewBox="0 0 32 32" className="z-10 h-7 w-7 scale-125 fill-light">
-        <motion.path
-          variants={iconBounceVariant}
-          animate="animate"
-          d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
-        />
-        <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
-      </svg>
-      <AnimatePresence>
-        <motion.span
-          variants={textVariant}
-          initial="enter"
-          animate={isHovering ? 'open' : 'autoOpenClose'}
-          exit="exit"
-          className="origin-left font-semibold text-dark-base"
-        >
-          Resume
-        </motion.span>
-      </AnimatePresence>
-    </motion.a>
+      <Link
+        target="_blank"
+        href={resumeUrlPath}
+        className="flex items-center justify-between overflow-hidden "
+      >
+        <svg viewBox="0 0 32 32" className="z-10 h-7 w-7 scale-125 fill-light">
+          <motion.path
+            variants={iconBounceVariant}
+            animate="animate"
+            d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
+          />
+          <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
+        </svg>
+        <AnimatePresence>
+          <motion.span
+            variants={textVariant}
+            initial="enter"
+            animate={['open', 'autoOpenClose']}
+            exit="exit"
+            custom={isHovering}
+            className="origin-left font-semibold text-dark-base"
+          >
+            Resume
+          </motion.span>
+        </AnimatePresence>
+      </Link>
+    </motion.button>
   );
 };
 
