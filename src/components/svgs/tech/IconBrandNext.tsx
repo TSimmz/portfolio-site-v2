@@ -14,8 +14,8 @@ const IconBrandNext: FC<SVGIconProps> = ({
   return (
     <motion.svg
       viewBox="0 0 24 24"
-      fill={fill}
-      stroke={stroke}
+      fill="none"
+      stroke="none"
       strokeWidth={strokeWidth}
       height={height}
       width={width}
@@ -23,8 +23,11 @@ const IconBrandNext: FC<SVGIconProps> = ({
       strokeLinecap="round"
       className={className}
     >
-      <motion.path stroke="none" d="M0 0h24v24H0z" />
-      <motion.path d="M9 15V9l7.745 10.65A9 9 0 1119 17.657M15 12V9" />
+      <motion.path stroke="none" fill="none" d="M0 0h24v24H0z" />
+      <motion.path
+        fill="none"
+        d="M9 15V9l7.745 10.65A9 9 0 1119 17.657M15 12V9"
+      />
     </motion.svg>
   );
 };

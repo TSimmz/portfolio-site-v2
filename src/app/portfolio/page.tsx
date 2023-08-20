@@ -1,4 +1,4 @@
-import Portfolio from '~/sections/Portfolio';
+import Portfolio from '~/sections/Portfolio/Portfolio';
 
 function PortfolioPage() {
   return <Portfolio />;

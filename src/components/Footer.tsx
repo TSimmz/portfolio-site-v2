@@ -6,7 +6,7 @@ const Footer = () => {
     <footer
       id="page-footer"
       key="page-footer"
-      className="mt-4 flex w-full flex-col justify-center bg-gradient-to-b from-slate-800 to-slate-700 px-4 pb-8 pt-12"
+      className="mt-4 flex w-full flex-col justify-center bg-gradient-to-b from-neutrals-200 to-neutrals-100 px-4 pb-8 pt-12 dark:from-neutrals-800 dark:to-neutrals-700"
     >
       <div
         id="socials"
@@ -20,7 +20,7 @@ const Footer = () => {
           <SocialIcons.IconGitHubAlt
             height={36}
             width={36}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
         <Link
@@ -31,7 +31,7 @@ const Footer = () => {
           <SocialIcons.IconLinkedIn
             height={36}
             width={36}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
         <Link
@@ -42,7 +42,7 @@ const Footer = () => {
           <SocialIcons.IconInstagram
             height={36}
             width={36}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
         <Link
@@ -53,13 +53,15 @@ const Footer = () => {
           <SocialIcons.IconTwitter
             height={30}
             width={30}
-            className="fill-slate-200 stroke-slate-200 group-hover:fill-rose-500 group-hover:stroke-rose-500 "
+            className="fill-dark stroke-dark group-hover:fill-brandLight-500 group-hover:stroke-brandLight-500 dark:fill-light dark:stroke-light dark:group-hover:fill-brandDark-500 dark:group-hover:stroke-brandDark-500 "
           />
         </Link>
       </div>
-      <p className="text-center text-sm text-slate-100">
+      <p className="text-center text-sm text-light-base dark:text-dark-base">
         Tyler Simoni{' '}
-        <span className="text-rose-300">&copy;{new Date().getFullYear()}</span>
+        <span className="text-brandLight-600 dark:text-brandDark-300">
+          &copy;{new Date().getFullYear()}
+        </span>
       </p>
     </footer>
   );

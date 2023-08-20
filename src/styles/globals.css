@@ -2,32 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #hexagon-icon > svg {
-  --_icon-size: 36px;
-  width: var(--_icon-size);
-  height: var(--_icon-size);
-} */
-
-/* .nav-menu-open {
-  overflow-y: hidden;
-  position: relative;
+summary::marker,
+summary::-webkit-details-marker {
+  display: none;
 }
-
-.nav-menu-open::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 25%;
-  background-color: theme('colors.slate.600');
-  --tw-backdrop-blur: blur(20px);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
-    var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
-    var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
-    var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
-    var(--tw-backdrop-sepia);
-} */
 
 @layer utilities {
   .nav-menu::after {
@@ -37,7 +15,6 @@
     right: 0;
     bottom: 0;
     height: var(--_height);
-    background-color: theme('colors.rose.500');
     scale: var(--_width, 0.125) 1;
     translate: var(--_left, 0) 0px;
     transform-origin: left;

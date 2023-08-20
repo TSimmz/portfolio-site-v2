@@ -1,4 +1,4 @@
-import About from '~/sections/About';
+import About from '~/sections/About/About';
 
 function AboutPage() {
   return <About />;

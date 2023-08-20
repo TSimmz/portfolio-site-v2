@@ -3,7 +3,12 @@
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize } from 'react-use';
-import { motion } from 'framer-motion';
+import {
+  motion,
+  //useScroll,
+  //useTransform,
+  AnimatePresence,
+} from 'framer-motion';
 
 import theme from 'tailwindcss/defaultTheme';
 
@@ -12,14 +17,22 @@ import {
   type BaseRouteKeys,
   baseRouteKeysList,
   baseRoutes,
+  //localStorageHasScrolledId,
 } from '~/utils/constants';
-import Burger from './Burger';
-import { AnimatePresence } from 'framer-motion';
+import Burger from './buttons/Burger';
+import BrandLogo from './svgs/BrandLogo';
+import Link from 'next/link';
+import ThemeSwitcher from './buttons/ThemeSwitcher';
+import ResumeButton from './buttons/ResumeButton';
 
 const NavMenu = () => {
   const pathname = usePathname();
+  // const { scrollY } = useScroll();
+  // const opacity = useTransform(scrollY, [100, 500], [0, 1]);
   const { width } = useWindowSize();
   const [opened, toggle] = useToggle(false);
+
+  // const [hasScrolled, setHasScrolled] = useState<boolean>(false);
 
   const navMenuRef = useRef<HTMLElement | null>(null);
 
@@ -60,6 +73,18 @@ const NavMenu = () => {
     [navMenuRef],
   );
 
+  // const opacityValue = opacity.isAnimating();
+  // useEffect(() => {
+  //   console.log('Scrolling...', hasScrolled);
+  //   if (
+  //     localStorage[localStorageHasScrolledId] === 'false' &&
+  //     opacity.get() === 1
+  //   ) {
+  //     localStorage[localStorageHasScrolledId] = 'true';
+  //     setHasScrolled(true);
+  //   }
+  // }, [opacityValue]);
+
   useEffect(() => {
     toggle(false);
   }, [pathname]);
@@ -88,11 +113,6 @@ const NavMenu = () => {
       }
     }
   }, [width]);
-
-  // useEffect(() => {
-  //   if (opened) document.body.classList.add('nav-menu-open');
-  //   else document.body.classList.remove('nav-menu-open');
-  // }, [opened]);
 
   const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
@@ -181,12 +201,14 @@ const NavMenu = () => {
 
   const renderNavButtons = useMemo(
     () =>
-      baseRouteKeysList.map((routeName: BaseRouteKeys) => (
+      baseRouteKeysList.map((routeName: BaseRouteKeys, index: number) => (
         <NavLink
           key={createLinkId(routeName)}
           id={createLinkId(routeName)}
           title={routeName}
           href={baseRoutes[routeName]}
+          index={index + 1}
+          length={baseRouteKeysList.length}
           onPathChange={handleDesktopPathChange}
         />
       )),
@@ -194,19 +216,60 @@ const NavMenu = () => {
   );
 
   return (
-    <header
+    <motion.header
+      //style={{ opacity: pathname === '/' && !hasScrolled ? opacity : 1 }}
       id="page-header"
       key="page-header"
-      className={`${
-        opened ? 'from-slate-900/50' : 'from-slate-800/80'
-      } fixed top-0 z-10 min-h-[84px] w-full bg-gradient-to-t from-slate-800/80 to-slate-700/60 px-4 pb-3 pt-8 shadow-2xl shadow-slate-800 backdrop-blur-md`}
+      className={`fixed top-0 z-20 w-full bg-neutrals-600 py-3 pl-4 pr-4 shadow-2xl shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
     >
       <nav
         id="nav-menu"
         key="nav-menu"
         ref={navMenuRef}
-        className={`sm:nav-menu relative mx-auto flex min-h-[40px] max-w-4xl scroll-pr-6 gap-2 px-0 pb-3 sm:px-4 sm:pb-0 lg:px-0`}
+        className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
+          opened ? 'min-h-[40px]' : 'h-10'
+        }`}
       >
+        <AnimatePresence>
+          {!opened ? (
+            <motion.div
+              className="flex items-center gap-3 overflow-visible rounded-md "
+              initial={{
+                x: -100,
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: {
+                  opacity: {
+                    duration: 0.2,
+                    delay: 0.2,
+                  },
+                  x: {
+                    duration: 0.2,
+                    delay: 0.25,
+                    type: 'spring',
+                    bounce: 0.35,
+                  },
+                },
+              }}
+              exit={{
+                opacity: 0,
+                x: -100,
+              }}
+            >
+              <Link id="brand-logo" href="/">
+                <BrandLogo
+                  height={'36px'}
+                  className="fill-brandLight-500 transition-transform duration-300 ease-in-out hover:scale-110 dark:fill-brandDark-500"
+                />
+              </Link>
+              <ResumeButton />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+
         {/* Mobile nav buttons */}
         <AnimatePresence>
           {opened ? (
@@ -214,33 +277,46 @@ const NavMenu = () => {
               initial={{
                 height: 0,
                 opacity: 0,
+                translateY: -100,
               }}
               animate={{
                 height: 'auto',
                 opacity: 1,
+                translateY: 0,
                 transition: {
                   height: {
-                    duration: 0.4,
+                    delay: 0.2,
+                    type: 'spring',
+                    bounce: 0.5,
                   },
                   opacity: {
-                    duration: 0.25,
-                    delay: 0.15,
+                    duration: 0.2,
+                    delay: 0.5,
+                  },
+                  translateY: {
+                    duration: 0.2,
+                    delay: 0.5,
                   },
                 },
               }}
               exit={{
                 height: 0,
                 opacity: 0,
+                translateY: -100,
                 transition: {
-                  height: {
-                    duration: 0.4,
+                  translateY: {
+                    duration: 0,
                   },
                   opacity: {
-                    duration: 0.25,
+                    duration: 0,
+                  },
+                  height: {
+                    duration: 0.15,
+                    delay: 0.1,
                   },
                 },
               }}
-              className="flex w-[80%] flex-col gap-1"
+              className="mb-1 flex w-[60%] flex-col gap-1"
             >
               {renderNavButtons}
             </motion.div>
@@ -248,18 +324,18 @@ const NavMenu = () => {
         </AnimatePresence>
 
         {/* Desktop nav buttons */}
-        <div className="hidden w-full space-x-4 sm:flex">
-          {renderNavButtons}
+        <div className="hidden gap-2 space-x-1 sm:flex">
+          <div className="flex gap-1">{renderNavButtons}</div>
+          <ThemeSwitcher id="theme-switcher-desktop" />
         </div>
 
         {/* Burger button */}
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          className="absolute right-0 top-0 sm:hidden"
-        />
+        <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
+          <ThemeSwitcher id="theme-switcher-mobile" isMobile={true} />
+          <Burger opened={opened} onClick={toggle} />
+        </div>
       </nav>
-    </header>
+    </motion.header>
   );
 };
 

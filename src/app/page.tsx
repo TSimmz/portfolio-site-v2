@@ -1,7 +1,7 @@
-import About from '~/sections/About';
-import Contact from '~/sections/Contact';
-import Hero from '~/sections/Hero';
-import Portfolio from '~/sections/Portfolio';
+import About from '~/sections/About/About';
+import Contact from '~/sections/Contact/Contact';
+import Hero from '~/sections/Hero/Hero';
+import Portfolio from '~/sections/Portfolio/Portfolio';
 
 function HomePage() {
   return (

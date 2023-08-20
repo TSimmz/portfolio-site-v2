@@ -9,7 +9,7 @@ const GradientTextColor: FC<GradientTextColorProps> = ({
   ...otherProps
 }) => {
   const colorGradientClass =
-    'bg-gradient-to-b from-rose-500 to-rose-700 bg-clip-text text-transparent';
+    'bg-gradient-to-b dark:from-brandDark-500 dark:to-brandDark-600 from-brandLight-500 to-brandLight-600 bg-clip-text text-transparent';
   const className = !otherProps.className
     ? colorGradientClass
     : `${otherProps.className} ${colorGradientClass}`;

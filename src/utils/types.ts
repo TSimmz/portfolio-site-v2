@@ -100,7 +100,7 @@ export type GitHubRepositoryResponse = {
   default_branch: StringOrNull;
 };
 
-export type GitHubProfileResponse = {
+export type GitHubProfileData = {
   login: string;
   id: number;
   node_id: string;
@@ -133,4 +133,12 @@ export type GitHubProfileResponse = {
   following: number;
   created_at: string;
   updated_at: string;
+};
+
+export type Notification = {
+  id: string;
+  title?: string;
+  message: string;
+  type: 'success' | 'info' | 'warning' | 'error';
+  timeToRemove?: number;
 };
