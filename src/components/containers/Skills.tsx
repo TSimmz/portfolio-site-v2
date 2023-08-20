@@ -25,8 +25,7 @@ const Skills = () => {
   const areSkillsInView = useInView(skillsRef, { once: true });
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateSkills(
+    const skillSquares = animateSkills(
       '.skill-square',
       {
         opacity: !areSkillsInView ? 0 : 1,

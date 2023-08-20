@@ -18,22 +18,20 @@ type AboutBodyProps = {
 };
 
 const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
-  const [headerRef, animateHeader] = useAnimate();
+  const [headerRef, animateHeader] = useAnimate<HTMLDivElement>();
   const isHeaderInView = useInView(headerRef, { once: true });
 
   const [imageRef, animateImage] = useAnimate();
   const isImageInView = useInView(imageRef, { once: true });
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const sectionHeader = animateHeader(
       '.section-header',
       { opacity: !isHeaderInView ? 0 : 1 },
       { duration: 0.2, delay: 0.1 },
     );
 
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const headerText = animateHeader(
       '.header-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -46,8 +44,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
       },
     );
 
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const flavorText = animateHeader(
       '.flavor-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -62,8 +59,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   }, [isHeaderInView]);
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateImage(
+    const imageWrapper = animateImage(
       '.image-wrapper',
       {
         opacity: !isImageInView ? 0 : 1,

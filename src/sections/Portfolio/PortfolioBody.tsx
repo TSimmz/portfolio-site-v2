@@ -24,15 +24,13 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const areCardsInView = useInView(cardsRef, { once: true });
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const sectionHeader = animateHeader(
       '.section-header',
       { opacity: !isHeaderInView ? 0 : 1 },
       { duration: 0.2, delay: 0.1 },
     );
 
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const headerText = animateHeader(
       '.header-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -45,8 +43,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       },
     );
 
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const flavorText = animateHeader(
       '.flavor-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -61,8 +58,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   }, [isHeaderInView]);
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateCards(
+    const portfolioCards = animateCards(
       '.portfolio-card',
       {
         opacity: !areCardsInView ? 0 : 1,

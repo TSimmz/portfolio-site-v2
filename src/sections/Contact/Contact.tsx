@@ -13,7 +13,7 @@ import { useNotificationContext } from '~/components/containers/NotificationProv
 import { useAnimate, stagger, useInView } from 'framer-motion';
 
 const staggerHeader = stagger(0.2, { startDelay: 0.4, from: 'last' });
-const staggerFormInputs = stagger(0.2, { startDelay: 0.5 });
+const staggerFormInputs = stagger(0.3, { startDelay: 0.5 });
 
 const ContactSchema = z.object({
   name: z
@@ -55,15 +55,13 @@ const Contact = () => {
   }, []);
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const sectionHeader = animateHeader(
       '.section-header',
       { opacity: !isHeaderInView ? 0 : 1 },
       { duration: 0.2, delay: 0.1 },
     );
 
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const headerText = animateHeader(
       '.header-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -76,8 +74,7 @@ const Contact = () => {
       },
     );
 
-    // tslint:disable-next-line:no-floating-promises
-    animateHeader(
+    const flavorText = animateHeader(
       '.flavor-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -92,12 +89,11 @@ const Contact = () => {
   }, [isHeaderInView]);
 
   useEffect(() => {
-    // tslint:disable-next-line:no-floating-promises
-    animateForm(
+    const formInputs = animateForm(
       '.form-input',
       {
         opacity: !isFormInView ? 0 : 1,
-        x: !isFormInView ? -100 : 0,
+        x: !isFormInView ? 150 : 0,
       },
       {
         duration: 0.2,
