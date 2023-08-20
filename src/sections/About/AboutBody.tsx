@@ -25,64 +25,55 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   const isImageInView = useInView(imageRef, { once: true });
 
   useEffect(() => {
-    const animate = async () => {
-      await animateHeader(
-        '.section-header',
-        { opacity: !isHeaderInView ? 0 : 1 },
-        { duration: 0.2, delay: 0.1 },
-      ).then(() => {
-        let then = 0;
-      });
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.section-header',
+      { opacity: !isHeaderInView ? 0 : 1 },
+      { duration: 0.2, delay: 0.1 },
+    );
 
-      await animateHeader(
-        '.header-text',
-        {
-          y: !isHeaderInView ? -50 : 0,
-          opacity: !isHeaderInView ? 0 : 1,
-          scale: !isHeaderInView ? 0.7 : 1,
-        },
-        {
-          duration: 0.2,
-          delay: !isHeaderInView ? 0 : staggerAboutHeader,
-        },
-      ).then(() => {
-        let then = 0;
-      });
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.header-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: !isHeaderInView ? 0 : staggerAboutHeader,
+      },
+    );
 
-      await animateHeader(
-        '.flavor-text',
-        {
-          y: !isHeaderInView ? -50 : 0,
-          opacity: !isHeaderInView ? 0 : 1,
-          scale: !isHeaderInView ? 0.7 : 1,
-        },
-        {
-          duration: 0.2,
-        },
-      ).then(() => {
-        let then = 0;
-      });
-    };
-    animate();
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.flavor-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: 0.8,
+      },
+    );
   }, [isHeaderInView]);
 
   useEffect(() => {
-    const animate = async () => {
-      await animateImage(
-        '.image-wrapper',
-        {
-          opacity: !isImageInView ? 0 : 1,
-          scale: !isImageInView ? 0.1 : 1,
-        },
-        {
-          duration: 0.5,
-          delay: !isImageInView ? 0 : 0.4,
-        },
-      ).then(() => {
-        let then = 0;
-      });
-    };
-    animate();
+    // tslint:disable-next-line:no-floating-promises
+    animateImage(
+      '.image-wrapper',
+      {
+        opacity: !isImageInView ? 0 : 1,
+        scale: !isImageInView ? 0.1 : 1,
+      },
+      {
+        duration: 0.5,
+        delay: !isImageInView ? 0 : 0.4,
+      },
+    );
   }, [isImageInView]);
 
   return (

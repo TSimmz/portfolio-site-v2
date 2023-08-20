@@ -55,64 +55,55 @@ const Contact = () => {
   }, []);
 
   useEffect(() => {
-    const animate = async () => {
-      await animateHeader(
-        '.section-header',
-        { opacity: !isHeaderInView ? 0 : 1 },
-        { duration: 0.2, delay: 0.1 },
-      ).then(() => {
-        let then = 0;
-      });
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.section-header',
+      { opacity: !isHeaderInView ? 0 : 1 },
+      { duration: 0.2, delay: 0.1 },
+    );
 
-      await animateHeader(
-        '.header-text',
-        {
-          y: !isHeaderInView ? -50 : 0,
-          opacity: !isHeaderInView ? 0 : 1,
-          scale: !isHeaderInView ? 0.7 : 1,
-        },
-        {
-          duration: 0.2,
-          delay: !isHeaderInView ? 0 : staggerHeader,
-        },
-      ).then(() => {
-        let then = 0;
-      });
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.header-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: !isHeaderInView ? 0 : staggerHeader,
+      },
+    );
 
-      await animateHeader(
-        '.flavor-text',
-        {
-          y: !isHeaderInView ? -50 : 0,
-          opacity: !isHeaderInView ? 0 : 1,
-          scale: !isHeaderInView ? 0.7 : 1,
-        },
-        {
-          duration: 0.2,
-        },
-      ).then(() => {
-        let then = 0;
-      });
-    };
-    animate();
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.flavor-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: 0.8,
+      },
+    );
   }, [isHeaderInView]);
 
   useEffect(() => {
-    const animate = async () => {
-      await animateForm(
-        '.form-input',
-        {
-          opacity: !isFormInView ? 0 : 1,
-          x: !isFormInView ? -100 : 0,
-        },
-        {
-          duration: 0.2,
-          delay: !isFormInView ? 0 : staggerFormInputs,
-        },
-      ).then(() => {
-        let then = 0;
-      });
-    };
-    animate();
+    // tslint:disable-next-line:no-floating-promises
+    animateForm(
+      '.form-input',
+      {
+        opacity: !isFormInView ? 0 : 1,
+        x: !isFormInView ? -100 : 0,
+      },
+      {
+        duration: 0.2,
+        delay: !isFormInView ? 0 : staggerFormInputs,
+      },
+    );
   }, [isFormInView]);
 
   const onContactSubmit: SubmitHandler<ContactType> = (data) => {

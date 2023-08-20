@@ -24,64 +24,55 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const areCardsInView = useInView(cardsRef, { once: true });
 
   useEffect(() => {
-    const animate = async () => {
-      await animateHeader(
-        '.section-header',
-        { opacity: !isHeaderInView ? 0 : 1 },
-        { duration: 0.2, delay: 0.1 },
-      ).then(() => {
-        let then = 0;
-      });
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.section-header',
+      { opacity: !isHeaderInView ? 0 : 1 },
+      { duration: 0.2, delay: 0.1 },
+    );
 
-      await animateHeader(
-        '.header-text',
-        {
-          y: !isHeaderInView ? -50 : 0,
-          opacity: !isHeaderInView ? 0 : 1,
-          scale: !isHeaderInView ? 0.7 : 1,
-        },
-        {
-          duration: 0.2,
-          delay: !isHeaderInView ? 0 : staggerPortfolioHeader,
-        },
-      ).then(() => {
-        let then = 0;
-      });
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.header-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: !isHeaderInView ? 0 : staggerPortfolioHeader,
+      },
+    );
 
-      await animateHeader(
-        '.flavor-text',
-        {
-          y: !isHeaderInView ? -50 : 0,
-          opacity: !isHeaderInView ? 0 : 1,
-          scale: !isHeaderInView ? 0.7 : 1,
-        },
-        {
-          duration: 0.2,
-        },
-      ).then(() => {
-        let then = 0;
-      });
-    };
-    animate();
+    // tslint:disable-next-line:no-floating-promises
+    animateHeader(
+      '.flavor-text',
+      {
+        y: !isHeaderInView ? -50 : 0,
+        opacity: !isHeaderInView ? 0 : 1,
+        scale: !isHeaderInView ? 0.7 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: 0.8,
+      },
+    );
   }, [isHeaderInView]);
 
   useEffect(() => {
-    const animate = async () => {
-      await animateCards(
-        '.portfolio-card',
-        {
-          opacity: !areCardsInView ? 0 : 1,
-          scale: !areCardsInView ? 0.1 : 1,
-        },
-        {
-          duration: 0.2,
-          delay: !areCardsInView ? 0 : staggerCards,
-        },
-      ).then(() => {
-        let then = 0;
-      });
-    };
-    animate();
+    // tslint:disable-next-line:no-floating-promises
+    animateCards(
+      '.portfolio-card',
+      {
+        opacity: !areCardsInView ? 0 : 1,
+        scale: !areCardsInView ? 0.1 : 1,
+      },
+      {
+        duration: 0.2,
+        delay: !areCardsInView ? 0 : staggerCards,
+      },
+    );
   }, [areCardsInView]);
 
   return (
