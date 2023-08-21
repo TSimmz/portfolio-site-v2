@@ -120,20 +120,22 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
   return (
     <NotificationContext.Provider value={{ notify }}>
       {children}
-      <div className="fixed bottom-[0.5rem] right-[0.5rem] pl-[0.5rem] sm:bottom-[2rem] sm:right-[2rem]">
+      <div className="fixed right-[0.5rem] top-[0.5rem] z-30 pl-[0.5rem] sm:bottom-[2rem] sm:right-[2rem]">
         <ul>
           <AnimatePresence initial={false}>
-            {notifications.map((notification) => (
-              <Notification
-                id={notification.id}
-                key={notification.id}
-                type={notification.type}
-                title={notification.title}
-                message={notification.message}
-                timeToRemove={notification.timeToRemove}
-                removeFromList={removeNotification}
-              />
-            ))}
+            {notifications
+              .map((notification) => (
+                <Notification
+                  id={notification.id}
+                  key={notification.id}
+                  type={notification.type}
+                  title={notification.title}
+                  message={notification.message}
+                  timeToRemove={notification.timeToRemove}
+                  removeFromList={removeNotification}
+                />
+              ))
+              .reverse()}
           </AnimatePresence>
         </ul>
       </div>
