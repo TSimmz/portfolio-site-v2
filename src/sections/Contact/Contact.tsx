@@ -117,17 +117,11 @@ const Contact = () => {
   useEffect(() => {
     let formSubmitTimerId: ReturnType<typeof setTimeout>;
     if (isFormSubmitted && localStorage[localStorageHasSubmittedContact]) {
-      console.table({
-        submitted: isFormSubmitted,
-        local: localStorage[localStorageHasSubmittedContact],
-      });
-
-      const localStorageSubmitDate =
-        localStorage[localStorageHasSubmittedContact];
-      const previousSubmitDate = new Date(localStorageSubmitDate);
-      const currentDate = new Date();
-
-      console.table({ current: currentDate, prev: previousSubmitDate });
+      const localStorageSubmitDate: string = localStorage[
+        localStorageHasSubmittedContact
+      ] as string;
+      const previousSubmitDate: Date = new Date(localStorageSubmitDate);
+      const currentDate: Date = new Date();
 
       if (previousSubmitDate) {
         const diffInMillis = Math.abs(
@@ -227,7 +221,7 @@ const Contact = () => {
           </p>
         ) : (
           <p className="flavor-text mt-2 text-center text-lg">
-            Thanks for reaching out! I'll get back to you ASAP 🎉
+            {`Thanks for reaching out! I'll get back to you ASAP 🎉`}
           </p>
         )}
         <form
