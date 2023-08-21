@@ -3,7 +3,7 @@
 import { type FC, useEffect } from 'react';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
-import PortfolioCard from '~/components/containers/PortfolioCard';
+import PortfolioCard from '~/sections/Portfolio/PortfolioCard';
 import Underline from '~/components/Underline';
 import { pinnedRepoNames } from '~/utils/constants';
 import { type GitHubRepositoryResponse } from '~/utils/types';
