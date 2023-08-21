@@ -15,6 +15,8 @@ import useDeviceWidths from '~/hooks/useDeviceWidths';
 import LoadingSpinner from '~/components/svgs/LoadingSpinner';
 import { localStorageHasSubmittedContact } from '~/utils/constants';
 import { motion } from 'framer-motion';
+import SocialLinks from '~/components/containers/SocialLinks';
+import NotificationButtons from '~/components/poc/NotificationButtons';
 
 const staggerHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerFormInputs = stagger(0.3, { startDelay: 0.5 });
@@ -183,9 +185,19 @@ const Contact = () => {
 
               // Notify success
               notify.success(
-                "Thanks for the message! The electrons are on their way and I'll get back to you as soon as I can.",
+                'In the mean time, feel free to check out my resume or reach out to me directly at one my socials: ',
+                'Check me out!',
+                0,
+                <SocialLinks
+                  wrapperClassName="mt-6"
+                  linkColors="fill-dark stroke-dark"
+                />,
+              );
+
+              notify.success(
+                "Thanks for the message! The electrons are on their way, so I'll get back to you as soon as I can! ",
                 undefined,
-                5000,
+                6000,
               );
             }
           },
