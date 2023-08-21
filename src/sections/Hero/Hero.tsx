@@ -94,7 +94,9 @@ const Hero = () => {
             className="mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
           >
             <motion.path
-              className={'stroke-brandLight-400 dark:stroke-brandDark-500 '}
+              className={
+                'scale-x-[1.15] stroke-brandLight-400 dark:stroke-brandDark-500'
+              }
               variants={saberVariant}
               strokeWidth={1.5}
               strokeLinecap={'round'}

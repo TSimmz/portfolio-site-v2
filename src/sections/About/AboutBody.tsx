@@ -11,7 +11,7 @@ import { useAnimate, stagger, useInView } from 'framer-motion';
 
 import { type GitHubProfileData } from '~/utils/types';
 
-const staggerAboutHeader = stagger(0.2, { startDelay: 0.4, from: 'last' });
+const staggerAboutHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 
 type AboutBodyProps = {
   githubProfileData?: GitHubProfileData;

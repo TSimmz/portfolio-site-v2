@@ -22,6 +22,16 @@ summary::-webkit-details-marker {
     transition-timing-function: ease-in-out;
   }
 
+  .three-dee {
+    perspective: 800px;
+  }
+
+  .three-dee:hover {
+    perspective: 800px;
+    transform: rotateX(var(--_rotateX)) rotateY(var(--_rotateY)) !important;
+    transform-origin: center;
+  }
+
   /* .hexagon-container {
     display: flex;
     padding-left: 8px;

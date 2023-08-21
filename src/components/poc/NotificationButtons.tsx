@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNotificationContext } from '~/components/containers/NotificationProvider';
-
+import SocialLinks from '../containers/SocialLinks';
 const NotificationButtons = () => {
   const { notify } = useNotificationContext();
 
@@ -13,6 +13,10 @@ const NotificationButtons = () => {
             'This is a test of the success notification! It will close after 5 seconds',
             'Banana bread at work dude?!',
             5000,
+            <SocialLinks
+              wrapperClassName="mt-4"
+              linkColors="fill-dark stroke-dark"
+            />,
           )
         }
       >

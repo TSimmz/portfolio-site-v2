@@ -139,6 +139,7 @@ export type Notification = {
   id: string;
   title?: string;
   message: string;
+  component?: React.ReactNode;
   type: 'success' | 'info' | 'warning' | 'error';
   timeToRemove?: number;
 };
