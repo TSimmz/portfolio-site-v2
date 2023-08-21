@@ -21,3 +21,4 @@ export const pinnedRepoNames = new Set([
 
 export const localStorageThemeId = 'tylerSimoni:ui:colorScheme';
 export const localStorageHasScrolledId = 'tylerSimoni:ui:hasScrolled';
+export const localStorageHasSubmittedContact = 'tylerSimoni:form:hasSubmitted';
