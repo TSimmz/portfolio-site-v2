@@ -16,7 +16,7 @@ import LoadingSpinner from '~/components/svgs/LoadingSpinner';
 import { localStorageHasSubmittedContact } from '~/utils/constants';
 import { motion } from 'framer-motion';
 
-const staggerHeader = stagger(0.2, { startDelay: 0.4, from: 'last' });
+const staggerHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerFormInputs = stagger(0.3, { startDelay: 0.5 });
 
 const formSubmitWaitTime = 1000 * 60 * 5;

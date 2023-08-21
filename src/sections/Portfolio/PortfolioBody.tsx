@@ -9,7 +9,7 @@ import { pinnedRepoNames } from '~/utils/constants';
 import { type GitHubRepositoryResponse } from '~/utils/types';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 
-const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.4, from: 'last' });
+const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
 
 type PortfolioBodyProps = {
