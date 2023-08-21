@@ -60,6 +60,7 @@ const Notification: FC<NotificationProps> = ({
   id,
   title = '',
   message,
+  component,
   type,
   timeToRemove = 2500,
   removeFromList,
@@ -73,6 +74,8 @@ const Notification: FC<NotificationProps> = ({
   if (isTimeoutDisabled) {
     cancel();
   }
+
+  console.table({ id, title, message, type, component });
 
   const handleCloseNotification = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -132,6 +135,9 @@ const Notification: FC<NotificationProps> = ({
         className={`flex w-full flex-col px-3 py-2 text-neutrals-700 ${notification[type].styles.bodyBg}`}
       >
         <p className="text-xs italic sm:text-sm">{`> ${message}`}</p>
+        {component ? (
+          <div className="flex w-full justify-center py-2">{component}</div>
+        ) : null}
       </div>
     </motion.li>
   );

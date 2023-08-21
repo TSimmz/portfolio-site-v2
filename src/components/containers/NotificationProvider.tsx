@@ -17,6 +17,7 @@ type NotifyHelperFunction = (
   message: string,
   title?: string,
   timeToRemove?: number,
+  component?: React.ReactNode,
 ) => void;
 
 type NotifyTool = {
@@ -65,11 +66,17 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
   };
 
   const success = useCallback(
-    (message: string, title?: string, timeToRemove?: number) => {
+    (
+      message: string,
+      title?: string,
+      timeToRemove?: number,
+      component?: React.ReactNode,
+    ) => {
       addNotification({
         id: uuid(),
         title: title,
         message: message,
+        component: component,
         type: 'success',
         timeToRemove: timeToRemove,
       });
@@ -77,11 +84,17 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
     [],
   );
   const info = useCallback(
-    (message: string, title?: string, timeToRemove?: number) => {
+    (
+      message: string,
+      title?: string,
+      timeToRemove?: number,
+      component?: React.ReactNode,
+    ) => {
       addNotification({
         id: uuid(),
         title: title,
         message: message,
+        component: component,
         type: 'info',
         timeToRemove: timeToRemove,
       });
@@ -90,11 +103,17 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
   );
 
   const warning = useCallback(
-    (message: string, title?: string, timeToRemove?: number) => {
+    (
+      message: string,
+      title?: string,
+      timeToRemove?: number,
+      component?: React.ReactNode,
+    ) => {
       addNotification({
         id: uuid(),
         title: title,
         message: message,
+        component: component,
         type: 'warning',
         timeToRemove: timeToRemove,
       });
@@ -103,11 +122,17 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
   );
 
   const error = useCallback(
-    (message: string, title?: string, timeToRemove?: number) => {
+    (
+      message: string,
+      title?: string,
+      timeToRemove?: number,
+      component?: React.ReactNode,
+    ) => {
       addNotification({
         id: uuid(),
         title: title,
         message: message,
+        component: component,
         type: 'error',
         timeToRemove: timeToRemove,
       });
@@ -120,7 +145,7 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
   return (
     <NotificationContext.Provider value={{ notify }}>
       {children}
-      <div className="fixed right-[0.5rem] top-[0.5rem] z-30 pl-[0.5rem] sm:bottom-[2rem] sm:right-[2rem]">
+      <div className="fixed right-[0.5rem] top-[4rem] z-30 pl-[0.5rem] sm:bottom-[2rem] sm:right-[2rem]">
         <ul>
           <AnimatePresence initial={false}>
             {notifications
@@ -131,6 +156,7 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
                   type={notification.type}
                   title={notification.title}
                   message={notification.message}
+                  component={notification.component}
                   timeToRemove={notification.timeToRemove}
                   removeFromList={removeNotification}
                 />
