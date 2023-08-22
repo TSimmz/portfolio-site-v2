@@ -9,7 +9,7 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import Underline from '~/components/Underline';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
-import { useNotificationContext } from '~/components/containers/NotificationProvider';
+import { useNotificationContext } from '~/providers/NotificationProvider';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 import useDeviceWidths from '~/hooks/useDeviceWidths';
 import LoadingSpinner from '~/components/svgs/LoadingSpinner';

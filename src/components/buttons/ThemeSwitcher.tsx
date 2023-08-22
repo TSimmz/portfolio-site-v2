@@ -9,8 +9,8 @@ import {
 } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import useDarkTheme, { type ThemeType } from '~/hooks/useDarkTheme';
 import colors from 'tailwindcss/colors';
+import { useTheme, type ThemeType } from '~/providers/ThemeProvider';
 
 const themeSwitcherVariant = {
   rest: (isDarkMode: boolean) => ({
@@ -150,7 +150,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
   title = id,
   isMobile = false,
 }) => {
-  const { isDarkMode, themeMode, onThemeClick } = useDarkTheme();
+  const { isDarkMode, themeMode, onThemeClick } = useTheme();
   const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(false);
 
   const detailsRef = useRef<HTMLDetailsElement>(null);

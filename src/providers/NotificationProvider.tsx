@@ -11,7 +11,7 @@ import React, {
 import { AnimatePresence } from 'framer-motion';
 import { type Notification as NotificationType } from '~/utils/types';
 import { v4 as uuid } from 'uuid';
-import Notification from './Notification';
+import Notification from '../components/containers/Notification';
 
 type NotifyHelperFunction = (
   message: string,
