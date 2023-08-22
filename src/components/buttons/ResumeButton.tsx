@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useHoverDirty } from 'react-use';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
-import useDarkTheme from '~/hooks/useDarkTheme';
+import { useTheme } from '~/providers/ThemeProvider';
 
 const buttonVariant = {
   initial: {
@@ -115,7 +115,7 @@ const textVariant = {
 const ResumeButton = () => {
   const linkRef = useRef<HTMLButtonElement>(null);
   const isHovering = useHoverDirty(linkRef);
-  const { isDarkMode } = useDarkTheme();
+  const { isDarkMode } = useTheme();
 
   const resumeUrlPath = isDarkMode
     ? process.env.NEXT_PUBLIC_DARK_RESUME_PATH! ?? '/'

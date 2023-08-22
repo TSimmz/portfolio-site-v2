@@ -1,4 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
+'use client';
+
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  type ReactNode,
+  type FC,
+  useCallback,
+} from 'react';
+
 import { localStorageThemeId } from '~/utils/constants';
 
 const themeTypes = {
@@ -9,7 +20,23 @@ const themeTypes = {
 
 export type ThemeType = keyof typeof themeTypes;
 
-function useDarkTheme() {
+type Theme = {
+  isDarkMode: boolean;
+  themeMode: ThemeType | null;
+  onThemeClick: (mode: ThemeType) => void;
+};
+
+type ThemeProviderProps = {
+  children: ReactNode;
+};
+
+const ThemeContext = createContext<Theme>({
+  isDarkMode: false,
+  themeMode: null,
+  onThemeClick: () => null,
+});
+
+const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [themeMode, setThemeMode] = useState<ThemeType | null>(null);
 
@@ -106,11 +133,13 @@ function useDarkTheme() {
     }
   };
 
-  return {
-    isDarkMode,
-    themeMode,
-    onThemeClick,
-  };
-}
+  return (
+    <ThemeContext.Provider value={{ isDarkMode, themeMode, onThemeClick }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
 
-export default useDarkTheme;
+export default ThemeProvider;
+
+export const useTheme = () => useContext(ThemeContext);

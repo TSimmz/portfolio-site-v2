@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNotificationContext } from '~/components/containers/NotificationProvider';
+import { useNotificationContext } from '~/providers/NotificationProvider';
 import SocialLinks from '../containers/SocialLinks';
 const NotificationButtons = () => {
   const { notify } = useNotificationContext();
