@@ -4,7 +4,7 @@ import colors from 'tailwindcss/colors';
 
 const color = colors.rose['500'];
 
-const HeroStar = ({ p }: { p: number }) => {
+const Star = ({ p }: { p: number }) => {
   const ref = useRef<THREE.Mesh>(null);
 
   useLayoutEffect(() => {
@@ -26,14 +26,4 @@ const HeroStar = ({ p }: { p: number }) => {
   );
 };
 
-export default HeroStar;
-
-// export default function App() {
-//   return (
-//     <div className="container">
-//       <Canvas gl={{ antialias: false }}>
-//         <Scene />
-//       </Canvas>
-//     </div>
-//   );
-// }
+export default Star;

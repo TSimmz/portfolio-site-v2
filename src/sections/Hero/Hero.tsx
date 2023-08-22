@@ -1,10 +1,9 @@
 'use client';
-import { Canvas } from '@react-three/fiber';
+
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import { motion } from 'framer-motion';
-import HeroScene from '~/components/threeJs/Hero/HeroScene';
 
 const helloThereVariant = {
   highGround: {
@@ -73,9 +72,6 @@ const Hero = () => {
       id="home"
       className="relative !mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
     >
-      <Canvas gl={{ antialias: false }}>
-        <HeroScene />
-      </Canvas>
       <div>
         <motion.div
           className="origin-center"

@@ -3,12 +3,12 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
 import { degreesToRadians, progress } from 'popmotion';
-import HeroStar from './HeroStar';
+import HeroStar from './Star';
 import colors from 'tailwindcss/colors';
 
 const color = colors.rose['500'];
 
-function HeroScene({ numStars = 100 }) {
+function Scene({ numStars = 100 }) {
   const gl = useThree((state) => state.gl);
   const { scrollYProgress } = useScroll();
   const yAngle = useTransform(
@@ -47,4 +47,4 @@ function HeroScene({ numStars = 100 }) {
   );
 }
 
-export default HeroScene;
+export default Scene;
