@@ -4,10 +4,11 @@ import { useTransform, useScroll, useTime } from 'framer-motion';
 
 import { degreesToRadians, progress } from 'popmotion';
 import HeroStar from './HeroStar';
+import colors from 'tailwindcss/colors';
 
-const color = '#111111';
+const color = colors.rose['500'];
 
-function Scene({ numStars = 100 }) {
+function HeroScene({ numStars = 100 }) {
   const gl = useThree((state) => state.gl);
   const { scrollYProgress } = useScroll();
   const yAngle = useTransform(
@@ -45,3 +46,5 @@ function Scene({ numStars = 100 }) {
     </>
   );
 }
+
+export default HeroScene;

@@ -1,12 +1,11 @@
-import './styles.css';
-import { Canvas } from '@react-three/fiber';
 import { useRef, useLayoutEffect } from 'react';
 import { degreesToRadians, mix } from 'popmotion';
+import colors from 'tailwindcss/colors';
 
-const color = '#111111';
+const color = colors.rose['500'];
 
 const HeroStar = ({ p }: { p: number }) => {
-  const ref = useRef<THREE.Object3D>(null);
+  const ref = useRef<THREE.Mesh>(null);
 
   useLayoutEffect(() => {
     const distance = mix(2, 3.5, Math.random());
