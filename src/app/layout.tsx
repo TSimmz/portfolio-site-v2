@@ -8,21 +8,23 @@ import NotificationProvider from '~/providers/NotificationProvider';
 import ThemeProvider from '~/providers/ThemeProvider';
 
 export const metadata: Metadata = {
-  title: 'Tyler Simoni | Portfolio',
+  title: 'Tyler Simoni',
   description: 'A portfolio website for Tyler Simoni to showcase work',
-  applicationName: 'Tyler Simoni Portfolio',
+  applicationName: 'Tyler Simoni Portfolio v2',
   authors: {
     name: 'Tyler Simoni',
     url: 'https://tylersimoni.com',
   },
   keywords: [
+    'tyler simoni',
     'react',
     'next13',
     'tailwindcss',
     'trpc',
+    'prisma',
+    'react-use',
     'sanityio',
     'portfolio',
-    'tyler simoni',
     'framer-motion',
   ],
   themeColor: [
