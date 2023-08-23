@@ -1,17 +1,20 @@
 import { useRef, useLayoutEffect } from 'react';
 import { degreesToRadians, mix } from 'popmotion';
 import colors from 'tailwindcss/colors';
-
-const color = colors.rose['500'];
+import { useTheme } from '~/providers/ThemeProvider';
 
 const Star = ({ p }: { p: number }) => {
   const ref = useRef<THREE.Mesh>(null);
 
+  const { isDarkMode } = useTheme();
+
+  const color = isDarkMode ? colors.slate['600'] : colors.slate['300'];
+
   useLayoutEffect(() => {
-    const distance = mix(2, 3.5, Math.random());
+    const distance = mix(1.2, 10, Math.random() * 2);
     const yAngle = mix(
-      degreesToRadians(80),
-      degreesToRadians(100),
+      degreesToRadians(65),
+      degreesToRadians(115),
       Math.random(),
     );
     const xAngle = degreesToRadians(360) * p;

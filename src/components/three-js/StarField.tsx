@@ -1,13 +1,13 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import HeroScene from '~/components/three-js/Scene';
+import Scene from '~/components/three-js/Scene';
 
 const StarField = () => {
   return (
     <div className="fixed inset-0 -z-10 h-screen w-screen">
       <Canvas gl={{ antialias: false }}>
-        <HeroScene />
+        <Scene numStars={1000} />
       </Canvas>
     </div>
   );
