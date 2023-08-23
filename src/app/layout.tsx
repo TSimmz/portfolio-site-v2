@@ -9,7 +9,8 @@ import ThemeProvider from '~/providers/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni',
-  description: 'A portfolio website for Tyler Simoni to showcase work',
+  description:
+    'An animated portfolio website for Tyler Simoni to showcase his frontend web development abilities',
   applicationName: 'Tyler Simoni Portfolio v2',
   authors: {
     name: 'Tyler Simoni',
@@ -17,15 +18,20 @@ export const metadata: Metadata = {
   },
   keywords: [
     'tyler simoni',
+    'simoni',
     'react',
     'next13',
     'tailwindcss',
     'trpc',
     'prisma',
     'react-use',
-    'sanityio',
+    'react-hook-forms',
+    'sanity-io',
     'portfolio',
     'framer-motion',
+    'threejs',
+    'popmotion',
+    'react-three-fiber',
   ],
   themeColor: [
     {

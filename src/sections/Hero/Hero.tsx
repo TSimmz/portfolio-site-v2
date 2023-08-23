@@ -3,6 +3,7 @@
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
+import CallToAction from '~/components/buttons/CallToAction';
 import { motion } from 'framer-motion';
 
 const helloThereVariant = {
@@ -24,7 +25,7 @@ const nameVariant = {
     opacity: 1,
     transition: {
       opacity: {
-        delay: 2.3,
+        delay: 1.25,
         duration: 0.3,
       },
     },
@@ -39,7 +40,7 @@ const hiltVariant = {
     opacity: 1,
     transition: {
       opacity: {
-        delay: 1.5,
+        delay: 0.75,
         duration: 0.2,
       },
     },
@@ -56,10 +57,10 @@ const saberVariant = {
     pathLength: 1,
     transition: {
       opacity: {
-        delay: 2,
+        delay: 1,
       },
       pathLength: {
-        delay: 2,
+        delay: 1,
         duration: 0.5,
       },
     },
@@ -79,7 +80,7 @@ const Hero = () => {
           initial="highGround"
           animate="dropFromAbove"
           transition={{
-            delay: 1,
+            delay: 0.4,
             type: 'spring',
             damping: 2.2,
             mass: 0.1,
@@ -125,6 +126,7 @@ const Hero = () => {
             <br />I am a frontend web developer.
           </Heading>
         </motion.div>
+        <CallToAction buttonText="Check me out" href="#about" />
       </div>
     </SectionWrapper>
   );

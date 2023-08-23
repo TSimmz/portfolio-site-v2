@@ -10,8 +10,10 @@ import Skills from '~/components/containers/Skills';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 
 import { type GitHubProfileData } from '~/utils/types';
+import CallToAction from '~/components/buttons/CallToAction';
 
 const staggerAboutHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
+const staggerFlavorText = stagger(0.2, { startDelay: 0.3 });
 
 type AboutBodyProps = {
   githubProfileData?: GitHubProfileData;
@@ -53,7 +55,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
       },
       {
         duration: 0.2,
-        delay: 0.8,
+        delay: !isHeaderInView ? 0 : staggerFlavorText,
       },
     );
   }, [isHeaderInView]);
@@ -82,9 +84,12 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         <Underline className="header-text min-w-[250px] max-w-xl bg-brandLight-500 px-4 dark:bg-brandDark-500" />
       </Heading>
 
-      <p className="flavor-text mb-10 hyphens-auto break-words text-center text-base sm:text-lg">
+      <p className="flavor-text mb-10 break-words text-center text-base sm:text-lg">
         {githubProfileData?.bio ?? '<-- Skills to pay the bills -->'}
       </p>
+      <div className="flavor-text mb-6 mt-[-3rem] flex justify-center">
+        <CallToAction buttonText="View my work" href="#portfolio" />
+      </div>
       <div
         ref={imageRef}
         className="grid grid-cols-1 gap-8 px-4 sm:grid-cols-2 md:gap-6"

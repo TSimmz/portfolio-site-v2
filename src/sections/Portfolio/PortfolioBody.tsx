@@ -8,6 +8,7 @@ import Underline from '~/components/Underline';
 import { pinnedRepoNames } from '~/utils/constants';
 import { type GitHubRepositoryResponse } from '~/utils/types';
 import { useAnimate, stagger, useInView } from 'framer-motion';
+import CallToAction from '~/components/buttons/CallToAction';
 
 const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
@@ -84,6 +85,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       <p className="flavor-text mb-10 text-center text-lg">
         {'Here are some of my projects! 👾'}
       </p>
+      <div className="mb-8 mt-[-3rem] flex justify-center">
+        <CallToAction buttonText="Like what you see?" href={'#contact'} />{' '}
+      </div>
       <div
         ref={cardsRef}
         className="cards-container grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6"
