@@ -18,10 +18,10 @@ import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
 import ResumeButton from './buttons/ResumeButton';
+import { useElementInView } from '~/providers/ViewPortProvider';
 
 const NavMenu = () => {
-  const pathname = usePathname();
-  const { y } = useWindowScroll();
+  const { elementInView } = useElementInView();
 
   //const prevScrollY = useRef<number>(y);
   const [navbarYPosition, setNavbarYPosition] = useState<number>(0);
@@ -32,8 +32,8 @@ const NavMenu = () => {
 
   // Toggle for nav bar hiding
   const [navBarHidden, toggleNavBar] = useToggle(false);
-  const hideNavBarPosition = useRef<number>(0);
 
+  // Ref for nav menu
   const navMenuRef = useRef<HTMLElement | null>(null);
 
   // Active link in the navbar
@@ -79,18 +79,6 @@ const NavMenu = () => {
     const upDistance = -64;
     setNavbarYPosition(navBarHidden ? upDistance : 0);
   }, [navBarHidden]);
-
-  useEffect(() => {
-    if (y >= 500) {
-      hideNavBarPosition.current = 0;
-    } else {
-      hideNavBarPosition.current = navBarHidden ? -84 : -100;
-    }
-  }, [y]);
-
-  useEffect(() => {
-    toggle(false);
-  }, [pathname]);
 
   useEffect(() => {
     // Update mobile view state
@@ -213,6 +201,7 @@ const NavMenu = () => {
           index={index + 1}
           length={baseRouteKeysList.length}
           onPathChange={handleDesktopPathChange}
+          toggleMobileMenu={toggle}
         />
       )),
     [createLinkId, handleDesktopPathChange],

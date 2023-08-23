@@ -12,6 +12,7 @@ type NavLinkProps = {
   index: number;
   length: number;
   onPathChange: (newActiveLinkId: string) => void;
+  toggleMobileMenu: (nextValue: boolean) => void;
 };
 
 const NavLink: FC<NavLinkProps> = ({
@@ -21,6 +22,7 @@ const NavLink: FC<NavLinkProps> = ({
   index,
   length,
   onPathChange,
+  toggleMobileMenu,
 }) => {
   const { elementInView } = useElementInView();
   const isActive = useRef<boolean>(elementInView === href);
@@ -31,6 +33,10 @@ const NavLink: FC<NavLinkProps> = ({
     if (isActive.current) onPathChange(id);
   }, [elementInView]);
 
+  const handleLinkClick = () => {
+    toggleMobileMenu(false);
+  };
+
   // Calculates delay so the drop in order is from right to left
   const delay = 0.5 + 0.15 * (length - index + 1);
 
@@ -40,6 +46,7 @@ const NavLink: FC<NavLinkProps> = ({
       href={href}
       as={`${href}`}
       passHref
+      onClick={handleLinkClick}
       className={`${
         href === baseRoutes.home ? 'sm:max-[775px]:hidden' : ''
       } relative ml-0 flex touch-auto flex-row items-center space-x-0 rounded-md px-3 py-1 text-base text-dark-base transition-all duration-500 sm:text-sm min-[690px]:px-4 min-[800px]:px-5 ${
