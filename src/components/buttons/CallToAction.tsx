@@ -50,6 +50,8 @@ const CallToAction: FC<CallToActionProps> = ({
     >
       <Link
         href={href}
+        passHref
+        as={`${href}`}
         className={`${buttonText ? 'px-3 py-2' : 'p-2'} ${
           fill
             ? ' bg-brandLight-500 group-hover:border-brandLight-400 group-hover:bg-brandLight-400 group-hover:text-dark-base dark:border-brandDark-500 dark:bg-brandDark-500 group-hover:dark:bg-brandDark-600'

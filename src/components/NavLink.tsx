@@ -37,6 +37,8 @@ const NavLink: FC<NavLinkProps> = ({
     <Link
       id={id}
       href={href}
+      as={`${href}`}
+      passHref
       className={`${
         href === baseRoutes.home ? 'sm:max-[775px]:hidden' : ''
       } relative ml-0 flex touch-auto flex-row items-center space-x-0 rounded-md px-3 py-1 text-base text-dark-base transition-all duration-500 sm:text-sm min-[690px]:px-4 min-[800px]:px-5 ${

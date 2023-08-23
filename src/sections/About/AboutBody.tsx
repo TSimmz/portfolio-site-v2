@@ -75,7 +75,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   }, [isImageInView]);
 
   return (
-    <div ref={headerRef} className="about-body flex flex-col items-center">
+    <div ref={headerRef} className="about-body mt-4 flex flex-col items-center">
       <Heading
         as="h1"
         className="section-header flex flex-col items-center justify-center text-center"
