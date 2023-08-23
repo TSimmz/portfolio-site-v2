@@ -224,7 +224,7 @@ const Contact = () => {
   };
 
   return (
-    <SectionWrapper id="contact" className="!gap-0">
+    <SectionWrapper id="contact" className="!gap-0 pt-[80px] sm:mt-5 sm:pt-16">
       <div ref={headerRef} className="flex w-full flex-col items-center">
         <Heading
           as="h1"

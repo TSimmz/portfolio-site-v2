@@ -81,7 +81,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   }, [areCardsInView]);
 
   return (
-    <div ref={headerRef} className="portfolio-body mt-[-0.5rem]">
+    <div ref={headerRef} className="portfolio-body mt-4">
       <Heading
         as="h1"
         className="section-header flex flex-col items-center justify-center text-center"
