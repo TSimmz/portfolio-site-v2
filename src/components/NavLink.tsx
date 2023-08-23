@@ -41,41 +41,35 @@ const NavLink: FC<NavLinkProps> = ({
   const delay = 0.5 + 0.15 * (length - index + 1);
 
   return (
-    <Link
+    <motion.a
       id={id}
       href={href}
-      as={`${href}`}
-      passHref
       onClick={handleLinkClick}
-      className={`${
-        href === baseRoutes.home ? 'sm:max-[775px]:hidden' : ''
-      } relative ml-0 flex touch-auto flex-row items-center space-x-0 rounded-md px-3 py-1 text-base text-dark-base transition-all duration-500 sm:text-sm min-[690px]:px-4 min-[800px]:px-5 ${
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      whileHover={{ scale: 1.2 }}
+      whileTap={{ scale: 0.9 }}
+      transition={{
+        scale: {
+          duration: 0.2,
+        },
+        y: {
+          delay: delay,
+        },
+        opacity: { delay: delay },
+      }}
+      className={`${href === baseRoutes.home ? 'sm:max-[840px]:hidden' : ''} ${
+        href === baseRoutes.about ? 'sm:max-[660px]:hidden' : ''
+      } relative ml-0 flex touch-auto flex-row items-center space-x-0 rounded-md px-2 py-1 align-middle text-base text-dark-base transition-all duration-500 sm:text-sm min-[710px]:px-3 min-[800px]:px-4 lg:px-5 ${
         isActive.current
           ? 'font-semibold !text-brandLight-500 dark:!text-brandDark-500'
           : 'hover:text-brandLight-300 dark:hover:text-brandDark-300 '
       }`}
     >
-      <motion.div
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.9 }}
-        transition={{
-          scale: {
-            duration: 0.2,
-          },
-          y: {
-            delay: delay,
-          },
-          opacity: { delay: delay },
-        }}
-        className={`pointer-events-none flex align-middle focus:outline-none`}
-      >
-        <span className="pointer-events-none px-2 capitalize text-inherit sm:py-0">
-          {title}
-        </span>
-      </motion.div>
-    </Link>
+      <span className="pointer-events-none px-2 capitalize text-inherit sm:py-0">
+        {title}
+      </span>
+    </motion.a>
   );
 };
 

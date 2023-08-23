@@ -24,7 +24,9 @@ type AboutBodyProps = {
 const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   const [headerRef, animateHeader] = useAnimate<HTMLDivElement>();
   const isHeaderInView = useInView(headerRef, { once: true });
-  const isSectionInView = useInView(headerRef);
+  const isSectionInView = useInView(headerRef, {
+    margin: '-70px 0px',
+  });
 
   const [imageRef, animateImage] = useAnimate();
   const isImageInView = useInView(imageRef, { once: true });
