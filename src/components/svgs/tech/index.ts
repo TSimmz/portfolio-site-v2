@@ -95,10 +95,10 @@ const techIcons: TechIconItem[] = [
     id: 'JavaScript',
     Icon: IconJavascript,
   },
-  {
-    id: 'Styled Components',
-    Icon: IconStyledComponents,
-  },
+  // {
+  //   id: 'Styled Components',
+  //   Icon: IconStyledComponents,
+  // },
   {
     id: 'GatsbyJS',
     Icon: IconGatsby,

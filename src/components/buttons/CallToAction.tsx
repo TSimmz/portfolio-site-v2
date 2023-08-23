@@ -48,13 +48,11 @@ const CallToAction: FC<CallToActionProps> = ({
         transition: { scale: { duration: 0.15, delay: 0.1 } },
       }}
     >
-      <Link
+      <a
         href={`/${href}`}
-        as={`/${href}`}
-        passHref
         className={`${buttonText ? 'px-3 py-2' : 'p-2'} ${
           fill
-            ? ' bg-brandLight-500 group-hover:border-brandLight-400 group-hover:bg-brandLight-400 group-hover:text-dark-base dark:border-brandDark-500 dark:bg-brandDark-500 group-hover:dark:bg-brandDark-600'
+            ? ' border-brandLight-500 bg-brandLight-500 group-hover:border-brandLight-400 group-hover:bg-brandLight-400 group-hover:text-dark-base dark:border-brandDark-500 dark:bg-brandDark-500 group-hover:dark:border-brandDark-600 group-hover:dark:bg-brandDark-600'
             : 'group-hover:bg-brandLight-500 group-hover:text-dark-base dark:border-brandDark-500 group-hover:dark:bg-brandDark-500'
         } mt-6 flex items-center justify-around gap-4 overflow-hidden rounded-lg border-2 border-brandLight-500  text-base font-semibold duration-300 ease-in-out  sm:text-sm`}
       >
@@ -82,7 +80,7 @@ const CallToAction: FC<CallToActionProps> = ({
             } group-hover:stroke-white dark:stroke-white`}
           />
         </motion.div>
-      </Link>
+      </a>
     </motion.div>
   );
 };
