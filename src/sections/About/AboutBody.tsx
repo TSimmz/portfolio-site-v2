@@ -84,10 +84,10 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         <Underline className="header-text min-w-[250px] max-w-xl bg-brandLight-500 px-4 dark:bg-brandDark-500" />
       </Heading>
 
-      <p className="flavor-text mb-10 hyphens-auto break-words text-center text-base sm:text-lg">
+      <p className="flavor-text mb-10 break-words text-center text-base sm:text-lg">
         {githubProfileData?.bio ?? '<-- Skills to pay the bills -->'}
       </p>
-      <div className="flavor-text mb-8 mt-[-3rem] flex justify-center">
+      <div className="flavor-text mb-6 mt-[-3rem] flex justify-center">
         <CallToAction buttonText="View my work" href="#portfolio" />
       </div>
       <div

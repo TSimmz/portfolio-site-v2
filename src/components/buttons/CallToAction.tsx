@@ -8,17 +8,30 @@ type CallToActionProps = {
   buttonText?: string;
   href: string;
   direction?: 'Up' | 'Down' | 'Left' | 'Right';
+  fill?: boolean;
 };
 
 const CallToAction: FC<CallToActionProps> = ({
   buttonText,
   href,
   direction = 'Down',
+  fill,
 }) => {
   const ctaRef = useRef(null);
   const isCtaHovering = useHoverDirty(ctaRef);
 
   const Chevron = Chevrons[direction];
+  const directionalPositions =
+    direction === 'Up'
+      ? { y: [30, 0, -30] }
+      : direction === 'Down'
+      ? { y: [-30, 0, 30] }
+      : direction === 'Right'
+      ? { x: [-30, 0, 30] }
+      : { x: [30, 0, -30] };
+
+  const directionalRest =
+    direction === 'Up' || direction === 'Down' ? { y: 0 } : { x: 0 };
 
   return (
     <motion.div
@@ -37,7 +50,11 @@ const CallToAction: FC<CallToActionProps> = ({
     >
       <Link
         href={href}
-        className="mt-6 flex items-center justify-around gap-4 overflow-hidden rounded-lg border-2 border-brandLight-500 px-3 py-2 text-base font-semibold duration-300 ease-in-out group-hover:bg-brandLight-500 group-hover:text-dark-base dark:border-brandDark-500 group-hover:dark:bg-brandDark-500 sm:text-sm"
+        className={`${buttonText ? 'px-3 py-2' : 'p-2'} ${
+          fill
+            ? ' bg-brandLight-500 group-hover:border-brandLight-400 group-hover:bg-brandLight-400 group-hover:text-dark-base dark:border-brandDark-500 dark:bg-brandDark-500 group-hover:dark:bg-brandDark-600'
+            : 'group-hover:bg-brandLight-500 group-hover:text-dark-base dark:border-brandDark-500 group-hover:dark:bg-brandDark-500'
+        } mt-6 flex items-center justify-around gap-4 overflow-hidden rounded-lg border-2 border-brandLight-500  text-base font-semibold duration-300 ease-in-out  sm:text-sm`}
       >
         {buttonText ? <span>{buttonText}</span> : null}
         <motion.div
@@ -45,7 +62,7 @@ const CallToAction: FC<CallToActionProps> = ({
           animate={
             isCtaHovering
               ? {
-                  y: [-30, 0, 30],
+                  ...directionalPositions,
                   opacity: [0.7, 1, 0.7],
                   transition: {
                     duration: 1,
@@ -54,10 +71,14 @@ const CallToAction: FC<CallToActionProps> = ({
                     repeat: Infinity,
                   },
                 }
-              : { y: 0, opacity: 1 }
+              : { ...directionalRest, opacity: 1 }
           }
         >
-          <Chevron className="h-6 w-6 stroke-dark group-hover:stroke-white dark:stroke-white" />
+          <Chevron
+            className={`h-6 w-6 ${
+              fill ? 'stroke-light' : 'stroke-dark'
+            } group-hover:stroke-white dark:stroke-white`}
+          />
         </motion.div>
       </Link>
     </motion.div>
