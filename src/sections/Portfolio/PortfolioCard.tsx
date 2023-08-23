@@ -65,7 +65,7 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
   return (
     <Link
       ref={cardRef}
-      className="portfolio-card three-dee group relative flex min-h-[200px] max-w-sm flex-col gap-4 overflow-hidden rounded-lg text-light-base backdrop-brightness-110 transition-colors duration-300 ease-in-out hover:backdrop-brightness-125 dark:text-dark-base"
+      className="portfolio-card three-dee group relative flex min-h-[200px] max-w-sm flex-col gap-4 overflow-hidden rounded-lg text-light-base backdrop-brightness-110 transition-colors duration-300 ease-in-out hover:backdrop-brightness-125 dark:bg-neutrals-700/80 dark:text-dark-base"
       href={href}
       target="_blank"
     >

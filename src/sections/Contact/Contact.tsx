@@ -1,7 +1,7 @@
 'use client';
 
 import * as z from 'zod';
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SectionWrapper from '~/components/containers/SectionWrapper';
@@ -16,7 +16,6 @@ import LoadingSpinner from '~/components/svgs/LoadingSpinner';
 import { localStorageHasSubmittedContact } from '~/utils/constants';
 import { motion } from 'framer-motion';
 import SocialLinks from '~/components/containers/SocialLinks';
-import NotificationButtons from '~/components/poc/NotificationButtons';
 
 const staggerHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerFormInputs = stagger(0.3, { startDelay: 0.5 });
@@ -260,7 +259,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.name ? ' ring-2 !ring-error-500' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
+              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
               {...register('name', { required: true })}
             />
             {errors.name ? (
@@ -292,7 +291,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.email ? 'ring-2 !ring-error-500 ' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
+              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
               {...register('email', { required: true })}
             />
             {errors.email ? (
@@ -328,7 +327,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.subject ? 'ring-2 !ring-error-500' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
+              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
               {...register('subject', { required: true })}
             />
             {errors.subject ? (
@@ -362,7 +361,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.message ? 'ring-2 !ring-error-500' : ''
-              } min-h-[2.5rem] resize-y rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:focus:ring-neutrals-500`}
+              } min-h-[2.5rem] resize-y rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
               {...register('message', { required: true })}
             />
             {errors.message ? (
