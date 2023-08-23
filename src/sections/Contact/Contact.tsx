@@ -61,7 +61,7 @@ const Contact = () => {
   const { errors, isSubmitting } = formState;
 
   const isSectionInView = useInView(headerRef, {
-    margin: '-70px 0px',
+    margin: '-30px 0px',
   });
   const { updateElementInView } = useElementInView();
 

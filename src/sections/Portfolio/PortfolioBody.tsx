@@ -22,7 +22,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const [headerRef, animateHeader] = useAnimate();
   const isHeaderInView = useInView(headerRef, { once: true });
   const isSectionInView = useInView(headerRef, {
-    margin: '-70px 0px',
+    margin: '-30px 0px',
   });
 
   const [cardsRef, animateCards] = useAnimate();
