@@ -1,23 +1,132 @@
-export { default as IconAdobeIllustrator } from './IconAdobeIllustrator';
-export { default as IconBrandNext } from './IconBrandNext';
-export { default as IconConfluence } from './IconConfluence';
-export { default as IconCss } from './IconCss';
-export { default as IconFigma } from './IconFigma';
-export { default as IconFramer } from './IconFramer';
-export { default as IconGatsby } from './IconGatsby';
-export { default as IconGit } from './IconGit';
-export { default as IconHtml } from './IconHtml';
-export { default as IconJavascript } from './IconJavascript';
-export { default as IconJira } from './IconJira';
-export { default as IconMantine } from './IconMantine';
-export { default as IconMongodb } from './IconMongodb';
-export { default as IconNodeJs } from './IconNodeJs';
-export { default as IconPrisma } from './IconPrisma';
-export { default as IconReact } from './IconReact';
-export { default as IconReactHookForm } from './IconReactHookForm';
-export { default as IconRedux } from './IconRedux';
-export { default as IconStyledComponents } from './IconStyledComponents';
-export { default as IconTailwind } from './IconTailwind';
-export { default as IconTrpc } from './IconTrpc';
-export { default as IconTypescript } from './IconTypescript';
-export { default as IconVsCode } from './IconVsCode';
+import { type FC } from 'react';
+import { SVGIconProps } from '..';
+import IconAdobeIllustrator from './IconAdobeIllustrator';
+import IconBrandNext from './IconBrandNext';
+import IconConfluence from './IconConfluence';
+import IconCss from './IconCss';
+import IconFigma from './IconFigma';
+import IconFramer from './IconFramer';
+import IconGatsby from './IconGatsby';
+import IconGit from './IconGit';
+import { IconGitHubAlt } from '../socials';
+import IconHtml from './IconHtml';
+import IconJavascript from './IconJavascript';
+import IconJira from './IconJira';
+import IconMantine from './IconMantine';
+import IconMongodb from './IconMongodb';
+import IconNodeJs from './IconNodeJs';
+import IconPrisma from './IconPrisma';
+import IconReact from './IconReact';
+import IconReactHookForm from './IconReactHookForm';
+import IconRedux from './IconRedux';
+import IconStyledComponents from './IconStyledComponents';
+import IconTailwind from './IconTailwind';
+import IconTrpc from './IconTrpc';
+import IconTypescript from './IconTypescript';
+import IconVsCode from './IconVsCode';
+
+export type TechIconItem = {
+  id: string;
+  Icon: FC<SVGIconProps>;
+};
+
+const techIcons: TechIconItem[] = [
+  {
+    id: 'Git',
+    Icon: IconGit,
+  },
+  {
+    id: 'GitHub',
+    Icon: IconGitHubAlt,
+  },
+  {
+    id: 'Jira',
+    Icon: IconJira,
+  },
+  {
+    id: 'Confluence',
+    Icon: IconConfluence,
+  },
+  {
+    id: 'VS Code',
+    Icon: IconVsCode,
+  },
+  {
+    id: 'Next JS',
+    Icon: IconBrandNext,
+  },
+  {
+    id: 'TypeScript',
+    Icon: IconTypescript,
+  },
+  {
+    id: 'TailwindCSS',
+    Icon: IconTailwind,
+  },
+  {
+    id: 'Framer',
+    Icon: IconFramer,
+  },
+  {
+    id: 'Hook Forms',
+    Icon: IconReactHookForm,
+  },
+  {
+    id: 'React',
+    Icon: IconReact,
+  },
+  {
+    id: 'Redux',
+    Icon: IconRedux,
+  },
+  {
+    id: 'MantineUI',
+    Icon: IconMantine,
+  },
+  {
+    id: 'HTML5',
+    Icon: IconHtml,
+  },
+  {
+    id: 'CSS3',
+    Icon: IconCss,
+  },
+  {
+    id: 'JavaScript',
+    Icon: IconJavascript,
+  },
+  {
+    id: 'Styled Components',
+    Icon: IconStyledComponents,
+  },
+  {
+    id: 'GatsbyJS',
+    Icon: IconGatsby,
+  },
+  {
+    id: 'NodeJS',
+    Icon: IconNodeJs,
+  },
+  {
+    id: 'MongoDB',
+    Icon: IconMongodb,
+  },
+  {
+    id: 'Prisma',
+    Icon: IconPrisma,
+  },
+  {
+    id: 'tRPC',
+    Icon: IconTrpc,
+  },
+  {
+    id: 'Illustrator',
+    Icon: IconAdobeIllustrator,
+  },
+  {
+    id: 'Figma',
+    Icon: IconFigma,
+  },
+];
+
+export default techIcons;
