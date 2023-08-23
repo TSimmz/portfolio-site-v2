@@ -23,20 +23,26 @@ const NavMenu = () => {
   const pathname = usePathname();
   const { y } = useWindowScroll();
 
-  const prevScrollY = useRef<number>(y);
+  //const prevScrollY = useRef<number>(y);
+  const [navbarYPosition, setNavbarYPosition] = useState<number>(0);
 
-  const position = useRef<number>(0);
-
+  // Toggle for mobile hamburger menu
   const { width } = useWindowSize();
   const [opened, toggle] = useToggle(false);
 
+  // Toggle for nav bar hiding
+  const [navBarHidden, toggleNavBar] = useToggle(false);
+  const hideNavBarPosition = useRef<number>(0);
+
   const navMenuRef = useRef<HTMLElement | null>(null);
 
+  // Active link in the navbar
   const [activeLinkId, setActiveLinkId] = useState<string>('');
 
   const themeSize = useRef<number>(
     parseInt(theme.screens.sm.split('px')[0] ?? '0', 10),
   );
+
   const [isMobileView, setIsMobileView] = useState<boolean>(
     width < themeSize.current,
   );
@@ -70,18 +76,15 @@ const NavMenu = () => {
   );
 
   useEffect(() => {
+    const upDistance = -64;
+    setNavbarYPosition(navBarHidden ? upDistance : 0);
+  }, [navBarHidden]);
+
+  useEffect(() => {
     if (y >= 500) {
-      if (prevScrollY.current <= y) {
-        if (Math.abs(prevScrollY.current - y) >= 200) {
-          position.current = -100;
-          prevScrollY.current = y;
-        }
-      } else {
-        if (Math.abs(prevScrollY.current - y) >= 200) {
-          position.current = 0;
-          prevScrollY.current = y;
-        }
-      }
+      hideNavBarPosition.current = 0;
+    } else {
+      hideNavBarPosition.current = navBarHidden ? -84 : -100;
     }
   }, [y]);
 
@@ -216,126 +219,136 @@ const NavMenu = () => {
   );
 
   return (
-    <motion.header
-      id="page-header"
-      key="page-header"
-      animate={{ translateY: position.current }}
-      className={`fixed top-0 z-20 w-full bg-neutrals-600 py-3 pl-4 pr-4 shadow-md shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
-    >
-      <nav
-        id="nav-menu"
-        key="nav-menu"
-        ref={navMenuRef}
-        className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
-          opened ? 'min-h-[40px]' : 'h-10'
-        }`}
+    <>
+      <motion.header
+        id="page-header"
+        key="page-header"
+        animate={{ translateY: navbarYPosition }}
+        className={`fixed top-0 z-20 w-full bg-neutrals-600 py-3 pl-4 pr-4 shadow-sm shadow-neutrals-300/90 backdrop-blur-md dark:bg-neutrals-700 dark:shadow-neutrals-800 sm:pr-2`}
       >
-        <AnimatePresence>
-          {!opened ? (
-            <motion.div
-              className="flex items-center gap-3 overflow-visible rounded-md "
-              initial={{
-                x: -100,
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                transition: {
-                  opacity: {
-                    duration: 0.2,
-                    delay: 0.2,
+        <nav
+          id="nav-menu"
+          key="nav-menu"
+          ref={navMenuRef}
+          className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
+            opened ? 'min-h-[40px]' : 'h-10'
+          }`}
+        >
+          <AnimatePresence>
+            {!opened ? (
+              <motion.div
+                className="flex items-center gap-3 overflow-visible rounded-md "
+                initial={{
+                  x: -100,
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    opacity: {
+                      duration: 0.2,
+                      delay: 0.2,
+                    },
+                    x: {
+                      duration: 0.2,
+                      delay: 0.25,
+                      type: 'spring',
+                      bounce: 0.35,
+                    },
                   },
-                  x: {
-                    duration: 0.2,
-                    delay: 0.25,
-                    type: 'spring',
-                    bounce: 0.35,
-                  },
-                },
-              }}
-              exit={{
-                opacity: 0,
-                x: -100,
-              }}
-            >
-              <Link id="brand-logo" href="/">
-                <BrandLogo
-                  height={'36px'}
-                  className="fill-brandLight-500 transition-transform duration-300 ease-in-out hover:scale-110 dark:fill-brandDark-500"
-                />
-              </Link>
-              <ResumeButton />
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+                }}
+                exit={{
+                  opacity: 0,
+                  x: -100,
+                }}
+              >
+                <Link id="brand-logo" href="/">
+                  <BrandLogo
+                    height={'36px'}
+                    className="fill-brandLight-500 transition-transform duration-300 ease-in-out hover:scale-110 dark:fill-brandDark-500"
+                  />
+                </Link>
+                <ResumeButton />
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
 
-        {/* Mobile nav buttons */}
-        <AnimatePresence>
-          {opened ? (
-            <motion.div
-              initial={{
-                height: 0,
-                opacity: 0,
-                translateY: -100,
-              }}
-              animate={{
-                height: 'auto',
-                opacity: 1,
-                translateY: 0,
-                transition: {
-                  height: {
-                    delay: 0.2,
-                    type: 'spring',
-                    bounce: 0.5,
+          {/* Mobile nav buttons */}
+          <AnimatePresence>
+            {opened ? (
+              <motion.div
+                initial={{
+                  height: 0,
+                  opacity: 0,
+                  translateY: -100,
+                }}
+                animate={{
+                  height: 'auto',
+                  opacity: 1,
+                  translateY: 0,
+                  transition: {
+                    height: {
+                      delay: 0.2,
+                      type: 'spring',
+                      bounce: 0.5,
+                    },
+                    opacity: {
+                      duration: 0.2,
+                      delay: 0.5,
+                    },
+                    translateY: {
+                      duration: 0.2,
+                      delay: 0.5,
+                    },
                   },
-                  opacity: {
-                    duration: 0.2,
-                    delay: 0.5,
+                }}
+                exit={{
+                  height: 0,
+                  opacity: 0,
+                  translateY: -100,
+                  transition: {
+                    translateY: {
+                      duration: 0,
+                    },
+                    opacity: {
+                      duration: 0,
+                    },
+                    height: {
+                      duration: 0.15,
+                      delay: 0.1,
+                    },
                   },
-                  translateY: {
-                    duration: 0.2,
-                    delay: 0.5,
-                  },
-                },
-              }}
-              exit={{
-                height: 0,
-                opacity: 0,
-                translateY: -100,
-                transition: {
-                  translateY: {
-                    duration: 0,
-                  },
-                  opacity: {
-                    duration: 0,
-                  },
-                  height: {
-                    duration: 0.15,
-                    delay: 0.1,
-                  },
-                },
-              }}
-              className="mb-1 flex w-[60%] flex-col gap-1"
-            >
-              {renderNavButtons}
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+                }}
+                className="mb-1 flex w-[60%] flex-col gap-1"
+              >
+                {renderNavButtons}
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
 
-        {/* Desktop nav buttons */}
-        <div className="hidden gap-2 space-x-1 sm:flex">
-          <div className="flex gap-1">{renderNavButtons}</div>
-          <ThemeSwitcher id="theme-switcher-desktop" />
-        </div>
+          {/* Desktop nav buttons */}
+          <div className="hidden gap-2 space-x-1 sm:flex">
+            <div className="flex gap-1">{renderNavButtons}</div>
+            <ThemeSwitcher id="theme-switcher-desktop" />
+          </div>
 
-        {/* Burger button */}
-        <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
-          <ThemeSwitcher id="theme-switcher-mobile" isMobile={true} />
-          <Burger opened={opened} onClick={toggle} />
-        </div>
-      </nav>
-    </motion.header>
+          {/* Burger button */}
+          <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
+            <ThemeSwitcher id="theme-switcher-mobile" isMobile={true} />
+            <Burger opened={opened} onClick={toggle} />
+          </div>
+        </nav>
+      </motion.header>
+      <motion.button
+        onClick={() => toggleNavBar()}
+        animate={{ translateY: navbarYPosition }}
+        whileHover={{ translateY: navbarYPosition + 4 }}
+        className="fixed right-[1.5rem] top-[2.3rem] z-10 !cursor-pointer rounded-md bg-warning-300/80 px-3 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400"
+      >
+        {navBarHidden ? 'Show' : 'Hide'}
+      </motion.button>
+    </>
   );
 };
 
