@@ -11,6 +11,8 @@ import { useAnimate, stagger, useInView } from 'framer-motion';
 
 import { type GitHubProfileData } from '~/utils/types';
 import CallToAction from '~/components/buttons/CallToAction';
+import { useElementInView } from '~/providers/ViewPortProvider';
+import { baseRoutes } from '~/utils/constants';
 
 const staggerAboutHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerFlavorText = stagger(0.2, { startDelay: 0.3 });
@@ -22,9 +24,16 @@ type AboutBodyProps = {
 const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   const [headerRef, animateHeader] = useAnimate<HTMLDivElement>();
   const isHeaderInView = useInView(headerRef, { once: true });
+  const isSectionInView = useInView(headerRef);
 
   const [imageRef, animateImage] = useAnimate();
   const isImageInView = useInView(imageRef, { once: true });
+
+  const { updateElementInView } = useElementInView();
+
+  useEffect(() => {
+    if (isSectionInView) updateElementInView(baseRoutes.about);
+  }, [isSectionInView]);
 
   useEffect(() => {
     const sectionHeader = animateHeader(

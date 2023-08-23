@@ -7,7 +7,7 @@ const StarField = () => {
   return (
     <div className="fixed inset-0 -z-10 h-screen w-screen">
       <Canvas gl={{ antialias: false }}>
-        <Scene numStars={1000} />
+        <Scene numStars={750} />
       </Canvas>
     </div>
   );
