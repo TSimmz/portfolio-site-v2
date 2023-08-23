@@ -82,7 +82,7 @@ const Hero = () => {
   return (
     <SectionWrapper
       id="hero"
-      className="relative !mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
+      className="relative !mt-[84px] min-h-[calc(100vh-64px)] w-full !pt-0"
     >
       <div ref={heroRef}>
         <motion.div
