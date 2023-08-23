@@ -5,10 +5,11 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/sections/Portfolio/PortfolioCard';
 import Underline from '~/components/Underline';
-import { pinnedRepoNames } from '~/utils/constants';
+import { baseRoutes, pinnedRepoNames } from '~/utils/constants';
 import { type GitHubRepositoryResponse } from '~/utils/types';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 import CallToAction from '~/components/buttons/CallToAction';
+import { useElementInView } from '~/providers/ViewPortProvider';
 
 const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
@@ -20,9 +21,16 @@ type PortfolioBodyProps = {
 const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const [headerRef, animateHeader] = useAnimate();
   const isHeaderInView = useInView(headerRef, { once: true });
+  const isSectionInView = useInView(headerRef);
 
   const [cardsRef, animateCards] = useAnimate();
   const areCardsInView = useInView(cardsRef, { once: true });
+
+  const { updateElementInView } = useElementInView();
+
+  useEffect(() => {
+    if (isSectionInView) updateElementInView(baseRoutes.portfolio);
+  }, [isSectionInView]);
 
   useEffect(() => {
     const sectionHeader = animateHeader(

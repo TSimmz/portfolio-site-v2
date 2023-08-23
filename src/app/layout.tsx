@@ -6,6 +6,7 @@ import NavMenu from '~/components/NavMenu';
 import Footer from '~/components/Footer';
 import NotificationProvider from '~/providers/NotificationProvider';
 import ThemeProvider from '~/providers/ThemeProvider';
+import ViewPortProvider from '~/providers/ViewPortProvider';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni',
@@ -58,9 +59,11 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <NotificationProvider>
-            <NavMenu />
-            {children}
-            <Footer />
+            <ViewPortProvider>
+              <NavMenu />
+              {children}
+              <Footer />
+            </ViewPortProvider>
           </NotificationProvider>
         </ThemeProvider>
       </body>

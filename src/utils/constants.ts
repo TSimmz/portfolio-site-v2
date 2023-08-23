@@ -1,13 +1,15 @@
 export const baseRoutes = {
-  home: '/',
-  about: '/about',
-  portfolio: '/portfolio',
-  blog: '/blog',
+  home: '/#home',
+  about: '/#about',
+  portfolio: '/#portfolio',
+  contact: '/#contact',
+  // blog: '/blog',
 } as const;
 
 export type BaseRouteKeys = keyof typeof baseRoutes;
 export type BaseRoutePaths = (typeof baseRoutes)[BaseRouteKeys];
 
+export const baseRoutesList = Object.values(baseRoutes) as BaseRoutePaths[];
 export const baseRouteKeysList = Object.keys(baseRoutes) as BaseRouteKeys[];
 
 export const pinnedRepoNames = new Set([

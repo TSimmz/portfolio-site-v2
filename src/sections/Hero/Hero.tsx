@@ -4,7 +4,10 @@ import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import CallToAction from '~/components/buttons/CallToAction';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useElementInView } from '~/providers/ViewPortProvider';
+import { baseRoutes } from '~/utils/constants';
 
 const helloThereVariant = {
   highGround: {
@@ -68,12 +71,20 @@ const saberVariant = {
 };
 
 const Hero = () => {
+  const heroRef = useRef(null);
+  const isHeroInView = useInView(heroRef);
+  const { updateElementInView } = useElementInView();
+
+  useEffect(() => {
+    if (isHeroInView) updateElementInView(baseRoutes.home);
+  }, [isHeroInView]);
+
   return (
     <SectionWrapper
-      id="home"
+      id="hero"
       className="relative !mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
     >
-      <div>
+      <div ref={heroRef}>
         <motion.div
           className="origin-center"
           variants={helloThereVariant}

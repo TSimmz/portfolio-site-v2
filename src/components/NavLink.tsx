@@ -1,9 +1,9 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useRef, useEffect, type FC } from 'react';
+import { useRef, useEffect, useState, type FC } from 'react';
 import { baseRoutes } from '~/utils/constants';
 import { motion } from 'framer-motion';
+import { useElementInView } from '~/providers/ViewPortProvider';
 
 type NavLinkProps = {
   id: string;
@@ -22,13 +22,14 @@ const NavLink: FC<NavLinkProps> = ({
   length,
   onPathChange,
 }) => {
-  const pathname = usePathname();
-  const isActive = useRef<boolean>(pathname === href);
+  const { elementInView } = useElementInView();
+  const isActive = useRef<boolean>(elementInView === href);
 
   useEffect(() => {
-    isActive.current = pathname === href;
+    isActive.current = elementInView === href;
+
     if (isActive.current) onPathChange(id);
-  }, [pathname]);
+  }, [elementInView]);
 
   // Calculates delay so the drop in order is from right to left
   const delay = 0.5 + 0.15 * (length - index + 1);
@@ -61,9 +62,11 @@ const NavLink: FC<NavLinkProps> = ({
           },
           opacity: { delay: delay },
         }}
-        className={`flex align-middle focus:outline-none`}
+        className={`pointer-events-none flex align-middle focus:outline-none`}
       >
-        <span className="px-2 capitalize text-inherit sm:py-0">{title}</span>
+        <span className="pointer-events-none px-2 capitalize text-inherit sm:py-0">
+          {title}
+        </span>
       </motion.div>
     </Link>
   );

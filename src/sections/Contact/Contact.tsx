@@ -1,7 +1,7 @@
 'use client';
 
 import * as z from 'zod';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SectionWrapper from '~/components/containers/SectionWrapper';
@@ -13,9 +13,10 @@ import { useNotificationContext } from '~/providers/NotificationProvider';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 import useDeviceWidths from '~/hooks/useDeviceWidths';
 import LoadingSpinner from '~/components/svgs/LoadingSpinner';
-import { localStorageHasSubmittedContact } from '~/utils/constants';
+import { baseRoutes, localStorageHasSubmittedContact } from '~/utils/constants';
 import { motion } from 'framer-motion';
 import SocialLinks from '~/components/containers/SocialLinks';
+import { useElementInView } from '~/providers/ViewPortProvider';
 
 const staggerHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerFormInputs = stagger(0.3, { startDelay: 0.5 });
@@ -58,6 +59,13 @@ const Contact = () => {
   });
 
   const { errors, isSubmitting } = formState;
+
+  const isSectionInView = useInView(headerRef);
+  const { updateElementInView } = useElementInView();
+
+  useEffect(() => {
+    if (isSectionInView) updateElementInView(baseRoutes.contact);
+  }, [isSectionInView]);
 
   useEffect(() => {
     emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_ID!);
