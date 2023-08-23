@@ -23,7 +23,7 @@ const CallToAction: FC<CallToActionProps> = ({
   return (
     <motion.div
       ref={ctaRef}
-      className="group origin-left overflow-hidden"
+      className="group max-w-fit overflow-hidden"
       initial={{ opacity: 0, scale: 0.7, y: 60 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileHover={{
@@ -37,7 +37,7 @@ const CallToAction: FC<CallToActionProps> = ({
     >
       <Link
         href={href}
-        className="mt-6 flex w-52 items-center justify-around gap-4 overflow-hidden rounded-lg border-2 border-brandLight-500 px-3 py-2 text-base font-semibold duration-300 ease-in-out group-hover:bg-brandLight-500 group-hover:text-dark-base dark:border-brandDark-500 group-hover:dark:bg-brandDark-500 sm:text-sm"
+        className="mt-6 flex items-center justify-around gap-4 overflow-hidden rounded-lg border-2 border-brandLight-500 px-3 py-2 text-base font-semibold duration-300 ease-in-out group-hover:bg-brandLight-500 group-hover:text-dark-base dark:border-brandDark-500 group-hover:dark:bg-brandDark-500 sm:text-sm"
       >
         {buttonText ? <span>{buttonText}</span> : null}
         <motion.div
