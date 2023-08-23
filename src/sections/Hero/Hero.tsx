@@ -24,7 +24,7 @@ const nameVariant = {
     opacity: 1,
     transition: {
       opacity: {
-        delay: 2.3,
+        delay: 1.25,
         duration: 0.3,
       },
     },
@@ -39,7 +39,7 @@ const hiltVariant = {
     opacity: 1,
     transition: {
       opacity: {
-        delay: 1.5,
+        delay: 0.75,
         duration: 0.2,
       },
     },
@@ -56,10 +56,10 @@ const saberVariant = {
     pathLength: 1,
     transition: {
       opacity: {
-        delay: 2,
+        delay: 1,
       },
       pathLength: {
-        delay: 2,
+        delay: 1,
         duration: 0.5,
       },
     },
@@ -79,7 +79,7 @@ const Hero = () => {
           initial="highGround"
           animate="dropFromAbove"
           transition={{
-            delay: 1,
+            delay: 0.4,
             type: 'spring',
             damping: 2.2,
             mass: 0.1,
