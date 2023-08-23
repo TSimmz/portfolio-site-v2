@@ -10,6 +10,7 @@ import Skills from '~/components/containers/Skills';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 
 import { type GitHubProfileData } from '~/utils/types';
+import CallToAction from '~/components/buttons/CallToAction';
 
 const staggerAboutHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 
@@ -99,6 +100,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         </div>
         <Skills />
       </div>
+      <CallToAction buttonText="View my work" href="#portfolio" />
     </div>
   );
 };

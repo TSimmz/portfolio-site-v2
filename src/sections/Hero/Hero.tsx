@@ -3,6 +3,7 @@
 import SectionWrapper from '~/components/containers/SectionWrapper';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
+import CallToAction from '~/components/buttons/CallToAction';
 import { motion } from 'framer-motion';
 
 const helloThereVariant = {
@@ -125,6 +126,7 @@ const Hero = () => {
             <br />I am a frontend web developer.
           </Heading>
         </motion.div>
+        <CallToAction buttonText="Check me out" href="#about" />
       </div>
     </SectionWrapper>
   );
