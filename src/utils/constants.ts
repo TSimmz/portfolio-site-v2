@@ -21,6 +21,8 @@ export const pinnedRepoNames = new Set([
   'recipe-book-app',
 ]);
 
+export const hotkeyModifier = 'alt';
+
 export const localStorageThemeId = 'tylerSimoni:ui:colorScheme';
 export const localStorageHasScrolledId = 'tylerSimoni:ui:hasScrolled';
 export const localStorageHasSubmittedContact = 'tylerSimoni:form:hasSubmitted';
