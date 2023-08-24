@@ -109,7 +109,7 @@ const Hero = () => {
             Hello there.
           </Heading>
           <motion.svg
-            id="light-saber-ctrl-l-to-extend"
+            id="light-saber-alt-l-to-extend"
             viewBox="0 0 32 2"
             className=" mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
           >
