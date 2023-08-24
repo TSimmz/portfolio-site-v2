@@ -91,7 +91,7 @@ This project is meant to showcase my skills as a developer, share a bit about my
 
 ## Goals As A Developer
 
-- I absolutely LOVE to learn new things, whether it be new technologies, new recipes, or new ways to make art. I want to learn anything and everything about anything that interests me. Once I start diving into a new fixation, I will not stop unti I understand it all the way down.
+- I absolutely LOVE to learn new things, whether it be new technologies, new recipes, or new ways to make art. I want to learn anything and everything about anything that interests me. Once I start diving into a new fixation, I will not stop until I understand it all the way down.
 - I strive to be the go-to knowledge source on a team and if I don't know something, it will not take me long to learn, understand, and apply it.
 - I make it my mission to make future developers lives on a project as easy as I can. To me, this means:
   - Squeaky clean code
