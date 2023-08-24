@@ -5,9 +5,10 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import CallToAction from '~/components/buttons/CallToAction';
 import { motion, useInView } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useElementInView } from '~/providers/ViewPortProvider';
 import { baseRoutes } from '~/utils/constants';
+import { useKeyCombo } from '@rwh/react-keystrokes';
 
 const helloThereVariant = {
   highGround: {
@@ -75,14 +76,22 @@ const Hero = () => {
   const isHeroInView = useInView(heroRef);
   const { updateElementInView } = useElementInView();
 
+  const [saberExtended, setSaberExtended] = useState<number>(1);
+  const isLightSaberComboPressed = useKeyCombo('control + l');
+
   useEffect(() => {
     if (isHeroInView) updateElementInView(baseRoutes.home);
   }, [isHeroInView]);
 
+  useEffect(() => {
+    if (isLightSaberComboPressed)
+      setSaberExtended((prev) => (prev === 1 ? 0 : 1));
+  }, [isLightSaberComboPressed]);
+
   return (
     <SectionWrapper
       id="hero"
-      className="relative !mt-[84px] min-h-[calc(100vh-84px)] w-full !pt-0"
+      className="relative !mt-[84px] min-h-[calc(100vh-64px)] w-full !pt-0"
     >
       <div ref={heroRef}>
         <motion.div
@@ -102,8 +111,9 @@ const Hero = () => {
             Hello there.
           </Heading>
           <motion.svg
+            id="light-saber-ctrl-l-to-extend"
             viewBox="0 0 32 2"
-            className="mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
+            className=" mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
           >
             <motion.path
               className={
@@ -112,6 +122,7 @@ const Hero = () => {
               variants={saberVariant}
               strokeWidth={1.5}
               strokeLinecap={'round'}
+              animate={{ pathLength: saberExtended }}
               d="M7 1H28"
             />
             <motion.path

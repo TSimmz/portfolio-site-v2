@@ -58,9 +58,7 @@ const NavLink: FC<NavLinkProps> = ({
         },
         opacity: { delay: delay },
       }}
-      className={`${href === baseRoutes.home ? 'sm:max-[840px]:hidden' : ''} ${
-        href === baseRoutes.about ? 'sm:max-[660px]:hidden' : ''
-      } relative ml-0 flex touch-auto flex-row items-center space-x-0 rounded-md px-2 py-1 align-middle text-base text-dark-base transition-all duration-500 sm:text-sm min-[710px]:px-3 min-[800px]:px-4 lg:px-5 ${
+      className={`relative ml-0 flex touch-auto flex-row items-center space-x-0 rounded-md px-2 py-1 align-middle text-base text-dark-base transition-all duration-500 sm:text-sm min-[710px]:px-3 min-[800px]:px-4 lg:px-5 ${
         isActive.current
           ? 'font-semibold !text-brandLight-500 dark:!text-brandDark-500'
           : 'hover:text-brandLight-300 dark:hover:text-brandDark-300 '

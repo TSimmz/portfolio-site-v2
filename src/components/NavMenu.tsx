@@ -1,8 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
-import { useToggle, useWindowSize, useWindowScroll } from 'react-use';
+import { useToggle, useWindowSize } from 'react-use';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import theme from 'tailwindcss/defaultTheme';
@@ -17,41 +16,56 @@ import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
-import ResumeButton from './buttons/ResumeButton';
-import { useElementInView } from '~/providers/ViewPortProvider';
+import { useTheme } from '~/providers/ThemeProvider';
+import { useKeyCombo } from '@rwh/react-keystrokes';
+import Tooltip from './Tooltip';
 
 const NavMenu = () => {
-  const { elementInView } = useElementInView();
+  // Navbar ref
+  const navMenuRef = useRef<HTMLElement | null>(null);
 
-  //const prevScrollY = useRef<number>(y);
+  // Nav bar position
   const [navbarYPosition, setNavbarYPosition] = useState<number>(0);
 
   // Toggle for mobile hamburger menu
   const { width } = useWindowSize();
   const [opened, toggle] = useToggle(false);
 
-  // Toggle for nav bar hiding
+  // Toggle for nav bar hiding and hotkey set up
   const [navBarHidden, toggleNavBar] = useToggle(false);
+  const isHideNavbarComboPressed = useKeyCombo('control + h');
 
-  // Ref for nav menu
-  const navMenuRef = useRef<HTMLElement | null>(null);
+  // Resume button hotkey
+  const isResumeComboPressed = useKeyCombo('control + r');
 
   // Active link in the navbar
   const [activeLinkId, setActiveLinkId] = useState<string>('');
 
+  // Size of theme
   const themeSize = useRef<number>(
     parseInt(theme.screens.sm.split('px')[0] ?? '0', 10),
   );
 
+  // Mobile view state
   const [isMobileView, setIsMobileView] = useState<boolean>(
     width < themeSize.current,
   );
 
+  // Dark mode check
+  const { isDarkMode } = useTheme();
+
+  // The path to the resume depending on theme mode
+  const resumeUrlPath = isDarkMode
+    ? process.env.NEXT_PUBLIC_DARK_RESUME_PATH! ?? '/'
+    : process.env.NEXT_PUBLIC_LIGHT_RESUME_PATH! ?? '/';
+
+  // Creates an id for a navbar link
   const createLinkId = useCallback(
     (name: string) => `nav-link-${name.toLowerCase()}`,
     [],
   );
 
+  // Handles setting the CSS variables for the navbar link underline
   const setNavMenuVariables = useCallback(
     ({
       width = '',
@@ -75,11 +89,29 @@ const NavMenu = () => {
     [navMenuRef],
   );
 
+  // Effect for resume button key combo
+  useEffect(() => {
+    if (isResumeComboPressed) {
+      const resumeButton = document.getElementById('resume-button');
+      if (resumeButton !== null) {
+        console.log('Resume button click!');
+        resumeButton.click();
+      }
+    }
+  }, [isResumeComboPressed]);
+
+  // Effect for hide/show button key combo
+  useEffect(() => {
+    if (isHideNavbarComboPressed) toggleNavBar();
+  }, [isHideNavbarComboPressed]);
+
+  // Effect for navbar position on state change
   useEffect(() => {
     const upDistance = -64;
     setNavbarYPosition(navBarHidden ? upDistance : 0);
   }, [navBarHidden]);
 
+  // Effect to close mobile navbar state when switching to desktop
   useEffect(() => {
     // Update mobile view state
     if (isMobileView !== width < themeSize.current) {
@@ -105,6 +137,7 @@ const NavMenu = () => {
     }
   }, [width]);
 
+  // Logic to handle the underline movement for navbar links
   const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
       // Get the link button elements
@@ -190,6 +223,7 @@ const NavMenu = () => {
     [activeLinkId, setNavMenuVariables],
   );
 
+  // Renders the navbar link buttons
   const renderNavButtons = useMemo(
     () =>
       baseRouteKeysList.map((routeName: BaseRouteKeys, index: number) => (
@@ -219,7 +253,7 @@ const NavMenu = () => {
           id="nav-menu"
           key="nav-menu"
           ref={navMenuRef}
-          className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:pl-4 sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
+          className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
             opened ? 'min-h-[40px]' : 'h-10'
           }`}
         >
@@ -258,7 +292,6 @@ const NavMenu = () => {
                     className="fill-brandLight-500 transition-transform duration-300 ease-in-out hover:scale-110 dark:fill-brandDark-500"
                   />
                 </Link>
-                <ResumeButton />
               </motion.div>
             ) : null}
           </AnimatePresence>
@@ -329,13 +362,47 @@ const NavMenu = () => {
           </div>
         </nav>
       </motion.header>
+      <motion.a
+        target="_blank"
+        id="resume-button"
+        href={resumeUrlPath}
+        animate={{ translateY: navbarYPosition }}
+        whileHover={{ translateY: navbarYPosition + 4 }}
+        className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 pb-1 pl-2 pr-3 pt-8 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
+      >
+        <Tooltip text="Ctrl+R">
+          <svg
+            viewBox="0 0 32 32"
+            className="z-10 mr-1 inline-block h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
+          >
+            <motion.path
+              animate={{
+                y: [-1.5, 0.5, -1.5],
+                transition: {
+                  y: {
+                    duration: 1,
+                    ease: 'easeInOut',
+                    times: [0, 0.5, 1],
+                    repeat: Infinity,
+                  },
+                },
+              }}
+              d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
+            />
+            <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
+          </svg>
+          <span>Resume</span>
+        </Tooltip>
+      </motion.a>
       <motion.button
         onClick={() => toggleNavBar()}
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
-        className="fixed right-[1.5rem] top-[2.3rem] z-10 !cursor-pointer rounded-md bg-warning-300/80 px-3 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400"
+        className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 w-20 cursor-pointer rounded-md bg-warning-300/80 px-2 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
       >
-        {navBarHidden ? 'Show' : 'Hide'}
+        <Tooltip text="Ctrl+H">
+          <span>{navBarHidden ? 'Show' : 'Hide'}</span>
+        </Tooltip>
       </motion.button>
     </>
   );

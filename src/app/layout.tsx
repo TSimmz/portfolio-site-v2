@@ -4,9 +4,7 @@ import { sourceCodePro } from './fonts';
 
 import NavMenu from '~/components/NavMenu';
 import Footer from '~/components/Footer';
-import NotificationProvider from '~/providers/NotificationProvider';
-import ThemeProvider from '~/providers/ThemeProvider';
-import ViewPortProvider from '~/providers/ViewPortProvider';
+import Providers from '~/providers';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni',
@@ -57,15 +55,11 @@ export default function RootLayout({
       <body
         className={`relative !mx-0 w-screen overflow-x-hidden bg-light text-light-base antialiased dark:bg-dark dark:text-dark-base ${sourceCodePro.className}`}
       >
-        <ThemeProvider>
-          <NotificationProvider>
-            <ViewPortProvider>
-              <NavMenu />
-              {children}
-              <Footer />
-            </ViewPortProvider>
-          </NotificationProvider>
-        </ThemeProvider>
+        <Providers>
+          <NavMenu />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
