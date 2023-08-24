@@ -265,7 +265,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
                 viewBox="0 0 24 24"
                 variants={sunMoonVariant}
                 custom={isDarkMode}
-                className="h-6 w-6"
+                className="h-6 w-6 stroke-[0.3]"
               >
                 <motion.path
                   fill="none"

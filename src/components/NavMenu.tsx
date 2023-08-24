@@ -16,61 +16,55 @@ import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
-import { useElementInView } from '~/providers/ViewPortProvider';
 import { useTheme } from '~/providers/ThemeProvider';
-
-const iconBounceVariant = {
-  animate: {
-    y: [-1.5, 0.5, -1.5],
-    transition: {
-      y: {
-        duration: 1,
-        ease: 'easeInOut',
-        times: [0, 0.5, 1],
-        repeat: Infinity,
-      },
-    },
-  },
-};
+import { useKeyCombo } from '@rwh/react-keystrokes';
 
 const NavMenu = () => {
-  const { elementInView } = useElementInView();
+  // Navbar ref
+  const navMenuRef = useRef<HTMLElement | null>(null);
 
-  //const prevScrollY = useRef<number>(y);
+  // Nav bar position
   const [navbarYPosition, setNavbarYPosition] = useState<number>(0);
 
   // Toggle for mobile hamburger menu
   const { width } = useWindowSize();
   const [opened, toggle] = useToggle(false);
 
-  // Toggle for nav bar hiding
+  // Toggle for nav bar hiding and hotkey set up
   const [navBarHidden, toggleNavBar] = useToggle(false);
+  const isHideNavbarComboPressed = useKeyCombo('control + h');
 
-  // Ref for nav menu
-  const navMenuRef = useRef<HTMLElement | null>(null);
+  // Resume button hotkey
+  const isResumeComboPressed = useKeyCombo('control + r');
 
   // Active link in the navbar
   const [activeLinkId, setActiveLinkId] = useState<string>('');
 
+  // Size of theme
   const themeSize = useRef<number>(
     parseInt(theme.screens.sm.split('px')[0] ?? '0', 10),
   );
 
+  // Mobile view state
   const [isMobileView, setIsMobileView] = useState<boolean>(
     width < themeSize.current,
   );
 
+  // Dark mode check
   const { isDarkMode } = useTheme();
 
+  // The path to the resume depending on theme mode
   const resumeUrlPath = isDarkMode
     ? process.env.NEXT_PUBLIC_DARK_RESUME_PATH! ?? '/'
     : process.env.NEXT_PUBLIC_LIGHT_RESUME_PATH! ?? '/';
 
+  // Creates an id for a navbar link
   const createLinkId = useCallback(
     (name: string) => `nav-link-${name.toLowerCase()}`,
     [],
   );
 
+  // Handles setting the CSS variables for the navbar link underline
   const setNavMenuVariables = useCallback(
     ({
       width = '',
@@ -94,11 +88,29 @@ const NavMenu = () => {
     [navMenuRef],
   );
 
+  // Effect for resume button key combo
+  useEffect(() => {
+    if (isResumeComboPressed) {
+      const resumeButton = document.getElementById('resume-button');
+      if (resumeButton !== null) {
+        console.log('Resume button click!');
+        resumeButton.click();
+      }
+    }
+  }, [isResumeComboPressed]);
+
+  // Effect for hide/show button key combo
+  useEffect(() => {
+    if (isHideNavbarComboPressed) toggleNavBar();
+  }, [isHideNavbarComboPressed]);
+
+  // Effect for navbar position on state change
   useEffect(() => {
     const upDistance = -64;
     setNavbarYPosition(navBarHidden ? upDistance : 0);
   }, [navBarHidden]);
 
+  // Effect to close mobile navbar state when switching to desktop
   useEffect(() => {
     // Update mobile view state
     if (isMobileView !== width < themeSize.current) {
@@ -124,6 +136,7 @@ const NavMenu = () => {
     }
   }, [width]);
 
+  // Logic to handle the underline movement for navbar links
   const handleDesktopPathChange = useCallback(
     (newActiveLinkId: string) => {
       // Get the link button elements
@@ -209,6 +222,7 @@ const NavMenu = () => {
     [activeLinkId, setNavMenuVariables],
   );
 
+  // Renders the navbar link buttons
   const renderNavButtons = useMemo(
     () =>
       baseRouteKeysList.map((routeName: BaseRouteKeys, index: number) => (
@@ -349,6 +363,7 @@ const NavMenu = () => {
       </motion.header>
       <motion.a
         target="_blank"
+        id="resume-button"
         href={resumeUrlPath}
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
@@ -359,8 +374,17 @@ const NavMenu = () => {
           className="z-10 mt-[2px] h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
         >
           <motion.path
-            variants={iconBounceVariant}
-            animate="animate"
+            animate={{
+              y: [-1.5, 0.5, -1.5],
+              transition: {
+                y: {
+                  duration: 1,
+                  ease: 'easeInOut',
+                  times: [0, 0.5, 1],
+                  repeat: Infinity,
+                },
+              },
+            }}
             d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
           />
           <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
