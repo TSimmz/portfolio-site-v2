@@ -1,28 +1,105 @@
-# Create T3 App
+# Portfolio for Tyler Simoni
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This project is meant to showcase my skills as a developer, share a bit about myself, display some of the work I have done, as well as to act as a playground for trying out and understanding new technologies as they come to market. It was bootstrapped with `create-t3-app` which uses the [T3 Stack](https://create.t3.gg/) and is written entirely in TypeScript.
 
-## What's next? How do I make an app with this?
+## Technologies Used
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+<table>
+  <tr>
+    <td>
+      <a href='https://nextjs.org' target="_blank">Next.js</a>
+    </td>
+    <td>
+      <a href='https://prisma.io' target="_blank">Prisma</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://tailwindcss.com' target="_blank">Tailwind CSS</a>
+    </td>
+    <td>
+      <a href='https://trpc.io' target="_blank">tRPC</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://www.emailjs.com/' target="_blank">EmailJs</a>
+    </td>
+    <td>
+      <a href='https://www.framer.com/motion/' target="_blank">Framer Motion</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://react-hook-form.com/' target="_blank">React Hook Form</a>
+    </td>
+    <td>
+      <a href='https://zod.dev/' target="_blank">Zod Validation</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://github.com/JohannesKlauss/react-hotkeys-hook' target="_blank">React Hotkeys Hook</a>
+    </td>
+    <td>
+      <a href='https://github.com/octokit' target="_blank">OctoKit</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://threejs.org/' target="_blank">Three JS</a>
+    </td>
+    <td>
+      <a href='https://docs.pmnd.rs/react-three-fiber/getting-started/introduction' target="_blank">React Three Fiber</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://popmotion.io/' target="_blank">Pop Motion IO</a>
+    </td>
+    <td>
+      <a href='https://www.sanity.io/' target="_blank">Sanity IO</a>
+    </td>
+  </tr>
+</table>
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Features
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- Server side rendered components created using out of the box NextJS 13 features
+  - About section and Portfolio section fetch GitHub information via OctoKit on the server before forwarding it via props to their respective client side components.
+- About section displays GitHub bio and profile picture fetched from my GitHub profile data.
+- Portfolio section displays noteable projects with information fetched from my GitHub repository data.
+- Contact form built with React-Hook-Form, using Zod for validation, and EmailJS to send messages from users.
+- Notification system built to provide various status notifications to the user.
+  - Note: Currently the only active notifications are created via filling out the Contact form.
+- Navigation Link underline built manually, inspired by [Kevin Powell](https://www.youtube.com/@KevinPowell)'s wonderfull CSS videos.
+- Entry, resting, and exit animations created using Framer Motion.
+- Light/Dark/System color theming using TailwindCSS with custom theme switcher provider, hook, and UI component.
+- Themed resume download available depending on currently active theme.
+- Ability to show/hide the navbar via a button click or a hotkey press (alt+h).
+- Ability to open the resume via a hotkey press (alt+r)
+- Smooth scrolling down the page via navigation links in navbar or through various call-to-action (CTA) buttons in the page
 
-## Learn More
+## Future Plans For This Project
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- Add a dev blog
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+  - Utitize Sanity IO to build my own CMS system.
+  - It will act less like a blog and more like a notebook with a view into my mind as a developer as I learn cool, new, fun technologies.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- To act as a project catalog of sorts; to be a place I can host my past, present, and future personal projects.
 
-## How do I deploy this?
+## Goals As A Developer
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- I absolutely LOVE to learn new things, whether it be new technologies, new recipes, or new ways to make art. I want to learn anything and everything about anything that interests me. Once I start diving into a new fixation, I will not stop unti I understand it all the way down.
+- I strive to be the go-to knowledge source on a team and if I don't know something, it will not take me long to learn, understand, and apply it.
+- I make it my mission to make future developers lives on a project as easy as I can. To me, this means:
+  - Squeaky clean code
+  - Verbose variable and function naming
+  - Commenting anything and everything that isn't immediately clear
+  - Using common coding standard practices to the best of my abilities
+  - Building file/directory architectures that are clear and make sense
+
+## A Bit About Me
+
+I'v been a developer working with ReactJS for about 6 years now and I love it. Outside of being a developer some things I love to do are working on my digital art, trying new breweries and eateries in and around my area (Knoxville, TN), hiking the Great Smoky Mountains and all the surrounding mountains/trails, and just relaxing with my wife, dog, and two rabbits.
