@@ -11,14 +11,15 @@ import {
   type BaseRouteKeys,
   baseRouteKeysList,
   baseRoutes,
+  hotkeyModifier,
 } from '~/utils/constants';
 import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
 import { useTheme } from '~/providers/ThemeProvider';
-import { useKeyCombo } from '@rwh/react-keystrokes';
 import Tooltip from './Tooltip';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 const NavMenu = () => {
   // Navbar ref
@@ -33,10 +34,18 @@ const NavMenu = () => {
 
   // Toggle for nav bar hiding and hotkey set up
   const [navBarHidden, toggleNavBar] = useToggle(false);
-  const isHideNavbarComboPressed = useKeyCombo('control + h');
+  const hideNavKeyCombo = `${hotkeyModifier} + h`;
+  useHotkeys(hideNavKeyCombo, () => toggleNavBar());
 
   // Resume button hotkey
-  const isResumeComboPressed = useKeyCombo('control + r');
+  const openResumeKeyCombo = `${hotkeyModifier} + r`;
+  useHotkeys(openResumeKeyCombo, () => {
+    const resumeButton = document.getElementById('resume-button');
+    if (resumeButton !== null) {
+      resumeButton.click();
+    }
+  });
+  //const isResumeComboPressed = useKeyCombo(openResumeKeyCombo);
 
   // Active link in the navbar
   const [activeLinkId, setActiveLinkId] = useState<string>('');
@@ -89,21 +98,22 @@ const NavMenu = () => {
     [navMenuRef],
   );
 
-  // Effect for resume button key combo
-  useEffect(() => {
-    if (isResumeComboPressed) {
-      const resumeButton = document.getElementById('resume-button');
-      if (resumeButton !== null) {
-        console.log('Resume button click!');
-        resumeButton.click();
-      }
-    }
-  }, [isResumeComboPressed]);
+  // // Effect for resume button key combo
+  // useEffect(() => {
+  //   console.log(`${openResumeKeyCombo} Pressed!`);
+  //   if (isResumeComboPressed) {
+  //     const resumeButton = document.getElementById('resume-button');
+  //     if (resumeButton !== null) {
+  //       resumeButton.click();
+  //     }
+  //   }
+  // }, [isResumeComboPressed]);
 
-  // Effect for hide/show button key combo
-  useEffect(() => {
-    if (isHideNavbarComboPressed) toggleNavBar();
-  }, [isHideNavbarComboPressed]);
+  // // Effect for hide/show button key combo
+  // useEffect(() => {
+  //   console.log(`${hideNavKeyCombo} Pressed!`);
+  //   if (isHideNavbarComboPressed) toggleNavBar();
+  // }, [isHideNavbarComboPressed]);
 
   // Effect for navbar position on state change
   useEffect(() => {
@@ -370,7 +380,7 @@ const NavMenu = () => {
         whileHover={{ translateY: navbarYPosition + 4 }}
         className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 pb-1 pl-2 pr-3 pt-8 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
       >
-        <Tooltip text="Ctrl+R">
+        <Tooltip text="Alt+R">
           <svg
             viewBox="0 0 32 32"
             className="z-10 mr-1 inline-block h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
@@ -400,7 +410,7 @@ const NavMenu = () => {
         whileHover={{ translateY: navbarYPosition + 4 }}
         className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 w-20 cursor-pointer rounded-md bg-warning-300/80 px-2 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
       >
-        <Tooltip text="Ctrl+H">
+        <Tooltip text="Alt+H">
           <span>{navBarHidden ? 'Show' : 'Hide'}</span>
         </Tooltip>
       </motion.button>

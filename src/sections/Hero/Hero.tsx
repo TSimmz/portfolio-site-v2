@@ -7,8 +7,8 @@ import CallToAction from '~/components/buttons/CallToAction';
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { useElementInView } from '~/providers/ViewPortProvider';
-import { baseRoutes } from '~/utils/constants';
-import { useKeyCombo } from '@rwh/react-keystrokes';
+import { baseRoutes, hotkeyModifier } from '~/utils/constants';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 const helloThereVariant = {
   highGround: {
@@ -77,16 +77,14 @@ const Hero = () => {
   const { updateElementInView } = useElementInView();
 
   const [saberExtended, setSaberExtended] = useState<number>(1);
-  const isLightSaberComboPressed = useKeyCombo('control + l');
+  const lightSaberHotkey = `${hotkeyModifier} + l`;
+  useHotkeys(lightSaberHotkey, () =>
+    setSaberExtended((prev) => (prev === 1 ? 0 : 1)),
+  );
 
   useEffect(() => {
     if (isHeroInView) updateElementInView(baseRoutes.home);
   }, [isHeroInView]);
-
-  useEffect(() => {
-    if (isLightSaberComboPressed)
-      setSaberExtended((prev) => (prev === 1 ? 0 : 1));
-  }, [isLightSaberComboPressed]);
 
   return (
     <SectionWrapper
@@ -111,7 +109,7 @@ const Hero = () => {
             Hello there.
           </Heading>
           <motion.svg
-            id="light-saber-ctrl-l-to-extend"
+            id="light-saber-alt-l-to-extend"
             viewBox="0 0 32 2"
             className=" mb-4 mr-auto mt-2 h-[14px] overflow-visible xs:h-4 sm:h-5"
           >

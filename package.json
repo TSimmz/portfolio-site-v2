@@ -1,6 +1,7 @@
 {
   "name": "portfolio-site-v2",
-  "version": "1.0.4",
+  "version": "1.0.5",
+  "description": "",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -8,6 +9,29 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start"
+  },
+  "keywords": [
+    "tyler simoni",
+    "simoni",
+    "react",
+    "next13",
+    "tailwindcss",
+    "trpc",
+    "prisma",
+    "react-use",
+    "react-hook-forms",
+    "sanity-io",
+    "portfolio",
+    "framer-motion",
+    "threejs",
+    "popmotion",
+    "react-three-fiber"
+  ],
+  "author": "Tyler Simoni <tyler.simoni.8@gmail.com>",
+  "repository": "github:Tsimmz/portfolio-site-v2",
+  "bugs": {
+    "email": "tyler.simoni.8@gmail.com",
+    "url": "https://github.com/Tsimmmz/portfolio-site-v2/issues/"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
@@ -18,8 +42,6 @@
     "@octokit/types": "^11.1.0",
     "@prisma/client": "^5.0.0",
     "@react-three/fiber": "^8.13.7",
-    "@rwh/keystrokes": "^1.2.1",
-    "@rwh/react-keystrokes": "^1.2.1",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.14.4",
     "@t3-oss/env-nextjs": "^0.3.1",
@@ -37,6 +59,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.4",
+    "react-hotkeys-hook": "^4.4.1",
     "react-use": "^17.4.0",
     "sanity": "^3.14.4",
     "styled-components": "5.2",
