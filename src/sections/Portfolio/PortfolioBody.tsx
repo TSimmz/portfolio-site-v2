@@ -112,6 +112,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
               key={repo.name}
               title={repo.name ?? 'Repo Name'}
               description={repo.description ?? 'Repo Description'}
+              topics={repo.topics ?? []}
               href={repo.svn_url ?? '/'}
             />
           ))}
