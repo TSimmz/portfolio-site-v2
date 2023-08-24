@@ -18,6 +18,7 @@ import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
 import { useTheme } from '~/providers/ThemeProvider';
 import { useKeyCombo } from '@rwh/react-keystrokes';
+import Tooltip from './Tooltip';
 
 const NavMenu = () => {
   // Navbar ref
@@ -367,39 +368,41 @@ const NavMenu = () => {
         href={resumeUrlPath}
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
-        className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center justify-between gap-1 rounded-md bg-brandLight-500/90 pb-1 pl-2 pr-3 pt-8 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
+        className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 pb-1 pl-2 pr-3 pt-8 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
       >
-        <svg
-          viewBox="0 0 32 32"
-          className="z-10 mt-[2px] h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
-        >
-          <motion.path
-            animate={{
-              y: [-1.5, 0.5, -1.5],
-              transition: {
-                y: {
-                  duration: 1,
-                  ease: 'easeInOut',
-                  times: [0, 0.5, 1],
-                  repeat: Infinity,
+        <Tooltip text="Ctrl+R">
+          <svg
+            viewBox="0 0 32 32"
+            className="z-10 mr-1 inline-block h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
+          >
+            <motion.path
+              animate={{
+                y: [-1.5, 0.5, -1.5],
+                transition: {
+                  y: {
+                    duration: 1,
+                    ease: 'easeInOut',
+                    times: [0, 0.5, 1],
+                    repeat: Infinity,
+                  },
                 },
-              },
-            }}
-            d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
-          />
-          <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
-        </svg>
-        <span>Resume</span>
+              }}
+              d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
+            />
+            <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
+          </svg>
+          <span>Resume</span>
+        </Tooltip>
       </motion.a>
       <motion.button
         onClick={() => toggleNavBar()}
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
-        className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 cursor-pointer rounded-md bg-warning-300/80 px-4 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
+        className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 w-20 cursor-pointer rounded-md bg-warning-300/80 px-2 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
       >
-        <span className="pointer-events-none">
-          {navBarHidden ? 'Show' : 'Hide'}
-        </span>
+        <Tooltip text="Ctrl+H">
+          <span>{navBarHidden ? 'Show' : 'Hide'}</span>
+        </Tooltip>
       </motion.button>
     </>
   );
