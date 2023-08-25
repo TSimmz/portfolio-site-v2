@@ -45,28 +45,33 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
     clamp: false,
   });
 
+  // Reference for scroller element
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
   // Calculates the X position offset as a percentage
   const x = useTransform(baseX, (v: number) => {
     // Cast the wrap function
     const wrapFn = wrap as (min: number, max: number, v: number) => number;
 
-    // Get the parallax and scroller elements for wrap calculations
-    const parallax = document.getElementById(
-      'motion-parallax',
-    ) as HTMLDivElement;
-    const scroller = document.getElementById(
-      'motion-scroller',
-    ) as HTMLDivElement;
-
     // Calculate the min and max X position offsets
     const threshold = { min: 0, max: 0 };
-    if (parallax !== null && scroller !== null) {
+    if (scrollerRef.current !== null) {
       threshold.min =
-        mapRange(scroller.offsetWidth / 2, 0, scroller.offsetWidth, 0, 100) *
-        -1;
+        mapRange(
+          scrollerRef.current.offsetWidth / 2,
+          0,
+          scrollerRef.current.offsetWidth,
+          0,
+          100,
+        ) * -1;
       threshold.max =
-        mapRange(scroller.offsetWidth / 4, 0, scroller.offsetWidth, 0, 100) *
-        -1;
+        mapRange(
+          scrollerRef.current.offsetWidth / 4,
+          0,
+          scrollerRef.current.offsetWidth,
+          0,
+          100,
+        ) * -1;
     }
 
     return `${wrapFn(threshold.min, threshold.max, v)}%`;
@@ -136,6 +141,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
     >
       <motion.div
         id="motion-scroller"
+        ref={scrollerRef}
         className="flex min-w-fit flex-nowrap whitespace-nowrap"
         style={{ x }}
       >
