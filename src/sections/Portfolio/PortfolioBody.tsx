@@ -6,7 +6,7 @@ import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/sections/Portfolio/PortfolioCard';
 import Underline from '~/components/Underline';
 import { baseRoutes, pinnedRepoNames } from '~/utils/constants';
-import { type GitHubRepositoryResponse } from '~/utils/types';
+import { type GitHubRepositoryData } from '~/utils/types';
 import {
   useAnimate,
   stagger,
@@ -21,7 +21,7 @@ const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
 
 type PortfolioBodyProps = {
-  githubRepos: GitHubRepositoryResponse[];
+  githubRepos?: GitHubRepositoryData[];
 };
 
 const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
@@ -40,11 +40,11 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const areCardsInView = useInView(cardsRef, { once: true });
 
   const { updateElementInView } = useElementInView();
-  const filteredGithubRepos = githubRepos.filter(
+  const filteredGithubRepos = githubRepos?.filter(
     (repo) => !repo.private && pinnedRepoNames.has(repo.name ? repo.name : ''),
   );
 
-  console.log('Repo: ', filteredGithubRepos[4]);
+  if (filteredGithubRepos) console.log('Repo: ', filteredGithubRepos[4]);
 
   useEffect(() => {
     if (isSectionInView) updateElementInView(baseRoutes.portfolio);
@@ -118,7 +118,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         ref={cardsRef}
         className="cards-container relative grid grid-cols-1 gap-3 rounded-xl sm:grid-cols-2 md:gap-6 lg:gap-8"
       >
-        {filteredGithubRepos.map((repo, index: number) => (
+        {filteredGithubRepos?.map((repo, index: number) => (
           <PortfolioCard
             key={repo.name}
             title={repo.name ?? 'Repo Name'}
