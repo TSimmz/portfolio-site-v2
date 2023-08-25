@@ -129,7 +129,10 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   return (
     <motion.div
       id="motion-parallax"
-      className="m-0 flex w-full flex-nowrap overflow-hidden whitespace-nowrap py-4"
+      className={`relative m-0 flex w-full flex-nowrap overflow-hidden whitespace-nowrap py-4
+        ${"before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-10 before:bg-gradient-to-r before:from-neutrals-100 before:via-neutrals-100 before:to-transparent before:content-[''] before:dark:from-neutrals-700"}
+        ${"after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-10 after:bg-gradient-to-l after:from-neutrals-100 after:via-neutrals-100 after:to-transparent after:content-[''] after:dark:from-neutrals-700"}
+      `}
     >
       <motion.div
         id="motion-scroller"
