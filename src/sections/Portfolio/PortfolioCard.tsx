@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { type FC, useRef, useEffect } from 'react';
-import { useHoverDirty, useMouseHovered } from 'react-use';
+import { useMouseHovered } from 'react-use';
 import PortfolioTopics from './PortfolioTopics';
 import { mapRange } from '~/utils/helpers';
+import { motion } from 'framer-motion';
 
 type PortfolioCardProps = {
   title: string;
@@ -10,17 +10,19 @@ type PortfolioCardProps = {
   href: string;
   topics: string[];
   imageUrl?: string;
+  index: number;
+  setSelectedCard: (title: string, index: number) => void;
 };
 
 const PortfolioCard: FC<PortfolioCardProps> = ({
   title,
   description,
-  href,
   topics,
+  index,
+  setSelectedCard,
 }) => {
-  const cardRef = useRef<HTMLAnchorElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const isCardHovered = useHoverDirty(cardRef);
   const mousePosition = useMouseHovered(cardRef, {
     bound: true,
     whenHovered: true,
@@ -57,15 +59,15 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
   }, [mousePosition]);
 
   return (
-    <Link
+    <motion.div
       ref={cardRef}
-      className="portfolio-card three-dee group relative flex min-h-[200px] max-w-sm flex-col justify-between gap-4 overflow-hidden rounded-lg bg-neutrals-200/90 text-light-base backdrop-brightness-110 transition-colors duration-300 ease-in-out hover:backdrop-brightness-125 dark:bg-neutrals-700/90 dark:text-dark-base"
-      href={href}
-      target="_blank"
+      layoutId={`${title}-${index}`}
+      className="portfolio-card three-dee group relative flex min-h-[200px] max-w-sm cursor-pointer flex-col justify-between gap-4 overflow-hidden rounded-lg bg-neutrals-200/90 text-light-base backdrop-brightness-110 transition-colors duration-300 ease-in-out hover:backdrop-brightness-125 dark:bg-neutrals-700/90 dark:text-dark-base"
+      onClick={() => setSelectedCard(title, index)}
     >
       <div
         id={`${title}-card-navbar`}
-        className="absolute flex h-7 w-full items-center bg-neutral-400 transition-colors duration-300 ease-in-out group-hover:bg-neutrals-500/50 dark:bg-neutrals-400/25"
+        className="absolute flex h-7 w-full items-center bg-neutrals-400 transition-colors duration-300 ease-in-out group-hover:bg-neutrals-500/50 dark:bg-neutrals-400/25"
       >
         <div className="relative ml-3 aspect-square w-3 rounded-full bg-error-400 before:absolute before:left-[18px] before:aspect-square before:w-3 before:rounded-full before:bg-warning-400 before:content-[''] after:absolute after:left-[36px] after:aspect-square after:w-3 after:rounded-full after:bg-success-400 after:content-['']"></div>
       </div>
@@ -74,7 +76,7 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
         <p className="text-sm">{description}</p>
       </div>
       <PortfolioTopics repoTitle={title} topics={topics} />
-    </Link>
+    </motion.div>
   );
 };
 
