@@ -15,6 +15,7 @@ import {
 import { wrap } from '@motionone/utils';
 import { mapRange } from '~/utils/helpers';
 
+// Used for color calculations
 const minTimeMs = 8000;
 const maxTimeMs = 12000;
 
@@ -24,24 +25,32 @@ type PortfolioTopicsProps = {
 };
 
 const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
-  const baseVelocity = Math.log(16 / topics.length);
+  // Starting X position
   const baseX = useMotionValue(0);
 
+  // Base velocity - uses log to normalize speed based on length
+  const baseVelocity = Math.log(16 / topics.length);
+
+  // Scroll Y and scroll velocity with smoothing
   const { scrollY } = useScroll();
-
   const scrollVelocity = useVelocity(scrollY);
-
   const smoothVelocity = useSpring(scrollVelocity, {
     damping: 50,
     stiffness: 400,
   }) as MotionValue<number>;
 
+  // Direction and velocity factors for
+  const directionFactor = useRef<number>(1);
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
     clamp: false,
   });
 
+  // Calculates the X position offset as a percentage
   const x = useTransform(baseX, (v: number) => {
+    // Cast the wrap function
     const wrapFn = wrap as (min: number, max: number, v: number) => number;
+
+    // Get the parallax and scroller elements for wrap calculations
     const parallax = document.getElementById(
       'motion-parallax',
     ) as HTMLDivElement;
@@ -49,25 +58,22 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
       'motion-scroller',
     ) as HTMLDivElement;
 
+    // Calculate the min and max X position offsets
     const threshold = { min: 0, max: 0 };
     if (parallax !== null && scroller !== null) {
       threshold.min =
-        mapRange(scroller.offsetWidth / 3, 0, scroller.offsetWidth, 0, 100) *
+        mapRange(scroller.offsetWidth / 2, 0, scroller.offsetWidth, 0, 100) *
         -1;
       threshold.max =
-        mapRange(scroller.offsetWidth / 6, 0, scroller.offsetWidth, 0, 100) *
+        mapRange(scroller.offsetWidth / 4, 0, scroller.offsetWidth, 0, 100) *
         -1;
-    } else {
-      threshold.min = -20;
-      threshold.max = -45;
     }
 
     return `${wrapFn(threshold.min, threshold.max, v)}%`;
   });
 
-  const directionFactor = useRef<number>(1);
-
-  useAnimationFrame((t, delta) => {
+  useAnimationFrame((_, delta) => {
+    // Initial amount to move by
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     // Changes the direction of the scroll on switching scroll directions.
@@ -77,11 +83,14 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
       directionFactor.current = 1;
     }
 
+    // Update move by based on direction
     moveBy += directionFactor.current * moveBy * velocityFactor.get();
 
+    // Update the X position by the move amount
     baseX.set(baseX.get() + moveBy);
   });
 
+  // Creates the looping color animation
   const time = useTime();
   const loopThreshold = useRef<number>(
     Math.floor(Math.random() * (maxTimeMs - minTimeMs + 1) + minTimeMs),
@@ -91,6 +100,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   });
   const topicBackgroundColor = useMotionTemplate`hsla(${rotateHue}, 100%, 80%, 1)`;
 
+  // Renders the list of topics
   const renderTopics = useMemo(
     () => (
       <span className="block">
@@ -113,6 +123,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
     [],
   );
 
+  // Check if topics exist
   if (!topics || topics.length === 0) return null;
 
   return (
@@ -129,8 +140,13 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
         {renderTopics}
         {renderTopics}
         {renderTopics}
-        {renderTopics}
-        {renderTopics}
+        {/* If not enought topics in the list, add some extra as padding */}
+        {topics.length < 3 ? (
+          <>
+            {renderTopics}
+            {renderTopics}
+          </>
+        ) : null}
       </motion.div>
     </motion.div>
   );
