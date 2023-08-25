@@ -135,18 +135,21 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
           {selectedCard.title && (
             <motion.div
               layoutId={`${selectedCard.title}-${selectedCard.index}`}
-              className="fixed bottom-0 left-0 right-0 top-[64px] z-10 flex max-h-screen flex-col overflow-hidden bg-neutrals-200 p-4 text-light-base dark:bg-neutrals-700 dark:text-dark-base"
+              className="group fixed bottom-0 left-0 right-0 top-[64px] z-20 flex max-h-screen flex-col overflow-hidden bg-neutrals-200 text-light-base dark:bg-neutrals-700 dark:text-dark-base"
             >
-              <div className="flex justify-between">
-                <motion.h2>{selectedCard.title}</motion.h2>
+              <div
+                id={`${selectedCard.title}-selected-card-navbar`}
+                className="flex h-10 w-full items-center justify-start gap-[10px] bg-neutrals-400 transition-colors duration-300 ease-in-out group-hover:bg-neutrals-500/50 dark:bg-neutrals-400/25"
+              >
                 <motion.button
-                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-brandLight-500 dark:bg-brandDark-500"
-                  whileHover={{ scale: 1.1 }}
+                  whileHover={{ scale: 1.25 }}
                   whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
                   onClick={() => setSelectedCard({ title: '', index: -1 })}
+                  className="group ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-400 group-hover:scale-110"
                 >
                   <motion.svg
-                    className="h-5 w-5 fill-none stroke-white"
+                    className="h-3 w-3 fill-none stroke-black"
                     viewBox="0 0 24 24"
                   >
                     <motion.path
@@ -163,6 +166,13 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
                     />
                   </motion.svg>
                 </motion.button>
+                <div className="aspect-square w-[18px] rounded-full bg-warning-400"></div>
+                <div className="aspect-square w-[18px] rounded-full bg-success-400"></div>
+              </div>
+              <div className="p-4">
+                <div className="flex justify-between">
+                  <motion.h2>{selectedCard.title}</motion.h2>
+                </div>
               </div>
             </motion.div>
           )}
