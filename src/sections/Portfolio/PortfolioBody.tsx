@@ -83,7 +83,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   }, [areCardsInView]);
 
   return (
-    <div ref={headerRef} className="portfolio-body mt-4">
+    <div ref={headerRef} className="portfolio-body">
       <Heading
         as="h1"
         className="section-header flex flex-col items-center justify-center text-center"
@@ -100,7 +100,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       </div>
       <div
         ref={cardsRef}
-        className="cards-container grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-6"
+        className="cards-container grid grid-cols-1 gap-3 rounded-xl sm:grid-cols-2 md:gap-6 lg:gap-8"
       >
         {githubRepos
           .filter(
