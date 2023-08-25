@@ -50,48 +50,57 @@ code {
     transform-origin: center;
   }
 
-  /* .hexagon-container {
-    display: flex;
-    padding-left: 8px;
-    --size: 100px; /* size  
-    --hex-size: 120px;
-    --margin: 4px; /* margin 
-    --f: calc(1.732 * var(--size) + 4 * var(--margin) - 1px);
+  .read-me-content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
+    }
+
+    h1 {
+      @apply sticky top-[42px] z-10 w-full bg-neutrals-200 pb-3 pt-5 text-3xl  dark:bg-neutrals-700 !important;
+    }
+
+    h2 {
+      @apply text-xl !important;
+    }
+
+    h3 {
+      @apply text-lg !important;
+    }
+
+    h4,
+    h5,
+    h6 {
+      @apply text-base  !important;
+    }
+
+    p {
+      @apply mb-4 text-xs xs:text-sm !important;
+    }
+
+    pre code {
+      @apply block max-w-screen-sm overflow-x-scroll whitespace-pre rounded-xl px-3 py-4 text-xs leading-none backdrop-brightness-75 xs:text-sm !important;
+    }
+
+    ul,
+    ol {
+      @apply ml-4 block min-w-fit max-w-screen-sm list-decimal px-5 text-xs xs:text-sm !important;
+
+      li {
+        @apply ml-4 list-item !important;
+      }
+    }
+
+    a {
+      @apply rounded-md bg-brandLight-500/70 px-2 py-0.5 text-white hover:bg-brandLight-300/70 hover:text-light-base dark:bg-brandDark-500/70 hover:dark:bg-brandDark-300/70;
+    }
+
+    img {
+      @apply mx-auto rounded-md;
+    }
   }
-
-  .hexagon-wrapper {
-    font-size: 0; /*disable white space between inline block element 
-  } */
-
-  /* .hexagon-wrapper .hexagon {
-    padding: 1rem;
-    width: var(--hex-size);
-    height: var(--hex-size);
-    display: inline-block;
-    font-size: theme('fontSize.sm');
-    background: theme('colors.rose.500');
-    margin-top: -16px;
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  } */
-  /* 
-  .hexagon-img {
-    position: relative;
-    padding: 1rem;
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  } */
-
-  /* .hexagon-wrapper .hexagon:nth-child(odd) {
-    background:green;
-  } */
-
-  /* .hexagon-wrapper::before {
-    content: '';
-    width: calc(var(--hex-size) / 2);
-    float: left;
-    height: 120%;
-    shape-outside: repeating-linear-gradient(
-      #0000 0 calc(var(--f) - 3px),
-      #000 0 var(--f)
-    );
-  } */
 }

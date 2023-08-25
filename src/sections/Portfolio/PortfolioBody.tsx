@@ -1,6 +1,5 @@
 'use client';
-
-import { type FC, useEffect, useState, useRef } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/sections/Portfolio/PortfolioCard';
@@ -183,10 +182,10 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
               {isRepoLoading ? (
                 <LoadingSpinner />
               ) : (
-                <div className="relative ">
+                <div className="relative">
                   <div
                     id={`${selectedCard.title}-selected-card-navbar`}
-                    className="sticky top-0 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-600"
+                    className="sticky top-0 z-10 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-600"
                   >
                     <motion.button
                       whileHover={{ scale: 1.25 }}
@@ -216,15 +215,11 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
                     <div className="aspect-square w-[18px] rounded-full bg-warning-400"></div>
                     <div className="aspect-square w-[18px] rounded-full bg-success-400"></div>
                   </div>
-                  <div className="flex flex-col gap-2 px-4 pb-4 pt-0">
-                    <div className="sticky top-[42px] z-0 mb-4 flex w-full items-center gap-2 bg-neutrals-200 pb-4 pt-4 dark:bg-neutrals-700">
-                      <Heading as="h2">{selectedCard.title}</Heading>
-                    </div>
-                    <Heading as="h3">ReadMe Content</Heading>
-
+                  <div className=" mx-auto max-w-5xl">
                     <ReactMarkdown
-                      className="read-me-content container"
+                      className="read-me-content flex flex-col gap-2 px-4 pb-16 pt-0"
                       remarkPlugins={[remarkGfm]}
+                      linkTarget={'_blank'}
                     >
                       {readmeContent}
                     </ReactMarkdown>
