@@ -1,17 +1,13 @@
 import { type FC } from 'react';
 
 type LoadingSpinnerProps = {
-  id: string;
   loadingText?: string;
-  className?: string;
   circleFill?: string;
   spinnerFill?: string;
 };
 
 const LoadingSpinner: FC<LoadingSpinnerProps> = ({
-  id,
   loadingText,
-  className,
   circleFill,
   spinnerFill,
 }) => {
