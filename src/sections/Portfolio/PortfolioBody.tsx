@@ -215,7 +215,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
                     <div className="aspect-square w-[18px] rounded-full bg-warning-400"></div>
                     <div className="aspect-square w-[18px] rounded-full bg-success-400"></div>
                   </div>
-                  <div className=" mx-auto max-w-5xl">
+                  <div className="mx-auto max-w-5xl">
                     <ReactMarkdown
                       className="read-me-content flex flex-col gap-2 px-4 pb-16 pt-0"
                       remarkPlugins={[remarkGfm]}

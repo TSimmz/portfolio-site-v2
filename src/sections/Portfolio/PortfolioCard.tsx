@@ -23,40 +23,40 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const mousePosition = useMouseHovered(cardRef, {
-    bound: true,
-    whenHovered: true,
-  });
+  // const mousePosition = useMouseHovered(cardRef, {
+  //   bound: true,
+  //   whenHovered: true,
+  // });
 
-  const cardSize = useRef<{ w: number; h: number }>({
-    w: mousePosition.elW,
-    h: mousePosition.elH,
-  });
+  // const cardSize = useRef<{ w: number; h: number }>({
+  //   w: mousePosition.elW,
+  //   h: mousePosition.elH,
+  // });
 
-  useEffect(() => {
-    if (cardRef.current !== null) {
-      if (cardSize.current.w === 0 || cardSize.current.h === 0)
-        cardSize.current = { w: mousePosition.elW, h: mousePosition.elH };
+  // useEffect(() => {
+  //   if (cardRef.current !== null) {
+  //     if (cardSize.current.w === 0 || cardSize.current.h === 0)
+  //       cardSize.current = { w: mousePosition.elW, h: mousePosition.elH };
 
-      const height = cardSize.current.h;
-      const width = cardSize.current.w;
-      const center = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
+  //     const height = cardSize.current.h;
+  //     const width = cardSize.current.w;
+  //     const center = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
 
-      const posX = mousePosition.elX;
-      const posY = mousePosition.elY;
+  //     const posX = mousePosition.elX;
+  //     const posY = mousePosition.elY;
 
-      const ratioX = Math.abs(center.x - posX);
-      const ratioY = Math.abs(center.y - posY);
+  //     const ratioX = Math.abs(center.x - posX);
+  //     const ratioY = Math.abs(center.y - posY);
 
-      const modifierX = posX > center.x ? 1 : -1;
-      const rotateY = mapRange(ratioX, 0, center.x, 0, 15) * modifierX;
-      const modifierY = posY > center.y ? -1 : 1;
-      const rotateX = mapRange(ratioY, 0, center.y, 0, 15) * modifierY;
+  //     const modifierX = posX > center.x ? 1 : -1;
+  //     const rotateY = mapRange(ratioX, 0, center.x, 0, 15) * modifierX;
+  //     const modifierY = posY > center.y ? -1 : 1;
+  //     const rotateX = mapRange(ratioY, 0, center.y, 0, 15) * modifierY;
 
-      cardRef.current.style.setProperty('--_rotateX', `${rotateX}deg`);
-      cardRef.current.style.setProperty('--_rotateY', `${rotateY}deg`);
-    }
-  }, [mousePosition]);
+  //     cardRef.current.style.setProperty('--_rotateX', `${rotateX}deg`);
+  //     cardRef.current.style.setProperty('--_rotateY', `${rotateY}deg`);
+  //   }
+  // }, [mousePosition]);
 
   return (
     <motion.div
