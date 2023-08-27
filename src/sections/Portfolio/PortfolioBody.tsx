@@ -144,7 +144,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     () => (
       <div
         id={`${selectedCard.title}-selected-card-navbar`}
-        className="sticky top-0 z-10 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-600"
+        className="sticky top-0 z-10 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-500"
       >
         <motion.button
           whileHover={{ scale: 1.25 }}
