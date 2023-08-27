@@ -96,7 +96,7 @@ code {
     }
 
     a {
-      @apply rounded-md bg-brandLight-500/70 px-2 py-0.5 text-white hover:bg-brandLight-300/70 hover:text-light-base dark:bg-brandDark-500/70 hover:dark:bg-brandDark-300/70;
+      @apply rounded-sm p-px font-medium text-brandLight-600 hover:bg-brandLight-500/70 hover:text-dark-base dark:text-brandDark-400 hover:dark:bg-brandDark-400/90 hover:dark:text-dark-base !important;
     }
 
     img {
