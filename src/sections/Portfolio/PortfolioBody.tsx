@@ -1,5 +1,5 @@
 'use client';
-import { type FC, useEffect, useState } from 'react';
+import { type FC, useEffect, useState, useMemo } from 'react';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/sections/Portfolio/PortfolioCard';
@@ -140,6 +140,44 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     }
   }, [selectedCard.title]);
 
+  const renderCardNavbar = useMemo(
+    () => (
+      <div
+        id={`${selectedCard.title}-selected-card-navbar`}
+        className="sticky top-0 z-10 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-600"
+      >
+        <motion.button
+          whileHover={{ scale: 1.25 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.2 }}
+          onClick={() => setSelectedCard({ title: '', index: -1 })}
+          className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-400 group-hover:scale-110"
+        >
+          <motion.svg
+            className="h-3 w-3 fill-none stroke-error-800 hover:stroke-error-100"
+            viewBox="0 0 24 24"
+          >
+            <motion.path
+              name={'close-A'}
+              fill="none"
+              strokeWidth="2.2"
+              d="M6 18 L18 6"
+            />
+            <motion.path
+              name={'close-B'}
+              fill="none"
+              strokeWidth="2.2"
+              d="M6 6 L18 18"
+            />
+          </motion.svg>
+        </motion.button>
+        <div className="aspect-square w-[18px] rounded-full bg-warning-400"></div>
+        <div className="aspect-square w-[18px] rounded-full bg-success-400"></div>
+      </div>
+    ),
+    [],
+  );
+
   return (
     <div ref={headerRef} className="portfolio-body">
       <Heading
@@ -176,55 +214,29 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         <AnimatePresence>
           {selectedCard.title && (
             <motion.div
-              layoutId={`${selectedCard.title}-${selectedCard.index}`}
-              className="group fixed bottom-0 left-0 right-0 top-[64px] z-20 flex max-h-screen flex-col overflow-y-scroll bg-neutrals-200 text-light-base dark:bg-neutrals-700 dark:text-dark-base"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="group fixed inset-0 z-50 box-border flex items-center justify-center bg-neutrals-500/50"
             >
               {isRepoLoading ? (
-                <LoadingSpinner />
+                <LoadingSpinner height="h-16" width="w-16" />
               ) : (
-                <div className="relative">
-                  <div
-                    id={`${selectedCard.title}-selected-card-navbar`}
-                    className="sticky top-0 z-10 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-600"
-                  >
-                    <motion.button
-                      whileHover={{ scale: 1.25 }}
-                      whileTap={{ scale: 0.9 }}
-                      transition={{ duration: 0.2 }}
-                      onClick={() => setSelectedCard({ title: '', index: -1 })}
-                      className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-400 group-hover:scale-110"
-                    >
-                      <motion.svg
-                        className="h-3 w-3 fill-none stroke-error-800 hover:stroke-error-100"
-                        viewBox="0 0 24 24"
-                      >
-                        <motion.path
-                          name={'close-A'}
-                          fill="none"
-                          strokeWidth="2.2"
-                          d="M6 18 L18 6"
-                        />
-                        <motion.path
-                          name={'close-B'}
-                          fill="none"
-                          strokeWidth="2.2"
-                          d="M6 6 L18 18"
-                        />
-                      </motion.svg>
-                    </motion.button>
-                    <div className="aspect-square w-[18px] rounded-full bg-warning-400"></div>
-                    <div className="aspect-square w-[18px] rounded-full bg-success-400"></div>
-                  </div>
-                  <div className="mx-auto max-w-5xl">
+                <motion.div
+                  layoutId={`${selectedCard.title}-${selectedCard.index}`}
+                  className="relative max-h-screen overflow-hidden rounded-xl bg-neutrals-200 text-light-base shadow-2xl shadow-neutrals-700 dark:bg-neutrals-700 dark:text-dark-base dark:shadow-neutrals-900"
+                >
+                  {renderCardNavbar}
+                  <div className="mb-6 mr-0.5 h-[80vmax] overflow-y-scroll rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]">
                     <ReactMarkdown
-                      className="read-me-content flex flex-col gap-2 px-4 pb-16 pt-0"
+                      className="read-me-content relative flex max-w-[80vmin] flex-col gap-2"
                       remarkPlugins={[remarkGfm]}
                       linkTarget={'_blank'}
                     >
                       {readmeContent}
                     </ReactMarkdown>
                   </div>
-                </div>
+                </motion.div>
               )}
             </motion.div>
           )}

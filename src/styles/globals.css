@@ -61,7 +61,7 @@ code {
     }
 
     h1 {
-      @apply sticky top-[42px] z-10 w-full bg-neutrals-200 pb-3 pt-5 text-3xl  dark:bg-neutrals-700 !important;
+      @apply sticky top-0 z-10 -mt-[4px] h-16 w-full bg-neutrals-200 pb-3 pt-5 text-3xl  dark:bg-neutrals-700 !important;
     }
 
     h2 {
@@ -100,7 +100,7 @@ code {
     }
 
     img {
-      @apply mx-auto rounded-md;
+      @apply mx-auto max-w-full rounded-md;
     }
   }
 }
