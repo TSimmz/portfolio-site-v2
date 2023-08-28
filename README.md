@@ -5,20 +5,20 @@ This project is meant to showcase my skills as a developer, share a bit about my
 ## Technologies Used
 | Name | Description |
 |:------|:------|
-| [NextJs](https://nextjs.org)| A React framework for building full-stack web applications |
-| [Prisma](https://prisma.io) | placeholder |
-| [Tailwind CSS](https://tailwindcss.com) | placeholder |
-| [tRPC](https://trpc.io) |  placeholder |
-| [EmailJS](https://www.emailjs.com/)| placeholder |
-| [Framer Motion](https://www.framer.com/motion/)| placeholder |
-| [React Hook Form](https://react-hook-form.com/)| placeholder |
-| [Zod](https://zod.dev/)| placeholder |
-| [React Hotkeys Hook](https://github.com/JohannesKlauss/react-hotkeys-hook)| placeholder |
-| [OctoKit](https://github.com/octokit)| placeholder |
-| [Three JS](https://threejs.org/)| placeholder |
-| [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)| placeholder |
-| [Pop Motion IO](https://popmotion.io/)| placeholder |
-| [Sanity IO](https://www.sanity.io/)| placeholder |
+| [NextJs](https://nextjs.org)| A React framework for building full-stack web applications. |
+| [Prisma](https://prisma.io) | A next generation Node.js and TypeScript ORM. |
+| [Tailwind CSS](https://tailwindcss.com) | A utility-first CSS framework that can be composed to build any design, directly in your markup. |
+| [tRPC](https://trpc.io) |  A tool to build & consume fully typesafe APIs without schemas or code generation. |
+| [EmailJS](https://www.emailjs.com/)| A tool to send email directly from code, no server code needed. |
+| [Framer Motion](https://www.framer.com/motion/)| A production-ready motion and animation library for React. |
+| [React Hook Form](https://react-hook-form.com/)| A tool to build performant, flexible and extensible forms with easy-to-use validation. |
+| [Zod](https://zod.dev/)| A TypeScript-first schema declaration and validation library. |
+| [React Hotkeys Hook](https://github.com/JohannesKlauss/react-hotkeys-hook)| A React hook for using keyboard shortcuts in components in a declarative way. |
+| [OctoKitJs](https://github.com/octokit/octokit.js)| An all-batteries-included GitHub SDK for Browsers, Node.js, and Deno |
+| [Three JS](https://threejs.org/)| An easy to use, lightweight, cross-browser, general purpose 3D library. |
+| [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)| A React renderer for three.js |
+| [Pop Motion IO](https://popmotion.io/)| A animator’s JavaScript toolbox.|
+| [Sanity IO](https://www.sanity.io/)| A modern CMS that transforms content into a competitive advantage. |
 
 ## Features
 
