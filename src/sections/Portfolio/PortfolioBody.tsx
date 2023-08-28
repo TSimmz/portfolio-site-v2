@@ -205,7 +205,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         onClick={(e) => {
           setSelectedCard({ title: '', index: -1 });
         }}
-        className="group fixed inset-0 z-50 box-border flex items-center justify-center bg-neutrals-500/50"
+        className="group fixed inset-0 z-50 box-border flex items-center justify-center bg-neutrals-500/50 backdrop-blur-[1px]"
       >
         {isRepoLoading ? (
           <LoadingSpinner height="h-16" width="w-16" />
