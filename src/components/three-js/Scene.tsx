@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
@@ -41,10 +41,13 @@ function Scene({ numStars = 100 }) {
   // Updates pixel ratio
   useLayoutEffect(() => gl.setPixelRatio(0.75));
 
-  const stars = [];
-  for (let i = 0; i < numStars; i++) {
-    stars.push(<Star key={`star-${i}`} p={progress(0, numStars, i)} />);
-  }
+  const stars = useMemo(() => {
+    return new Array(numStars)
+      .fill(null)
+      .map((star, index) => (
+        <Star key={`star-${index}`} p={progress(0, numStars, index)} />
+      ));
+  }, []);
 
   return (
     <>
