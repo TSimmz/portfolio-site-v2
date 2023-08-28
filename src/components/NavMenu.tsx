@@ -45,7 +45,6 @@ const NavMenu = () => {
       resumeButton.click();
     }
   });
-  //const isResumeComboPressed = useKeyCombo(openResumeKeyCombo);
 
   // Active link in the navbar
   const [activeLinkId, setActiveLinkId] = useState<string>('');
