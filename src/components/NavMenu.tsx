@@ -4,6 +4,7 @@ import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize, useCopyToClipboard } from 'react-use';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { useNotificationContext } from '~/providers/NotificationProvider';
 import theme from 'tailwindcss/defaultTheme';
 
 import NavLink from './NavLink';
@@ -65,6 +66,9 @@ const NavMenu = () => {
   // Clipboard hook for resume
   const [_, copyToClipboard] = useCopyToClipboard();
   const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  // Notification tool
+  const { notify } = useNotificationContext();
 
   // The path to the resume depending on theme mode
   const resumeUrlPath = isDarkMode
@@ -407,12 +411,16 @@ const NavMenu = () => {
 
           if (!isCopied) {
             copyToClipboard(resumeCopyLink);
+            notify.info(`Copied to clipboard!`, undefined, 5000);
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 10000);
           }
         }}
       >
-        <Tooltip text={isCopied ? 'Copied!' : 'Copy'}>
+        <Tooltip
+          text={isCopied ? 'Copied!' : 'Copy Resume Link'}
+          overrides="min-w-fit before:!left-[50%] before:!translate-x-[-50%] translate-y-[2px] whitespace-nowrap"
+        >
           <svg
             viewBox="0 0 24 24"
             className={`${
