@@ -212,7 +212,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
           </div>
           <motion.div
             style={{ scaleX: scrollProgressLength }}
-            className="z-30 h-2 origin-[0%] bg-brandLight-500 dark:bg-brandDark-500"
+            className="z-10 h-3 origin-[0%] bg-brandLight-500 dark:bg-brandDark-500"
           />
         </div>
       ),
@@ -241,10 +241,10 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             <div
               id="portfolio-card-modal"
               ref={cardModalRef}
-              className="scrollbar-hidden mb-6 h-[80vmax] touch-pan-y overflow-y-scroll rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
+              className="scrollbar-hidden mb-6 h-[80vmax] touch-auto overflow-y-auto rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
             >
               <ReactMarkdown
-                className="read-me-content relative flex max-w-[80vmin] flex-col gap-2"
+                className="read-me-content relative flex max-w-[87vmin] flex-col gap-2 px-[3px] py-px"
                 remarkPlugins={[remarkGfm]}
                 linkTarget={'_blank'}
               >

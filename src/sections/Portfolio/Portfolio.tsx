@@ -22,7 +22,7 @@ const Portfolio = async () => {
   });
 
   return (
-    <SectionWrapper id="portfolio">
+    <SectionWrapper id="portfolio" className="max-sm:pt-24">
       <PortfolioBody githubRepos={githubRepos} />
     </SectionWrapper>
   );
