@@ -53,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
+        id="app-body"
         className={`relative !mx-0 w-screen overflow-x-hidden bg-light text-light-base antialiased dark:bg-dark dark:text-dark-base ${sourceCodePro.className}`}
       >
         <Providers>

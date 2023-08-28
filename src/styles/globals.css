@@ -51,6 +51,7 @@ code {
   }
 
   .scrollbar-hidden {
+    -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
 
@@ -70,29 +71,33 @@ code {
     h4,
     h5,
     h6 {
-      @apply mt-2 font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
+      @apply font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
     }
 
     h1 {
-      @apply sticky top-0 z-10 -mt-[4px] w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
+      @apply sticky -top-[0.5rem] left-0 right-0 -mr-0.5 -mt-3 box-content w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
     }
 
     h2 {
-      @apply text-xl !important;
+      @apply mt-2 text-xl !important;
     }
 
     h3 {
-      @apply text-lg !important;
+      @apply mt-2 text-lg !important;
     }
 
     h4,
     h5,
     h6 {
-      @apply text-base !important;
+      @apply mt-2 text-base !important;
     }
 
     p {
       @apply text-xs xs:text-sm !important;
+
+      code {
+        @apply rounded-md bg-neutrals-400 px-1 py-0.5 font-mono text-xs font-normal leading-none dark:bg-neutrals-500 !important;
+      }
     }
 
     code {
@@ -133,6 +138,37 @@ code {
 
     img {
       @apply mx-auto max-w-full rounded-md !important;
+    }
+
+    table {
+      @apply overflow-hidden rounded-md text-light-base dark:text-dark-base sm:text-sm !important;
+
+      thead {
+        @apply bg-neutrals-400 dark:bg-neutrals-800/30 !important;
+
+        th + th {
+          @apply border-neutrals-500 dark:border-neutrals-300 !important;
+        }
+
+        th {
+          @apply px-2 py-1.5 text-sm text-light-sub dark:text-dark-sub sm:text-base !important;
+        }
+      }
+      tbody {
+        @apply !important;
+
+        tr {
+          @apply align-top text-xs odd:bg-neutrals-300/50 even:bg-neutrals-400/50 odd:dark:bg-neutrals-500/50 even:dark:bg-neutrals-600/50 sm:text-sm !important;
+
+          td + td {
+            @apply border-l-[1px] border-neutrals-300 dark:border-neutrals-500/75 !important;
+          }
+
+          td {
+            @apply px-2 py-1.5 !important;
+          }
+        }
+      }
     }
   }
 }
