@@ -25,9 +25,9 @@ import { type OctokitResponse } from '@octokit/types';
 import LoadingSpinner from '~/components/svgs/LoadingSpinner';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useLockBodyScroll } from 'react-use';
 import Link from 'next/link';
 import { IconGitHubAlt } from '~/components/svgs/socials';
+import { usePreventScroll } from 'react-aria';
 
 const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
@@ -49,8 +49,6 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   const isSectionInView = useInView(headerRef, {
     margin: '-30px 0px',
   });
-
-  //useLockBodyScroll(selectedCard.title !== '');
 
   const [cardsRef, animateCards] = useAnimate();
   const areCardsInView = useInView(cardsRef, { once: true });
@@ -155,6 +153,8 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       restDelta: 0.001,
     });
 
+    usePreventScroll({ isDisabled: selectedCard.title !== '' });
+
     const renderCardNavbar = useMemo(
       () => (
         <div className="sticky top-0 z-10 flex w-full flex-col">
@@ -224,7 +224,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={(e) => {
+        onClick={() => {
           setSelectedCard({ title: '', index: -1 });
         }}
         className="group fixed inset-0 z-30 box-border flex items-center justify-center bg-neutrals-500/50 backdrop-blur-[1px]"
@@ -241,6 +241,10 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             <div
               id="portfolio-card-modal"
               ref={cardModalRef}
+              onTouchMove={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
               className="scrollbar-hidden mb-6 h-[75vmax] w-full touch-pan-y overflow-y-auto rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
             >
               <ReactMarkdown
