@@ -71,25 +71,25 @@ code {
     h4,
     h5,
     h6 {
-      @apply mt-2 font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
+      @apply font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
     }
 
     h1 {
-      @apply sticky left-0 right-0 top-0 -mr-px -mt-3 box-content w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
+      @apply sticky -top-[0.5rem] left-0 right-0 -mr-0.5 -mt-3 box-content w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
     }
 
     h2 {
-      @apply text-xl !important;
+      @apply mt-2 text-xl !important;
     }
 
     h3 {
-      @apply text-lg !important;
+      @apply mt-2 text-lg !important;
     }
 
     h4,
     h5,
     h6 {
-      @apply text-base !important;
+      @apply mt-2 text-base !important;
     }
 
     p {

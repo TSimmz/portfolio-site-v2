@@ -50,7 +50,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     margin: '-30px 0px',
   });
 
-  useLockBodyScroll(selectedCard.title !== '');
+  //useLockBodyScroll(selectedCard.title !== '');
 
   const [cardsRef, animateCards] = useAnimate();
   const areCardsInView = useInView(cardsRef, { once: true });
@@ -235,13 +235,13 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
           <motion.div
             layoutId={`${selectedCard.title}-${selectedCard.index}`}
             onClick={(e) => e.stopPropagation()}
-            className="relative max-h-screen overflow-hidden rounded-xl bg-neutrals-200 text-light-base shadow-2xl shadow-neutrals-700 dark:bg-neutrals-700 dark:text-dark-base dark:shadow-neutrals-900"
+            className="relative max-h-[calc(100vh-1.5rem)] overflow-hidden rounded-xl bg-neutrals-200 text-light-base shadow-2xl shadow-neutrals-700 dark:bg-neutrals-700 dark:text-dark-base dark:shadow-neutrals-900"
           >
             {renderCardNavbar}
             <div
               id="portfolio-card-modal"
               ref={cardModalRef}
-              className="z-50 mb-6 h-[80vmax] touch-auto overflow-y-auto rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
+              className="scrollbar-hidden mb-6 h-[75vmax] w-full touch-pan-y overflow-y-auto rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
             >
               <ReactMarkdown
                 className="read-me-content relative flex max-w-[87vmin] flex-col gap-2 px-[3px] py-px"
