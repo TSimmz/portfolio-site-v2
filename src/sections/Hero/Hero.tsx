@@ -84,7 +84,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (isHeroInView) updateElementInView(baseRoutes.home);
-  }, [isHeroInView]);
+  }, [isHeroInView]); // eslint-disable-line
 
   return (
     <SectionWrapper

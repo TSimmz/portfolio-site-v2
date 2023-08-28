@@ -1,6 +1,5 @@
 'use client';
-import { type FC, useRef } from 'react';
-import { useHoverDirty } from 'react-use';
+import { type FC } from 'react';
 import PortfolioTopics from './PortfolioTopics';
 import { motion } from 'framer-motion';
 

@@ -28,7 +28,7 @@ function useDeviceWidths() {
         width < themeSize() ? directions.toMobile : directions.toDesktop,
       );
     }
-  }, [width]);
+  }, [width]); // eslint-disable-line
 
   return {
     width,

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { motion, stagger, useAnimate, useInView } from 'framer-motion';
-import techIcons, { type TechIconItem } from '../svgs/tech';
+import techIcons from '../svgs/tech';
 
 const transition = {
   rotate: {
@@ -25,7 +25,8 @@ const Skills = () => {
   const areSkillsInView = useInView(skillsRef, { once: true });
 
   useEffect(() => {
-    const skillSquares = animateSkills(
+    // eslint-disable-next-line
+    animateSkills(
       '.skill-square',
       {
         opacity: !areSkillsInView ? 0 : 1,
@@ -36,7 +37,7 @@ const Skills = () => {
         delay: !areSkillsInView ? 0 : staggerSkills,
       },
     );
-  }, [areSkillsInView]);
+  }, [areSkillsInView]); // eslint-disable-line
 
   return (
     <div
@@ -44,7 +45,7 @@ const Skills = () => {
       ref={skillsRef}
       className="flex flex-wrap items-center justify-center gap-4"
     >
-      {Object.entries(techIcons).map(([key, { id, Icon }]) => (
+      {Object.entries(techIcons).map(([_, { id, Icon }]) => (
         <motion.div
           id={`skill-wrapper-${id.toLowerCase()}`}
           key={`skill-wrapper-${id.toLowerCase()}`}

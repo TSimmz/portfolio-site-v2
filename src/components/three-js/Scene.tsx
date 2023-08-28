@@ -47,7 +47,7 @@ function Scene({ numStars = 100 }) {
       .map((star, index) => (
         <Star key={`star-${index}`} p={progress(0, numStars, index)} />
       ));
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>

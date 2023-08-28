@@ -1,7 +1,6 @@
 import { useRef, type FC } from 'react';
 import { motion } from 'framer-motion';
 import * as Chevrons from '~/components/svgs/chevrons';
-import Link from 'next/link';
 import { useHoverDirty } from 'react-use';
 
 type CallToActionProps = {

@@ -59,16 +59,18 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
 
   useEffect(() => {
     if (isSectionInView) updateElementInView(baseRoutes.portfolio);
-  }, [isSectionInView]);
+  }, [isSectionInView]); // eslint-disable-line
 
   useEffect(() => {
-    const sectionHeader = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.section-header',
       { opacity: !isHeaderInView ? 0 : 1 },
       { duration: 0.2, delay: 0.1 },
     );
 
-    const headerText = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.header-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -81,7 +83,8 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       },
     );
 
-    const flavorText = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.flavor-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -93,7 +96,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         delay: 0.8,
       },
     );
-  }, [isHeaderInView]);
+  }, [isHeaderInView]); // eslint-disable-line
 
   useEffect(() => {
     const portfolioCards = animateCards(
@@ -107,7 +110,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         delay: !areCardsInView ? 0 : staggerCards,
       },
     );
-  }, [areCardsInView]);
+  }, [areCardsInView]); // eslint-disable-line
 
   useEffect(() => {
     const fetchRespositoryData = async (title: string) => {
@@ -130,17 +133,17 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         bodyElement.style.overflowY = 'hidden';
       }
       setIsRepoLoading(true);
-      const repoContent = fetchRespositoryData(selectedCard.title).then(
-        (response: unknown) => {
-          const res = response as OctokitResponse<GitHubRepoContentData>;
-          if (res.status === 200) {
-            const content = atob(res.data.content);
 
-            setReadmeContent(content);
-            setIsRepoLoading(false);
-          }
-        },
-      );
+      // eslint-disable-next-line
+      fetchRespositoryData(selectedCard.title).then((response: unknown) => {
+        const res = response as OctokitResponse<GitHubRepoContentData>;
+        if (res.status === 200) {
+          const content = atob(res.data.content);
+
+          setReadmeContent(content);
+          setIsRepoLoading(false);
+        }
+      });
     } else {
       if (bodyElement != null) {
         bodyElement.style.overflowY = 'auto';

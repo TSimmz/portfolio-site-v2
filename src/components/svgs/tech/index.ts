@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import { SVGIconProps } from '..';
+import { type SVGIconProps } from '..';
 import IconAdobeIllustrator from './IconAdobeIllustrator';
 import IconBrandNext from './IconBrandNext';
 import IconConfluence from './IconConfluence';
@@ -19,7 +19,6 @@ import IconPrisma from './IconPrisma';
 import IconReact from './IconReact';
 import IconReactHookForm from './IconReactHookForm';
 import IconRedux from './IconRedux';
-import IconStyledComponents from './IconStyledComponents';
 import IconTailwind from './IconTailwind';
 import IconTrpc from './IconTrpc';
 import IconTypescript from './IconTypescript';
@@ -95,10 +94,6 @@ const techIcons: TechIconItem[] = [
     id: 'JavaScript',
     Icon: IconJavascript,
   },
-  // {
-  //   id: 'Styled Components',
-  //   Icon: IconStyledComponents,
-  // },
   {
     id: 'GatsbyJS',
     Icon: IconGatsby,

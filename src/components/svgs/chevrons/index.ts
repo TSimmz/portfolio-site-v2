@@ -1,5 +1,3 @@
-import { type FC } from 'react';
-
 export const ctaTopBounceVariant = {
   animate: {
     y: [-1.8, 0.5, -1.8],

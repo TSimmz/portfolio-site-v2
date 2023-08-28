@@ -1,10 +1,10 @@
 'use client';
+
 import { type FC } from 'react';
 import { motion } from 'framer-motion';
 import { type SVGIconProps } from '..';
 
 const IconBrandMantine: FC<SVGIconProps> = ({
-  fill = 'none',
   stroke = 'currentColor',
   strokeWidth = 2,
   height = '1em',

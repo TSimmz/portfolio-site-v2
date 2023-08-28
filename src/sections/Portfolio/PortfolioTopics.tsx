@@ -125,7 +125,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
         })}
       </span>
     ),
-    [],
+    [], // eslint-disable-line
   );
 
   // Check if topics exist

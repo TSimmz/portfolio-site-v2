@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import { type SVGIconProps } from '..';
 
 const IconReact: FC<SVGIconProps> = ({
-  fill = 'none',
-  stroke = 'currentColor',
   strokeWidth = 0.75,
   height = '1em',
   width = '1em',

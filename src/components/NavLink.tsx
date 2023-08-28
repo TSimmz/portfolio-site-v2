@@ -1,7 +1,6 @@
 'use client';
-import Link from 'next/link';
-import { useRef, useEffect, useState, type FC } from 'react';
-import { baseRoutes } from '~/utils/constants';
+
+import { useRef, useEffect, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { useElementInView } from '~/providers/ViewPortProvider';
 
@@ -31,7 +30,7 @@ const NavLink: FC<NavLinkProps> = ({
     isActive.current = elementInView === href;
 
     if (isActive.current) onPathChange(id);
-  }, [elementInView]);
+  }, [elementInView]); // eslint-disable-line
 
   const handleLinkClick = () => {
     toggleMobileMenu(false);

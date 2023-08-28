@@ -98,23 +98,6 @@ const NavMenu = () => {
     [navMenuRef],
   );
 
-  // // Effect for resume button key combo
-  // useEffect(() => {
-  //   console.log(`${openResumeKeyCombo} Pressed!`);
-  //   if (isResumeComboPressed) {
-  //     const resumeButton = document.getElementById('resume-button');
-  //     if (resumeButton !== null) {
-  //       resumeButton.click();
-  //     }
-  //   }
-  // }, [isResumeComboPressed]);
-
-  // // Effect for hide/show button key combo
-  // useEffect(() => {
-  //   console.log(`${hideNavKeyCombo} Pressed!`);
-  //   if (isHideNavbarComboPressed) toggleNavBar();
-  // }, [isHideNavbarComboPressed]);
-
   // Effect for navbar position on state change
   useEffect(() => {
     const upDistance = -64;
@@ -145,7 +128,7 @@ const NavMenu = () => {
         });
       }
     }
-  }, [width]);
+  }, [width]); // eslint-disable-line
 
   // Logic to handle the underline movement for navbar links
   const handleDesktopPathChange = useCallback(
@@ -248,7 +231,7 @@ const NavMenu = () => {
           toggleMobileMenu={toggle}
         />
       )),
-    [createLinkId, handleDesktopPathChange],
+    [createLinkId, handleDesktopPathChange], // eslint-disable-line
   );
 
   return (

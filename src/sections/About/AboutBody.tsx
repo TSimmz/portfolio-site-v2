@@ -35,16 +35,18 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
 
   useEffect(() => {
     if (isSectionInView) updateElementInView(baseRoutes.about);
-  }, [isSectionInView]);
+  }, [isSectionInView]); // eslint-disable-line
 
   useEffect(() => {
-    const sectionHeader = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.section-header',
       { opacity: !isHeaderInView ? 0 : 1 },
       { duration: 0.2, delay: 0.1 },
     );
 
-    const headerText = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.header-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -57,7 +59,8 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
       },
     );
 
-    const flavorText = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.flavor-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -69,10 +72,11 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         delay: !isHeaderInView ? 0 : staggerFlavorText,
       },
     );
-  }, [isHeaderInView]);
+  }, [isHeaderInView]); // eslint-disable-line
 
   useEffect(() => {
-    const imageWrapper = animateImage(
+    // eslint-disable-next-line
+    animateImage(
       '.image-wrapper',
       {
         opacity: !isImageInView ? 0 : 1,
@@ -83,7 +87,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
         delay: !isImageInView ? 0 : 0.4,
       },
     );
-  }, [isImageInView]);
+  }, [isImageInView]); // eslint-disable-line
 
   return (
     <div ref={headerRef} className="about-body flex flex-col items-center">
@@ -109,7 +113,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
           <Image
             src={githubProfileData?.avatar_url ?? '/default-profile-pic.jpeg'}
             fill={true}
-            sizes={undefined}
+            sizes={'100vw'}
             className="scale-[1.05]"
             alt="GitHub profile image for Tyler Simoni"
           />
