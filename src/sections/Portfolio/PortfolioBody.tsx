@@ -1,5 +1,5 @@
 'use client';
-import { type FC, useEffect, useState, useMemo } from 'react';
+import { type FC, useEffect, useState, useMemo, useRef } from 'react';
 import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import PortfolioCard from '~/sections/Portfolio/PortfolioCard';
@@ -15,6 +15,8 @@ import {
   useInView,
   AnimatePresence,
   motion,
+  useScroll,
+  useSpring,
 } from 'framer-motion';
 import CallToAction from '~/components/buttons/CallToAction';
 import { useElementInView } from '~/providers/ViewPortProvider';
@@ -131,7 +133,6 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
           if (res.status === 200) {
             const content = atob(res.data.content);
 
-            console.log('Content: ', content);
             setReadmeContent(content);
             setIsRepoLoading(false);
           }
@@ -140,43 +141,95 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     }
   }, [selectedCard.title]);
 
-  const renderCardNavbar = useMemo(
-    () => (
-      <div
-        id={`${selectedCard.title}-selected-card-navbar`}
-        className="sticky top-0 z-10 flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-500"
-      >
-        <motion.button
-          whileHover={{ scale: 1.25 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.2 }}
-          onClick={() => setSelectedCard({ title: '', index: -1 })}
-          className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-400 group-hover:scale-110"
-        >
-          <motion.svg
-            className="h-3 w-3 fill-none stroke-error-800 hover:stroke-error-100"
-            viewBox="0 0 24 24"
+  const Modal = () => {
+    const cardModalRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+      container: cardModalRef,
+    });
+
+    const scrollProgressLength = useSpring(scrollYProgress, {
+      stiffness: 200,
+      damping: 20,
+      restDelta: 0.001,
+    });
+
+    const renderCardNavbar = useMemo(
+      () => (
+        <div className="sticky top-0 z-10 flex w-full flex-col">
+          <div
+            id={`${selectedCard.title}-selected-card-navbar`}
+            className="flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-500"
           >
-            <motion.path
-              name={'close-A'}
-              fill="none"
-              strokeWidth="2.2"
-              d="M6 18 L18 6"
-            />
-            <motion.path
-              name={'close-B'}
-              fill="none"
-              strokeWidth="2.2"
-              d="M6 6 L18 18"
-            />
-          </motion.svg>
-        </motion.button>
-        <div className="aspect-square w-[18px] rounded-full bg-warning-400"></div>
-        <div className="aspect-square w-[18px] rounded-full bg-success-400"></div>
-      </div>
-    ),
-    [],
-  );
+            <motion.button
+              whileHover={{ scale: 1.4 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setSelectedCard({ title: '', index: -1 })}
+              className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-500 transition-colors duration-500 ease-in-out hover:bg-error-400 group-hover:scale-110 dark:bg-error-400 dark:hover:bg-error-300"
+            >
+              <motion.svg
+                className="peer h-3 w-3 fill-none stroke-error-200"
+                viewBox="0 0 24 24"
+              >
+                <motion.path
+                  name={'close-A'}
+                  fill="none"
+                  strokeWidth="2.2"
+                  d="M6 18 L18 6"
+                />
+                <motion.path
+                  name={'close-B'}
+                  fill="none"
+                  strokeWidth="2.2"
+                  d="M6 6 L18 18"
+                />
+              </motion.svg>
+            </motion.button>
+            <div className="aspect-square w-[18px] rounded-full bg-warning-400 transition-colors duration-500 ease-in-out peer-hover:bg-warning-300"></div>
+            <div className="aspect-square w-[18px] rounded-full bg-success-400 transition-colors duration-500 ease-in-out peer-hover:bg-success-300"></div>
+          </div>
+          <motion.div
+            style={{ scaleX: scrollProgressLength }}
+            className="z-30 h-2 origin-[0%] bg-brandLight-500 dark:bg-brandDark-500"
+          />
+        </div>
+      ),
+      [],
+    );
+
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="group fixed inset-0 z-50 box-border flex items-center justify-center bg-neutrals-500/50"
+      >
+        {isRepoLoading ? (
+          <LoadingSpinner height="h-16" width="w-16" />
+        ) : (
+          <motion.div
+            layoutId={`${selectedCard.title}-${selectedCard.index}`}
+            className="relative max-h-screen overflow-hidden rounded-xl bg-neutrals-200 text-light-base shadow-2xl shadow-neutrals-700 dark:bg-neutrals-700 dark:text-dark-base dark:shadow-neutrals-900"
+          >
+            {renderCardNavbar}
+            <div
+              id="portfolio-card-modal"
+              ref={cardModalRef}
+              className="scrollbar-hidden mb-6 h-[80vmax] overflow-y-scroll rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
+            >
+              <ReactMarkdown
+                className="read-me-content relative flex max-w-[80vmin] flex-col gap-2"
+                remarkPlugins={[remarkGfm]}
+                linkTarget={'_blank'}
+              >
+                {readmeContent}
+              </ReactMarkdown>
+            </div>
+          </motion.div>
+        )}
+      </motion.div>
+    );
+  };
 
   return (
     <div ref={headerRef} className="portfolio-body">
@@ -211,36 +264,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             }
           />
         ))}
-        <AnimatePresence>
-          {selectedCard.title && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="group fixed inset-0 z-50 box-border flex items-center justify-center bg-neutrals-500/50"
-            >
-              {isRepoLoading ? (
-                <LoadingSpinner height="h-16" width="w-16" />
-              ) : (
-                <motion.div
-                  layoutId={`${selectedCard.title}-${selectedCard.index}`}
-                  className="relative max-h-screen overflow-hidden rounded-xl bg-neutrals-200 text-light-base shadow-2xl shadow-neutrals-700 dark:bg-neutrals-700 dark:text-dark-base dark:shadow-neutrals-900"
-                >
-                  {renderCardNavbar}
-                  <div className="mb-6 mr-0.5 h-[80vmax] overflow-y-scroll rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]">
-                    <ReactMarkdown
-                      className="read-me-content relative flex max-w-[80vmin] flex-col gap-2"
-                      remarkPlugins={[remarkGfm]}
-                      linkTarget={'_blank'}
-                    >
-                      {readmeContent}
-                    </ReactMarkdown>
-                  </div>
-                </motion.div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <AnimatePresence>{selectedCard.title && <Modal />}</AnimatePresence>
       </div>
     </div>
   );

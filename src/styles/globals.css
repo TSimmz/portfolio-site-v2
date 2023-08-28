@@ -50,18 +50,31 @@ code {
     transform-origin: center;
   }
 
+  .scrollbar-hidden {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .read-me-content {
+    * {
+      @apply decoration-brandLight-800 dark:decoration-brandDark-200 !important;
+    }
+
     h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      @apply font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
+      @apply mt-2 font-bold text-light-base underline underline-offset-2 dark:text-dark-base !important;
     }
 
     h1 {
-      @apply sticky top-0 z-10 -mt-[4px] h-16 w-full bg-neutrals-200 pb-3 pt-5 text-3xl  dark:bg-neutrals-700 !important;
+      @apply sticky top-0 z-10 -mt-[4px] w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
     }
 
     h2 {
@@ -75,23 +88,42 @@ code {
     h4,
     h5,
     h6 {
-      @apply text-base  !important;
+      @apply text-base !important;
     }
 
     p {
-      @apply mb-4 text-xs xs:text-sm !important;
+      @apply text-xs xs:text-sm !important;
+    }
+
+    code {
+      @apply rounded-xl font-mono font-normal leading-none !important;
     }
 
     pre code {
-      @apply block max-w-screen-sm overflow-x-scroll whitespace-pre rounded-xl px-3 py-4 text-xs leading-none backdrop-brightness-75 xs:text-sm !important;
+      @apply block max-w-screen-sm overflow-x-scroll whitespace-pre rounded-xl px-3 py-2 text-xs leading-none backdrop-brightness-100 backdrop-contrast-75 dark:backdrop-brightness-75 dark:backdrop-contrast-100 xs:text-sm !important;
     }
 
-    ul,
     ol {
-      @apply ml-4 block min-w-fit max-w-screen-sm list-decimal px-5 text-xs xs:text-sm !important;
+      @apply ml-4 block min-w-fit max-w-screen-sm list-decimal px-2 text-xs xs:text-sm !important;
 
       li {
-        @apply ml-4 list-item !important;
+        @apply ml-1 list-item marker:font-semibold marker:text-brandLight-800 marker:dark:text-brandDark-200 !important;
+
+        & > ol {
+          @apply ml-0.5 !important;
+        }
+      }
+    }
+
+    ul {
+      @apply ml-1.5 block min-w-fit max-w-screen-sm list-disc px-2 text-xs xs:text-sm  !important;
+
+      li {
+        @apply ml-1 list-item marker:font-extrabold !important;
+
+        ul {
+          @apply ml-0 !important;
+        }
       }
     }
 
@@ -100,7 +132,7 @@ code {
     }
 
     img {
-      @apply mx-auto max-w-full rounded-md;
+      @apply mx-auto max-w-full rounded-md !important;
     }
   }
 }
