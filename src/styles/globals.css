@@ -128,7 +128,7 @@ code {
     }
 
     a {
-      @apply rounded-sm p-px font-medium text-brandLight-600 hover:bg-brandLight-500/70 hover:text-dark-base dark:text-brandDark-400 hover:dark:bg-brandDark-400/90 hover:dark:text-dark-base !important;
+      @apply rounded-sm px-px py-px font-medium text-brandLight-600 transition-colors duration-300 ease-in-out hover:bg-brandLight-500/70 hover:text-dark-base dark:text-brandDark-400 hover:dark:bg-brandDark-400/90 hover:dark:text-dark-base !important;
     }
 
     img {
