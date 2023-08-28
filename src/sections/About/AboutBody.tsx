@@ -113,7 +113,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
           <Image
             src={githubProfileData?.avatar_url ?? '/default-profile-pic.jpeg'}
             fill={true}
-            sizes={'100vw'}
+            sizes={'80vw'}
             className="scale-[1.05]"
             alt="GitHub profile image for Tyler Simoni"
           />
