@@ -207,13 +207,6 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
               >
                 <span className="mr-1 text-xs">GitHub</span>
                 <IconGitHubAlt className="inline h-5 w-5 " />
-                {/* <motion.svg
-                  viewBox={'0 0 64 64'}
-                  strokeWidth={4}
-                  className="absolute -left-4 bottom-1  h-5 w-6 origin-bottom -rotate-180 scale-x-[-1] stroke-black transition-all duration-500 ease-in-out"
-                >
-                  <motion.path d="M30 64V6L55 17C57 18 57 20 55 21L34 30 34 64" />
-                </motion.svg> */}
               </Link>
             </motion.div>
           </div>
@@ -248,7 +241,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             <div
               id="portfolio-card-modal"
               ref={cardModalRef}
-              className="scrollbar-hidden mb-6 h-[80vmax] overflow-y-scroll rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
+              className="scrollbar-hidden mb-6 h-[80vmax] touch-pan-y overflow-y-scroll rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
             >
               <ReactMarkdown
                 className="read-me-content relative flex max-w-[80vmin] flex-col gap-2"
