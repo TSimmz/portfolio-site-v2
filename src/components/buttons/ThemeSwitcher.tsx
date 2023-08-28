@@ -255,7 +255,6 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       variants={themeSwitcherVariant}
       initial={['rest', 'out']}
       whileHover="hover"
-      whileTap={isMobile ? 'hover' : ''}
       animate={['rest', 'in']}
       custom={isDarkMode}
       className="group relative flex !h-10 items-center justify-center rounded-md"
@@ -269,8 +268,8 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
             id="theme-mode-button"
             className="mr-2 overflow-visible"
             onClick={(e) => {
-              if (themeMode === 'system') return;
               e.stopPropagation();
+              if (themeMode === 'system') return;
 
               closeDetailsDropDown();
               onThemeClick(isDarkMode ? 'light' : 'dark');
