@@ -165,7 +165,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}
               onClick={() => setSelectedCard({ title: '', index: -1 })}
-              className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-500 transition-colors duration-500 ease-in-out hover:bg-error-400 group-hover:scale-110 dark:bg-error-400 dark:hover:bg-error-300"
+              className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-500 transition-colors duration-500 ease-in-out hover:bg-error-400 group-hover:scale-110 dark:bg-error-400 dark:hover:bg-error-500"
             >
               <motion.svg
                 className="peer h-3 w-3 fill-none stroke-error-200"
@@ -202,6 +202,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        onClick={(e) => {
+          setSelectedCard({ title: '', index: -1 });
+        }}
         className="group fixed inset-0 z-50 box-border flex items-center justify-center bg-neutrals-500/50"
       >
         {isRepoLoading ? (
@@ -209,6 +212,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         ) : (
           <motion.div
             layoutId={`${selectedCard.title}-${selectedCard.index}`}
+            onClick={(e) => e.stopPropagation()}
             className="relative max-h-screen overflow-hidden rounded-xl bg-neutrals-200 text-light-base shadow-2xl shadow-neutrals-700 dark:bg-neutrals-700 dark:text-dark-base dark:shadow-neutrals-900"
           >
             {renderCardNavbar}
