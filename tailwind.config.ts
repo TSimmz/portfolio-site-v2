@@ -13,9 +13,9 @@ const accent = brand[500];
 const lightBg = neutrals[100];
 const darkBg = neutrals[800];
 const lightBaseText = neutrals[800];
-const lightSubText = neutrals[400];
+const lightSubText = neutrals[600];
 const darkBaseText = neutrals[100];
-const darkSubText = neutrals[500];
+const darkSubText = neutrals[400];
 
 const colorThemes = Object.freeze({
   brand: brand,
