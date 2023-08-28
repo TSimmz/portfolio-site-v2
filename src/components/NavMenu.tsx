@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
-import { useToggle, useWindowSize } from 'react-use';
+import { useToggle, useWindowSize, useCopyToClipboard } from 'react-use';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import theme from 'tailwindcss/defaultTheme';
@@ -62,10 +62,16 @@ const NavMenu = () => {
   // Dark mode check
   const { isDarkMode } = useTheme();
 
+  // Clipboard hook for resume
+  const [_, copyToClipboard] = useCopyToClipboard();
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
   // The path to the resume depending on theme mode
   const resumeUrlPath = isDarkMode
     ? process.env.NEXT_PUBLIC_DARK_RESUME_PATH! ?? '/'
     : process.env.NEXT_PUBLIC_LIGHT_RESUME_PATH! ?? '/';
+
+  const resumeCopyLink = process.env.NEXT_PUBLIC_BASE_URL + resumeUrlPath;
 
   // Creates an id for a navbar link
   const createLinkId = useCallback(
@@ -387,6 +393,206 @@ const NavMenu = () => {
           <span>Resume</span>
         </Tooltip>
       </motion.a>
+      <motion.button
+        animate={{ translateY: navbarYPosition }}
+        whileHover={{ translateY: navbarYPosition + 4 }}
+        className={`group fixed left-[7.2rem] top-[2.65rem] z-10 flex origin-center cursor-pointer rounded-md ${
+          !isCopied
+            ? 'bg-brandLight-500/90 hover:bg-brandLight-400 hover:text-light-base hover:ring-brandLight-500 dark:bg-brandDark-500/90 hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400'
+            : 'bg-info-500 hover:!ring-info-500'
+        } px-3 pb-2 pt-8 text-sm text-dark-base  hover:ring-2 hover:ring-offset-2 dark:text-dark-base`}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+
+          if (!isCopied) {
+            copyToClipboard(resumeCopyLink);
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 10000);
+          }
+        }}
+      >
+        <Tooltip text={isCopied ? 'Copied!' : 'Copy'}>
+          <svg
+            viewBox="0 0 24 24"
+            className={`${
+              !isCopied
+                ? '-mb-px h-3 w-3 group-hover:stroke-dark'
+                : '-mb-0.5 mt-px h-3 w-3 scale-[1.75]'
+            }  h-3 w-3 scale-125 overflow-visible fill-none stroke-light `}
+          >
+            <AnimatePresence>
+              {!isCopied ? (
+                <>
+                  {/* Lower square */}
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{
+                      pathLength: 1,
+                      x: [-0.5, 0, -0.5],
+                      y: [-0.5, 0, -0.5],
+                      transition: {
+                        pathLength: {
+                          duration: 0.3,
+                          delay: 0.3,
+                        },
+                        x: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                        y: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                      },
+                    }}
+                    exit={{
+                      pathLength: 0,
+                      transition: {
+                        pathLength: {
+                          duration: 0.01,
+                        },
+                      },
+                    }}
+                    d="M11 9 H20 A2 2 0 0 1 22 11 V20 A2 2 0 0 1 20 22 H11 A2 2 0 0 1 9 20 V11 A2 2 0 0 1 11 9 z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className=" stroke-[2]"
+                  />
+                  {/* Upper Square */}
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{
+                      pathLength: 1,
+                      x: [0.5, 0, 0.5],
+                      y: [0.5, 0, 0.5],
+                      transition: {
+                        pathLength: {
+                          duration: 0.3,
+                          delay: 0.3,
+                        },
+                        x: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                        y: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                      },
+                    }}
+                    exit={{
+                      pathLength: 0,
+                      transition: {
+                        pathLength: {
+                          duration: 0.01,
+                        },
+                      },
+                    }}
+                    d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className=" stroke-[2]"
+                  />
+                </>
+              ) : null}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {isCopied ? (
+                <>
+                  {/* Square */}
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{
+                      pathLength: 1,
+                      x: [-4.3, -4.3, -4.3],
+                      y: [-4.3, -4.3, -4.3],
+                      transition: {
+                        pathLength: {
+                          duration: 0.3,
+                          delay: 0.3,
+                        },
+                        x: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                        y: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                      },
+                    }}
+                    exit={{
+                      pathLength: 0,
+                      transition: {
+                        pathLength: {
+                          duration: 0.01,
+                        },
+                      },
+                    }}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M11 9 H20 A2 2 0 0 1 22 11 V20 A2 2 0 0 1 20 22 H11 A2 2 0 0 1 9 20 V11 A2 2 0 0 1 11 9 z"
+                    className="stroke-[1.75]"
+                  />
+                  {/* Check mark */}
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{
+                      pathLength: 1,
+                      x: [-4, -4, -4],
+                      y: [-4, -4, -4],
+                      transition: {
+                        pathLength: {
+                          duration: 0.3,
+                          delay: 0.3,
+                        },
+                        x: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                        y: {
+                          duration: 1.2,
+                          ease: 'easeInOut',
+                          times: [0, 0.5, 1],
+                          repeat: Infinity,
+                        },
+                      },
+                    }}
+                    exit={{
+                      pathLength: 0,
+                      transition: {
+                        pathLength: {
+                          duration: 0.01,
+                        },
+                      },
+                    }}
+                    d="M12 15l2 2 4-4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className=" stroke-[1.75]"
+                  />
+                </>
+              ) : null}
+            </AnimatePresence>
+          </svg>
+        </Tooltip>
+      </motion.button>
       <motion.button
         onClick={() => toggleNavBar()}
         animate={{ translateY: navbarYPosition }}

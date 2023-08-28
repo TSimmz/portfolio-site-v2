@@ -5,10 +5,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 type TooltipProps = {
   text: string;
+  overrides?: string;
   children: React.ReactNode;
 };
 
-const Tooltip: FC<TooltipProps> = ({ text, children }) => {
+const Tooltip: FC<TooltipProps> = ({ text, overrides, children }) => {
   const tooltipRef = useRef(null);
   const isHovering = useHoverDirty(tooltipRef);
   return (
@@ -22,7 +23,8 @@ const Tooltip: FC<TooltipProps> = ({ text, children }) => {
             exit={{ opacity: 0 }}
             transition={{ delay: 0.1 }}
             role="tooltip"
-            className={`pointer-events-none absolute bottom-[-2.7rem] left-[51%] z-30 translate-x-[-50%] rounded-md bg-neutrals-600 px-2 py-1 text-xs text-dark-base ${"before:absolute before:left-[40%] before:top-[-0.5rem] before:h-0 before:w-0 before:content-['']"} 
+            className={`pointer-events-none absolute bottom-[-2.7rem] left-[51%] z-30 translate-x-[-50%] rounded-md bg-neutrals-600 px-2 py-1 text-xs text-dark-base ${"before:absolute before:-top-2 before:left-[35%] before:h-0 before:w-0 before:content-['']"} 
+            ${overrides ? overrides : ''}
             ${'before:border-l-[0.5rem] before:border-l-transparent'} 
             ${'before:border-r-[0.5rem] before:border-r-transparent '} 
             ${'before:border-b-[0.5rem] before:border-b-neutrals-600'}`}
