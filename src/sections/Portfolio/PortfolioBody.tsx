@@ -26,6 +26,8 @@ import LoadingSpinner from '~/components/svgs/LoadingSpinner';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useLockBodyScroll } from 'react-use';
+import Link from 'next/link';
+import { IconGitHubAlt } from '~/components/svgs/socials';
 
 const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
@@ -141,7 +143,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     }
   }, [selectedCard.title]);
 
-  const Modal = () => {
+  const Modal: FC<{ index: number }> = ({ index }) => {
     const cardModalRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
       container: cardModalRef,
@@ -158,35 +160,62 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         <div className="sticky top-0 z-10 flex w-full flex-col">
           <div
             id={`${selectedCard.title}-selected-card-navbar`}
-            className="flex w-full items-center justify-start gap-[10px] bg-neutrals-400 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-500"
+            className="flex w-full items-center justify-between bg-neutrals-400 px-3 py-3 transition-colors duration-300 ease-in-out dark:bg-neutrals-500"
           >
-            <motion.button
-              whileHover={{ scale: 1.4 }}
+            <div className="flex items-center justify-start gap-[10px]">
+              <motion.button
+                whileHover={{ scale: 1.4 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setSelectedCard({ title: '', index: -1 })}
+                className="group peer flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-500 transition-colors duration-500 ease-in-out hover:bg-error-400 group-hover:scale-110 dark:bg-error-400 dark:hover:bg-error-500"
+              >
+                <motion.svg
+                  className="peer h-3 w-3 fill-none stroke-error-200"
+                  viewBox="0 0 24 24"
+                >
+                  <motion.path
+                    name={'close-A'}
+                    fill="none"
+                    strokeWidth="2.2"
+                    d="M6 18 L18 6"
+                  />
+                  <motion.path
+                    name={'close-B'}
+                    fill="none"
+                    strokeWidth="2.2"
+                    d="M6 6 L18 18"
+                  />
+                </motion.svg>
+              </motion.button>
+              <div className="aspect-square w-[18px] rounded-full bg-warning-400 transition-colors duration-500 ease-in-out peer-hover:bg-warning-300"></div>
+              <div className="aspect-square w-[18px] rounded-full bg-success-400 transition-colors duration-500 ease-in-out peer-hover:bg-success-300"></div>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              onClick={() => setSelectedCard({ title: '', index: -1 })}
-              className="group peer ml-3 flex aspect-square w-[18px] items-center justify-center rounded-full bg-error-500 transition-colors duration-500 ease-in-out hover:bg-error-400 group-hover:scale-110 dark:bg-error-400 dark:hover:bg-error-500"
+              className="relative rounded-md bg-brandLight-400 px-2 py-0.5 text-light-base dark:bg-brandDark-500 dark:text-dark-base "
             >
-              <motion.svg
-                className="peer h-3 w-3 fill-none stroke-error-200"
-                viewBox="0 0 24 24"
+              <Link
+                className="group"
+                target="_blank"
+                href={
+                  filteredGithubRepos?.[index]?.svn_url ??
+                  'https://www.github.com/tsimmz'
+                }
               >
-                <motion.path
-                  name={'close-A'}
-                  fill="none"
-                  strokeWidth="2.2"
-                  d="M6 18 L18 6"
-                />
-                <motion.path
-                  name={'close-B'}
-                  fill="none"
-                  strokeWidth="2.2"
-                  d="M6 6 L18 18"
-                />
-              </motion.svg>
-            </motion.button>
-            <div className="aspect-square w-[18px] rounded-full bg-warning-400 transition-colors duration-500 ease-in-out peer-hover:bg-warning-300"></div>
-            <div className="aspect-square w-[18px] rounded-full bg-success-400 transition-colors duration-500 ease-in-out peer-hover:bg-success-300"></div>
+                <span className="mr-1 text-xs">GitHub</span>
+                <IconGitHubAlt className="inline h-5 w-5 " />
+                {/* <motion.svg
+                  viewBox={'0 0 64 64'}
+                  strokeWidth={4}
+                  className="absolute -left-4 bottom-1  h-5 w-6 origin-bottom -rotate-180 scale-x-[-1] stroke-black transition-all duration-500 ease-in-out"
+                >
+                  <motion.path d="M30 64V6L55 17C57 18 57 20 55 21L34 30 34 64" />
+                </motion.svg> */}
+              </Link>
+            </motion.div>
           </div>
           <motion.div
             style={{ scaleX: scrollProgressLength }}
@@ -268,7 +297,9 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             }
           />
         ))}
-        <AnimatePresence>{selectedCard.title && <Modal />}</AnimatePresence>
+        <AnimatePresence>
+          {selectedCard.title && <Modal index={selectedCard.index} />}
+        </AnimatePresence>
       </div>
     </div>
   );

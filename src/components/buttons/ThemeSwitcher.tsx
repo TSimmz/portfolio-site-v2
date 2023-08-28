@@ -173,7 +173,8 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
   };
 
   const closeDetailsDropDown = () => {
-    if (detailsRef.current !== null) detailsRef.current.removeAttribute('open');
+    if (detailsRef.current !== null && isDetailsOpen)
+      detailsRef.current.removeAttribute('open');
     setIsDetailsOpen(false);
   };
 
