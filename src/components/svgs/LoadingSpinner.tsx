@@ -1,19 +1,19 @@
 import { type FC } from 'react';
 
 type LoadingSpinnerProps = {
-  id: string;
   loadingText?: string;
-  className?: string;
   circleFill?: string;
   spinnerFill?: string;
+  width?: string;
+  height?: string;
 };
 
 const LoadingSpinner: FC<LoadingSpinnerProps> = ({
-  id,
   loadingText,
-  className,
   circleFill,
   spinnerFill,
+  width = 'w-8',
+  height = 'h-8',
 }) => {
   const defaultCircleFill = 'fill-current';
   const defaultSpinnerFill = 'fill-brandLight-500 dark:fill-brandDark-500';
@@ -25,7 +25,7 @@ const LoadingSpinner: FC<LoadingSpinnerProps> = ({
     >
       <svg
         aria-hidden="true"
-        className="mr-2 h-8 w-8 animate-spin text-gray-200 dark:text-gray-600"
+        className={`mr-2 ${width} ${height} animate-spin text-gray-200 dark:text-gray-600`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

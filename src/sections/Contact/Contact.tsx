@@ -399,7 +399,6 @@ const Contact = () => {
               )
             ) : (
               <LoadingSpinner
-                id={'spinner-contact-submit'}
                 loadingText="Loading..."
                 spinnerFill="fill-brandLight-500 dark:fill-brandDark-500 group-hover:fill-brandLight-600 group-hover:dark:fill-brandDark-300"
               />

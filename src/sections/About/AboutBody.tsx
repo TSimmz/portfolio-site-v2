@@ -86,7 +86,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
   }, [isImageInView]);
 
   return (
-    <div ref={headerRef} className="about-body mt-4 flex flex-col items-center">
+    <div ref={headerRef} className="about-body flex flex-col items-center">
       <Heading
         as="h1"
         className="section-header flex flex-col items-center justify-center text-center"
@@ -98,12 +98,12 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
       <p className="flavor-text mb-10 break-words text-center text-base sm:text-lg">
         {githubProfileData?.bio ?? '<-- Skills to pay the bills -->'}
       </p>
-      <div className="flavor-text mb-6 mt-[-3rem] flex justify-center">
+      <div className="flavor-text mb-6 mt-[-3rem] flex justify-center lg:mb-9">
         <CallToAction buttonText="View my work" href="#portfolio" />
       </div>
       <div
         ref={imageRef}
-        className="grid grid-cols-1 gap-8 px-4 sm:grid-cols-2 md:gap-6"
+        className="grid grid-cols-1 gap-8 px-4 sm:grid-cols-2 md:gap-6 lg:gap-10"
       >
         <div className="image-wrapper relative mx-auto aspect-square w-full max-w-md origin-center overflow-clip rounded-2xl">
           <Image
