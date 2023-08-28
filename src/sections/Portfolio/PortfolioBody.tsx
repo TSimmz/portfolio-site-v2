@@ -227,7 +227,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         onClick={(e) => {
           setSelectedCard({ title: '', index: -1 });
         }}
-        className="group fixed inset-0 z-10 box-border flex items-center justify-center bg-neutrals-500/50 backdrop-blur-[1px]"
+        className="group fixed inset-0 z-30 box-border flex items-center justify-center bg-neutrals-500/50 backdrop-blur-[1px]"
       >
         {isRepoLoading ? (
           <LoadingSpinner height="h-16" width="w-16" />
@@ -241,7 +241,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             <div
               id="portfolio-card-modal"
               ref={cardModalRef}
-              className="scrollbar-hidden z-10 mb-6 h-[80vmax] touch-auto overflow-y-auto rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
+              className="z-50 mb-6 h-[80vmax] touch-auto overflow-y-auto rounded-lg px-4 sm:h-[80vmin] sm:max-h-[50%]"
             >
               <ReactMarkdown
                 className="read-me-content relative flex max-w-[87vmin] flex-col gap-2 px-[3px] py-px"

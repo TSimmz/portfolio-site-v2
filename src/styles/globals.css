@@ -75,7 +75,7 @@ code {
     }
 
     h1 {
-      @apply sticky left-0 right-0 top-0 -mt-3 box-content w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
+      @apply sticky left-0 right-0 top-0 -mr-px -mt-3 box-content w-full bg-neutrals-200 pb-2 pt-3 text-2xl leading-tight dark:bg-neutrals-700 max-sm:text-center  sm:text-3xl !important;
     }
 
     h2 {
