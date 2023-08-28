@@ -3,65 +3,22 @@
 This project is meant to showcase my skills as a developer, share a bit about myself, display some of the work I have done, as well as to act as a playground for trying out and understanding new technologies as they come to market. It was bootstrapped with `create-t3-app` which uses the [T3 Stack](https://create.t3.gg/) and is written entirely in TypeScript.
 
 ## Technologies Used
-
-<table>
-  <tr>
-    <td>
-      <a href='https://nextjs.org' target="_blank">Next.js</a>
-    </td>
-    <td>
-      <a href='https://prisma.io' target="_blank">Prisma</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href='https://tailwindcss.com' target="_blank">Tailwind CSS</a>
-    </td>
-    <td>
-      <a href='https://trpc.io' target="_blank">tRPC</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href='https://www.emailjs.com/' target="_blank">EmailJs</a>
-    </td>
-    <td>
-      <a href='https://www.framer.com/motion/' target="_blank">Framer Motion</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href='https://react-hook-form.com/' target="_blank">React Hook Form</a>
-    </td>
-    <td>
-      <a href='https://zod.dev/' target="_blank">Zod Validation</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href='https://github.com/JohannesKlauss/react-hotkeys-hook' target="_blank">React Hotkeys Hook</a>
-    </td>
-    <td>
-      <a href='https://github.com/octokit' target="_blank">OctoKit</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href='https://threejs.org/' target="_blank">Three JS</a>
-    </td>
-    <td>
-      <a href='https://docs.pmnd.rs/react-three-fiber/getting-started/introduction' target="_blank">React Three Fiber</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href='https://popmotion.io/' target="_blank">Pop Motion IO</a>
-    </td>
-    <td>
-      <a href='https://www.sanity.io/' target="_blank">Sanity IO</a>
-    </td>
-  </tr>
-</table>
+| Name | Description |
+|:------|:------|
+| [NextJs](https://nextjs.org)| A React framework for building full-stack web applications |
+| [Prisma](https://prisma.io) | placeholder |
+| [Tailwind CSS](https://tailwindcss.com) | placeholder |
+| [tRPC](https://trpc.io) |  placeholder |
+| [EmailJS](https://www.emailjs.com/)| placeholder |
+| [Framer Motion](https://www.framer.com/motion/)| placeholder |
+| [React Hook Form](https://react-hook-form.com/)| placeholder |
+| [Zod](https://zod.dev/)| placeholder |
+| [React Hotkeys Hook](https://github.com/JohannesKlauss/react-hotkeys-hook)| placeholder |
+| [OctoKit](https://github.com/octokit)| placeholder |
+| [Three JS](https://threejs.org/)| placeholder |
+| [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)| placeholder |
+| [Pop Motion IO](https://popmotion.io/)| placeholder |
+| [Sanity IO](https://www.sanity.io/)| placeholder |
 
 ## Features
 
