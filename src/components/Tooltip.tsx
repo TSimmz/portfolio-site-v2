@@ -12,7 +12,7 @@ const Tooltip: FC<TooltipProps> = ({ text, children }) => {
   const tooltipRef = useRef(null);
   const isHovering = useHoverDirty(tooltipRef);
   return (
-    <div ref={tooltipRef} className=" group relative inline-block w-full">
+    <div ref={tooltipRef} className="group relative inline-block">
       {children}
       <AnimatePresence>
         {isHovering ? (

@@ -327,7 +327,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
           initial={{ rotate: 90 }}
           animate={{ rotate: isDetailsOpen ? 180 : 90 }}
           custom={isDetailsOpen}
-          className="mt-1 cursor-pointer"
+          className="mb-1 cursor-pointer "
         >
           <motion.path
             variants={isDarkMode ? sunFillVariant : moonFillVariant}
