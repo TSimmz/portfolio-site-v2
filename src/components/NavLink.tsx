@@ -10,6 +10,7 @@ type NavLinkProps = {
   href: string;
   index: number;
   length: number;
+  isMobile: boolean;
   onPathChange: (newActiveLinkId: string) => void;
   toggleMobileMenu: (nextValue: boolean) => void;
 };
@@ -20,6 +21,7 @@ const NavLink: FC<NavLinkProps> = ({
   href,
   index,
   length,
+  isMobile,
   onPathChange,
   toggleMobileMenu,
 }) => {
@@ -37,7 +39,7 @@ const NavLink: FC<NavLinkProps> = ({
   };
 
   // Calculates delay so the drop in order is from right to left
-  const delay = 0.5 + 0.15 * (length - index + 1);
+  const delay = isMobile ? 0.1 : 0.5 + 0.15 * (length - index + 1);
 
   return (
     <motion.a

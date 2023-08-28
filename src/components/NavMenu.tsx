@@ -228,6 +228,7 @@ const NavMenu = () => {
           index={index + 1}
           length={baseRouteKeysList.length}
           onPathChange={handleDesktopPathChange}
+          isMobile={isMobileView}
           toggleMobileMenu={toggle}
         />
       )),
