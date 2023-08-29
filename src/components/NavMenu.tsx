@@ -419,10 +419,11 @@ const NavMenu = () => {
 
           console.log(e);
           if (!isCopied) {
+            const timeDelay = 3000;
             copyToClipboard(resumeCopyLink);
-            notify.info(`Copied link to resume to clipboard!`, undefined, 5000);
+            notify.info(`Copied to clipboard!`, 'Resume Link', timeDelay);
             setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 5000);
+            setTimeout(() => setIsCopied(false), timeDelay);
           }
         }}
       >

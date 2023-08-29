@@ -101,7 +101,10 @@ const Notification: FC<NotificationProps> = ({
           <span>{notification[type].name}</span>{' '}
           {title ? (
             <>
-              {': '} <span className="font-semibold sm:text-base">{title}</span>
+              {': '}{' '}
+              <span className="pr-8 font-semibold leading-snug sm:text-base">
+                {title}
+              </span>
             </>
           ) : null}
         </h1>
