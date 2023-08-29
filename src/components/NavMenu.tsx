@@ -355,7 +355,10 @@ const NavMenu = () => {
           {/* Desktop nav buttons */}
           <div className="hidden gap-2 space-x-1 sm:flex">
             <div className="flex gap-1">{renderNavButtons}</div>
-            <ThemeSwitcher id="theme-switcher-desktop" />
+            <ThemeSwitcher
+              id="theme-switcher-desktop"
+              isMobile={isMobileView}
+            />
           </div>
 
           {/* Burger button */}
@@ -371,9 +374,13 @@ const NavMenu = () => {
         href={resumeUrlPath}
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
-        className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 pb-1 pl-2 pr-3 pt-8 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
+        className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
       >
-        <Tooltip text="Alt+R">
+        <Tooltip
+          text={'Alt+R'}
+          isMobileView={isMobileView}
+          className="pb-1 pl-2 pr-3 pt-8"
+        >
           <svg
             viewBox="0 0 32 32"
             className="z-10 mr-1 inline-block h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
@@ -397,6 +404,7 @@ const NavMenu = () => {
           <span>Resume</span>
         </Tooltip>
       </motion.a>
+
       <motion.button
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
@@ -404,22 +412,24 @@ const NavMenu = () => {
           !isCopied
             ? 'bg-brandLight-500/90 hover:bg-brandLight-400 hover:text-light-base hover:ring-brandLight-500 dark:bg-brandDark-500/90 hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400'
             : 'bg-info-500 hover:!ring-info-500'
-        } px-3 pb-2 pt-8 text-sm text-dark-base  hover:ring-2 hover:ring-offset-2 dark:text-dark-base`}
+        } text-sm text-dark-base  hover:ring-2 hover:ring-offset-2 dark:text-dark-base`}
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
 
+          console.log(e);
           if (!isCopied) {
             copyToClipboard(resumeCopyLink);
-            notify.info(`Copied to clipboard!`, undefined, 5000);
+            notify.info(`Copied link to resume to clipboard!`, undefined, 5000);
             setIsCopied(true);
-            setTimeout(() => setIsCopied(false), 10000);
+            setTimeout(() => setIsCopied(false), 5000);
           }
         }}
       >
         <Tooltip
           text={isCopied ? 'Copied!' : 'Copy Resume Link'}
-          overrides="min-w-fit before:!left-[50%] before:!translate-x-[-50%] translate-y-[2px] whitespace-nowrap"
+          className="px-3 pb-2 pt-8"
+          toolTipStyles="min-w-fit before:!left-[50%] before:!translate-x-[-50%] translate-y-[2px] whitespace-nowrap"
         >
           <svg
             viewBox="0 0 24 24"
@@ -427,14 +437,14 @@ const NavMenu = () => {
               !isCopied
                 ? '-mb-px h-3 w-3 group-hover:stroke-dark'
                 : '-mb-0.5 mt-px h-3 w-3 scale-[1.75]'
-            }  h-3 w-3 scale-125 overflow-visible fill-none stroke-light `}
+            }  pointer-events-none h-3 w-3 scale-125 overflow-visible fill-none stroke-light`}
           >
             <AnimatePresence>
               {!isCopied ? (
                 <>
                   {/* Lower square */}
                   <motion.path
-                    initial={{ pathLength: 0 }}
+                    initial={false}
                     animate={{
                       pathLength: 1,
                       x: [-0.5, 0, -0.5],
@@ -473,7 +483,7 @@ const NavMenu = () => {
                   />
                   {/* Upper Square */}
                   <motion.path
-                    initial={{ pathLength: 0 }}
+                    initial={false}
                     animate={{
                       pathLength: 1,
                       x: [0.5, 0, 0.5],
@@ -605,9 +615,13 @@ const NavMenu = () => {
         onClick={() => toggleNavBar()}
         animate={{ translateY: navbarYPosition }}
         whileHover={{ translateY: navbarYPosition + 4 }}
-        className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 w-20 cursor-pointer rounded-md bg-warning-300/80 px-2 pb-1 pt-8 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
+        className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 cursor-pointer rounded-md bg-warning-300/80 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
       >
-        <Tooltip text="Alt+H">
+        <Tooltip
+          text={'Alt+H'}
+          isMobileView={isMobileView}
+          className="w-20 px-2 pb-1 pt-8"
+        >
           <span>{navBarHidden ? 'Show' : 'Hide'}</span>
         </Tooltip>
       </motion.button>

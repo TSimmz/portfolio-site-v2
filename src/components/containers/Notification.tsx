@@ -20,7 +20,7 @@ const notification: {
   error: NotificationInfo;
 } = {
   success: {
-    emoji: '🚀',
+    emoji: '✓',
     name: 'Success',
     styles: {
       headerBg: 'bg-success-500 ',
@@ -28,7 +28,7 @@ const notification: {
     },
   },
   info: {
-    emoji: '💁‍♂️',
+    emoji: '✌️',
     name: 'Info',
     styles: {
       headerBg: 'bg-info-500 ',
@@ -75,8 +75,6 @@ const Notification: FC<NotificationProps> = ({
     cancel();
   }
 
-  console.table({ id, title, message, type, component });
-
   const handleCloseNotification = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
@@ -96,7 +94,7 @@ const Notification: FC<NotificationProps> = ({
     >
       <div
         id={`notification-header-${id}`}
-        className={`text-light flex w-full items-center justify-between px-3 py-2 text-sm font-semibold sm:text-base ${notification[type].styles.headerBg}`}
+        className={`text-light flex w-full items-center justify-between px-3 py-1 text-sm font-semibold sm:text-base ${notification[type].styles.headerBg}`}
       >
         <h1 className="text-dark-base">
           <span>{notification[type].emoji}</span>{' '}

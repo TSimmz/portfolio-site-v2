@@ -263,7 +263,7 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
         id={`${id}-summary`}
         className={`pointer-events-auto relative flex list-none items-center justify-center gap-2 bg-transparent px-3 py-2`}
       >
-        <Tooltip text="Alt+T">
+        <Tooltip text={'Alt+T'} isMobileView={isMobile}>
           <button
             id="theme-mode-button"
             className="mr-2 overflow-visible"
