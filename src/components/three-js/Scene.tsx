@@ -1,14 +1,16 @@
-import { useLayoutEffect, useMemo } from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
+import { useMemo } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
 import { degreesToRadians, progress } from 'popmotion';
+
 import Star from './Star';
 import colors from 'tailwindcss/colors';
+
 import { useTheme } from '~/providers/ThemeProvider';
 
 function Scene({ numStars = 100 }) {
-  const gl = useThree((state) => state.gl);
+  //const gl = useThree((state) => state.gl);
   const time = useTime();
 
   // Scroll Y Progress down the page
@@ -20,8 +22,12 @@ function Scene({ numStars = 100 }) {
     [0, 1],
     [0.001, degreesToRadians(80)],
   );
-  // Distance of the camera - also based on Scroll Y Progress
-  const distance = useTransform(scrollYProgress, [0, 1], [6, 6]);
+
+  // Distance of the camera - static
+  //const distance = useMotionValue(6);
+
+  // Distance of the camera - dynamic based on scroll Y distance
+  const distance = useTransform(scrollYProgress, [0, 1], [2, 10]);
 
   // Set color based on theme
   const { isDarkMode } = useTheme();
@@ -39,7 +45,7 @@ function Scene({ numStars = 100 }) {
   });
 
   // Updates pixel ratio
-  useLayoutEffect(() => gl.setPixelRatio(0.75));
+  //useLayoutEffect(() => gl.setPixelRatio(0.75));
 
   const stars = useMemo(() => {
     return new Array(numStars)
