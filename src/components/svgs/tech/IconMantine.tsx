@@ -1,14 +1,12 @@
 'use client';
+
 import { type FC } from 'react';
 import { motion } from 'framer-motion';
 import { type SVGIconProps } from '..';
 
 const IconBrandMantine: FC<SVGIconProps> = ({
-  fill = 'none',
   stroke = 'currentColor',
   strokeWidth = 2,
-  height = '1em',
-  width = '1em',
   className,
 }) => {
   return (
@@ -19,8 +17,6 @@ const IconBrandMantine: FC<SVGIconProps> = ({
       fill="none"
       stroke={stroke}
       strokeWidth={strokeWidth}
-      height={height}
-      width={width}
       className={className}
     >
       <motion.path stroke="none" fill="none" d="M0 0h24v24H0z" />

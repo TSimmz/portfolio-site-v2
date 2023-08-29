@@ -7,18 +7,14 @@ const IconFigmaLogo: FC<SVGIconProps> = ({
   fill = 'none',
   stroke = 'none',
   strokeWidth = 0,
-  height = '1em',
-  width = '1em',
   className,
 }) => {
   return (
     <motion.svg
+      viewBox="0 0 15 15"
       fill={fill}
       stroke={stroke}
       strokeWidth={strokeWidth}
-      viewBox="0 0 15 15"
-      height={height}
-      width={width}
       className={className}
     >
       <motion.path

@@ -7,8 +7,6 @@ const IconBrandVscode: FC<SVGIconProps> = ({
   fill = 'none',
   stroke = 'currentColor',
   strokeWidth = 1,
-  height = '1em',
-  width = '1em',
   className,
 }) => {
   return (
@@ -19,8 +17,6 @@ const IconBrandVscode: FC<SVGIconProps> = ({
       fill={fill}
       stroke={stroke}
       strokeWidth={strokeWidth}
-      height={height}
-      width={width}
       className={className}
     >
       <motion.path fill="none" stroke="none" d="M0 0h24v24H0z" />

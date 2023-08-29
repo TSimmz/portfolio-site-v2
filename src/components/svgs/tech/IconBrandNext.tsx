@@ -3,22 +3,13 @@ import { type FC } from 'react';
 import { motion } from 'framer-motion';
 import { type SVGIconProps } from '..';
 
-const IconBrandNext: FC<SVGIconProps> = ({
-  fill = 'none',
-  stroke = 'currentColor',
-  strokeWidth = 2,
-  height = '1em',
-  width = '1em',
-  className,
-}) => {
+const IconBrandNext: FC<SVGIconProps> = ({ strokeWidth = 2, className }) => {
   return (
     <motion.svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="none"
       strokeWidth={strokeWidth}
-      height={height}
-      width={width}
       strokeLinejoin="round"
       strokeLinecap="round"
       className={className}

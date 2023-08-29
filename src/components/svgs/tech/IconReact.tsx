@@ -3,21 +3,12 @@ import { type FC } from 'react';
 import { motion } from 'framer-motion';
 import { type SVGIconProps } from '..';
 
-const IconReact: FC<SVGIconProps> = ({
-  fill = 'none',
-  stroke = 'currentColor',
-  strokeWidth = 0.75,
-  height = '1em',
-  width = '1em',
-  className,
-}) => {
+const IconReact: FC<SVGIconProps> = ({ strokeWidth = 0.75, className }) => {
   return (
     <motion.svg
       fill="none"
       strokeWidth={strokeWidth}
       viewBox="0 0 15 15"
-      height={height}
-      width={width}
       className={className}
     >
       <motion.path

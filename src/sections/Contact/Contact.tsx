@@ -1,7 +1,7 @@
 'use client';
 
 import * as z from 'zod';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SectionWrapper from '~/components/containers/SectionWrapper';
@@ -67,20 +67,22 @@ const Contact = () => {
 
   useEffect(() => {
     if (isSectionInView) updateElementInView(baseRoutes.contact);
-  }, [isSectionInView]);
+  }, [isSectionInView]); // eslint-disable-line
 
   useEffect(() => {
     emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_ID!);
   }, []);
 
   useEffect(() => {
-    const sectionHeader = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.section-header',
       { opacity: !isHeaderInView ? 0 : 1 },
       { duration: 0.2, delay: 0.1 },
     );
 
-    const headerText = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.header-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -93,7 +95,8 @@ const Contact = () => {
       },
     );
 
-    const flavorText = animateHeader(
+    // eslint-disable-next-line
+    animateHeader(
       '.flavor-text',
       {
         y: !isHeaderInView ? -50 : 0,
@@ -105,10 +108,11 @@ const Contact = () => {
         delay: 0.8,
       },
     );
-  }, [isHeaderInView]);
+  }, [isHeaderInView]); // eslint-disable-line
 
   useEffect(() => {
-    const formInputs = animateForm(
+    // eslint-disable-next-line
+    animateForm(
       '.form-input',
       {
         opacity: !isFormInView ? 0 : 1,
@@ -119,7 +123,7 @@ const Contact = () => {
         delay: !isFormInView ? 0 : staggerFormInputs,
       },
     );
-  }, [isFormInView]);
+  }, [isFormInView]); // eslint-disable-line
 
   useEffect(() => {
     if (localStorage[localStorageHasSubmittedContact]) setIsFormSubmitted(true);

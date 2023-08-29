@@ -1,7 +1,6 @@
 'use client';
-import Link from 'next/link';
-import { useRef, useEffect, useState, type FC } from 'react';
-import { baseRoutes } from '~/utils/constants';
+
+import { useRef, useEffect, type FC } from 'react';
 import { motion } from 'framer-motion';
 import { useElementInView } from '~/providers/ViewPortProvider';
 
@@ -11,6 +10,7 @@ type NavLinkProps = {
   href: string;
   index: number;
   length: number;
+  isMobile: boolean;
   onPathChange: (newActiveLinkId: string) => void;
   toggleMobileMenu: (nextValue: boolean) => void;
 };
@@ -21,6 +21,7 @@ const NavLink: FC<NavLinkProps> = ({
   href,
   index,
   length,
+  isMobile,
   onPathChange,
   toggleMobileMenu,
 }) => {
@@ -31,14 +32,14 @@ const NavLink: FC<NavLinkProps> = ({
     isActive.current = elementInView === href;
 
     if (isActive.current) onPathChange(id);
-  }, [elementInView]);
+  }, [elementInView]); // eslint-disable-line
 
   const handleLinkClick = () => {
     toggleMobileMenu(false);
   };
 
   // Calculates delay so the drop in order is from right to left
-  const delay = 0.5 + 0.15 * (length - index + 1);
+  const delay = isMobile ? 0.1 : 0.5 + 0.15 * (length - index + 1);
 
   return (
     <motion.a

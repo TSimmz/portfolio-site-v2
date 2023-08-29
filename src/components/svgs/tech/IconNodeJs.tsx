@@ -7,8 +7,6 @@ const IconNodejs: FC<SVGIconProps> = ({
   fill = 'none',
   stroke = 'currentColor',
   strokeWidth = 0,
-  height = '1em',
-  width = '1em',
   className,
 }) => {
   return (
@@ -17,8 +15,6 @@ const IconNodejs: FC<SVGIconProps> = ({
       fill={fill}
       stroke={stroke}
       strokeWidth={strokeWidth}
-      height={height}
-      width={width}
       className={className}
     >
       <motion.path

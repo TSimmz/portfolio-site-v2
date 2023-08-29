@@ -90,7 +90,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
           handleSystemChangeEvent.bind(null),
           true,
         );
-  }, [themeMode]);
+  }, [themeMode]); // eslint-disable-line
 
   useEffect(() => {
     // If key not in local storage or value is not valid type, set to system
@@ -101,7 +101,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     } else {
       onThemeClick(localStorage[localStorageThemeId] as ThemeType);
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   const setSystemTheme = () => {
     localStorage[localStorageThemeId] = themeTypes.system;
