@@ -99,7 +99,8 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
   }, [isHeaderInView]); // eslint-disable-line
 
   useEffect(() => {
-    const portfolioCards = animateCards(
+    // eslint-disable-next-line
+    animateCards(
       '.portfolio-card',
       {
         opacity: !areCardsInView ? 0 : 1,
@@ -225,7 +226,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
             />
           </div>
         ),
-        [],
+        [], // eslint-disable-line
       );
 
       return (

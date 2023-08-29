@@ -7,8 +7,6 @@ const IconJavascript: FC<SVGIconProps> = ({
   fill = 'currentColor',
   stroke = 'none',
   strokeWidth = 0,
-  height = '1em',
-  width = '1em',
   className,
 }) => {
   return (

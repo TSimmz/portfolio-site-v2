@@ -64,7 +64,7 @@ const NavMenu = () => {
   const { isDarkMode } = useTheme();
 
   // Clipboard hook for resume
-  const [_, copyToClipboard] = useCopyToClipboard();
+  const [_, copyToClipboard] = useCopyToClipboard(); // eslint-disable-line
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   // Notification tool
