@@ -1,12 +1,6 @@
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  type ReactNode,
-  type FC,
-} from 'react';
+import React, { createContext, useState, type ReactNode, type FC } from 'react';
 
 type ViewPort = {
   elementInView: string;
@@ -17,7 +11,7 @@ type ViewPortProviderProps = {
   children: ReactNode;
 };
 
-const ViewPortContext = createContext<ViewPort>({
+export const ViewPortContext = createContext<ViewPort>({
   elementInView: '#home',
   updateElementInView: () => null,
 });
@@ -35,5 +29,3 @@ const ViewPortProvider: FC<ViewPortProviderProps> = ({ children }) => {
 };
 
 export default ViewPortProvider;
-
-export const useElementInView = () => useContext(ViewPortContext);

@@ -3,10 +3,8 @@
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize, useCopyToClipboard } from 'react-use';
 import { motion, AnimatePresence } from 'framer-motion';
-
-import { useNotificationContext } from '~/providers/NotificationProvider';
+import { useNotifications, useTheme } from '~/hooks';
 import theme from 'tailwindcss/defaultTheme';
-
 import NavLink from './NavLink';
 import {
   type BaseRouteKeys,
@@ -18,7 +16,6 @@ import Burger from './buttons/Burger';
 import BrandLogo from './svgs/BrandLogo';
 import Link from 'next/link';
 import ThemeSwitcher from './buttons/ThemeSwitcher';
-import { useTheme } from '~/providers/ThemeProvider';
 import Tooltip from './Tooltip';
 import { useHotkeys } from 'react-hotkeys-hook';
 
@@ -68,7 +65,7 @@ const NavMenu = () => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   // Notification tool
-  const { notify } = useNotificationContext();
+  const { notify } = useNotifications();
 
   // The path to the resume depending on theme mode
   const resumeUrlPath = isDarkMode

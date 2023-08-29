@@ -2,7 +2,6 @@
 
 import React, {
   createContext,
-  useContext,
   useState,
   useEffect,
   type ReactNode,
@@ -30,7 +29,7 @@ type ThemeProviderProps = {
   children: ReactNode;
 };
 
-const ThemeContext = createContext<Theme>({
+export const ThemeContext = createContext<Theme>({
   isDarkMode: false,
   themeMode: null,
   onThemeClick: () => null,
@@ -141,5 +140,3 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 };
 
 export default ThemeProvider;
-
-export const useTheme = () => useContext(ThemeContext);

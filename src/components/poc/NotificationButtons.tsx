@@ -1,8 +1,8 @@
 import React from 'react';
-import { useNotificationContext } from '~/providers/NotificationProvider';
+import { useNotifications } from '~/hooks';
 import SocialLinks from '../containers/SocialLinks';
 const NotificationButtons = () => {
-  const { notify } = useNotificationContext();
+  const { notify } = useNotifications();
 
   return (
     <div className="mt-[100px] flex gap-4">

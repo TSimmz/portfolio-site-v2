@@ -10,7 +10,8 @@ import {
 import { AnimatePresence, motion } from 'framer-motion';
 
 import colors from 'tailwindcss/colors';
-import { useTheme, type ThemeType } from '~/providers/ThemeProvider';
+import { useTheme } from '~/hooks';
+import { type ThemeType } from '~/providers/ThemeProvider';
 import { hotkeyModifier } from '~/utils/constants';
 import { useHotkeys } from 'react-hotkeys-hook';
 import Tooltip from '../Tooltip';

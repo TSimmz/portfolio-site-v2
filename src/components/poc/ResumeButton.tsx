@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useHoverDirty } from 'react-use';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useTheme } from '~/providers/ThemeProvider';
+import { useTheme } from '~/hooks';
 
 const buttonVariant = {
   initial: {

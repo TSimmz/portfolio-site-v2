@@ -2,7 +2,6 @@
 
 import {
   createContext,
-  useContext,
   useState,
   type ReactNode,
   type FC,
@@ -15,7 +14,7 @@ type ThreeAnimation = {
   toggleAnimationState: () => void;
 };
 
-const ThreeAnimationContext = createContext<ThreeAnimation>({
+export const ThreeAnimationContext = createContext<ThreeAnimation>({
   animationActive: true,
   updateAnimationState: () => null,
   toggleAnimationState: () => null,
@@ -50,5 +49,3 @@ const ThreeAnimationProvider: FC<ThreeAnimationProviderProps> = ({
 };
 
 export default ThreeAnimationProvider;
-
-export const useThreeAnimation = () => useContext(ThreeAnimationContext);

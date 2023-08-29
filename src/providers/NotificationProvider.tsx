@@ -2,7 +2,6 @@
 
 import React, {
   createContext,
-  useContext,
   useState,
   type ReactNode,
   type FC,
@@ -29,7 +28,7 @@ type NotifyTool = {
   };
 };
 
-const NotificationContext = createContext<NotifyTool>({
+export const NotificationContext = createContext<NotifyTool>({
   notify: {
     success: () => null,
     info: () => null,
@@ -170,5 +169,3 @@ const NotificationProvider: FC<NotificationProviderProps> = ({ children }) => {
 };
 
 export default NotificationProvider;
-
-export const useNotificationContext = () => useContext(NotificationContext);

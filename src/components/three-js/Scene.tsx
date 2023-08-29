@@ -7,7 +7,7 @@ import { degreesToRadians, progress } from 'popmotion';
 import Star from './Star';
 import colors from 'tailwindcss/colors';
 
-import { useTheme } from '~/providers/ThemeProvider';
+import { useTheme } from '~/hooks';
 
 function Scene({ numStars = 100 }) {
   //const gl = useThree((state) => state.gl);

@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, type FC } from 'react';
 import { motion } from 'framer-motion';
-import { useElementInView } from '~/providers/ViewPortProvider';
+import { useElementInView } from '~/hooks';
 
 type NavLinkProps = {
   id: string;

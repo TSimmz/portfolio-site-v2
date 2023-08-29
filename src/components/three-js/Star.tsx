@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { degreesToRadians, mix } from 'popmotion';
 import colors from 'tailwindcss/colors';
-import { useTheme } from '~/providers/ThemeProvider';
+import { useTheme } from '~/hooks';
 
 const Star = ({ p }: { p: number }) => {
   const ref = useRef<THREE.Mesh>(null);

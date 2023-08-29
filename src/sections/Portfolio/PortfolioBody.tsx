@@ -19,7 +19,7 @@ import {
   useSpring,
 } from 'framer-motion';
 import CallToAction from '~/components/buttons/CallToAction';
-import { useElementInView } from '~/providers/ViewPortProvider';
+import { useElementInView } from '~/hooks';
 import { Octokit } from '@octokit/core';
 import { type OctokitResponse } from '@octokit/types';
 import LoadingSpinner from '~/components/svgs/LoadingSpinner';
