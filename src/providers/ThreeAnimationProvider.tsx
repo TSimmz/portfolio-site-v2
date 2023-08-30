@@ -9,13 +9,13 @@ import {
 } from 'react';
 
 type ThreeAnimation = {
-  animationActive: boolean;
+  isAnimating: boolean;
   updateAnimationState: (value: boolean) => void;
   toggleAnimationState: () => void;
 };
 
 export const ThreeAnimationContext = createContext<ThreeAnimation>({
-  animationActive: true,
+  isAnimating: true,
   updateAnimationState: () => null,
   toggleAnimationState: () => null,
 });
@@ -27,21 +27,20 @@ type ThreeAnimationProviderProps = {
 const ThreeAnimationProvider: FC<ThreeAnimationProviderProps> = ({
   children,
 }) => {
-  const [animationActive, setAnimationActive] = useState<boolean>(true);
+  const [isAnimating, setIsAnimating] = useState<boolean>(true);
 
   const updateAnimationState = useCallback(
-    (value: boolean) => setAnimationActive(value),
+    (value: boolean) => setIsAnimating(value),
     [],
   );
   const toggleAnimationState = useCallback(
-    () =>
-      setAnimationActive((previousAnimationActive) => !previousAnimationActive),
+    () => setIsAnimating((previousAnimationActive) => !previousAnimationActive),
     [],
   );
 
   return (
     <ThreeAnimationContext.Provider
-      value={{ animationActive, updateAnimationState, toggleAnimationState }}
+      value={{ isAnimating, updateAnimationState, toggleAnimationState }}
     >
       {children}
     </ThreeAnimationContext.Provider>

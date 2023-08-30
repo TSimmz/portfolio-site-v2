@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
@@ -7,7 +7,7 @@ import { degreesToRadians, progress } from 'popmotion';
 import Star from './Star';
 import colors from 'tailwindcss/colors';
 
-import { useTheme } from '~/hooks';
+import { useTheme, useThreeAnimation } from '~/hooks';
 
 function Scene({ numStars = 100 }) {
   //const gl = useThree((state) => state.gl);
@@ -15,6 +15,9 @@ function Scene({ numStars = 100 }) {
 
   // Scroll Y Progress down the page
   const { scrollYProgress } = useScroll();
+
+  // Gets animation play state
+  const { isAnimating } = useThreeAnimation();
 
   // Calculates the Y angle mapping from Scroll Y Progress
   const yAngle = useTransform(
@@ -27,21 +30,32 @@ function Scene({ numStars = 100 }) {
   //const distance = useMotionValue(6);
 
   // Distance of the camera - dynamic based on scroll Y distance
-  const distance = useTransform(scrollYProgress, [0, 1], [2, 10]);
+  const distance = useTransform(scrollYProgress, [0, 1], [2, 9]);
 
   // Set color based on theme
   const { isDarkMode } = useTheme();
-  const color = isDarkMode ? colors.slate['600'] : colors.slate['300'];
+
+  // Generates the color based on animating and dark mode
+  const getColor = useCallback(() => {
+    if (isAnimating) {
+      return isDarkMode ? colors.slate['600'] : colors.slate['300'];
+    }
+
+    return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
+  }, [isAnimating, isDarkMode]);
+  const color = getColor();
 
   // Updates camera position based on distance, yAngle, and time
   useFrame(({ camera }) => {
-    camera.position.setFromSphericalCoords(
-      distance.get(),
-      yAngle.get(),
-      time.get() * 0.000085,
-    );
-    camera.updateProjectionMatrix();
-    camera.lookAt(0, 0, 0);
+    if (isAnimating) {
+      camera.position.setFromSphericalCoords(
+        distance.get(),
+        yAngle.get(),
+        time.get() * 0.000085,
+      );
+      camera.updateProjectionMatrix();
+      camera.lookAt(0, 0, 0);
+    }
   });
 
   // Updates pixel ratio
@@ -51,9 +65,14 @@ function Scene({ numStars = 100 }) {
     return new Array(numStars)
       .fill(null)
       .map((star, index) => (
-        <Star key={`star-${index}`} p={progress(0, numStars, index)} />
+        <Star
+          key={`star-${index}`}
+          indexId={progress(0, numStars, index)}
+          isAnimating={isAnimating as boolean}
+          isDarkMode={isDarkMode}
+        />
       ));
-  }, []); // eslint-disable-line
+  }, [isAnimating]); // eslint-disable-line
 
   return (
     <>

@@ -27,6 +27,7 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { IconGitHubAlt } from '~/components/svgs/socials';
+import { useThreeAnimation } from '~/hooks';
 
 const staggerPortfolioHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerCards = stagger(0.2, { startDelay: 0.5 });
@@ -36,31 +37,43 @@ type PortfolioBodyProps = {
 };
 
 const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
+  // The card selected
   const [selectedCard, setSelectedCard] = useState<{
     title: string;
     index: number;
   }>({ title: '', index: -1 });
+
+  // State for ReadMe logic
   const [isRepoLoading, setIsRepoLoading] = useState<boolean>(false);
   const [readmeContent, setReadmeContent] = useState<string>('');
 
+  // Header Ref and inView watchers for animations
   const [headerRef, animateHeader] = useAnimate();
   const isHeaderInView = useInView(headerRef, { once: true });
   const isSectionInView = useInView(headerRef, {
     margin: '-30px 0px',
   });
 
+  // Card Ref and inView for animations
   const [cardsRef, animateCards] = useAnimate();
   const areCardsInView = useInView(cardsRef, { once: true });
 
+  // In View hook
   const { updateElementInView } = useElementInView();
+
+  // Filter the repositories based on 'pinned' set list
   const filteredGithubRepos = githubRepos?.filter(
     (repo) => !repo.private && pinnedRepoNames.has(repo.name ? repo.name : ''),
   );
 
+  const { updateAnimationState } = useThreeAnimation();
+
+  // Handles updating state of current section in
   useEffect(() => {
     if (isSectionInView) updateElementInView(baseRoutes.portfolio);
   }, [isSectionInView]); // eslint-disable-line
 
+  // Handles animations for header info
   useEffect(() => {
     // eslint-disable-next-line
     animateHeader(
@@ -98,6 +111,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     );
   }, [isHeaderInView]); // eslint-disable-line
 
+  // Handles animations for card
   useEffect(() => {
     // eslint-disable-next-line
     animateCards(
@@ -113,6 +127,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     );
   }, [areCardsInView]); // eslint-disable-line
 
+  // Handles logic for fetching card data and stopping body scrolling
   useEffect(() => {
     const fetchRespositoryData = async (title: string) => {
       const octokit = new Octokit({
@@ -129,10 +144,14 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     };
 
     const bodyElement = document.getElementById('app-body');
+
     if (selectedCard.title) {
+      updateAnimationState(false);
+
       if (bodyElement != null) {
         bodyElement.style.overflowY = 'hidden';
       }
+
       setIsRepoLoading(true);
 
       // eslint-disable-next-line
@@ -146,25 +165,34 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         }
       });
     } else {
+      updateAnimationState(true);
       if (bodyElement != null) {
         bodyElement.style.overflowY = 'auto';
       }
     }
   }, [selectedCard.title]);
 
+  // Nested Modal component for Card Modal
+  // TMS - Interesting technique but actually nice bc now the component
+  // ----- has access to all the data it need without passing down props.
+  // ----- Should memoize for potential optimization.
   const Modal: FC<{ index: number }> = ({ index }) => {
+    // Nested Modal Body component for Card Modal
     const ModalBody = () => {
+      // Ref to track scroll Y progress inside modal
       const cardModalRef = useRef<HTMLDivElement>(null);
       const { scrollYProgress } = useScroll({
         container: cardModalRef,
       });
 
+      // Smooths out the progress bar with a spring function
       const scrollProgressLength = useSpring(scrollYProgress, {
         stiffness: 200,
         damping: 20,
         restDelta: 0.001,
       });
 
+      // Renders the Card Modal navbar
       const renderCardNavbar = useMemo(
         () => (
           <div className="sticky top-0 z-10 flex w-full flex-col">
@@ -229,6 +257,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         [], // eslint-disable-line
       );
 
+      // Returns the body of Card Modal component
       return (
         <motion.div
           layoutId={`${selectedCard.title}-${selectedCard.index}`}
@@ -257,6 +286,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       );
     };
 
+    // Returns the Modal component
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -276,6 +306,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
     );
   };
 
+  // Returns the body of the portfolio section
   return (
     <div ref={headerRef} className="portfolio-body">
       <Heading

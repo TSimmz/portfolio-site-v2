@@ -1,24 +1,38 @@
-import { useRef, useLayoutEffect } from 'react';
+'use client';
+
+import { type FC, useRef, useLayoutEffect, useCallback } from 'react';
 import { degreesToRadians, mix } from 'popmotion';
 import colors from 'tailwindcss/colors';
-import { useTheme } from '~/hooks';
 
-const Star = ({ p }: { p: number }) => {
+type StarProps = {
+  indexId: number;
+  isAnimating: boolean;
+  isDarkMode: boolean;
+};
+
+const Star: FC<StarProps> = ({ indexId, isAnimating, isDarkMode }) => {
   const ref = useRef<THREE.Mesh>(null);
 
-  const { isDarkMode } = useTheme();
+  // Generates the color based on animating and dark mode
+  const getColor = useCallback(() => {
+    if (isAnimating)
+      return isDarkMode ? colors.slate['600'] : colors.slate['300'];
 
-  const color = isDarkMode ? colors.slate['600'] : colors.slate['300'];
+    return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
+  }, [isAnimating, isDarkMode]);
+  const color = getColor();
 
   useLayoutEffect(() => {
-    const distance = mix(1.2, 10, Math.random() * 2);
-    const yAngle = mix(
-      degreesToRadians(65),
-      degreesToRadians(115),
-      Math.random(),
-    );
-    const xAngle = degreesToRadians(360) * p;
-    ref.current!.position.setFromSphericalCoords(distance, yAngle, xAngle);
+    if (isAnimating) {
+      const distance = mix(1.2, 10, Math.random() * 2);
+      const yAngle = mix(
+        degreesToRadians(0),
+        degreesToRadians(360),
+        Math.random(),
+      );
+      const xAngle = degreesToRadians(360) * indexId;
+      ref.current!.position.setFromSphericalCoords(distance, yAngle, xAngle);
+    }
   });
 
   return (
