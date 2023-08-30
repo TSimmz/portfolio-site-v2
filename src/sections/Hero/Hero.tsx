@@ -161,6 +161,7 @@ const Hero = () => {
             buttonText="View my resume"
             direction="Right"
             href={resumeCopyLink}
+            fill
             externalLink
           />
         </div>
