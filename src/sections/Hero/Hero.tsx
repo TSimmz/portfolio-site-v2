@@ -6,7 +6,7 @@ import Heading from '~/components/typography/Heading';
 import CallToAction from '~/components/buttons/CallToAction';
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { useElementInView } from '~/hooks';
+import { useElementInView, useTheme } from '~/hooks';
 import { baseRoutes, hotkeyModifier } from '~/utils/constants';
 import { useHotkeys } from 'react-hotkeys-hook';
 
@@ -82,6 +82,15 @@ const Hero = () => {
     setSaberExtended((prev) => (prev === 1 ? 0 : 1)),
   );
 
+  // Dark mode check
+  const { isDarkMode } = useTheme();
+
+  // The path to the resume depending on theme mode
+  const resumeUrlPath = isDarkMode
+    ? process.env.NEXT_PUBLIC_DARK_RESUME_PATH! ?? '/'
+    : process.env.NEXT_PUBLIC_LIGHT_RESUME_PATH! ?? '/';
+  const resumeCopyLink = process.env.NEXT_PUBLIC_BASE_URL + resumeUrlPath;
+
   useEffect(() => {
     if (isHeroInView) updateElementInView(baseRoutes.home);
   }, [isHeroInView]); // eslint-disable-line
@@ -146,7 +155,15 @@ const Hero = () => {
             <br />I am a frontend web developer.
           </Heading>
         </motion.div>
-        <CallToAction buttonText="Check me out" href="#about" />
+        <div className="mt-10 flex flex-col-reverse gap-4 min-[460px]:mt-6 min-[460px]:flex-row min-[460px]:justify-between">
+          <CallToAction buttonText="Check me out" href="#about" />
+          <CallToAction
+            buttonText="View my resume"
+            direction="Right"
+            href={resumeCopyLink}
+            externalLink
+          />
+        </div>
       </div>
     </SectionWrapper>
   );

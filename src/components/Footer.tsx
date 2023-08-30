@@ -10,7 +10,7 @@ const Footer = () => {
       key="page-footer"
       className="relative mt-4 flex w-full flex-col justify-center bg-gradient-to-b from-neutrals-100 to-neutrals-300 px-4 pb-8 pt-12 dark:from-neutrals-800 dark:to-neutrals-700"
     >
-      <div className="absolute left-[50%] top-[-2.75rem] translate-x-[-50%]">
+      <div className="absolute left-[50%] top-[-2.75rem] mt-6 translate-x-[-50%]">
         <CallToAction href={'#home'} direction="Up" fill />
       </div>
       <SocialLinks wrapperClassName="mx-auto mb-4 " />

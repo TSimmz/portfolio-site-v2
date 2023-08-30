@@ -320,7 +320,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
       <p className="flavor-text mb-10 text-center text-lg">
         {'Here are some of my projects! 👾'}
       </p>
-      <div className="mb-8 mt-[-3rem] flex justify-center">
+      <div className="mb-8 mt-[-1.5rem] flex justify-center">
         <CallToAction buttonText="Like what you see?" href={'#contact'} />{' '}
       </div>
       <div
