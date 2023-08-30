@@ -14,6 +14,7 @@ import {
 } from 'framer-motion';
 import { wrap } from '@motionone/utils';
 import { mapRange } from '~/utils/helpers';
+import { useThreeAnimation } from '~/hooks';
 
 // Used for color calculations
 const minTimeMs = 8000;
@@ -25,6 +26,9 @@ type PortfolioTopicsProps = {
 };
 
 const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
+  // Get animation state
+  const { isAnimating } = useThreeAnimation();
+
   // Starting X position
   const baseX = useMotionValue(0);
 
@@ -143,7 +147,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
         id="motion-scroller"
         ref={scrollerRef}
         className="flex min-w-fit flex-nowrap whitespace-nowrap"
-        style={{ x }}
+        style={{ x: isAnimating ? x : 0 }}
       >
         {renderTopics}
         {renderTopics}
