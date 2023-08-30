@@ -62,16 +62,14 @@ function Scene({ numStars = 100 }) {
   //useLayoutEffect(() => gl.setPixelRatio(0.75));
 
   const stars = useMemo(() => {
-    return new Array(numStars)
-      .fill(null)
-      .map((star, index) => (
-        <Star
-          key={`star-${index}`}
-          indexId={progress(0, numStars, index)}
-          isAnimating={isAnimating as boolean}
-          isDarkMode={isDarkMode}
-        />
-      ));
+    return new Array(numStars).fill(null).map((star, index) => (
+      <Star
+        key={`star-${index}`}
+        indexId={progress(0, numStars, index)}
+        isAnimating={isAnimating} // eslint-disable-line
+        isDarkMode={isDarkMode}
+      />
+    ));
   }, [isAnimating]); // eslint-disable-line
 
   return (

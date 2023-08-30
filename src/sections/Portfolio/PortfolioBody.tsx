@@ -170,7 +170,7 @@ const PortfolioBody: FC<PortfolioBodyProps> = ({ githubRepos }) => {
         bodyElement.style.overflowY = 'auto';
       }
     }
-  }, [selectedCard.title]);
+  }, [selectedCard.title]); // eslint-disable-line
 
   // Nested Modal component for Card Modal
   // TMS - Interesting technique but actually nice bc now the component
