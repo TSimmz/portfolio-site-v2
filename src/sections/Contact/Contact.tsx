@@ -9,14 +9,14 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Heading from '~/components/typography/Heading';
 import Underline from '~/components/Underline';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
-import { useNotificationContext } from '~/providers/NotificationProvider';
+import { useNotifications } from '~/hooks';
 import { useAnimate, stagger, useInView } from 'framer-motion';
 import useDeviceWidths from '~/hooks/useDeviceWidths';
 import LoadingSpinner from '~/components/svgs/LoadingSpinner';
 import { baseRoutes, localStorageHasSubmittedContact } from '~/utils/constants';
 import { motion } from 'framer-motion';
 import SocialLinks from '~/components/containers/SocialLinks';
-import { useElementInView } from '~/providers/ViewPortProvider';
+import { useElementInView } from '~/hooks';
 
 const staggerHeader = stagger(0.2, { startDelay: 0.2, from: 'last' });
 const staggerFormInputs = stagger(0.3, { startDelay: 0.5 });
@@ -53,7 +53,7 @@ const Contact = () => {
 
   const { isMobileView } = useDeviceWidths();
 
-  const { notify } = useNotificationContext();
+  const { notify } = useNotifications();
   const { register, handleSubmit, reset, formState } = useForm<ContactType>({
     resolver: zodResolver(ContactSchema),
   });

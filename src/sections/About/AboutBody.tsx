@@ -11,7 +11,7 @@ import { useAnimate, stagger, useInView, motion } from 'framer-motion';
 
 import { type GitHubProfileData } from '~/utils/types';
 import CallToAction from '~/components/buttons/CallToAction';
-import { useElementInView } from '~/providers/ViewPortProvider';
+import { useElementInView } from '~/hooks';
 import { baseRoutes } from '~/utils/constants';
 
 const transition = {

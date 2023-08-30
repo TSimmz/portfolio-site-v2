@@ -6,7 +6,7 @@ import Heading from '~/components/typography/Heading';
 import CallToAction from '~/components/buttons/CallToAction';
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { useElementInView } from '~/providers/ViewPortProvider';
+import { useElementInView } from '~/hooks';
 import { baseRoutes, hotkeyModifier } from '~/utils/constants';
 import { useHotkeys } from 'react-hotkeys-hook';
 

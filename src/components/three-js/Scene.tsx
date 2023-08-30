@@ -1,18 +1,23 @@
-import { useLayoutEffect, useMemo } from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
+import { useCallback, useMemo } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
 import { degreesToRadians, progress } from 'popmotion';
+
 import Star from './Star';
 import colors from 'tailwindcss/colors';
-import { useTheme } from '~/providers/ThemeProvider';
+
+import { useTheme, useThreeAnimation } from '~/hooks';
 
 function Scene({ numStars = 100 }) {
-  const gl = useThree((state) => state.gl);
+  //const gl = useThree((state) => state.gl);
   const time = useTime();
 
   // Scroll Y Progress down the page
   const { scrollYProgress } = useScroll();
+
+  // Gets animation play state
+  const { isAnimating } = useThreeAnimation();
 
   // Calculates the Y angle mapping from Scroll Y Progress
   const yAngle = useTransform(
@@ -20,34 +25,52 @@ function Scene({ numStars = 100 }) {
     [0, 1],
     [0.001, degreesToRadians(80)],
   );
-  // Distance of the camera - also based on Scroll Y Progress
-  const distance = useTransform(scrollYProgress, [0, 1], [6, 6]);
+
+  // Distance of the camera - static
+  //const distance = useMotionValue(6);
+
+  // Distance of the camera - dynamic based on scroll Y distance
+  const distance = useTransform(scrollYProgress, [0, 1], [2, 9]);
 
   // Set color based on theme
   const { isDarkMode } = useTheme();
-  const color = isDarkMode ? colors.slate['600'] : colors.slate['300'];
+
+  // Generates the color based on animating and dark mode
+  const getColor = useCallback(() => {
+    if (isAnimating) {
+      return isDarkMode ? colors.slate['600'] : colors.slate['300'];
+    }
+
+    return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
+  }, [isAnimating, isDarkMode]);
+  const color = getColor();
 
   // Updates camera position based on distance, yAngle, and time
   useFrame(({ camera }) => {
-    camera.position.setFromSphericalCoords(
-      distance.get(),
-      yAngle.get(),
-      time.get() * 0.000085,
-    );
-    camera.updateProjectionMatrix();
-    camera.lookAt(0, 0, 0);
+    if (isAnimating) {
+      camera.position.setFromSphericalCoords(
+        distance.get(),
+        yAngle.get(),
+        time.get() * 0.000085,
+      );
+      camera.updateProjectionMatrix();
+      camera.lookAt(0, 0, 0);
+    }
   });
 
   // Updates pixel ratio
-  useLayoutEffect(() => gl.setPixelRatio(0.75));
+  //useLayoutEffect(() => gl.setPixelRatio(0.75));
 
   const stars = useMemo(() => {
-    return new Array(numStars)
-      .fill(null)
-      .map((star, index) => (
-        <Star key={`star-${index}`} p={progress(0, numStars, index)} />
-      ));
-  }, []); // eslint-disable-line
+    return new Array(numStars).fill(null).map((star, index) => (
+      <Star
+        key={`star-${index}`}
+        indexId={progress(0, numStars, index)}
+        isAnimating={isAnimating} // eslint-disable-line
+        isDarkMode={isDarkMode}
+      />
+    ));
+  }, [isAnimating]); // eslint-disable-line
 
   return (
     <>
