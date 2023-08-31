@@ -10,7 +10,7 @@ type StarProps = {
 };
 
 const Star: FC<StarProps> = ({ indexId, isAnimating, color }) => {
-  const ref = useRef<THREE.Mesh>(null);
+  const starRef = useRef<THREE.Mesh>(null);
 
   useLayoutEffect(() => {
     if (isAnimating) {
@@ -21,12 +21,16 @@ const Star: FC<StarProps> = ({ indexId, isAnimating, color }) => {
         Math.random(),
       );
       const xAngle = degreesToRadians(360) * indexId;
-      ref.current!.position.setFromSphericalCoords(distance, yAngle, xAngle);
+      starRef.current!.position.setFromSphericalCoords(
+        distance,
+        yAngle,
+        xAngle,
+      );
     }
   });
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={starRef}>
       <boxGeometry args={[0.05, 0.05, 0.05]} />
       <meshBasicMaterial wireframe color={color} />
     </mesh>

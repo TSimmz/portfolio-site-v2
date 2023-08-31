@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
@@ -13,6 +13,10 @@ function Scene({ numStars = 100 }) {
   const gl = useThree((state) => state.gl);
   const time = useTime();
 
+  // Reference for central planetoid
+  const planetRef = useRef<THREE.Mesh>(null);
+
+  // State for color of planet and stars
   const [color, setColor] = useState<string>(colors.slate['500']);
 
   // Scroll Y Progress down the page
@@ -27,6 +31,8 @@ function Scene({ numStars = 100 }) {
     [0, 1],
     [0.001, degreesToRadians(80)],
   );
+
+  const tiltX = useTransform(time, [0, 2000], [0.221, 0.245]);
 
   // Distance of the camera - static
   //const distance = useMotionValue(6);
@@ -53,6 +59,7 @@ function Scene({ numStars = 100 }) {
   // Updates camera position based on distance, yAngle, and time
   useFrame(({ camera }) => {
     if (isAnimating) {
+      // Update camera position for scroll
       camera.position.setFromSphericalCoords(
         distance.get(),
         yAngle.get(),
@@ -60,6 +67,10 @@ function Scene({ numStars = 100 }) {
       );
       camera.updateProjectionMatrix();
       camera.lookAt(0, 0, 0);
+
+      // Spin the central planet in place
+      planetRef.current!.rotation.x = tiltX.get();
+      planetRef.current!.rotation.y -= 0.004;
     }
   });
 
@@ -79,7 +90,7 @@ function Scene({ numStars = 100 }) {
 
   return (
     <>
-      <mesh rotation-x={0.234}>
+      <mesh ref={planetRef}>
         {/* <icosahedronGeometry args={[1, 0]} /> */}
         <sphereGeometry />
         <meshBasicMaterial wireframe color={color} />
