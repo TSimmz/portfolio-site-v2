@@ -49,7 +49,7 @@ function Scene({ numStars = 100 }) {
       isAnimating
         ? isDarkMode
           ? colors.slate['600']
-          : colors.slate['400']
+          : colors.slate['300']
         : isDarkMode
         ? colors.rose['500']
         : colors.emerald['500'],
@@ -70,7 +70,7 @@ function Scene({ numStars = 100 }) {
 
       // Spin the central planet in place
       planetRef.current!.rotation.x = tiltX.get();
-      planetRef.current!.rotation.y -= 0.004;
+      planetRef.current!.rotation.y -= 0.001;
     }
   });
 
