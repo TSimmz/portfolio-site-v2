@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
 import { degreesToRadians, progress } from 'popmotion';
@@ -10,8 +10,10 @@ import colors from 'tailwindcss/colors';
 import { useTheme, useThreeAnimation } from '~/hooks';
 
 function Scene({ numStars = 100 }) {
-  //const gl = useThree((state) => state.gl);
+  const gl = useThree((state) => state.gl);
   const time = useTime();
+
+  const [color, setColor] = useState<string>(colors.slate['500']);
 
   // Scroll Y Progress down the page
   const { scrollYProgress } = useScroll();
@@ -35,15 +37,18 @@ function Scene({ numStars = 100 }) {
   // Set color based on theme
   const { isDarkMode } = useTheme();
 
-  // Generates the color based on animating and dark mode
-  const getColor = useCallback(() => {
-    if (isAnimating) {
-      return isDarkMode ? colors.slate['600'] : colors.slate['400'];
-    }
-
-    return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
+  // Effect to update color on based on animating and dark mode
+  useEffect(() => {
+    setColor(
+      isAnimating
+        ? isDarkMode
+          ? colors.slate['600']
+          : colors.slate['400']
+        : isDarkMode
+        ? colors.rose['500']
+        : colors.emerald['500'],
+    );
   }, [isAnimating, isDarkMode]);
-  const color = getColor();
 
   // Updates camera position based on distance, yAngle, and time
   useFrame(({ camera }) => {
@@ -59,18 +64,18 @@ function Scene({ numStars = 100 }) {
   });
 
   // Updates pixel ratio
-  //useLayoutEffect(() => gl.setPixelRatio(0.75));
+  useLayoutEffect(() => gl.setPixelRatio(0.75));
 
   const stars = useMemo(() => {
-    return new Array(numStars).fill(null).map((star, index) => (
+    return new Array(numStars).fill(null).map((_, index) => (
       <Star
         key={`star-${index}`}
         indexId={progress(0, numStars, index)}
         isAnimating={isAnimating} // eslint-disable-line
-        isDarkMode={isDarkMode}
+        color={color}
       />
     ));
-  }, [isAnimating, isDarkMode]); // eslint-disable-line
+  }, [isAnimating, isDarkMode, color]); // eslint-disable-line
 
   return (
     <>
