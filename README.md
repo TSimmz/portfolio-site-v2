@@ -2,6 +2,9 @@
 
 This project is meant to showcase my skills as a developer, share a bit about myself, display some of the work I have done, as well as to act as a playground for trying out and understanding new technologies as they come to market. It was bootstrapped with `create-t3-app` which uses the [T3 Stack](https://create.t3.gg/) and is written entirely in TypeScript.
 
+## View the live website
+[www.tylersimoni.com/](http://www.tylersimoni.com/)
+
 ## Technologies Used
 | Name | Description |
 |:------|:------|
