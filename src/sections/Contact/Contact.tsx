@@ -240,9 +240,9 @@ const Contact = () => {
           <Underline className="header-text min-w-[250px] max-w-xl bg-brandLight-500 px-4 dark:bg-brandDark-500" />
         </Heading>
         {!isFormSubmitted ? (
-          <p className="flavor-text mt-2 text-center text-lg">
-            Want to work together?
-            <br className="xs:hidden" /> Let&apos;s connect 🚀
+          <p className="flavor-text mt-2 flex flex-col text-center text-lg sm:flex-row sm:gap-2">
+            <span>Want to work together? </span>
+            <span> Let&apos;s connect 🚀 </span>
           </p>
         ) : (
           <p className="flavor-text mt-2 text-center text-lg">
@@ -272,14 +272,14 @@ const Contact = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               className={`${
-                errors.name ? ' ring-2 !ring-error-500' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+                errors.name ? 'border-2 !border-error-500 focus:ring-0' : ''
+              } h-10 rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('name', { required: true })}
             />
             {errors.name ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-5px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -304,14 +304,14 @@ const Contact = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               className={`${
-                errors.email ? 'ring-2 !ring-error-500 ' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+                errors.email ? 'border-2 !border-error-500 focus:ring-0' : ''
+              } h-10 rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('email', { required: true })}
             />
             {errors.email ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-5px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -340,14 +340,14 @@ const Contact = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               className={`${
-                errors.subject ? 'ring-2 !ring-error-500' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+                errors.subject ? 'border-2 !border-error-500 focus:ring-0' : ''
+              } h-10 rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('subject', { required: true })}
             />
             {errors.subject ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-5px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -374,14 +374,14 @@ const Contact = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               className={`${
-                errors.message ? 'ring-2 !ring-error-500' : ''
-              } min-h-[2.5rem] resize-y rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+                errors.message ? 'border-2 !border-error-500 focus:ring-0' : ''
+              } min-h-[2.5rem] resize-y rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('message', { required: true })}
             />
             {errors.message ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-5px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -393,7 +393,7 @@ const Contact = () => {
           <button
             type="submit"
             disabled={isFormSubmitted}
-            className="form-input group mt-2 flex h-12 w-1/2 cursor-pointer items-center justify-center self-end rounded-lg border-2 border-neutrals-800 px-2 py-1 font-bold transition-colors duration-200 ease-in-out hover:border-brandLight-500 hover:bg-brandLight-500 hover:text-white disabled:cursor-not-allowed disabled:border-neutrals-400 disabled:text-neutrals-500 disabled:hover:border-0 disabled:hover:bg-neutrals-500 disabled:hover:text-neutrals-400 dark:border-neutrals-200 dark:hover:border-brandDark-500 dark:hover:bg-brandDark-500 disabled:dark:border-neutrals-600 disabled:dark:text-neutrals-600 disabled:dark:hover:bg-neutrals-500"
+            className="form-input group mt-2 flex h-12 w-full cursor-pointer items-center justify-center self-end rounded-lg border-2 border-neutrals-800 px-2 py-1 font-bold transition-colors duration-200 ease-in-out hover:border-brandLight-500 hover:bg-brandLight-500 hover:text-white disabled:cursor-not-allowed disabled:border-neutrals-400 disabled:text-neutrals-500 disabled:hover:border-0 disabled:hover:bg-neutrals-500 disabled:hover:text-neutrals-400 dark:border-neutrals-200 dark:hover:border-brandDark-500 dark:hover:bg-brandDark-500 disabled:dark:border-neutrals-600 disabled:dark:text-neutrals-600 disabled:dark:hover:bg-neutrals-500 sm:w-1/2"
           >
             {!loadingEmailSend && !isSubmitting ? (
               isFormSubmitted ? (

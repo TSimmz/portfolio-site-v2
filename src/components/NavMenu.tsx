@@ -392,6 +392,7 @@ const NavMenu = () => {
         target="_blank"
         id="resume-button"
         href={resumeUrlPath}
+        initial={{ translateY: -100 }}
         animate={{
           translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
         }}
@@ -429,6 +430,7 @@ const NavMenu = () => {
 
       {/* @component - Copy Resume Link button */}
       <motion.button
+        initial={{ translateY: -100 }}
         animate={{
           translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
         }}
@@ -640,6 +642,7 @@ const NavMenu = () => {
       {/* @component -  Hide/Show button */}
       <motion.button
         onClick={() => toggleNavBar()}
+        initial={{ translateY: -100 }}
         animate={{
           translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
         }}

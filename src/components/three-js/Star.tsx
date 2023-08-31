@@ -1,42 +1,36 @@
 'use client';
 
-import { type FC, useRef, useLayoutEffect, useCallback } from 'react';
+import { type FC, useRef, useLayoutEffect } from 'react';
 import { degreesToRadians, mix } from 'popmotion';
-import colors from 'tailwindcss/colors';
 
 type StarProps = {
   indexId: number;
   isAnimating: boolean;
-  isDarkMode: boolean;
+  color: string;
 };
 
-const Star: FC<StarProps> = ({ indexId, isAnimating, isDarkMode }) => {
-  const ref = useRef<THREE.Mesh>(null);
-
-  // Generates the color based on animating and dark mode
-  const getColor = useCallback(() => {
-    if (isAnimating)
-      return isDarkMode ? colors.slate['600'] : colors.slate['400'];
-
-    return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
-  }, [isAnimating, isDarkMode]);
-  const color = getColor();
+const Star: FC<StarProps> = ({ indexId, isAnimating, color }) => {
+  const starRef = useRef<THREE.Mesh>(null);
 
   useLayoutEffect(() => {
     if (isAnimating) {
       const distance = mix(1.2, 10, Math.random() * 2);
       const yAngle = mix(
-        degreesToRadians(0),
-        degreesToRadians(360),
+        degreesToRadians(10),
+        degreesToRadians(180),
         Math.random(),
       );
       const xAngle = degreesToRadians(360) * indexId;
-      ref.current!.position.setFromSphericalCoords(distance, yAngle, xAngle);
+      starRef.current!.position.setFromSphericalCoords(
+        distance,
+        yAngle,
+        xAngle,
+      );
     }
   });
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={starRef}>
       <boxGeometry args={[0.05, 0.05, 0.05]} />
       <meshBasicMaterial wireframe color={color} />
     </mesh>

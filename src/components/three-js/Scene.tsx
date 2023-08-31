@@ -1,5 +1,5 @@
-import { useCallback, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useTransform, useScroll, useTime } from 'framer-motion';
 
 import { degreesToRadians, progress } from 'popmotion';
@@ -10,8 +10,14 @@ import colors from 'tailwindcss/colors';
 import { useTheme, useThreeAnimation } from '~/hooks';
 
 function Scene({ numStars = 100 }) {
-  //const gl = useThree((state) => state.gl);
+  const gl = useThree((state) => state.gl);
   const time = useTime();
+
+  // Reference for central planetoid
+  const planetRef = useRef<THREE.Mesh>(null);
+
+  // State for color of planet and stars
+  const [color, setColor] = useState<string>(colors.slate['500']);
 
   // Scroll Y Progress down the page
   const { scrollYProgress } = useScroll();
@@ -26,6 +32,8 @@ function Scene({ numStars = 100 }) {
     [0.001, degreesToRadians(80)],
   );
 
+  const tiltX = useTransform(time, [0, 2000], [0.221, 0.245]);
+
   // Distance of the camera - static
   //const distance = useMotionValue(6);
 
@@ -35,19 +43,23 @@ function Scene({ numStars = 100 }) {
   // Set color based on theme
   const { isDarkMode } = useTheme();
 
-  // Generates the color based on animating and dark mode
-  const getColor = useCallback(() => {
-    if (isAnimating) {
-      return isDarkMode ? colors.slate['600'] : colors.slate['400'];
-    }
-
-    return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
+  // Effect to update color on based on animating and dark mode
+  useEffect(() => {
+    setColor(
+      isAnimating
+        ? isDarkMode
+          ? colors.slate['600']
+          : colors.slate['300']
+        : isDarkMode
+        ? colors.rose['500']
+        : colors.emerald['500'],
+    );
   }, [isAnimating, isDarkMode]);
-  const color = getColor();
 
   // Updates camera position based on distance, yAngle, and time
   useFrame(({ camera }) => {
     if (isAnimating) {
+      // Update camera position for scroll
       camera.position.setFromSphericalCoords(
         distance.get(),
         yAngle.get(),
@@ -55,26 +67,30 @@ function Scene({ numStars = 100 }) {
       );
       camera.updateProjectionMatrix();
       camera.lookAt(0, 0, 0);
+
+      // Spin the central planet in place
+      planetRef.current!.rotation.x = tiltX.get();
+      planetRef.current!.rotation.y -= 0.001;
     }
   });
 
   // Updates pixel ratio
-  //useLayoutEffect(() => gl.setPixelRatio(0.75));
+  useLayoutEffect(() => gl.setPixelRatio(0.75));
 
   const stars = useMemo(() => {
-    return new Array(numStars).fill(null).map((star, index) => (
+    return new Array(numStars).fill(null).map((_, index) => (
       <Star
         key={`star-${index}`}
         indexId={progress(0, numStars, index)}
         isAnimating={isAnimating} // eslint-disable-line
-        isDarkMode={isDarkMode}
+        color={color}
       />
     ));
-  }, [isAnimating, isDarkMode]); // eslint-disable-line
+  }, [isAnimating, isDarkMode, color]); // eslint-disable-line
 
   return (
     <>
-      <mesh rotation-x={0.234}>
+      <mesh ref={planetRef}>
         {/* <icosahedronGeometry args={[1, 0]} /> */}
         <sphereGeometry />
         <meshBasicMaterial wireframe color={color} />
