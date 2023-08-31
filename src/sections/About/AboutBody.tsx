@@ -137,7 +137,7 @@ const AboutBody: FC<AboutBodyProps> = ({ githubProfileData }) => {
       <p className="flavor-text mb-10 break-words text-center text-base sm:text-lg">
         {githubProfileData?.bio ?? '<-- Skills to pay the bills -->'}
       </p>
-      <div className="flavor-text mb-6 mt-[-3rem] flex justify-center lg:mb-9">
+      <div className="flavor-text mb-6 mt-[-1.5rem] flex justify-center lg:mb-9">
         <CallToAction buttonText="View my work" href="#portfolio" />
       </div>
       <div

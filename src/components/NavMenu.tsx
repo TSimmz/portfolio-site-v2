@@ -2,7 +2,12 @@
 
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useToggle, useWindowSize, useCopyToClipboard } from 'react-use';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from 'framer-motion';
 import { useNotifications, useTheme } from '~/hooks';
 import theme from 'tailwindcss/defaultTheme';
 import NavLink from './NavLink';
@@ -19,9 +24,23 @@ import ThemeSwitcher from './buttons/ThemeSwitcher';
 import Tooltip from './Tooltip';
 import { useHotkeys } from 'react-hotkeys-hook';
 
+const scrollYThreshold = 512;
+
 const NavMenu = () => {
   // Navbar ref
   const navMenuRef = useRef<HTMLElement | null>(null);
+
+  // Scroll progress for navbar resume buttons
+  const { scrollY } = useScroll();
+  const [areResumeButtonsHidden, setAreResumeButtonsHidden] =
+    useState<boolean>(true);
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (areResumeButtonsHidden && latest >= scrollYThreshold)
+      setAreResumeButtonsHidden(false);
+    if (!areResumeButtonsHidden && latest < scrollYThreshold)
+      setAreResumeButtonsHidden(true);
+  });
 
   // Nav bar position
   const [navbarYPosition, setNavbarYPosition] = useState<number>(0);
@@ -72,6 +91,7 @@ const NavMenu = () => {
     ? process.env.NEXT_PUBLIC_DARK_RESUME_PATH! ?? '/'
     : process.env.NEXT_PUBLIC_LIGHT_RESUME_PATH! ?? '/';
 
+  // Direct link to resume for clipboard
   const resumeCopyLink = process.env.NEXT_PUBLIC_BASE_URL + resumeUrlPath;
 
   // Creates an id for a navbar link
@@ -257,6 +277,7 @@ const NavMenu = () => {
             opened ? 'min-h-[40px]' : 'h-10'
           }`}
         >
+          {/* @component - Brand Logo button */}
           <AnimatePresence>
             {!opened ? (
               <motion.div
@@ -296,7 +317,7 @@ const NavMenu = () => {
             ) : null}
           </AnimatePresence>
 
-          {/* Mobile nav buttons */}
+          {/* @component - Mobile Nav buttons */}
           <AnimatePresence>
             {opened ? (
               <motion.div
@@ -349,7 +370,7 @@ const NavMenu = () => {
             ) : null}
           </AnimatePresence>
 
-          {/* Desktop nav buttons */}
+          {/* @component - Desktop nav buttons and theme switcher */}
           <div className="hidden gap-2 space-x-1 sm:flex">
             <div className="flex gap-1">{renderNavButtons}</div>
             <ThemeSwitcher
@@ -358,18 +379,22 @@ const NavMenu = () => {
             />
           </div>
 
-          {/* Burger button */}
+          {/* @component - Theme Switcher (Mobile) and Mobile Menu Burger button */}
           <div className="absolute right-0 top-0 flex gap-1 sm:hidden">
             <ThemeSwitcher id="theme-switcher-mobile" isMobile={true} />
             <Burger opened={opened} onClick={toggle} />
           </div>
         </nav>
       </motion.header>
+
+      {/* @component - Link to Resume button */}
       <motion.a
         target="_blank"
         id="resume-button"
         href={resumeUrlPath}
-        animate={{ translateY: navbarYPosition }}
+        animate={{
+          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+        }}
         whileHover={{ translateY: navbarYPosition + 4 }}
         className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
       >
@@ -402,8 +427,11 @@ const NavMenu = () => {
         </Tooltip>
       </motion.a>
 
+      {/* @component - Copy Resume Link button */}
       <motion.button
-        animate={{ translateY: navbarYPosition }}
+        animate={{
+          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+        }}
         whileHover={{ translateY: navbarYPosition + 4 }}
         className={`group fixed left-[7.2rem] top-[2.65rem] z-10 flex origin-center cursor-pointer rounded-md ${
           !isCopied
@@ -414,7 +442,6 @@ const NavMenu = () => {
           e.stopPropagation();
           e.preventDefault();
 
-          console.log(e);
           if (!isCopied) {
             const timeDelay = 3000;
             copyToClipboard(resumeCopyLink);
@@ -609,9 +636,13 @@ const NavMenu = () => {
           </svg>
         </Tooltip>
       </motion.button>
+
+      {/* @component -  Hide/Show button */}
       <motion.button
         onClick={() => toggleNavBar()}
-        animate={{ translateY: navbarYPosition }}
+        animate={{
+          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+        }}
         whileHover={{ translateY: navbarYPosition + 4 }}
         className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 cursor-pointer rounded-md bg-warning-300/80 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
       >
