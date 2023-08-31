@@ -252,7 +252,7 @@ const Contact = () => {
         <form
           id="contact-form"
           ref={formRef}
-          className="mt-8 flex w-full flex-col gap-5 md:w-4/5"
+          className="mt-8 flex w-full flex-col gap-3 md:w-4/5"
           onSubmit={handleSubmit(onContactSubmit)}
           noValidate
         >
@@ -279,7 +279,7 @@ const Contact = () => {
             {errors.name ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 text-xs text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -311,7 +311,7 @@ const Contact = () => {
             {errors.email ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 text-xs text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -347,7 +347,7 @@ const Contact = () => {
             {errors.subject ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 text-xs text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
@@ -381,7 +381,7 @@ const Contact = () => {
             {errors.message ? (
               <p
                 role="alert"
-                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 text-xs text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
+                className={`absolute right-[10px] top-[-10px] z-10 bg-error-500 px-1 py-0.5 !text-xs leading-[0.8rem] text-dark-base sm:rounded-md sm:px-2 sm:py-1 sm:text-sm ${
                   isMobileView ? 'rounded-md' : 'rounded-sm'
                 }`}
               >
