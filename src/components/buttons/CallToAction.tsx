@@ -8,7 +8,6 @@ type CallToActionProps = {
   buttonText?: string;
   direction?: 'Up' | 'Down' | 'Left' | 'Right';
   fill?: boolean;
-  fillWidth?: boolean;
   externalLink?: boolean;
 };
 
@@ -17,7 +16,6 @@ const CallToAction: FC<CallToActionProps> = ({
   buttonText,
   direction = 'Down',
   fill = false,
-  fillWidth = false,
   externalLink = false,
 }) => {
   const ctaRef = useRef(null);
@@ -48,7 +46,7 @@ const CallToAction: FC<CallToActionProps> = ({
   return (
     <motion.div
       ref={ctaRef}
-      className={`group max-w-[250px] overflow-hidden`}
+      className={`group max-w-[220px] overflow-hidden`}
       initial={{ opacity: 0, scale: 0.7, y: 60 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileHover={{
