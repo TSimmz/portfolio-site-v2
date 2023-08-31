@@ -16,7 +16,7 @@ const Star: FC<StarProps> = ({ indexId, isAnimating, isDarkMode }) => {
   // Generates the color based on animating and dark mode
   const getColor = useCallback(() => {
     if (isAnimating)
-      return isDarkMode ? colors.slate['600'] : colors.slate['300'];
+      return isDarkMode ? colors.slate['600'] : colors.slate['400'];
 
     return isDarkMode ? colors.rose['500'] : colors.emerald['500'];
   }, [isAnimating, isDarkMode]);

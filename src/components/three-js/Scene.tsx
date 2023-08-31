@@ -30,7 +30,7 @@ function Scene({ numStars = 100 }) {
   //const distance = useMotionValue(6);
 
   // Distance of the camera - dynamic based on scroll Y distance
-  const distance = useTransform(scrollYProgress, [0, 1], [3, 9]);
+  const distance = useTransform(scrollYProgress, [0, 1], [2.2, 9]);
 
   // Set color based on theme
   const { isDarkMode } = useTheme();
@@ -38,7 +38,7 @@ function Scene({ numStars = 100 }) {
   // Generates the color based on animating and dark mode
   const getColor = useCallback(() => {
     if (isAnimating) {
-      return isDarkMode ? colors.slate['600'] : colors.slate['300'];
+      return isDarkMode ? colors.slate['600'] : colors.slate['400'];
     }
 
     return isDarkMode ? colors.rose['500'] : colors.emerald['500'];

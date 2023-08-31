@@ -67,7 +67,9 @@ const CallToAction: FC<CallToActionProps> = ({
             : 'group-hover:bg-brandLight-500 group-hover:text-dark-base dark:border-brandDark-500 group-hover:dark:bg-brandDark-500'
         } flex items-center justify-around gap-4 overflow-hidden rounded-lg border-2 border-brandLight-500  text-base font-semibold duration-300 ease-in-out  sm:text-sm`}
       >
-        {buttonText ? <span>{buttonText}</span> : null}
+        {buttonText ? (
+          <span className={fill ? 'text-dark-base' : ''}>{buttonText}</span>
+        ) : null}
         <motion.div
           className="text-neutrals-100"
           animate={
