@@ -640,7 +640,9 @@ const NavMenu = () => {
       {/* @component -  Hide/Show button */}
       <motion.button
         onClick={() => toggleNavBar()}
-        animate={{ translateY: navbarYPosition }}
+        animate={{
+          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+        }}
         whileHover={{ translateY: navbarYPosition + 4 }}
         className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 cursor-pointer rounded-md bg-warning-300/80 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
       >
