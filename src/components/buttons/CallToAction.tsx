@@ -46,7 +46,7 @@ const CallToAction: FC<CallToActionProps> = ({
   return (
     <motion.div
       ref={ctaRef}
-      className={`group max-w-[220px] overflow-hidden`}
+      className={`group max-w-[250px] overflow-hidden`}
       initial={{ opacity: 0, scale: 0.7, y: 60 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileHover={{

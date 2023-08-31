@@ -155,7 +155,7 @@ const Hero = () => {
             <br />I am a frontend web developer.
           </Heading>
         </motion.div>
-        <div className="mt-10 flex flex-col-reverse gap-4 min-[460px]:mt-6 min-[460px]:flex-row min-[460px]:justify-between">
+        <div className="mt-10 flex flex-col-reverse gap-4 max-[459px]:max-w-[205px] min-[460px]:mt-6 min-[460px]:flex-row min-[460px]:justify-between">
           <CallToAction buttonText="Check me out" href="#about" />
           <CallToAction
             buttonText="View my resume"
