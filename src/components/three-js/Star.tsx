@@ -16,8 +16,8 @@ const Star: FC<StarProps> = ({ indexId, isAnimating, color }) => {
     if (isAnimating) {
       const distance = mix(1.2, 10, Math.random() * 2);
       const yAngle = mix(
-        degreesToRadians(0),
-        degreesToRadians(360),
+        degreesToRadians(10),
+        degreesToRadians(180),
         Math.random(),
       );
       const xAngle = degreesToRadians(360) * indexId;
