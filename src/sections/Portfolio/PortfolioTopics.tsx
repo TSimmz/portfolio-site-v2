@@ -118,7 +118,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
             <motion.span
               layout
               key={`${repoTitle}-${topic}`}
-              className="mr-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold text-light-base group-hover:!bg-brandLight-500 group-hover:text-dark-base group-hover:dark:!bg-brandDark-500"
+              className="mr-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold text-light-base transition-colors duration-200 ease-out group-hover:!bg-brandLight-500 group-hover:text-dark-base group-hover:dark:!bg-brandDark-500"
               style={{
                 backgroundColor: topicBackgroundColor,
               }}
@@ -138,7 +138,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   return (
     <motion.div
       id="motion-parallax"
-      className={`relative m-0 flex w-full flex-nowrap overflow-hidden whitespace-nowrap py-4
+      className={`relative m-0 flex w-full flex-nowrap overflow-hidden whitespace-nowrap py-4 transition-transform duration-200 ease-in-out group-hover:scale-125
         ${"before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-10 before:bg-gradient-to-r before:from-neutrals-200 before:via-neutrals-200 before:to-transparent before:content-[''] before:dark:from-neutrals-700"}
         ${"after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-10 after:bg-gradient-to-l after:from-neutrals-200 after:via-neutrals-200 after:to-transparent after:content-[''] after:dark:from-neutrals-700"}
       `}
