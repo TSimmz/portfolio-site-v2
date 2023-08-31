@@ -273,7 +273,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.name ? ' ring-2 !ring-error-500' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+              } h-10 rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('name', { required: true })}
             />
             {errors.name ? (
@@ -305,7 +305,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.email ? 'ring-2 !ring-error-500 ' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+              } h-10 rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('email', { required: true })}
             />
             {errors.email ? (
@@ -341,7 +341,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.subject ? 'ring-2 !ring-error-500' : ''
-              } h-10 rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+              } h-10 rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('subject', { required: true })}
             />
             {errors.subject ? (
@@ -375,7 +375,7 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className={`${
                 errors.message ? 'ring-2 !ring-error-500' : ''
-              } min-h-[2.5rem] resize-y rounded-md bg-transparent px-4 py-1 backdrop-brightness-125 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:focus:ring-neutrals-500`}
+              } min-h-[2.5rem] resize-y rounded-md bg-white/90 px-4 py-1 shadow-md shadow-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutrals-600 dark:bg-neutrals-700/90 dark:shadow-none dark:focus:ring-neutrals-500`}
               {...register('message', { required: true })}
             />
             {errors.message ? (
