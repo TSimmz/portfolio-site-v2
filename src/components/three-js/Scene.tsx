@@ -30,7 +30,7 @@ function Scene({ numStars = 100 }) {
   //const distance = useMotionValue(6);
 
   // Distance of the camera - dynamic based on scroll Y distance
-  const distance = useTransform(scrollYProgress, [0, 1], [2, 9]);
+  const distance = useTransform(scrollYProgress, [0, 1], [3, 9]);
 
   // Set color based on theme
   const { isDarkMode } = useTheme();
@@ -70,7 +70,7 @@ function Scene({ numStars = 100 }) {
         isDarkMode={isDarkMode}
       />
     ));
-  }, [isAnimating]); // eslint-disable-line
+  }, [isAnimating, isDarkMode]); // eslint-disable-line
 
   return (
     <>
