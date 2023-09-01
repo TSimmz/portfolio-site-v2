@@ -32,7 +32,7 @@ function Scene({ numStars = 100 }) {
     [0.001, degreesToRadians(80)],
   );
 
-  const tiltX = useTransform(time, [0, 2000], [0.221, 0.245]);
+  const xRotationDirectionFactor = useRef<number>(1);
 
   // Distance of the camera - static
   //const distance = useMotionValue(6);
@@ -69,13 +69,20 @@ function Scene({ numStars = 100 }) {
       camera.lookAt(0, 0, 0);
 
       // Spin the central planet in place
-      planetRef.current!.rotation.x = tiltX.get();
-      planetRef.current!.rotation.y -= 0.001;
+
+      planetRef.current!.rotation.x +=
+        0.00007 * xRotationDirectionFactor.current;
+      if (planetRef.current!.rotation.x >= 0.4276057)
+        xRotationDirectionFactor.current = -1;
+      if (planetRef.current!.rotation.x <= 0.3857178)
+        xRotationDirectionFactor.current = 1;
+
+      planetRef.current!.rotation.y -= 0.000729;
     }
   });
 
   // Updates pixel ratio
-  useLayoutEffect(() => gl.setPixelRatio(0.75));
+  useLayoutEffect(() => gl.setPixelRatio(0.35));
 
   const stars = useMemo(() => {
     return new Array(numStars).fill(null).map((_, index) => (
@@ -90,7 +97,7 @@ function Scene({ numStars = 100 }) {
 
   return (
     <>
-      <mesh ref={planetRef}>
+      <mesh ref={planetRef} rotation-x={0.3857178}>
         {/* <icosahedronGeometry args={[1, 0]} /> */}
         <sphereGeometry />
         <meshBasicMaterial wireframe color={color} />

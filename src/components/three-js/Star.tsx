@@ -31,7 +31,7 @@ const Star: FC<StarProps> = ({ indexId, isAnimating, color }) => {
 
   return (
     <mesh ref={starRef}>
-      <boxGeometry args={[0.05, 0.05, 0.05]} />
+      <boxGeometry args={[0.025, 0.025, 0.025]} />
       <meshBasicMaterial wireframe color={color} />
     </mesh>
   );
