@@ -82,7 +82,7 @@ function Scene({ numStars = 100 }) {
   });
 
   // Updates pixel ratio
-  useLayoutEffect(() => gl.setPixelRatio(0.35));
+  useLayoutEffect(() => gl.setPixelRatio(0.75));
 
   const stars = useMemo(() => {
     return new Array(numStars).fill(null).map((_, index) => (
