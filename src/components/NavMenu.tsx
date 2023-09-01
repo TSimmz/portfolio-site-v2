@@ -24,7 +24,7 @@ import ThemeSwitcher from './buttons/ThemeSwitcher';
 import Tooltip from './Tooltip';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-const scrollYThreshold = 512;
+const scrollYThreshold = 555;
 
 const NavMenu = () => {
   // Navbar ref
@@ -261,6 +261,287 @@ const NavMenu = () => {
     [createLinkId, handleDesktopPathChange], // eslint-disable-line
   );
 
+  const renderNavDropdownButtons = () => (
+    <aside
+      id="drop-down-nav-buttons"
+      className="fixed top-[2.3rem] z-10 w-full pl-4 pr-4 sm:pr-2"
+    >
+      <div className="mx-auto flex max-w-6xl justify-between">
+        <div className="flex gap-[6px]">
+          {/* @component - Link to Resume button */}
+          <motion.a
+            target="_blank"
+            id="resume-button"
+            href={resumeUrlPath}
+            initial={{ translateY: -100 }}
+            animate={{
+              translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+            }}
+            whileHover={{ translateY: navbarYPosition + 4 }}
+            className="group flex cursor-pointer items-center rounded-md bg-brandLight-500/90 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
+          >
+            <Tooltip
+              text={'Alt+R'}
+              isMobileView={isMobileView}
+              className="pb-1 pl-2 pr-3 pt-8"
+            >
+              <svg
+                viewBox="0 0 32 32"
+                className="z-10 mr-1 inline-block h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
+              >
+                <motion.path
+                  animate={{
+                    y: [-1.5, 0.5, -1.5],
+                    transition: {
+                      y: {
+                        duration: 1,
+                        ease: 'easeInOut',
+                        times: [0, 0.5, 1],
+                        repeat: Infinity,
+                      },
+                    },
+                  }}
+                  d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
+                />
+                <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
+              </svg>
+              <span>Resume</span>
+            </Tooltip>
+          </motion.a>
+
+          {/* @component - Copy Resume Link button */}
+          <motion.button
+            initial={{ translateY: -100 }}
+            animate={{
+              translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+            }}
+            whileHover={{ translateY: navbarYPosition + 4 }}
+            className={`group flex origin-center cursor-pointer rounded-md ${
+              !isCopied
+                ? 'bg-brandLight-500/90 hover:bg-brandLight-400 hover:text-light-base hover:ring-brandLight-500 dark:bg-brandDark-500/90 hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400'
+                : 'bg-info-500 hover:!ring-info-500'
+            } text-sm text-dark-base  hover:ring-2 hover:ring-offset-2 dark:text-dark-base`}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+
+              if (!isCopied) {
+                const timeDelay = 3000;
+                copyToClipboard(resumeCopyLink);
+                notify.info(`Copied to clipboard!`, 'Resume Link', timeDelay);
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), timeDelay);
+              }
+            }}
+          >
+            <Tooltip
+              text={isCopied ? 'Copied!' : 'Copy Resume Link'}
+              className="h-full px-3 pb-2 pt-8"
+              toolTipStyles="min-w-fit before:!left-[50%] before:!translate-x-[-50%] translate-y-[2px] whitespace-nowrap"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className={`${
+                  !isCopied
+                    ? '-mb-px scale-125 group-hover:stroke-dark'
+                    : '-mb-0.5 mt-px scale-[1.75]'
+                }  pointer-events-none mt-1 h-3 w-3 overflow-visible fill-none stroke-light`}
+              >
+                <AnimatePresence>
+                  {!isCopied ? (
+                    <>
+                      {/* Lower square */}
+                      <motion.path
+                        initial={{ pathLength: 0 }}
+                        animate={{
+                          pathLength: 1,
+                          x: [-0.5, 0, -0.5],
+                          y: [-0.5, 0, -0.5],
+                          transition: {
+                            pathLength: {
+                              duration: 0.3,
+                              delay: 0.3,
+                            },
+                            x: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                            y: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                          },
+                        }}
+                        exit={{
+                          pathLength: 0,
+                          transition: {
+                            pathLength: {
+                              duration: 0.01,
+                            },
+                          },
+                        }}
+                        d="M11 9 H20 A2 2 0 0 1 22 11 V20 A2 2 0 0 1 20 22 H11 A2 2 0 0 1 9 20 V11 A2 2 0 0 1 11 9 z"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className=" stroke-[2]"
+                      />
+                      {/* Upper Square */}
+                      <motion.path
+                        initial={{ pathLength: 0 }}
+                        animate={{
+                          pathLength: 1,
+                          x: [0.5, 0, 0.5],
+                          y: [0.5, 0, 0.5],
+                          transition: {
+                            pathLength: {
+                              duration: 0.3,
+                              delay: 0.3,
+                            },
+                            x: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                            y: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                          },
+                        }}
+                        exit={{
+                          pathLength: 0,
+                          transition: {
+                            pathLength: {
+                              duration: 0.01,
+                            },
+                          },
+                        }}
+                        d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className=" stroke-[2]"
+                      />
+                    </>
+                  ) : null}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                  {isCopied ? (
+                    <>
+                      {/* Square */}
+                      <motion.path
+                        initial={{ pathLength: 0 }}
+                        animate={{
+                          pathLength: 1,
+                          x: [-4.3, -4.3, -4.3],
+                          y: [-4.3, -4.3, -4.3],
+                          transition: {
+                            pathLength: {
+                              duration: 0.3,
+                              delay: 0.3,
+                            },
+                            x: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                            y: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                          },
+                        }}
+                        exit={{
+                          pathLength: 0,
+                          transition: {
+                            pathLength: {
+                              duration: 0.01,
+                            },
+                          },
+                        }}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11 9 H20 A2 2 0 0 1 22 11 V20 A2 2 0 0 1 20 22 H11 A2 2 0 0 1 9 20 V11 A2 2 0 0 1 11 9 z"
+                        className="stroke-[1.75]"
+                      />
+                      {/* Check mark */}
+                      <motion.path
+                        initial={{ pathLength: 0 }}
+                        animate={{
+                          pathLength: 1,
+                          x: [-4, -4, -4],
+                          y: [-4, -4, -4],
+                          transition: {
+                            pathLength: {
+                              duration: 0.3,
+                              delay: 0.3,
+                            },
+                            x: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                            y: {
+                              duration: 1.2,
+                              ease: 'easeInOut',
+                              times: [0, 0.5, 1],
+                              repeat: Infinity,
+                            },
+                          },
+                        }}
+                        exit={{
+                          pathLength: 0,
+                          transition: {
+                            pathLength: {
+                              duration: 0.01,
+                            },
+                          },
+                        }}
+                        d="M12 15l2 2 4-4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className=" stroke-[1.75]"
+                      />
+                    </>
+                  ) : null}
+                </AnimatePresence>
+              </svg>
+            </Tooltip>
+          </motion.button>
+        </div>
+        {/* @component -  Hide/Show button */}
+        <motion.button
+          onClick={() => toggleNavBar()}
+          initial={{ translateY: -100 }}
+          animate={{
+            translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
+          }}
+          whileHover={{ translateY: navbarYPosition + 4 }}
+          className="pointer-events-auto cursor-pointer rounded-md bg-warning-300/80 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
+        >
+          <Tooltip
+            text={'Alt+H'}
+            isMobileView={isMobileView}
+            className="w-20 px-2 pb-1 pt-8"
+          >
+            <span>{navBarHidden ? 'Show' : 'Hide'}</span>
+          </Tooltip>
+        </motion.button>
+      </div>
+    </aside>
+  );
+
   return (
     <>
       <motion.header
@@ -273,7 +554,7 @@ const NavMenu = () => {
           id="nav-menu"
           key="nav-menu"
           ref={navMenuRef}
-          className={`sm:nav-menu relative flex scroll-pr-6 px-0 sm:justify-between sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
+          className={`sm:nav-menu relative mx-auto flex max-w-6xl px-0 sm:justify-between sm:after:bg-brandLight-500 dark:sm:after:bg-brandDark-500 ${
             opened ? 'min-h-[40px]' : 'h-10'
           }`}
         >
@@ -386,277 +667,7 @@ const NavMenu = () => {
           </div>
         </nav>
       </motion.header>
-
-      {/* @component - Link to Resume button */}
-      <motion.a
-        target="_blank"
-        id="resume-button"
-        href={resumeUrlPath}
-        initial={{ translateY: -100 }}
-        animate={{
-          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
-        }}
-        whileHover={{ translateY: navbarYPosition + 4 }}
-        className="group fixed left-[1rem] top-[2.3rem] z-10 flex cursor-pointer items-center rounded-md bg-brandLight-500/90 text-sm text-dark-base hover:bg-brandLight-400 hover:text-light-base hover:ring-2 hover:ring-brandLight-500 hover:ring-offset-2 dark:bg-brandDark-500/90 dark:text-dark-base hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400"
-      >
-        <Tooltip
-          text={'Alt+R'}
-          isMobileView={isMobileView}
-          className="pb-1 pl-2 pr-3 pt-8"
-        >
-          <svg
-            viewBox="0 0 32 32"
-            className="z-10 mr-1 inline-block h-[18px] w-[18px] scale-125 fill-light group-hover:fill-dark"
-          >
-            <motion.path
-              animate={{
-                y: [-1.5, 0.5, -1.5],
-                transition: {
-                  y: {
-                    duration: 1,
-                    ease: 'easeInOut',
-                    times: [0, 0.5, 1],
-                    repeat: Infinity,
-                  },
-                },
-              }}
-              d="M15.47 18.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L16.75 16.44V9.75a.75.75 0 00-1.5 0v6.69L12.78 13.97a.75.75 0 00-1.06 1.06l3.75 3.75z"
-            />
-            <motion.path d="M11.75 21a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z" />
-          </svg>
-          <span>Resume</span>
-        </Tooltip>
-      </motion.a>
-
-      {/* @component - Copy Resume Link button */}
-      <motion.button
-        initial={{ translateY: -100 }}
-        animate={{
-          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
-        }}
-        whileHover={{ translateY: navbarYPosition + 4 }}
-        className={`group fixed left-[7.2rem] top-[2.65rem] z-10 flex origin-center cursor-pointer rounded-md ${
-          !isCopied
-            ? 'bg-brandLight-500/90 hover:bg-brandLight-400 hover:text-light-base hover:ring-brandLight-500 dark:bg-brandDark-500/90 hover:dark:bg-brandDark-400 hover:dark:text-light-base hover:dark:ring-brandDark-400'
-            : 'bg-info-500 hover:!ring-info-500'
-        } text-sm text-dark-base  hover:ring-2 hover:ring-offset-2 dark:text-dark-base`}
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-
-          if (!isCopied) {
-            const timeDelay = 3000;
-            copyToClipboard(resumeCopyLink);
-            notify.info(`Copied to clipboard!`, 'Resume Link', timeDelay);
-            setIsCopied(true);
-            setTimeout(() => setIsCopied(false), timeDelay);
-          }
-        }}
-      >
-        <Tooltip
-          text={isCopied ? 'Copied!' : 'Copy Resume Link'}
-          className="px-3 pb-2 pt-8"
-          toolTipStyles="min-w-fit before:!left-[50%] before:!translate-x-[-50%] translate-y-[2px] whitespace-nowrap"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className={`${
-              !isCopied
-                ? '-mb-px h-3 w-3 group-hover:stroke-dark'
-                : '-mb-0.5 mt-px h-3 w-3 scale-[1.75]'
-            }  pointer-events-none h-3 w-3 scale-125 overflow-visible fill-none stroke-light`}
-          >
-            <AnimatePresence>
-              {!isCopied ? (
-                <>
-                  {/* Lower square */}
-                  <motion.path
-                    initial={false}
-                    animate={{
-                      pathLength: 1,
-                      x: [-0.5, 0, -0.5],
-                      y: [-0.5, 0, -0.5],
-                      transition: {
-                        pathLength: {
-                          duration: 0.3,
-                          delay: 0.3,
-                        },
-                        x: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                        y: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                      },
-                    }}
-                    exit={{
-                      pathLength: 0,
-                      transition: {
-                        pathLength: {
-                          duration: 0.01,
-                        },
-                      },
-                    }}
-                    d="M11 9 H20 A2 2 0 0 1 22 11 V20 A2 2 0 0 1 20 22 H11 A2 2 0 0 1 9 20 V11 A2 2 0 0 1 11 9 z"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className=" stroke-[2]"
-                  />
-                  {/* Upper Square */}
-                  <motion.path
-                    initial={false}
-                    animate={{
-                      pathLength: 1,
-                      x: [0.5, 0, 0.5],
-                      y: [0.5, 0, 0.5],
-                      transition: {
-                        pathLength: {
-                          duration: 0.3,
-                          delay: 0.3,
-                        },
-                        x: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                        y: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                      },
-                    }}
-                    exit={{
-                      pathLength: 0,
-                      transition: {
-                        pathLength: {
-                          duration: 0.01,
-                        },
-                      },
-                    }}
-                    d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className=" stroke-[2]"
-                  />
-                </>
-              ) : null}
-            </AnimatePresence>
-
-            <AnimatePresence>
-              {isCopied ? (
-                <>
-                  {/* Square */}
-                  <motion.path
-                    initial={{ pathLength: 0 }}
-                    animate={{
-                      pathLength: 1,
-                      x: [-4.3, -4.3, -4.3],
-                      y: [-4.3, -4.3, -4.3],
-                      transition: {
-                        pathLength: {
-                          duration: 0.3,
-                          delay: 0.3,
-                        },
-                        x: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                        y: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                      },
-                    }}
-                    exit={{
-                      pathLength: 0,
-                      transition: {
-                        pathLength: {
-                          duration: 0.01,
-                        },
-                      },
-                    }}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11 9 H20 A2 2 0 0 1 22 11 V20 A2 2 0 0 1 20 22 H11 A2 2 0 0 1 9 20 V11 A2 2 0 0 1 11 9 z"
-                    className="stroke-[1.75]"
-                  />
-                  {/* Check mark */}
-                  <motion.path
-                    initial={{ pathLength: 0 }}
-                    animate={{
-                      pathLength: 1,
-                      x: [-4, -4, -4],
-                      y: [-4, -4, -4],
-                      transition: {
-                        pathLength: {
-                          duration: 0.3,
-                          delay: 0.3,
-                        },
-                        x: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                        y: {
-                          duration: 1.2,
-                          ease: 'easeInOut',
-                          times: [0, 0.5, 1],
-                          repeat: Infinity,
-                        },
-                      },
-                    }}
-                    exit={{
-                      pathLength: 0,
-                      transition: {
-                        pathLength: {
-                          duration: 0.01,
-                        },
-                      },
-                    }}
-                    d="M12 15l2 2 4-4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className=" stroke-[1.75]"
-                  />
-                </>
-              ) : null}
-            </AnimatePresence>
-          </svg>
-        </Tooltip>
-      </motion.button>
-
-      {/* @component -  Hide/Show button */}
-      <motion.button
-        onClick={() => toggleNavBar()}
-        initial={{ translateY: -100 }}
-        animate={{
-          translateY: areResumeButtonsHidden ? -100 : navbarYPosition,
-        }}
-        whileHover={{ translateY: navbarYPosition + 4 }}
-        className="pointer-events-auto fixed right-[1rem] top-[2.3rem] z-10 cursor-pointer rounded-md bg-warning-300/80 text-sm text-light-base hover:bg-warning-400 hover:ring-2 hover:ring-warning-400 hover:ring-offset-2 sm:right-[0.5rem]"
-      >
-        <Tooltip
-          text={'Alt+H'}
-          isMobileView={isMobileView}
-          className="w-20 px-2 pb-1 pt-8"
-        >
-          <span>{navBarHidden ? 'Show' : 'Hide'}</span>
-        </Tooltip>
-      </motion.button>
+      {renderNavDropdownButtons()}
     </>
   );
 };
