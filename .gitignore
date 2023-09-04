@@ -17,6 +17,9 @@
 /out/
 next-env.d.ts
 
+# sanity.io
+/.sanity/
+
 # production
 /build
 
