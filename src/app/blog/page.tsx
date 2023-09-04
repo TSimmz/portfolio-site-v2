@@ -1,5 +1,5 @@
 import SectionWrapper from '~/components/containers/SectionWrapper';
-import { getBlogs } from '../../../sanity/utils';
+import { getBlogs } from '../../../sanity/api/getBlogs';
 import { type Blog } from 'sanity/types';
 
 const BlogPage = async () => {

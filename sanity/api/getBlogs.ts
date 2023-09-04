@@ -1,13 +1,7 @@
-import { createClient, groq } from 'next-sanity';
-import { apiVersion, dataset, projectId } from './env';
+import { groq } from 'next-sanity';
+import client from '../lib/client';
 
 export async function getBlogs() {
-  const client = createClient({
-    projectId,
-    dataset,
-    apiVersion,
-  });
-
   return client.fetch(
     groq`*[_type == 'blog']{
       _id,
