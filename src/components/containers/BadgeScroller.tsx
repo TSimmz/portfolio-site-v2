@@ -20,12 +20,12 @@ import { useThreeAnimation } from '~/hooks';
 const minTimeMs = 8000;
 const maxTimeMs = 12000;
 
-type PortfolioTopicsProps = {
-  repoTitle: string;
-  topics: string[];
+type BadgeScrollerProps = {
+  title: string;
+  badges: string[];
 };
 
-const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
+const BadgeScroller: FC<BadgeScrollerProps> = ({ title, badges }) => {
   // Get animation state
   const { isAnimating } = useThreeAnimation();
 
@@ -33,7 +33,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   const baseX = useMotionValue(0);
 
   // Base velocity - uses log to normalize speed based on length
-  const baseVelocity = Math.log(16 / topics.length);
+  const baseVelocity = Math.log(16 / badges.length);
 
   // Scroll Y and scroll velocity with smoothing
   const { scrollY } = useScroll();
@@ -110,20 +110,20 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   const topicBackgroundColor = useMotionTemplate`hsla(${rotateHue}, 100%, 80%, 1)`;
 
   // Renders the list of topics
-  const renderTopics = useMemo(
+  const renderBadges = useMemo(
     () => (
       <span className="block">
-        {topics.map((topic: string) => {
+        {badges.map((badge: string) => {
           return (
             <motion.span
               layout
-              key={`${repoTitle}-${topic}`}
+              key={`${title}-${badge}`}
               className="mr-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold text-light-base transition-colors duration-200 ease-out group-hover:!bg-brandLight-500 group-hover:text-dark-base group-hover:dark:!bg-brandDark-500"
               style={{
                 backgroundColor: topicBackgroundColor,
               }}
             >
-              {topic}
+              {badge}
             </motion.span>
           );
         })}
@@ -133,7 +133,7 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   );
 
   // Check if topics exist
-  if (!topics || topics.length === 0) return null;
+  if (!badges || badges.length === 0) return null;
 
   return (
     <motion.div
@@ -147,18 +147,18 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
       <motion.div
         id="motion-scroller"
         ref={scrollerRef}
-        className="flex min-w-fit flex-nowrap whitespace-nowrap"
+        className="flex min-w-fit flex-nowrap whitespace-nowrap px-px"
         style={{ x: isAnimating ? x : 0 }}
       >
-        {renderTopics}
-        {renderTopics}
-        {renderTopics}
-        {renderTopics}
+        {renderBadges}
+        {renderBadges}
+        {renderBadges}
+        {renderBadges}
         {/* If not enought topics in the list, add some extra as padding */}
-        {topics.length < 3 ? (
+        {badges.length < 3 ? (
           <>
-            {renderTopics}
-            {renderTopics}
+            {renderBadges}
+            {renderBadges}
           </>
         ) : null}
       </motion.div>
@@ -166,4 +166,4 @@ const PortfolioTopics: FC<PortfolioTopicsProps> = ({ repoTitle, topics }) => {
   );
 };
 
-export default PortfolioTopics;
+export default BadgeScroller;

@@ -12,32 +12,37 @@ const BlogsPage = async () => {
   const blogs: Blog[] = await getBlogs();
 
   return (
-    <SectionWrapper id="blog-main" className="!max-w-7xl !justify-start">
-      <div className="flex flex-col items-center py-4">
-        <Heading
-          as="h1"
-          className="section-header flex flex-col items-center justify-center text-center"
-        >
-          <GradientTextColor className="header-text">Blogs</GradientTextColor>
-          <Underline className="header-text min-w-[250px] max-w-xl bg-brandLight-500 px-4 dark:bg-brandDark-500" />
-        </Heading>
+    <main
+      id="home"
+      className="relative mx-auto flex flex-auto flex-col items-center overflow-x-hidden px-2"
+    >
+      <section
+        id="blogs-main"
+        className="container flex grow flex-col items-center gap-4 px-4 py-16 xs:gap-12 lg:py-20 xl:py-[7rem] min-[1920px]:min-h-[calc(100vh-64px)] min-[1920px]:py-16 "
+      >
+        <div className="flex flex-col items-center py-4">
+          <Heading
+            as="h1"
+            className="section-header flex flex-col items-center justify-center text-center"
+          >
+            <GradientTextColor className="header-text">Blogs</GradientTextColor>
+            <Underline className="header-text min-w-[250px] max-w-xl bg-brandLight-500 px-4 dark:bg-brandDark-500" />
+          </Heading>
 
-        <div className="mt-4 grid w-full justify-center gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {blogs.map((blog: Blog) => {
-            // console.log('blog data: ', blog);
-            return (
-              <BlogCard
-                key={blog._id}
-                title={blog.name}
-                description={blog.description}
-                href={`/blogs/${blog.slug}`}
-                tags={blog.tags ?? []}
-              />
-            );
-          })}
+          <div className="mt-4 grid w-full justify-center gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {blogs.map((blog: Blog) => {
+              return (
+                <BlogCard
+                  key={blog._id}
+                  href={`/blogs/${blog.slug}`}
+                  data={blog}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </SectionWrapper>
+      </section>
+    </main>
   );
 };
 

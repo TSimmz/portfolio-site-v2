@@ -3,7 +3,7 @@ export const baseRoutes = {
   about: '/#about',
   portfolio: '/#portfolio',
   contact: '/#contact',
-  // blog: '/blog',
+  blog: '/blogs',
 } as const;
 
 export type BaseRouteKeys = keyof typeof baseRoutes;

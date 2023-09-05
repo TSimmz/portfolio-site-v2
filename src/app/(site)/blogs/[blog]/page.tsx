@@ -12,7 +12,7 @@ type BlogProps = {
   params: { blog: string };
 };
 
-export default async function Project(props: BlogProps) {
+export default async function Blog(props: BlogProps) {
   const slug = props.params.blog;
   const blog: Blog = await getBlog(slug);
 
