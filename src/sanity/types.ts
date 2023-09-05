@@ -5,6 +5,8 @@ export type Blog = {
   _createdAt: Date;
   name: string;
   slug: string;
+  description: string;
+  tags: string[];
   image: string;
   url: string;
   content: PortableTextBlock[];

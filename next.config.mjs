@@ -28,6 +28,11 @@ const config = {
         port: '',
         pathname: '/u/17163973**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+      },
     ],
   },
 };

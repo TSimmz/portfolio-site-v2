@@ -15,6 +15,17 @@ const blog = {
       options: { source: 'name' },
     },
     {
+      name: 'description',
+      title: 'Description',
+      type: 'string',
+    },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+    },
+    {
       name: 'image',
       title: 'Image',
       type: 'image',

@@ -1,4 +1,4 @@
-import Studio from '~/sanity/Studio';
+import Studio from '~/sanity/components/Studio';
 
 // Ensures the Studio route is statically generated
 export const dynamic = 'force-static';
