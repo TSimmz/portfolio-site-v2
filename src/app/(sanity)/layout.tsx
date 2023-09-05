@@ -1,10 +1,6 @@
 import '~/styles/globals.css';
 import { type Metadata } from 'next';
-import { sourceCodePro } from './fonts';
-
-import NavMenu from '~/components/NavMenu';
-import Footer from '~/components/Footer';
-import Providers from '~/providers';
+import { sourceCodePro } from '~/utils/fonts';
 
 export const metadata: Metadata = {
   title: 'Tyler Simoni',
@@ -51,16 +47,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         id="app-body"
         className={`relative !mx-0 w-screen overflow-x-hidden bg-light text-light-base antialiased dark:bg-dark dark:text-dark-base ${sourceCodePro.className}`}
       >
-        <Providers>
-          <NavMenu />
-          {children}
-          <Footer />
-        </Providers>
+        {children}
       </body>
     </html>
   );

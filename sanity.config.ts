@@ -2,11 +2,13 @@ import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
 
-import { apiVersion, dataset, projectId } from '~/sanity/env';
+import { clientEnvVars } from '~/sanity/env';
 import schema from '~/sanity/schemas';
 
+const { projectId, dataset, apiVersion } = clientEnvVars;
+
 export default defineConfig({
-  title: 'Tyler Simoni Porfoltio Site v2',
+  title: 'Tyler Simoni Portfolio Site v2',
   basePath: '/studio',
   projectId,
   dataset,

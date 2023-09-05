@@ -6,6 +6,8 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Underline from '~/components/Underline';
 import Heading from '~/components/typography/Heading';
 
+export const revalidate = 10;
+
 type BlogProps = {
   params: { blog: string };
 };

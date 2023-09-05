@@ -10,6 +10,10 @@ export const env = createEnv({
     DATABASE_URL: z.string().url(),
     NODE_ENV: z.enum(['development', 'test', 'production']),
     GITHUB_TOKEN: z.string(),
+    SANITY_API_PROJECT_ID: z.string(),
+    SANITY_API_DATASET: z.string(),
+    SANITY_STUDIO_PROJECT_ID: z.string(),
+    SANITY_STUDIO_DATASET: z.string(),
   },
 
   /**
@@ -37,6 +41,10 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+    SANITY_API_PROJECT_ID: process.env.SANITY_API_PROJECT_ID,
+    SANITY_API_DATASET: process.env.SANITY_API_DATASET,
+    SANITY_STUDIO_PROJECT_ID: process.env.SANITY_STUDIO_PROJECT_ID,
+    SANITY_STUDIO_DATASET: process.env.SANITY_STUDIO_DATASET,
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
     NEXT_PUBLIC_GITHUB_TOKEN: process.env.NEXT_PUBLIC_GITHUB_TOKEN,

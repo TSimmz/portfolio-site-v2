@@ -1,6 +1,5 @@
 'use client';
 import { type FC } from 'react';
-//import PortfolioTopics from './PortfolioTopics';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import PortfolioTopics from '../Portfolio/PortfolioTopics';

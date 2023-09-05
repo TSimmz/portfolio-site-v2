@@ -1,7 +1,9 @@
 import createImageUrlBuilder from '@sanity/image-url';
 import { type Image } from 'sanity';
 
-import { dataset, projectId } from '../env';
+import { clientEnvVars } from '../env';
+
+const { dataset, projectId } = clientEnvVars;
 
 const imageBuilder = createImageUrlBuilder({
   projectId: projectId || '',

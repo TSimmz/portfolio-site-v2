@@ -1,5 +1,7 @@
 import { createClient } from 'next-sanity';
-import { apiVersion, dataset, projectId, useCdn } from '../env';
+import { clientEnvVars } from '../env';
+
+const { apiVersion, dataset, projectId, useCdn } = clientEnvVars;
 
 const client = createClient({
   apiVersion,

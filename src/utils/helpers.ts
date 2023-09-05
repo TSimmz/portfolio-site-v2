@@ -7,3 +7,11 @@ export const mapRange = (
 ) => {
   return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 };
+
+export const assertValue = <T>(v: T | undefined, errorMessage: string): T => {
+  if (v === undefined) {
+    throw new Error(errorMessage);
+  }
+
+  return v;
+};

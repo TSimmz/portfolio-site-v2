@@ -6,6 +6,8 @@ import GradientTextColor from '~/components/typography/GradientTextColor';
 import Underline from '~/components/Underline';
 import BlogCard from '~/sections/Blogs/BlogCard';
 
+export const revalidate = 10;
+
 const BlogsPage = async () => {
   const blogs: Blog[] = await getBlogs();
 
@@ -22,7 +24,7 @@ const BlogsPage = async () => {
 
         <div className="mt-4 grid w-full justify-center gap-6 sm:grid-cols-2 md:grid-cols-3">
           {blogs.map((blog: Blog) => {
-            console.log('blog data: ', blog);
+            // console.log('blog data: ', blog);
             return (
               <BlogCard
                 key={blog._id}

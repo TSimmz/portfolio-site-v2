@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity';
-import client from '../lib/client';
 import { type Blog } from '../types';
+import client from '../lib/client';
 
 export async function getBlogs(): Promise<Blog[]> {
   return client.fetch(
@@ -14,6 +14,7 @@ export async function getBlogs(): Promise<Blog[]> {
       description,
       "image": image.asset->url,
     }`,
-    { next: {} },
+    {},
+    { next: { revalidate: 10 } },
   );
 }
