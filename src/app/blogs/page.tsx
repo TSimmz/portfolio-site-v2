@@ -21,15 +21,18 @@ const BlogsPage = async () => {
         </Heading>
 
         <div className="mt-4 grid w-full justify-center gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {blogs.map((blog: Blog) => (
-            <BlogCard
-              key={blog._id}
-              title={blog.name}
-              description={blog.description}
-              href={`/blogs/${blog.slug}`}
-              topics={blog.tags}
-            />
-          ))}
+          {blogs.map((blog: Blog) => {
+            console.log('blog data: ', blog);
+            return (
+              <BlogCard
+                key={blog._id}
+                title={blog.name}
+                description={blog.description}
+                href={`/blogs/${blog.slug}`}
+                tags={blog.tags ?? []}
+              />
+            );
+          })}
         </div>
       </div>
     </SectionWrapper>

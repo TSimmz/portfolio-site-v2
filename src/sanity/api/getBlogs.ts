@@ -7,11 +7,13 @@ export async function getBlogs(): Promise<Blog[]> {
     groq`*[_type == 'blog']{
       _id,
       _createdAt,
+      _updatedAt,
       name,
       "slug": slug.current,
+      tags,
+      description,
       "image": image.asset->url,
-      url,
-      content
     }`,
+    { next: {} },
   );
 }

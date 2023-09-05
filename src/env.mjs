@@ -18,8 +18,6 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
-    NEXT_PUBLIC_SANITY_API_VERSION: z.string(),
     NEXT_PUBLIC_SANITY_DATASET: z.string(),
     NEXT_PUBLIC_SANITY_PROJECT_ID: z.string(),
     NEXT_PUBLIC_GITHUB_TOKEN: z.string(),
@@ -41,7 +39,6 @@ export const env = createEnv({
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
-    NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
     NEXT_PUBLIC_GITHUB_TOKEN: process.env.NEXT_PUBLIC_GITHUB_TOKEN,
     NEXT_PUBLIC_EMAILJS_PUBLIC_ID: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_ID,
     NEXT_PUBLIC_EMAILJS_SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
@@ -50,7 +47,6 @@ export const env = createEnv({
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_LIGHT_RESUME_PATH: process.env.NEXT_PUBLIC_LIGHT_RESUME_PATH,
     NEXT_PUBLIC_DARK_RESUME_PATH: process.env.NEXT_PUBLIC_DARK_RESUME_PATH,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

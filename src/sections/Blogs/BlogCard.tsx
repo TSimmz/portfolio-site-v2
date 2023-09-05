@@ -3,16 +3,17 @@ import { type FC } from 'react';
 //import PortfolioTopics from './PortfolioTopics';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import PortfolioTopics from '../Portfolio/PortfolioTopics';
 
 type BlogCardProps = {
   title: string;
   description: string;
   href: string;
-  topics: string[];
+  tags: string[];
   imageUrl?: string;
 };
 
-const BlogCard: FC<BlogCardProps> = ({ title, description, href }) => {
+const BlogCard: FC<BlogCardProps> = ({ title, description, href, tags }) => {
   return (
     <motion.div
       layout
@@ -32,7 +33,9 @@ const BlogCard: FC<BlogCardProps> = ({ title, description, href }) => {
           <h3 className="text-2xl font-bold">{title}</h3>
           <p className="text-sm">{description}</p>
         </div>
-        {/* <PortfolioTopics repoTitle={title} topics={topics} /> */}
+        {tags.length ? (
+          <PortfolioTopics repoTitle={title} topics={tags} />
+        ) : null}
       </Link>
     </motion.div>
   );

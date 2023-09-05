@@ -7,7 +7,10 @@ export async function getBlog(slug: string): Promise<Blog> {
     groq`*[_type == "blog" && slug.current == $slug][0]{
       _id,
       _createdAt,
+      _updatedAt,
       name,
+      description,
+      tags,
       "slug": slug.current,
       "image": image.asset->url,
       url,
