@@ -23,9 +23,14 @@ const maxTimeMs = 12000;
 type BadgeScrollerProps = {
   title: string;
   badges: string[];
+  capEnds?: boolean;
 };
 
-const BadgeScroller: FC<BadgeScrollerProps> = ({ title, badges }) => {
+const BadgeScroller: FC<BadgeScrollerProps> = ({
+  title,
+  badges,
+  capEnds = true,
+}) => {
   // Get animation state
   const { isAnimating } = useThreeAnimation();
 
@@ -118,7 +123,7 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({ title, badges }) => {
             <motion.span
               layout
               key={`${title}-${badge}`}
-              className="mr-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold text-light-base transition-colors duration-200 ease-out group-hover:!bg-brandLight-500 group-hover:text-dark-base group-hover:dark:!bg-brandDark-500"
+              className="mr-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold text-light-base antialiased transition-colors duration-200 ease-out group-hover:!backdrop-brightness-125 group-hover:dark:!backdrop-brightness-125"
               style={{
                 backgroundColor: topicBackgroundColor,
               }}
@@ -135,14 +140,18 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({ title, badges }) => {
   // Check if topics exist
   if (!badges || badges.length === 0) return null;
 
+  const gradientCaps = `
+    ${"before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-10 before:bg-gradient-to-r before:from-neutrals-200 before:via-neutrals-200 before:to-transparent before:content-[''] before:dark:from-neutrals-700"}
+    ${"after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-10 after:bg-gradient-to-l after:from-neutrals-200 after:via-neutrals-200 after:to-transparent after:content-[''] after:dark:from-neutrals-700"}
+  `;
+
   return (
     <motion.div
       id="motion-parallax"
-      whileHover={{ scale: 1.2, transition: { scale: { duration: 0.2 } } }}
-      className={`relative m-0 flex w-full flex-nowrap overflow-hidden whitespace-nowrap py-4
-        ${"before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-10 before:bg-gradient-to-r before:from-neutrals-200 before:via-neutrals-200 before:to-transparent before:content-[''] before:dark:from-neutrals-700"}
-        ${"after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-10 after:bg-gradient-to-l after:from-neutrals-200 after:via-neutrals-200 after:to-transparent after:content-[''] after:dark:from-neutrals-700"}
-      `}
+      whileHover={{ scale: 1.1, transition: { scale: { duration: 0.2 } } }}
+      className={`relative m-0 flex w-full flex-nowrap overflow-hidden whitespace-nowrap px-px py-4 ${
+        capEnds ? gradientCaps : ''
+      }`}
     >
       <motion.div
         id="motion-scroller"
