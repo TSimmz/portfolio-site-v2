@@ -1,4 +1,4 @@
-import StarField from '~/components/three-js/StarField';
+//import StarField from '~/components/three-js/StarField';
 
 export default function BlogLayout({
   children,
@@ -8,9 +8,9 @@ export default function BlogLayout({
   return (
     <main
       id="blogs-main"
-      className="relative mx-auto flex min-h-screen flex-auto flex-col items-center overflow-x-hidden px-2"
+      className="relative mx-auto flex min-h-screen flex-auto flex-col items-center px-2"
     >
-      <StarField />
+      {/* <StarField /> */}
       {children}
     </main>
   );

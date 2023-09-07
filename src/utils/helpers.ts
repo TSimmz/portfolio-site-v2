@@ -15,3 +15,17 @@ export const assertValue = <T>(v: T | undefined, errorMessage: string): T => {
 
   return v;
 };
+
+export const formatDate = (value: string | Date) => {
+  const date = typeof value === 'string' ? new Date(value) : value;
+
+  const dd =
+    date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : `${date.getUTCDate()}`;
+  const mm =
+    date.getUTCMonth() + 1 < 10
+      ? `0${date.getUTCMonth() + 1}`
+      : `${date.getUTCMonth() + 1}`;
+  const yyyy = date.getUTCFullYear();
+
+  return `${yyyy}-${mm}-${dd} UTC`;
+};
