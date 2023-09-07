@@ -61,10 +61,10 @@ export default async function Blog(props: BlogProps) {
         {'Testing the alt text'}
       </p>
 
-      <hr className="my-4 h-2 w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-brandLight-500 to-transparent dark:via-brandDark-500" />
+      <hr className="my-2 h-2 w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-brandLight-500 to-transparent dark:via-brandDark-500" />
 
       {/* @component - Blog Content Wrapper */}
-      <div className="blog-post-content mt-5 w-5/6 self-start text-lg text-light-base dark:text-dark-base">
+      <div className="blog-post-content w-5/6 self-start text-lg text-light-base dark:text-dark-base">
         <PortableText value={blog.content} />
       </div>
 

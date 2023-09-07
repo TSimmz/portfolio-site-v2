@@ -38,7 +38,7 @@ const TopicScroller: FC<TopicScrollerProps> = ({
   const baseX = useMotionValue(0);
 
   // Base velocity - uses log to normalize speed based on length
-  const baseVelocity = Math.log(16 / topics.length);
+  const baseVelocity = topics?.length ? Math.log(16 / topics.length) : 1;
 
   // Scroll Y and scroll velocity with smoothing
   const { scrollY } = useScroll();
@@ -115,20 +115,20 @@ const TopicScroller: FC<TopicScrollerProps> = ({
   const topicBackgroundColor = useMotionTemplate`hsla(${rotateHue}, 100%, 80%, 1)`;
 
   // Renders the list of topics
-  const renderBadges = useMemo(
+  const renderTopics = useMemo(
     () => (
       <span className="block">
-        {topics.map((badge: string) => {
+        {topics.map((topic: string) => {
           return (
             <motion.span
               layout
-              key={`${title}-${badge}`}
+              key={`${title}-${topic}`}
               className="mr-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-semibold text-light-base antialiased transition-colors duration-200 ease-out group-hover:!backdrop-brightness-125 group-hover:dark:!backdrop-brightness-125"
               style={{
                 backgroundColor: topicBackgroundColor,
               }}
             >
-              {badge}
+              {topic}
             </motion.span>
           );
         })}
@@ -159,15 +159,15 @@ const TopicScroller: FC<TopicScrollerProps> = ({
         className="flex min-w-fit flex-nowrap whitespace-nowrap px-px"
         style={{ x: isAnimating ? x : 0 }}
       >
-        {renderBadges}
-        {renderBadges}
-        {renderBadges}
-        {renderBadges}
+        {renderTopics}
+        {renderTopics}
+        {renderTopics}
+        {renderTopics}
         {/* If not enought topics in the list, add some extra as padding */}
         {topics.length < 3 ? (
           <>
-            {renderBadges}
-            {renderBadges}
+            {renderTopics}
+            {renderTopics}
           </>
         ) : null}
       </motion.div>
