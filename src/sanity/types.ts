@@ -1,4 +1,4 @@
-import { type PortableTextBlock } from 'sanity';
+import { type Image, type PortableTextBlock } from 'sanity';
 
 export type SanityImage = {
   _type: 'image';
@@ -17,15 +17,16 @@ export type SanitySlug = {
 };
 
 export type Blog = {
+  _type: 'blog';
   _id: string;
   _createdAt: Date;
   _updatedAt: Date;
-  _type: 'blog';
-  name: string;
+  author: string;
+  title: string;
   slug: string; // SanitySlug.current
-  description: string;
-  tags: string[];
-  image: string; // SanityImage.asset -> url
-  url: string;
+  tagLine: string;
+  readingTime: string;
+  topics: string[];
+  image: Image; // SanityImage.asset -> url
   content: PortableTextBlock[];
 };

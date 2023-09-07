@@ -8,15 +8,16 @@ export async function getBlog(slug: string): Promise<Blog> {
       _id,
       _createdAt,
       _updatedAt,
-      name,
-      description,
-      tags,
       "slug": slug.current,
-      "image": image.asset->url,
-      url,
+      image,
+      title,
+      author,
+      tagLine,
+      readingTime,
+      topics,
       content
     }`,
     { slug },
-    { next: { revalidate: 10 } },
+    { next: { revalidate: 11 } },
   );
 }

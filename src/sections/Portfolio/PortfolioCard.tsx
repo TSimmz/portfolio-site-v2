@@ -1,7 +1,7 @@
 'use client';
 import { type FC } from 'react';
 import { motion } from 'framer-motion';
-import BadgeScroller from '~/components/containers/BadgeScroller';
+import TopicScroller from '~/components/containers/TopicScroller';
 
 type PortfolioCardProps = {
   title: string;
@@ -39,7 +39,7 @@ const PortfolioCard: FC<PortfolioCardProps> = ({
         <h3 className="text-2xl font-bold">{title} →</h3>
         <p className="text-sm">{description}</p>
       </div>
-      <BadgeScroller title={title} badges={topics} />
+      <TopicScroller title={title} topics={topics} />
     </motion.div>
   );
 };

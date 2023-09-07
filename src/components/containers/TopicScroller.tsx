@@ -20,15 +20,15 @@ import { useThreeAnimation } from '~/hooks';
 const minTimeMs = 8000;
 const maxTimeMs = 12000;
 
-type BadgeScrollerProps = {
+type TopicScrollerProps = {
   title: string;
-  badges: string[];
+  topics: string[];
   capEnds?: boolean;
 };
 
-const BadgeScroller: FC<BadgeScrollerProps> = ({
+const TopicScroller: FC<TopicScrollerProps> = ({
   title,
-  badges,
+  topics,
   capEnds = true,
 }) => {
   // Get animation state
@@ -38,7 +38,7 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({
   const baseX = useMotionValue(0);
 
   // Base velocity - uses log to normalize speed based on length
-  const baseVelocity = Math.log(16 / badges.length);
+  const baseVelocity = Math.log(16 / topics.length);
 
   // Scroll Y and scroll velocity with smoothing
   const { scrollY } = useScroll();
@@ -118,7 +118,7 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({
   const renderBadges = useMemo(
     () => (
       <span className="block">
-        {badges.map((badge: string) => {
+        {topics.map((badge: string) => {
           return (
             <motion.span
               layout
@@ -138,7 +138,7 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({
   );
 
   // Check if topics exist
-  if (!badges || badges.length === 0) return null;
+  if (!topics || topics.length === 0) return null;
 
   const gradientCaps = `
     ${"before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-10 before:bg-gradient-to-r before:from-neutrals-200 before:via-neutrals-200 before:to-transparent before:content-[''] before:dark:from-neutrals-700"}
@@ -164,7 +164,7 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({
         {renderBadges}
         {renderBadges}
         {/* If not enought topics in the list, add some extra as padding */}
-        {badges.length < 3 ? (
+        {topics.length < 3 ? (
           <>
             {renderBadges}
             {renderBadges}
@@ -175,4 +175,4 @@ const BadgeScroller: FC<BadgeScrollerProps> = ({
   );
 };
 
-export default BadgeScroller;
+export default TopicScroller;
