@@ -11,13 +11,13 @@ export async function getBlog(slug: string): Promise<Blog> {
       "slug": slug.current,
       image,
       title,
-      author,
+      author->,
       tagLine,
       readingTime,
       topics,
       content
     }`,
     { slug },
-    { next: { revalidate: 11 } },
+    { next: { revalidate: 10 } },
   );
 }

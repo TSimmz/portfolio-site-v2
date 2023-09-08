@@ -16,16 +16,29 @@ export const assertValue = <T>(v: T | undefined, errorMessage: string): T => {
   return v;
 };
 
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+] as const;
+
 export const formatDate = (value: string | Date) => {
   const date = typeof value === 'string' ? new Date(value) : value;
 
   const dd =
-    date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : `${date.getUTCDate()}`;
-  const mm =
-    date.getUTCMonth() + 1 < 10
-      ? `0${date.getUTCMonth() + 1}`
-      : `${date.getUTCMonth() + 1}`;
-  const yyyy = date.getUTCFullYear();
+    date.getDate() < 10 ? `0${date.getUTCDate()}` : `${date.getUTCDate()}`;
+  const mm = months[date.getMonth()];
 
-  return `${yyyy}-${mm}-${dd} UTC`;
+  const yyyy = date.getFullYear();
+
+  return `${mm} ${dd}, ${yyyy}`;
 };
