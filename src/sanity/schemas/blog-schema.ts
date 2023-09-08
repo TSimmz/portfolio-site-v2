@@ -27,7 +27,8 @@ const blog = {
       name: 'author',
       title: 'Author',
       description: 'Person who authored this blog post',
-      type: 'string',
+      type: 'reference',
+      to: { type: 'author' },
     },
     {
       name: 'slug',
